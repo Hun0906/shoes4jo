@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif !important;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+header{
+	height: 100px;
+	border-bottom: 3px solid black;
+	display: grid;
+	grid-template-columns: 145px 1fr 100px;
+	align-items: center;
+	margin-bottom: 3rem;
+}
+
+.menu_container {
+	text-align: center;
+}
+
+.menu_container a {
+	text-decoration: none;
+	color: black;
+	font-size: 1.5rem;
+	margin: 0 1.5rem;
+}
+
+.menu_container a:hover {
+	background-image: linear-gradient(60deg, #6ECCAF 0%, #ADE792 30%, #ADE792 50%, #E9FFC2 90%, #FDFFAE 100%);
+    background-repeat: no-repeat;
+    background-position: left 0 bottom -4px;
+    background-size: 120% 10px;
+    color: black;
+}
+
+footer{
+	display: grid;
+	text-align: center;
+	align-items: center;
+	margin-top: 3rem;
+	padding: 1rem 0;
+	border-top: 1px solid #ccc;
+}
+
+footer a{
+	background-color: #f5f5f5;
+	text-decoration: none;
+	margin: 0 1rem;
+	color: #AAC8A7;
+	padding: 5px 10px;
+}
+
+footer a:hover{
+	color: #ADE792;
+}
+
+footer a {
+	line-height: 3.5;
+}
+
+.btn-basic{
+	padding: 0.3rem 2rem;
+    font-weight: bold;
+    margin: 0rem 1rem;
+}
+
+.btn-color1 {
+    color: #fff;
+    background-color: #6ECCAF;
+    border: 1px solid #6ECCAF;
+    }
+
+.btn-line-color1 {
+	border: 1px solid #6ECCAF;
+	color: #344D67;
+}
+
+.btn-color2 {
+    color: #fff;
+    background-color: #ADE792;
+    border: 1px solid #ADE792;
+    }
+
+.btn-color2:hover {
+    background-color: #6ECCAFaa;
+    border: 1px solid #6ECCAFaa;
+    }
+
+.btn-line-color2 {
+	border: 1px solid #ADE792;
+	color: #344D67;
+}
+
+.btn-line-color2:hover {
+	border: 1px solid #6ECCAFaa;
+}
