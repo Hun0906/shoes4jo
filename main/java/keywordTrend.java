@@ -1,42 +1,59 @@
-
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApiExamDatalabTrendShopping {
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-    public static void main(String[] args) {
+public class keywordTrend extends HttpServlet{
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String clientId = "JzcrBZHimsCICRuNqbzk"; // 애플리케이션의 Client ID
 		String clientSecret = "9fgwNuy1pM"; // 애플리케이션의 Client Secret
 
-        String apiUrl = "https://openapi.naver.com/v1/datalab/shopping/categories";
+        String apiUrl = "https://openapi.naver.com/v1/datalab/shopping/category/keywords";
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         requestHeaders.put("Content-Type", "application/json");
+        
+        String today = LocalDate.now().toString();
+        String keyword = request.getParameter("keyword");
 
-        String requestBody = "{  \"startDate\": \"2017-08-01\",\r\n"
-        		+ "  \"endDate\": \"2017-09-30\",\r\n"
-        		+ "  \"timeUnit\": \"month\",\r\n"
-                + "\"category\":[{\"name\":\"패션의류\",\"param\":[\"50000000\"]}," 
-        		+ "{\"name\":\"화장품/미용\",\"param\":[\"50000002\"]}],"
-        		+ "  \"keyword\": [\r\n"
-        		+ "      {\"name\": \"패션의류/정장\", \"param\": [ \"정장\"]},\r\n"
-        		+ "      {\"name\": \"패션의류/비지니스 캐주얼\", \"param\": [ \"비지니스 캐주얼\"]}\r\n"
-        		+ "  ],\r\n"
-        		+ "  \"device\": \"\",\r\n"
-        		+ "  \"gender\": \"\",\r\n"
-        		+ "  \"ages\": [ ]}";
+        String requestBody = "{"
+                + "   \"startDate\": \"2017-08-01\","
+                + "   \"endDate\": \"" + today + "\","
+                + "   \"timeUnit\": \"month\","
+                + "   \"category\": \"100000022\","
+                + "   \"keyword\": [{\"name\":\"" + keyword + "\", \"param\": [\"" + keyword + "\"] }]"
+                + "}";
 
         String responseBody = post(apiUrl, requestHeaders, requestBody);
         System.out.println(responseBody);
-    }
+	}
+
+	@Override
+	public void init() throws ServletException {
+		System.out.println("Init 호출됨");
+	}
 
     private static String post(String apiUrl, Map<String, String> requestHeaders, String requestBody) {
         HttpURLConnection con = connect(apiUrl);
@@ -90,7 +107,9 @@ public class ApiExamDatalabTrendShopping {
 
             return responseBody.toString();
         } catch (IOException e) {
-            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
+            throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }
     }
+	
+
 }

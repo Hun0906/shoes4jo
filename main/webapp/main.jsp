@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Main</title>
+<title>SHOES4JO | MAIN</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
