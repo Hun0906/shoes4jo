@@ -15,6 +15,14 @@ header{
 	margin-bottom: 3rem;
 }
 
+.main_search{
+border: none;
+border-bottom: 1px solid black;
+width: 30%;
+font-size: 1.5rem;
+background-color: transparent;
+}
+
 .menu_container {
 	text-align: center;
 }

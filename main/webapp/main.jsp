@@ -17,14 +17,6 @@ text-align: center;
 align-items: center;
 }
 
-.main_search{
-border: none;
-border-bottom: 1px solid black;
-width: 30%;
-font-size: 1.5rem;
-background-color: transparent;
-}
-
 #random_item{
 background-image: linear-gradient(60deg, #6ECCAF 0%, #ADE792 30%, #ADE792 50%, #E9FFC2 90%, #FDFFAE 100%);
     background-repeat: no-repeat;
@@ -69,14 +61,14 @@ font-weight: bold;
 </head>
 
 <body>
-	<%@include file="./view/header.jsp"%>
+	<%@include file="/view/header.jsp"%>
 
 	<div class="contents">
 		<div class="container main">
 		<div><br><span class="main_span">지금</span><br>
 		<span class="main_span" id="random_item">test0</span><span class="main_span">의 쇼핑 트렌드를</span><br>
 		<span class="main_span">알아보세요.</span></div>
-		<form style="position: relative; top: -5rem;"><input type="text" class="main_search">
+		<form style="position: relative; top: -5rem;" action="keyword_trend.jsp" method="get"><input type="text" class="main_search" name="keyword">
 		<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button></form>
 		
 		</div>
@@ -85,7 +77,27 @@ font-weight: bold;
 	</div>
 
     <script>
-    const random_items = ["test1", "test222", "testtest33"];
+    const random_items = [
+    	"나이키 에어포스 1",
+    	"아디다스 알파바운스 슬라이드 2.0",
+    	"닥터마틴 2976 첼시 스무스",
+    	"아디다스 슈퍼스타",
+    	"컨버스 척테일러 올스타 코어",
+    	"크록스 클래식 클로그",
+    	"에어 조던 레거시 312 로우",
+    	"반스 올드스쿨",
+    	"락피쉬웨더웨어 HAYDEN BOOTS",
+    	"우포스 OORIGINAL BLACK",
+    	"닥터마틴 1461 3홀 모노",
+    	"어그 퍼 카라 스웨이드 플랫폼 슬리퍼",
+    	"배럴 스웰 아쿠아 슈즈",
+    	"머렐 HYDRO MOC",
+    	"반스 어센틱",
+    	"뉴발란스 530",
+    	"나이키 덩크 로우 프로 프리미엄",
+    	"조던 1 로우",
+    	"아식스 젤 1130",
+    	];
     const random_item_element = document.getElementById('random_item');
     let currentItemIndex = 0;
 
@@ -140,12 +152,12 @@ font-weight: bold;
     function typeWriterEffect(idx, characterIdx) {
         if (characterIdx < random_items[idx].length) {
             random_item_element.innerHTML += random_items[idx].charAt(characterIdx);
-            setTimeout(typeWriterEffect, 150, idx, characterIdx + 1);
+            setTimeout(typeWriterEffect, 80, idx, characterIdx + 1);
         } else {
             setTimeout(() => {
                 changeRandomItem();
                 drawChart();
-            }, 5000);
+            }, 6000 - 80*(characterIdx + 1));
         }
     }
 
