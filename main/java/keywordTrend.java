@@ -16,12 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class keywordTrend extends HttpServlet{
+import org.springframework.web.bind.annotation.RequestMapping;
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
+@RequestMapping("keywordtrend")
+public class keywordTrend extends HttpServlet{//으아악 이건 옛날방식이고 Controller를 상속받아야 한다고 함..;; 809p
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,12 +35,13 @@ public class keywordTrend extends HttpServlet{
         
         String today = LocalDate.now().toString();
         String keyword = request.getParameter("keyword");
+        System.out.println("keyword: " + keyword);
 
         String requestBody = "{"
                 + "   \"startDate\": \"2017-08-01\","
                 + "   \"endDate\": \"" + today + "\","
                 + "   \"timeUnit\": \"month\","
-                + "   \"category\": \"100000022\","
+                + "   \"category\": \"50000001\","
                 + "   \"keyword\": [{\"name\":\"" + keyword + "\", \"param\": [\"" + keyword + "\"] }]"
                 + "}";
 

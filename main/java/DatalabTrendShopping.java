@@ -23,13 +23,13 @@ public class DatalabTrendShopping {
         requestHeaders.put("Content-Type", "application/json");
         
         String today = LocalDate.now().toString();
-        String keyword = "알파바운스"; //request.getParameter("keyword");
+        String keyword = "아디다스"; //request.getParameter("keyword");
 
         String requestBody = "{"
                 + "   \"startDate\": \"2017-08-01\","
                 + "   \"endDate\": \"" + today + "\","
                 + "   \"timeUnit\": \"month\","
-                + "   \"category\": \"100000022\","
+                + "   \"category\": \"50000001\","
                 + "   \"keyword\": [{\"name\":\"" + keyword + "\", \"param\": [\"" + keyword + "\"] }]"
                 + "}";
 

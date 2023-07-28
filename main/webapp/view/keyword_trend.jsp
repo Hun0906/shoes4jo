@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>SHOES4JO | 상품별 트렌드</title>
 
-	<%@include file="/view/header.jsp"%>
+	<%@include file="header.jsp"%>
 
 <script>
 function getAPIResult() {
@@ -61,7 +61,7 @@ function getAPIResult() {
 	// Step3: java 이용해서 호출
     $.ajax({
         method: "POST",
-        url: "keywordTrend.java",
+        url: "keywordtrend",
         dataType: "json",
         data: {
         	"keyword": keyword,
@@ -100,6 +100,6 @@ function getAPIResult() {
 	</div>
 </div>
 	
-	<%@include file="./view/footer.jsp" %>
+	<%@include file="footer.jsp" %>
 </body>
 </html>

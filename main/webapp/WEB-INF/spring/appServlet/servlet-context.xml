@@ -17,10 +17,11 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/repo/**" location="/repo/" />
+	<resources mapping="/keywordtrend" location="/servlet/keywordTrend" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="prefix" value="/view/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	

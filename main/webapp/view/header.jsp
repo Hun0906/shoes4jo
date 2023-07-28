@@ -56,10 +56,10 @@ function menuToggle() {
 </svg>
 
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context %>/login.jsp'">로그인</a></li>
-    <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context %>/signup.jsp'">회원가입</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context %>/mypage.jsp'">마이페이지</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context %>/logout'">로그아웃</a></li>
+    <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context %>/view/login.jsp'">로그인</a></li>
+    <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context %>/view/signup.jsp'">회원가입</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context %>/view/mypage.jsp'">마이페이지</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context %>/view/logout'">로그아웃</a></li>
   </ul>
 
 </div>
