@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<%@include file="./view/header.jsp"%>
+<%@include file="header.jsp"%>
 
 	<div class="contents">
 			
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 	
-<%@include file="./view/footer.jsp"%>
+<%@include file="footer.jsp"%>
 
 </body>
 </html>

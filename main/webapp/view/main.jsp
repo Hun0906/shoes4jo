@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Main</title>
+<title>SHOES4JO | MAIN</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -61,7 +61,7 @@ font-weight: bold;
 </head>
 
 <body>
-	<%@include file="/view/header.jsp"%>
+	<%@include file="header.jsp"%>
 
 	<div class="contents">
 		<div class="container main">
@@ -177,7 +177,7 @@ font-weight: bold;
       
     </script>
 
-	<%@include file="./view/footer.jsp"%>
+	<%@include file="footer.jsp"%>
 
 </body>
 </html>
