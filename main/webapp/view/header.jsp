@@ -7,12 +7,12 @@ String sessionID = (String) session.getAttribute("id");
 %>
 
 <!-- 스타일시트 -->
-<link href="<%=context %>/css/main.css" rel="stylesheet">
-<link href="<%=context %>/css/bootstrap.min.css" rel="stylesheet">
+<link href="<%=context %>/assets/css/main.css" rel="stylesheet">
+<link href="<%=context %>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<script src="<%=context %>/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="<%=context %>/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <!-- 기능 라이브러리 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -39,7 +39,7 @@ function menuToggle() {
 </script>
 
 <header>
-<img src="<%=context %>/repo/logo01.svg" style="width: 100%; padding: 1rem;" onclick="location.href='/'">
+<img src="<%=context %>/assets/img/logo01.svg" style="width: 100%; padding: 1rem;" onclick="location.href='/'">
 <div class="menu_container">
 <a href="/">메인</a>
 <a href="chart.jsp">차트 예시</a>
