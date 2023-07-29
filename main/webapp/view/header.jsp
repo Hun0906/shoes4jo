@@ -39,7 +39,7 @@ function menuToggle() {
 </script>
 
 <header>
-<img src="<%=context %>/assets/img/logo01.svg" style="width: 100%; padding: 1rem;" onclick="location.href='/'">
+<img src="<%=context %>/assets/img/logo01.svg" style="width: 100%; padding: 1rem;" onclick="location.href='<%=context %>/'">
 <div class="menu_container">
 <a href="/">메인</a>
 <a href="chart.jsp">차트 예시</a>

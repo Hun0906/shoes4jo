@@ -8,7 +8,8 @@
 </head>
 <body>
 <%
-response.sendRedirect("/view/main.jsp");
+String context = ((HttpServletRequest)request).getContextPath(); 
+response.sendRedirect(context+"/view/main.jsp");
 %>
 </body>
 </html>
