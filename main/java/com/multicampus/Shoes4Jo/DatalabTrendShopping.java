@@ -1,8 +1,7 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+package com.multicampus.Shoes4Jo;
+
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,18 +10,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+public class DatalabTrendShopping {
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-@RequestMapping("keywordtrend")
-public class keywordTrend extends HttpServlet{//으아악 이건 옛날방식이고 Controller를 상속받아야 한다고 함..;; 809p
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public static void main(String[] args) {
 		String clientId = "JzcrBZHimsCICRuNqbzk"; // 애플리케이션의 Client ID
 		String clientSecret = "9fgwNuy1pM"; // 애플리케이션의 Client Secret
 
@@ -34,8 +24,7 @@ public class keywordTrend extends HttpServlet{//으아악 이건 옛날방식이
         requestHeaders.put("Content-Type", "application/json");
         
         String today = LocalDate.now().toString();
-        String keyword = request.getParameter("keyword");
-        System.out.println("keyword: " + keyword);
+        String keyword = "아디다스"; //request.getParameter("keyword");
 
         String requestBody = "{"
                 + "   \"startDate\": \"2017-08-01\","
@@ -47,12 +36,7 @@ public class keywordTrend extends HttpServlet{//으아악 이건 옛날방식이
 
         String responseBody = post(apiUrl, requestHeaders, requestBody);
         System.out.println(responseBody);
-	}
-
-	@Override
-	public void init() throws ServletException {
-		System.out.println("Init 호출됨");
-	}
+    }
 
     private static String post(String apiUrl, Map<String, String> requestHeaders, String requestBody) {
         HttpURLConnection con = connect(apiUrl);
@@ -109,6 +93,4 @@ public class keywordTrend extends HttpServlet{//으아악 이건 옛날방식이
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }
     }
-	
-
 }

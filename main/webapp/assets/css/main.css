@@ -4,6 +4,7 @@ body {
 	margin: 0;
 	font-family: 'Noto Sans KR', sans-serif !important;
 	font-family: 'Noto Sans', sans-serif;
+	font-size: 1.05rem;
 }
 
 header{
@@ -13,6 +14,25 @@ header{
 	grid-template-columns: 145px 1fr 100px;
 	align-items: center;
 	margin-bottom: 3rem;
+}
+
+h1{
+	font-size: 2.5rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+a{
+	color:#6ECCAF;
+}
+
+a:hover{
+	color:#ADE792;
+	filter: saturation(200%);
+}
+
+header>a:hover{
+	color: black;	
 }
 
 .main_search{
@@ -59,22 +79,27 @@ footer a{
 	padding: 5px 10px;
 }
 
-footer a:hover{
-	color: #ADE792;
-}
-
 footer a {
 	line-height: 3.5;
 }
 
 .btn-basic{
-	padding: 0.3rem 2rem;
+	padding: 0.5rem 2.5rem;
     font-weight: bold;
     margin: 0rem 1rem;
+    background-color: black;
+    border: 1px solid black;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.btn-line-basic{
+    background-color: white;
+	border: 1px solid black;
+    color: black;
 }
 
 .btn-color1 {
-    color: #fff;
     background-color: #6ECCAF;
     border: 1px solid #6ECCAF;
     }
@@ -85,7 +110,6 @@ footer a {
 }
 
 .btn-color2 {
-    color: #fff;
     background-color: #ADE792;
     border: 1px solid #ADE792;
     }
@@ -102,4 +126,32 @@ footer a {
 
 .btn-line-color2:hover {
 	border: 1px solid #6ECCAFaa;
+}
+
+.form-wrapper{
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    max-width: 578px;
+}
+
+.input-wrapper{
+	display: grid;
+	grid-template-columns: 30% 1fr;
+	margin-bottom: 1rem;
+}
+
+.form-button-wrapper{
+	margin: 2rem;
+}
+
+.input-wrapper>label{
+	font-weight: bold;
+	text-align: left;
+    margin-top: 0.4rem;
+}
+
+.form-control:focus {
+    border-color: #ADE792 !important;
+    box-shadow: 0 0 0 0.25rem #ADE79250 !important;
 }
