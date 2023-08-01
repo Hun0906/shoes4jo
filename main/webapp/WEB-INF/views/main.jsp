@@ -68,7 +68,7 @@ font-weight: bold;
 		<div><br><span class="main_span">지금</span><br>
 		<span class="main_span" id="random_item" onclick="javascript:setSearchInput();">test</span><span class="main_span">의 쇼핑 트렌드를</span><br>
 		<span class="main_span">알아보세요.</span></div>
-		<form style="position: relative; top: -5rem;" action="keyword_trend.jsp" method="get"><input type="text" class="main_search" name="keyword" id="keyword">
+		<form style="position: relative; top: -5rem;" action="keyword_trend" method="post"><input type="text" class="main_search" name="keyword" id="keyword">
 		<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button></form>
 		
 		</div>

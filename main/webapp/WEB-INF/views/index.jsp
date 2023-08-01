@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Shoes4Jo</title>
 </head>
 <body>
 <%
 String context = ((HttpServletRequest)request).getContextPath(); 
-response.sendRedirect(context+"/view/main.jsp");
+response.sendRedirect("main");
 %>
 </body>
 </html>
