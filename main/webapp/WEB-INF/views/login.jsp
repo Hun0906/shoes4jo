@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SHOES4JO | LOGIN</title>
+	<%@include file="header-head.jsp"%>
 
 <style>
 .simpleLogin{
