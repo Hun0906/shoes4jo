@@ -1,4 +1,4 @@
-package com.multicampus.Shoes4Jo;
+package com;
 
 
 import java.io.*;
