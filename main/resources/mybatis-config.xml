@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+    <!-- 테이블이름이나, 컬럼의 이름을 변수화 시켜주는 설정(모든 테이블, 컬럼들을 정의) -->
+
+<configuration>
+    <properties>
+        <property name="ID" value="MEMBER_ID"/>
+        <property name="Name" value="MEMBER_NAME" />
+        <property name="PW" value="MEMBER_PW" />
+        <property name="SignUpDate" value="SIGNUP_DATE" />
+
+    </properties>
+
+<!-- value 부분은 테이블 구조의 실제 column 이름이고, name은 이제부터 mybatis 안에서 사용될 column의 이름 -->
+
+    <typeAliases>
+        <package name="shoes4jo.vo.MemberVO" />
+    </typeAliases>
+<!--  typeAliases : 모델 객체를 어디서 가져올지 경로-->
+
+</configuration>

@@ -1,4 +1,4 @@
-package shoes4jo.dao;
+package com.multi.shoes4jo.dao;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -20,9 +20,7 @@ public class daotest {
 	
 	private static final Logger logger = LoggerFactory.getLogger(daotest.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome daotest.home! The client locale is {}.", locale);

@@ -8,6 +8,7 @@
 <%@include file="header-head.jsp"%>
 
 <script>
+
 	function getAPIResult() {
 		// Step1: Set your API credentials here
 		const clientId = "JzcrBZHimsCICRuNqbzk"; // 애플리케이션의 Client ID
@@ -49,6 +50,9 @@
 				console.log("API 호출 실패: ", status, error);
 			}
 		});
+		
+		document.getElementById("container").setAttribute('style', 'text-align: center;');
+		document.forms['keywordTrendForm'].setAttribute('style', '');
 	}
 </script>
 
@@ -57,11 +61,8 @@
 	<%@include file="header.jsp"%>
 
 	<div class="contents">
-		<div class="container" style="text-align: center; height: calc(100vh - 330px);">
-			<form name="keywordTrendForm" action="javascript:getAPIResult();" style="
-    position: relative;
-    top: calc(50vh - 192px);
-">
+		<div class="container" id="container" style="text-align: center;">
+			<form name="keywordTrendForm" action="javascript:getAPIResult();">
 				<%
 				String keyword = request.getParameter("keyword");
 				%>
@@ -96,6 +97,11 @@ var keyword = document.getElementById("keyword").value;
 if (keyword != "" && keyword != "null" && keyword != null) {
 	document.keywordTrendForm.submit();
 }
+
+function setPosition() {
+	    document.getElementById("container").setAttribute('style', 'text-align: center; height: calc(100vh - 330px);');
+		document.forms['keywordTrendForm'].setAttribute('style', 'position: relative; top: calc(50vh - 192px)');
+	}
 
 setPosition();
 </script>

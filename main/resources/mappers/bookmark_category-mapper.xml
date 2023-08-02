@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shoes4jo.mapper.BookMarkCategoryMapper">
+
+    <resultMap type="BookmarkC" id="bookmarkResultMap">
+        <result property="BookMarkID" column="bookmark_id"/>
+        <result property="MemberID" column="member_id"/>
+        <result property="StartDate" column="start_date"/>
+        <result property="EndDate" column="end_date"/>
+        <result property="TimeUnit" column="time_unit"/>
+        <result property="Category" column="category"/>
+        <result property="CategoryName" column="category_name"/>
+        <result property="CategoryParam" column="category_param"/>
+        <result property="Device" column="device"/>
+        <result property="Gender" column="gender"/>
+        <result property="Ages" column="ages"/>
+        <result property="AddDate" column="add_date"/>
+    </resultMap>
+
+
+<!-- 메모: 수정 필요함 즐겨찾기 추가되는 컬럼 추가 필요(BOOK_NO) -->
+
+
+     <select id="bookmark" parameterType="int" resultMap="bookmarkResultMap">
+        SELECT L.bookmark_id, B.member_id, B.start_date, B.end_date, B.time_unit, B.category, 
+               B.category_name, B.category_param, B.device, B.gender, B.ages, B.add_date
+        FROM Shoes_4Jo_INFO A
+        JOIN MEMBER L ON(A.CONTENTID=L.CONTENTID)
+        WHERE BOOK_NO = #{BOOK_NO}
+	</select>
+
+    <select id="countBookmark" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM Shoes_4Jo_INFO B
+        JOIN MEMBER L ON(A.CONTENTID=L.CONTENTID)
+        WHERE BOOK_NO = #{BOOK_NO}
+	</select>
+
+    <delete id="deleteBookmark" parameterType="int">
+        DELETE FROM bookmark_category 
+        WHERE BOOK_NO = #{BOOK_NO}
+	</delete>
+</mapper> 

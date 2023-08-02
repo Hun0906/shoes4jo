@@ -29,8 +29,8 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
-<!-- 인코딩 필터를 정의하고 문자 인코딩 필터 클래스(별도로 encodingFilter클래스 안만들어도 됨
+	
+	<!-- 인코딩 필터를 정의하고 문자 인코딩 필터 클래스(별도로 encodingFilter클래스 안만들어도 됨
 이게 스프링에서 제공하는 기본 문자 인코딩 필터 클래스임 요청과 응답 문자 인코딩 처리하는데 사용 됨.
 Character~~객체 생성하고 인코딩 작업 해줌)를 사용합니다. -->
 <filter>
