@@ -93,7 +93,7 @@
 <script>
 var keyword = document.getElementById("keyword").value;
 
-if (keyword != "" || keyword != "null" || keyword != null) {
+if (keyword != "" && keyword != "null" && keyword != null) {
 	document.keywordTrendForm.submit();
 }
 

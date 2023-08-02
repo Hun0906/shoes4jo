@@ -41,6 +41,7 @@ border-bottom: 1px solid black;
 width: 30%;
 font-size: 1.5rem;
 background-color: transparent;
+	outline: none;
 }
 
 .menu_container {
