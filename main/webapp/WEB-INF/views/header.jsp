@@ -20,10 +20,16 @@
 </svg>
   </div>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
+  <p class="menu-member" style="
+  text-align: center;
+  margin: 0;
+  padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+  cursor: default;">반가워요🙌<br><%=sessionID %>님!</p>
+  <hr class="menu-member" style="margin: 0.6rem 0;">
     <li><a class="dropdown-item menu-visitor" onclick="location.href='login'">로그인</a></li>
     <li><a class="dropdown-item menu-visitor" onclick="location.href='signup'">회원가입</a></li>
     <li><a class="dropdown-item menu-member" onclick="location.href='mypage'">마이페이지</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='logout'">로그아웃</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='controller/logout'">로그아웃</a></li>
   </ul>
 </div>
 

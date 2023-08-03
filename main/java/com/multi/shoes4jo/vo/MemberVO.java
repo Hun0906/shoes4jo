@@ -1,7 +1,5 @@
 package com.multi.shoes4jo.vo;
 
-import java.sql.Date;
-
 import org.springframework.stereotype.Component;
 
 @Component("MemberVO")
@@ -9,13 +7,13 @@ public class MemberVO {
 	private String MemberID;
 	private String MemberName;
 	private String MemberPW;
-	private Date SignUpDate;
+	private String SignUpDate;
 
 	public MemberVO() {
 
 	}
 
-	public MemberVO(String id, String MemberName, String Name) {
+	public MemberVO(String MemberID, String MemberName, String MemberPW, String SignUpDate) {
 		this.MemberID = MemberID;
 		this.MemberName = MemberName;
 		this.MemberPW = MemberPW;
@@ -46,11 +44,11 @@ public class MemberVO {
 		this.MemberPW = MemberPW;
 	}
 
-	public Date getSignUpDate() {
+	public String getSignUpDate() {
 		return SignUpDate;
 	}
 
-	public void setSignUpDate(Date joinDate) {
+	public void setSignUpDate(String joinDate) {
 		this.SignUpDate = SignUpDate;
 	}
 

@@ -15,7 +15,7 @@ public class NaverShoppingInsight {
 			String apiURL = "https://openapi.naver.com/v1/datalab/shopping/top100";
 			URL url = new URL(apiURL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("GET");
+			connection.setRequestMethod("POST");
 			connection.setRequestProperty("X-Naver-Client-Id", clientId);
 			connection.setRequestProperty("X-Naver-Client-Secret", clientSecret);
 			int responseCode = connection.getResponseCode();
