@@ -32,8 +32,8 @@ public class KeywordTrend {
     public String getTrendData(@RequestParam String keyword) throws Exception {
 		logger.info("getTrendData() called");
 		
-    	String clientId = "JzcrBZHimsCICRuNqbzk"; // ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ Client ID
-		String clientSecret = "9fgwNuy1pM"; // ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ Client Secret
+    	String clientId = "JzcrBZHimsCICRuNqbzk"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client ID
+		String clientSecret = "9fgwNuy1pM"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client Secret
 
         String apiUrl = "https://openapi.naver.com/v1/datalab/shopping/category/keywords";
 
@@ -74,15 +74,15 @@ public class KeywordTrend {
             }
 
             int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) { // ì •ìƒ ì‘ë‹µ
+            if (responseCode == HttpURLConnection.HTTP_OK) { // Á¤»ó ÀÀ´ä
                 return readBody(con.getInputStream());
-            } else {  // ì—ëŸ¬ ì‘ë‹µ
+            } else {  // ¿¡·¯ ÀÀ´ä
                 return readBody(con.getErrorStream());
             }
         } catch (IOException e) {
-            throw new RuntimeException("API ìš”ì²­ê³¼ ì‘ë‹µ ì‹¤íŒ¨", e);
+            throw new RuntimeException("API ¿äÃ»°ú ÀÀ´ä ½ÇÆĞ", e);
         } finally {
-            con.disconnect(); // Connectionì„ ì¬í™œìš©í•  í•„ìš”ê°€ ì—†ëŠ” í”„ë¡œì„¸ìŠ¤ì¼ ê²½ìš°
+            con.disconnect(); // ConnectionÀ» ÀçÈ°¿ëÇÒ ÇÊ¿ä°¡ ¾ø´Â ÇÁ·Î¼¼½ºÀÏ °æ¿ì
         }
     }
     
@@ -91,9 +91,9 @@ public class KeywordTrend {
             URL url = new URL(apiUrl);
             return (HttpURLConnection) url.openConnection();
         } catch (MalformedURLException e) {
-            throw new RuntimeException("API URLì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. : " + apiUrl, e);
+            throw new RuntimeException("API URLÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. : " + apiUrl, e);
         } catch (IOException e) {
-            throw new RuntimeException("ì—°ê²°ì´ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. : " + apiUrl, e);
+            throw new RuntimeException("¿¬°áÀÌ ½ÇÆĞÇß½À´Ï´Ù. : " + apiUrl, e);
         }
     }
 
@@ -110,7 +110,7 @@ public class KeywordTrend {
 
             return responseBody.toString();
         } catch (IOException e) {
-            throw new RuntimeException("API ì‘ë‹µì„ ì½ëŠ” ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.", e);
+            throw new RuntimeException("API ÀÀ´äÀ» ÀĞ´Â µ¥ ½ÇÆĞÇß½À´Ï´Ù.", e);
         }
     }
 	

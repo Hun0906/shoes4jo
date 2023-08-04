@@ -20,8 +20,6 @@ public class MemberControllerImpl implements MemberController {
 	private MemberVO member_id;
 
   
-  //@PostMapping : post요청 처리하는 어노테이션(데이터 생성, 수정 시 클래스 내의 특정 메서드가 POST 요청을 처리)
-
   @Override
   @PostMapping("/insertMember") public ModelAndView
   insertMember(HttpServletRequest request, HttpServletResponse response) throws

@@ -9,8 +9,8 @@ import java.net.URL;
 
 public class NaverShoppingInsight {
 	public static void main(String[] args) {
-		String clientId = "Client ID : JzcrBZHimsCICRuNqbzk"; // ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ Client ID
-		String clientSecret = "secret : 9fgwNuy1pM"; // ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ Client Secret
+		String clientId = "Client ID : JzcrBZHimsCICRuNqbzk"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client ID
+		String clientSecret = "secret : 9fgwNuy1pM"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client Secret
 		try {
 			String apiURL = "https://openapi.naver.com/v1/datalab/shopping/top100";
 			URL url = new URL(apiURL);
