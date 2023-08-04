@@ -10,7 +10,7 @@
 
 <style>
 .simpleLogin{
-border: 1px solid black;
+border: 1px solid #ccc;
 background-color: #ccc;
 border-radius: 10rem;
 height: 64px;
@@ -18,6 +18,8 @@ width: 64px;
 display: inline-block;
 margin: 1rem;
 cursor: pointer;
+background-position: center;
+background-size: 100%;
 }
 </style>
 
@@ -93,16 +95,17 @@ document.loginForm.submit();
 		</div>
 		<div class="form-button-wrapper">
 		<button class="btn-basic">로그인</button>
-		<button class="btn-basic btn-line-basic">가입하기</button>
+		<span class="btn-basic btn-line-basic" onclick="location.href='signup'">가입하기</span>
 		</div>
 		</form>
 		<br>
 		<hr>
 		<br>
 		<h4>간편 로그인</h4>
-		<div><p class="simpleLogin" style="background-image: url(/assets/img/logo_kakao.svg) !important;
-    background-position: center;
-    background-size: 100%;"></p><p class="simpleLogin"></p></div>
+		<div>
+		<p class="simpleLogin" style="background-image: url(<%=context%>/assets/img/logo_kakao.svg);"></p>
+		<p class="simpleLogin" style="background-image: url(<%=context%>/assets/img/logo_google.svg);"></p>
+		</div>
 		</div>
 		
 

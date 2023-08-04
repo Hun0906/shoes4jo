@@ -32,7 +32,7 @@ public class LoginDAO {
 	
 	public int login(String MemberID, String MemberPW) {
 		String SQL = "SELECT count(*) FROM `shoes_4jo`.member WHERE MEMBER_ID = ? and MEMBER_PW = ?";
-		System.out.printf("login: SELECT count(*) FROM member WHERE MEMBER_ID = %s and MEMBER_PW = %s\n", MemberID, MemberPW);
+		System.out.printf("login: SELECT count(*) FROM `shoes_4jo`.member WHERE MEMBER_ID = %s and MEMBER_PW = %s\n", MemberID, MemberPW);
 		try {
 			conn = dataFactory.getConnection();
 
