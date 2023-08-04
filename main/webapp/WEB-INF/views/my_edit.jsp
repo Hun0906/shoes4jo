@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
-<%@ page import="com.multi.shoes4jo.DBUtil"%>
 <%
     String memberId = (String) session.getAttribute("memberId");
    // String memberName = (String) session.getAttribute("memberName");
@@ -34,4 +33,4 @@
 
 <%@include file="footer.jsp"%>
 </body>
-</html>
+</html> 

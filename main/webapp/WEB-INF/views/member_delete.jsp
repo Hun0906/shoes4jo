@@ -1,55 +1,88 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
-<%@ page import="com.multi.shoes4jo.DBUtil" %>
-<%
-    String memberId = (String) session.getAttribute("memberId"); // 세션에서 memberId 가져옴
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 
-    Connection conn = null;
-    PreparedStatement pstmt = null;
-    
-%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SHOES4JO | 회원 탈퇴</title>
+<%@include file="header-head.jsp"%>
+
+<style>
+.simplesignup {
+	border: 1px solid black;
+	background-color: #ccc;
+	border-radius: 10rem;
+	height: 64px;
+	width: 64px;
+	display: inline-block;
+	margin: 1rem;
+	cursor: pointer;
+}
+</style>
+
 <script>
-    var confirmed = confirm("정말로 회원 정보를 삭제하시겠습니까?");
-    if (!confirmed) {
-        // 사용자가 취소를 선택한 경우 이전 페이지로 돌아갑니다.
-        window.history.back();
+    document.getElementById("deleteMemberBtn").addEventListener("click", function() {
+        var confirmed = confirm("정말로 회원 정보를 삭제하시겠습니까?");
+        if (!confirmed) {
+            // 사용자가 취소를 선택한 경우 이전 페이지로 돌아감
+            window.history.back();
+            return;
+        }
+
+        // 회원 아이디를 가져옴
+        var member_id = "member_id";
+
+        deleteMember(member_id);
+    });
+
+    function deleteMember(id) {
+        $.ajax({
+            method: "POST",
+            url: "deleteMember",
+            data: { memberId: id },
+            success: function(response) {
+                if (response == 1) {
+                    alert("회원 정보가 성공적으로 삭제되었습니다.");
+                    window.location.href = "/";
+                } else {
+                    alert("회원 정보 삭제에 실패하였습니다.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Class 호출 실패: ", status, error);
+            }
+        });
     }
 </script>
-<%
-    if (memberId != null) {
-        try {
-            conn = DBUtil.getConnection();
-            pstmt = conn.prepareStatement("DELETE FROM member WHERE member_id=?");
-            pstmt.setString(1, memberId);
-            int rowsAffected = pstmt.executeUpdate();
 
-            if (rowsAffected > 0) {
-                // 회원 정보 삭제에 성공했을 때, 세션에서 로그인 정보 제거
-                session.removeAttribute("memberId");
-               // session.removeAttribute("memberName");
-               // session.removeAttribute("memberEmail");
-                // JavaScript 코드로 경고창을 띄웁니다.
-                %>
-                <script>
-                    alert("회원 정보가 삭제되었습니다.");
-                    // 메인 페이지로 이동
-                    window.location.href = "main.jsp";
-                </script>
-                <%
-            } else {
-                // JavaScript 코드로 경고창을 띄웁니다.
-                %>
-                <script>
-                    alert("회원 정보 삭제에 실패했습니다.");
-                    // 이전 페이지로 이동
-                    window.history.back();
-                </script>
-                <%
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.close(conn, pstmt, null);
-        }
-    }
-%>
+</head>
+
+<body>
+	<%@include file="header.jsp"%>
+
+	<div class="contents">
+		<div class="container">
+
+			<div class="form-wrapper">
+				<h1>회원 탈퇴</h1>
+				<form name="deleteForm" onsubmit="return delete();">
+					<div class="form-button-wrapper">
+						<button class="btn btn-danger" id="deleteMemberBtn" type="submit">회원 탈퇴</button>
+					</div>
+				</form>
+				<br>
+				<hr>
+				<br>
+			</div>
+
+		</div>
+	</div>
+
+	<%@include file="footer.jsp"%>
+
+</body>
+</html>
