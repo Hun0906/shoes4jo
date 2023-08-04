@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="com.multi.shoes4jo" />
+    </typeAliases>
+</configuration>
+
+
+<!-- 
+MyBatis의 핵심 설정 파일이며, 일반적인 MyBatis 설정에 대해 적용됩니다. 이 파일에서는 typeAliases,
+typeHandlers, plugins, environments, mappers 등 -->
