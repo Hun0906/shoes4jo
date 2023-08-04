@@ -34,7 +34,7 @@ public class LoginController {
 			HttpSession session = request.getSession();
 			session.setAttribute("member_id", memberID);
 
-			System.out.println(memberID + " ë¡œê·¸ì¸ ì„±ê³µ");
+			System.out.println(memberID + " ·Î±×ÀÎ ¼º°ø");
 
 			model.addAttribute("res", loginRes);
 			return "redirect:/login";
