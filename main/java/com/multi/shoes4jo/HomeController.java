@@ -42,13 +42,13 @@ public class HomeController {
 
 		return "login";
 	}
-	
+
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup() {
 		logger.info("signup() called");
-		
+
 		return "signup";
-	}
+	}	
 	
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
 	public String about() {
@@ -57,11 +57,38 @@ public class HomeController {
 		return "about";
 	}
 	
+	@RequestMapping(value = "/my_page", method = RequestMethod.GET)
+	public String my_page() {
+		logger.info("my_page() called");
+
+		return "my_page";
+	}
+	
+	@RequestMapping(value = "/my_edit", method = RequestMethod.GET)
+	public String my_edit() {
+		logger.info("my_edit() called");
+
+		return "my_edit";
+	}
+	
 	@RequestMapping(value = "/acknowledgement", method = RequestMethod.GET)
 	public String acknowledgement() {
 		logger.info("acknowledgement() called");
 		
 		return "acknowledgement";
 	}
+	
+	@RequestMapping(value = "/member_update", method = RequestMethod.GET)
+	public String member_update() {
+		logger.info("member_update() called");
 
+		return "member_update";
+	}
+	
+	@RequestMapping(value = "/member_delete", method = RequestMethod.GET)
+	public String member_delete() {
+		logger.info("member_delete() called");
+
+		return "member_delete";
+	}
 }
