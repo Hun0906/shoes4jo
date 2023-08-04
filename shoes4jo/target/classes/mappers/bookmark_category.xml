@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BookMarkCategory">
+
+	<resultMap type="com.multi.shoes4jo.vo.BookmarkC"
+		id="bookmarkCResult">
+		<result property="bookmark_id" column="bookmark_id" />
+		<result property="member_id" column="member_id" />
+		<result property="start_date" column="start_date" />
+		<result property="end_date" column="end_date" />
+		<result property="time_unit" column="time_unit" />
+		<result property="category" column="category" />
+		<result property="category_name" column="category_name" />
+		<result property="category_param" column="category_param" />
+		<result property="device" column="device" />
+		<result property="gender" column="gender" />
+		<result property="ages" column="ages" />
+		<result property="add_date" column="add_date" />
+	</resultMap>
+
+
+	<insert id="insertBookmarkC"
+		parameterType="com.multi.shoes4jo.vo.BookmarkC">
+		INSERT INTO shoes_4jo.bookmark_category (bookmark_id, member_id, start_date, end_date,
+		time_unit,
+		category, category_name, category_param, device, gender,
+		ages, add_date)
+		VALUES (#{bookmark_id}, #{member_id}, #{start_date}, #{end_date},
+		#{time_unit}, #{category}, #{category_name}, #{category_param},
+		#{device}, #{gender}, #{ages}, #{add_date})
+	</insert>
+
+	<delete id="deleteBookmarkC"
+		parameterType="com.multi.shoes4jo.vo.BookmarkC">
+		DELETE FROM shoes_4jo.bookmark_category
+		WHERE member_id = #{member_id}
+	</delete>
+</mapper>
