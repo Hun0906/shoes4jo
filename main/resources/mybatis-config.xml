@@ -8,5 +8,5 @@
 
 
 <!-- 
-MyBatis의 핵심 설정 파일이며, 일반적인 MyBatis 설정에 대해 적용됩니다. 이 파일에서는 typeAliases,
+MyBatis의 핵심 설정 파일이며, 일반적인 MyBatis 설정에 대해 적용됨. typeAliases,
 typeHandlers, plugins, environments, mappers 등 -->
