@@ -39,8 +39,6 @@ public class MainController {
 		return "keyword_trend";
 	}
 
-	}
-
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup() {
 		logger.info("signup() called");
