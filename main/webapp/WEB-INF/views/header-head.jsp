@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 String context = ((HttpServletRequest)request).getContextPath(); 
-String sessionID = (String) session.getAttribute("MemberID");
+String sessionID = (String) session.getAttribute("member_id");
 %>
 
 <!-- 스타일시트 -->
