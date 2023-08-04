@@ -25,6 +25,8 @@ public class LoginController {
 	public String login(MemberVO vo, Model model, HttpServletRequest request) {
 		String memberID = request.getParameter("member_id");
 		String memberPW = request.getParameter("member_pw");
+		
+		System.out.printf("member_id: %s, member_pw: %s\n", memberID, memberPW);
 
 		vo.setmember_id(memberID);
 		vo.setmember_pw(memberPW);

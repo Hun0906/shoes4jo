@@ -85,10 +85,10 @@ document.loginForm.submit();
 		<h1>로그인</h1>
 		<form name="loginForm" method="post" action="javascript:login();">
 		<div class="input-wrapper">
-		<label>아이디</label><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control">
+		<label>아이디</label><input type="text" id="id" name="member_id" placeholder="아이디" class="form-control">
 		</div>
 		<div class="input-wrapper">
-		<label>비밀번호</label><input type="password" id="pw" name="MEMBER_PW" placeholder="비밀번호" class="form-control">
+		<label>비밀번호</label><input type="password" id="pw" name="member_pw" placeholder="비밀번호" class="form-control">
 		</div>
 		<div class="form-button-wrapper">
 		<a href="">아이디 찾기</a> &nbsp;&nbsp; <a href="">비밀번호 찾기</a>
