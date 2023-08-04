@@ -68,27 +68,24 @@ $.ajax({
 		<div class="container">
 		
 		<div class="form-wrapper">
-		<h1>로그인</h1>
+		<h1>회원가입</h1>
 		<form name="signupForm" action="javascript:signup();">
 		<div class="input-wrapper">
-		<label>아이디</label><input type="text" id="id" name="id" placeholder="아이디" class="form-control">
+		<label>아이디</label><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control">
 		</div>
 		<div class="input-wrapper">
-		<label>비밀번호</label><input type="password" id="pw" name="pw" placeholder="비밀번호" class="form-control">
+		<label>이름</label><input type="text" id="id" name="MEMBER_NAME" placeholder="아이디" class="form-control">
+		</div>
+		<div class="input-wrapper">
+		<label>비밀번호</label><input type="password" id="pw" name="MEMBER_PW" placeholder="비밀번호" class="form-control">
+		</div>
+		<div class="input-wrapper">
+		<label>비밀번호 확인</label><input type="password" id="pw" placeholder="비밀번호" class="form-control">
 		</div>
 		<div class="form-button-wrapper">
-		<a href="">아이디 찾기</a> &nbsp;&nbsp; <a href="">비밀번호 찾기</a>
-		</div>
-		<div class="form-button-wrapper">
-		<button class="btn-basic">로그인</button>
-		<button class="btn-basic btn-line-basic">가입하기</button>
+		<button class="btn-basic">회원가입</button>
 		</div>
 		</form>
-		<br>
-		<hr>
-		<br>
-		<h4>간편 로그인</h4>
-		<div><p class="simplesignup" style="background-img: url('/assets/img/logo_kakao.svg')"></p><p class="simplesignup"></p></div>
 		</div>
 		
 

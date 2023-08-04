@@ -36,18 +36,32 @@ public class HomeController {
 		return "keyword_trend";
 	}
 
-	@RequestMapping(value = "/chart", method = RequestMethod.GET)
-	public String chart() {
-		logger.info("chart() called");
-
-		return "chart";
-	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		logger.info("login() called");
 
 		return "login";
+	}
+	
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signup() {
+		logger.info("signup() called");
+		
+		return "signup";
+	}
+	
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about() {
+		logger.info("about() called");
+		
+		return "about";
+	}
+	
+	@RequestMapping(value = "/acknowledgement", method = RequestMethod.GET)
+	public String acknowledgement() {
+		logger.info("acknowledgement() called");
+		
+		return "acknowledgement";
 	}
 
 }

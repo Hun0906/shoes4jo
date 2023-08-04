@@ -92,12 +92,14 @@ footer a {
     border: 1px solid black;
     color: #fff;
     font-size: 1.1rem;
+    cursor: pointer;
 }
 
 .btn-line-basic{
     background-color: white;
 	border: 1px solid black;
     color: black;
+    cursor: pointer;
 }
 
 .btn-color1 {
