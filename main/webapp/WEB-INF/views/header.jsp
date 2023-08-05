@@ -8,23 +8,29 @@
 <a href="keyword_trend">상품별 트렌드</a>
 <a href="category_trend">카테고리별 트렌드</a>
 </div>
-<div onclick="javascript:menuToggle()" style="
+
+<div class="dropdown" style="
     text-align: right;
     margin-right: 2rem;
     cursor: pointer;
-" data-bs-toggle="dropdown" aria-expanded="false">
-<svg xmlns="http://www.w3.org/2000/svg" width="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" style="height: auto;width: 40px;">
+">
+  <div onclick="javascript:menuToggle()" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" style="height: auto;width: 40px;">
   <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
 </svg>
-
-  <ul class="dropdown-menu">
+  </div>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
+  <p class="menu-member" style="
+  text-align: center;
+  margin: 0;
+  padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+  cursor: default;">반가워요🙌<br><%=sessionID %>님!</p>
+  <hr class="menu-member" style="margin: 0.6rem 0;">
     <li><a class="dropdown-item menu-visitor" onclick="location.href='login'">로그인</a></li>
     <li><a class="dropdown-item menu-visitor" onclick="location.href='signup'">회원가입</a></li>
     <li><a class="dropdown-item menu-member" onclick="location.href='mypage'">마이페이지</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='logout'">로그아웃</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='controller/logout'">로그아웃</a></li>
   </ul>
-
 </div>
-
 
 </header>

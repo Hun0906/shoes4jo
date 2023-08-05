@@ -1,35 +1,19 @@
-package shoes4jo.api;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.multi.shoes4jo.common;
 
 import java.io.*;
+
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.time.LocalDate;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+public class DatalabTrendShopping {
 
-@Controller
-@RequestMapping(value = "/api")
-public class keywordTrend {
-	
-	private static final Logger logger = LoggerFactory.getLogger(keywordTrend.class);
-
-	@RequestMapping(value = "/keywordtrend", method = { RequestMethod.GET, RequestMethod.POST } )
-	@ResponseBody
-    public String getTrendData(@RequestParam String keyword) throws Exception {
-		logger.info("getTrendData() called");
-		
-    	String clientId = "JzcrBZHimsCICRuNqbzk"; // 애플리케이션의 Client ID
+    public static void main(String[] args) {
+		String clientId = "JzcrBZHimsCICRuNqbzk"; // 애플리케이션의 Client ID
 		String clientSecret = "9fgwNuy1pM"; // 애플리케이션의 Client Secret
 
         String apiUrl = "https://openapi.naver.com/v1/datalab/shopping/category/keywords";
@@ -40,7 +24,7 @@ public class keywordTrend {
         requestHeaders.put("Content-Type", "application/json");
         
         String today = LocalDate.now().toString();
-        System.out.println("keyword: " + keyword);
+        String keyword = "아디다스"; //request.getParameter("keyword");
 
         String requestBody = "{"
                 + "   \"startDate\": \"2017-08-01\","
@@ -52,8 +36,7 @@ public class keywordTrend {
 
         String responseBody = post(apiUrl, requestHeaders, requestBody);
         System.out.println(responseBody);
-		return responseBody;
-	}
+    }
 
     private static String post(String apiUrl, Map<String, String> requestHeaders, String requestBody) {
         HttpURLConnection con = connect(apiUrl);
@@ -82,8 +65,8 @@ public class keywordTrend {
             con.disconnect(); // Connection을 재활용할 필요가 없는 프로세스일 경우
         }
     }
-    
-	private static HttpURLConnection connect(String apiUrl) {
+
+    private static HttpURLConnection connect(String apiUrl) {
         try {
             URL url = new URL(apiUrl);
             return (HttpURLConnection) url.openConnection();
@@ -110,6 +93,4 @@ public class keywordTrend {
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }
     }
-	
-
 }

@@ -20,24 +20,75 @@ margin: 1rem;
 cursor: pointer;
 }
 </style>
+
+<script>
+
+window.onload = function() {
+	getCode();
+}
+
+function getCode() {
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const code = urlParams.get('res');
+
+	if (code === "-1") {
+	    // 로그인 실패 처리
+	    alert("로그인에 실패하였습니다.");
+	    window.location="login";
+	} else if (code == "0") {
+	    alert("아이디 또는 비밀번호 오류입니다.");
+	    window.location="login";
+	} else if (code == "1") {
+	    alert("로그인에 성공하였습니다.");
+	    window.location="main";
+	} else if (code == "109") {
+	    alert("로그아웃에 성공하였습니다.");
+	    location.href = "/main";
+	}
+}
+
+function login(){
+	
+let id = document.loginForm.id.value;
+let pw = document.loginForm.pw.value;
+
+if (!id) {
+	alert("아이디를 입력하세요.");
+	$("#id").focus();
+	return false;
+}
+
+if (!pw) {
+	alert("비밀번호를 입력하세요.");
+	$("#pw").focus();
+	return false;
+}
+
+document.loginForm.action="controller/login";
+document.loginForm.submit();
+
+}
+
+</script>
 </head>
 
 <body>
-	<%@include file="header.jsp"%>
+	<%@ include file="header.jsp" %>
 
 	<div class="contents">
 		<div class="container">
 		
-		
 		<div class="form-wrapper">
 		<h1>로그인</h1>
-		<form name="loginForm">
-		<div class="input-wrapper">
-		<label>아이디</label><input type="text" placeholder="아이디" class="form-control">
-		</div>
-		<div class="input-wrapper">
-		<label>비밀번호</label><input type="password" placeholder="비밀번호" class="form-control">
-		</div>
+		<form name="loginForm" method="post" action="javascript:login();">
+<div class="input-wrapper">
+    <label>아이디</label><input type="text" id="id" name="member_id" placeholder="아이디" class="form-control">
+</div>
+<div class="input-wrapper">
+    <label>비밀번호</label><input type="password" id="pw" name="member_pw" placeholder="비밀번호" class="form-control">
+</div>
+
 		<div class="form-button-wrapper">
 		<a href="">아이디 찾기</a> &nbsp;&nbsp; <a href="">비밀번호 찾기</a>
 		</div>
@@ -50,7 +101,9 @@ cursor: pointer;
 		<hr>
 		<br>
 		<h4>간편 로그인</h4>
-		<div><p class="simpleLogin"></p><p class="simpleLogin"></p></div>
+		<div><p class="simpleLogin" style="background-image: url(/assets/img/logo_kakao.svg) !important;
+    background-position: center;
+    background-size: 100%;"></p><p class="simpleLogin"></p></div>
 		</div>
 		
 
