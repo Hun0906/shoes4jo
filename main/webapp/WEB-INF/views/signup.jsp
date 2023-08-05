@@ -29,8 +29,10 @@
 		let id = document.signupForm.id.value;
 		let name = document.signupForm.name.value;
 		let pw = document.signupForm.pw.value;
+		let pwCheck = document.signupForm.MEMBER_PWCheck.value;
 		let today = new Date();
 		let signup_date = today.toLocaleDateString();
+		let email = document.signupForm.email.value;
 
 		if (!id) {
 			alert("아이디를 입력하세요.");
@@ -49,25 +51,44 @@
 			$("#pw").focus();
 			return false;
 		}
+	    if (!pwCheck) {
+	        alert("비밀번호 확인 값을 입력하세요.");
+	        $("#pwCheck").focus();
+	        return false;
+	    }
 
-		$.ajax({
-			method : "POST",
-			url : "insertMember",
-			dataType : "text",
-			data : {
-				"member_id" : id,
-				"member_name" : name,
-				"member_pw" : pw,
-				"signup_date" : signup_date,
-			},
-			success : function(response) {
-				console.log("회원가입 성공");
-				alert("회원 가입 하셨습니다.");
-			},
-			error : function(xhr, status, error) {
-				console.log("Class 호출 실패: ", status, error);
-			}
-		});
+	    if (pw !== pwCheck) {
+	        alert("비밀번호 값이 일치하지 않습니다.");
+	        $("#pwCheck").focus();
+	        return false;
+	    }
+
+		if (!email) {
+			alert("이메일을 입력하세요.");
+			$("#email").focus();
+			return false;
+		}
+
+	    $.ajax({
+	        method : "POST",
+	        url : "insertMember",
+	        dataType : "text",
+	        data : {
+	            "member_id" : id,
+	            "member_name" : name,
+	            "member_pw" : pw,
+	            "signup_date" : signup_date,
+	            "member_email": email,
+	        },
+	        success : function(response) {
+	            console.log("회원가입 성공");
+	            alert("회원 가입 하셨습니다.");
+	            window.location.href = "login";
+	        },
+	        error : function(xhr, status, error) {
+	            console.log("Class 호출 실패: ", status, error);
+	        }
+	    });
 
 	}
 </script>
@@ -86,16 +107,19 @@
 		<label>아이디</label><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control">
 		</div>
 		<div class="input-wrapper">
-		<label>이름</label><input type="text" id="id" name="MEMBER_NAME" placeholder="아이디" class="form-control">
+		<label>이름</label><input type="text" id="name" name="MEMBER_NAME" placeholder="이름" class="form-control">
+		</div>
+		<div class="input-wrapper">
+		<label>이메일</label><input type="text" id="email" name="MEMBER_EMAIL" placeholder="이메일" class="form-control">
 		</div>
 		<div class="input-wrapper">
 		<label>비밀번호</label><input type="password" id="pw" name="MEMBER_PW" placeholder="비밀번호" class="form-control">
 		</div>
 		<div class="input-wrapper">
-		<label>비밀번호 확인</label><input type="password" id="pw" placeholder="비밀번호" class="form-control">
+		<label>비밀번호 확인</label><input type="password" id="pwCheck" name="MEMBER_PWCheck" placeholder="비밀번호" class="form-control">
 		</div>
 		<div class="form-button-wrapper">
-		<button class="btn-basic">회원가입</button>
+		<button class="btn-basic" onclick="signup();">회원가입</button>
 		</div>
 		</form>
 		</div>

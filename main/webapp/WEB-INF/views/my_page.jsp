@@ -20,6 +20,10 @@
 		아이디:
 		<%=session.getAttribute("memberId")%></p>
 	<p>
+		<p>
+		이메일:
+		<%=session.getAttribute("memberEmail")%></p>
+	<p>
 		가입날짜:
 		<%=session.getAttribute("signupDate")%></p>
 

@@ -24,6 +24,7 @@
 		<result property="member_name" column="member_name" />
 		<result property="member_pw" column="member_pw" />
 		<result property="signup_date" column="signup_date" />
+		<result property="member_email" column="member_email" />
 	</resultMap>
 
 	<!-- result property, column은 memberVO에서 쓸 sql 컬럼명이랑 DB컬럼명들 맞추는거(column이 
@@ -46,8 +47,8 @@
 	<insert id="insertMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
     <![CDATA[
-        insert into shoes_4jo.member(member_id, member_name, member_pw, signup_date)
-        values(#{member_id}, #{member_name}, #{member_pw}, NOW())
+        insert into shoes_4jo.member(member_id, member_name, member_pw, signup_date,member_email)
+        values(#{member_id}, #{member_name}, #{member_pw}, NOW(), #{member_email})
     ]]>
 	</insert>
 
@@ -78,6 +79,7 @@
      <![CDATA[
 	     update shoes_4jo.member
 	     set member_name=#{member_name}, member_pw=#{member_pw}
+	     , member_email=#{member_email}
 	     where
 	     member_id=#{member_id}
       ]]>

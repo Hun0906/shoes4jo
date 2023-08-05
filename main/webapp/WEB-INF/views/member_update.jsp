@@ -3,7 +3,7 @@
 <%@ page import="com.multi.shoes4jo.DBUtil" %>
 <%
     String memberId = request.getParameter("memberId");
-    String memberName = request.getParameter("memberName");
+    String memberName = request.getParameter("memberEmail");
     String memberPw = request.getParameter("memberPw");
 
     Connection conn = null;
@@ -12,9 +12,9 @@
     try {
         conn = DBUtil.getConnection();
 
-        pstmt = conn.prepareStatement("UPDATE member SET member_id=?, member_name=? WHERE member_pw=?");
+        pstmt = conn.prepareStatement("UPDATE member SET member_Email=?, member_name=? WHERE member_pw=?");
         pstmt.setString(1, memberId);
-        pstmt.setString(2, memberName);
+        pstmt.setString(2, memberEmail);
         pstmt.setString(3, memberPw);
 
         int rowsAffected = pstmt.executeUpdate();
