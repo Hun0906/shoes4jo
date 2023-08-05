@@ -21,8 +21,8 @@
         <label>이름:</label>
         <input type="text" name="memberName" value="<%= session.getAttribute("memberName") %>">
         <br>
-        <label>아이디:</label>
-        <input type="text" name="memberId" value="<%= session.getAttribute("memberId") %>" readonly>
+        <label>이메일:</label>
+        <input type="text" name="memberEmail" value="<%= session.getAttribute("memberEmail") %>" readonly>
         <br>
         <label>비밀번호:</label>
         <input type="password" name="memberPw">

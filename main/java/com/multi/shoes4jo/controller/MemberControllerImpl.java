@@ -23,18 +23,23 @@ public class MemberControllerImpl implements MemberController {
   @Override
   @PostMapping("/insertMember") public ModelAndView
   insertMember(HttpServletRequest request, HttpServletResponse response) throws
-  Exception { request.setCharacterEncoding("utf-8"); MemberVO memberVO = new
-  MemberVO();
+  Exception { request.setCharacterEncoding("utf-8"); 
+  MemberVO memberVO = new  MemberVO();
   
-  String id = request.getParameter("member_id"); String name =
-  request.getParameter("member_name"); String pw =
-  request.getParameter("member_pw"); String signup =
-  request.getParameter("signup_date");
+  String id = request.getParameter("member_id"); 
+  String name = request.getParameter("member_name"); 
+  String pw = request.getParameter("member_pw"); 
+  String signup = request.getParameter("signup_date");
+  String email = request.getParameter("member_email"); 
   
-  memberVO.setmember_id(id); memberVO.setmember_name(name);
-  memberVO.setmember_pw(pw); memberVO.setsignup_date(signup);
+  memberVO.setmember_id(id); 
+  memberVO.setmember_name(name);
+  memberVO.setmember_pw(pw); 
+  memberVO.setsignup_date(signup);
+  memberVO.setmember_email(email);
   
-  int result = memberService.insertMember(memberVO); ModelAndView mav = new
+  int result = memberService.insertMember(memberVO); 
+  ModelAndView mav = new
   ModelAndView("redirect:/signup"); return mav; }
 
   

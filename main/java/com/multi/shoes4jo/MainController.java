@@ -22,10 +22,6 @@ public class MainController {
 		mav.setViewName("index");
 		return mav;
 	}
-	// (메서드 단위)@RequestMapping을 이용해 첫 번째 단계의 url요청이 /이면(클래스 단위에서 @RequestMapping안해서)
-	// index()메서드에게 요청함 get방식으로 요청 시 해당 메서드 호출
-	// mav.addObject에서 addObject는 최종 view를 만드는데 필요한 실제 정보이고(정보 추가(바인딩)하는 역할)
-	// 뒤에 msg,index는 담긴 정보
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {

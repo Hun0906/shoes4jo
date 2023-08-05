@@ -8,6 +8,7 @@ public class MemberVO {
 	private String member_name;
 	private String member_pw;
 	private String signup_date;
+	private String member_email;
 
 	public MemberVO() {
 
@@ -18,6 +19,7 @@ public class MemberVO {
 		this.member_name = member_name;
 		this.member_pw = member_pw;
 		this.signup_date = signup_date;
+		this.member_email = member_email;
 	}
 
 	public String getmember_id() {
@@ -51,5 +53,12 @@ public class MemberVO {
 	public void setsignup_date(String joinDate) {
 		this.signup_date = signup_date;
 	}
+	
+	public String getmember_email() {
+		return member_email;
+	}
 
+	public void setmember_email(String member_email) {
+		this.member_email = member_email;
+	}
 }
