@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>회원 정보 수정</title>
+    <title>회원 정보 수정 | SHOES4JO</title>
 	<%@include file="header-head.jsp"%>
 </head>
 <body>

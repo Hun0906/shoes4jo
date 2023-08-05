@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SHOES4JO | 회원가입</title>
+<title>회원가입 | SHOES4JO</title>
 <%@include file="header-head.jsp"%>
 
 <style>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Shoes4Jo</title>
+<title>SHOES4JO</title>
 </head>
 <body>
 <%

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SHOES4JO | ACKNOWLEDGEMENT</title>
+<title>ACKNOWLEDGEMENT | SHOES4JO</title>
 	<%@include file="header-head.jsp"%>
 
 </head>

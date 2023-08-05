@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SHOES4JO | MAIN</title>
+<title>MAIN | SHOES4JO</title>
 	<%@include file="header-head.jsp"%>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

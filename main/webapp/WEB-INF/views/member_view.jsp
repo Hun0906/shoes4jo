@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="com.multi.shoes4jo.DBUtil"%>
 
-<title>SHOES4JO | 회원 정보 조회 </title>
+<title>회원 정보 조회 | SHOES4JO</title>
 	<%@include file="header-head.jsp"%>
 	<body>
 		<%@include file="header.jsp"%>
