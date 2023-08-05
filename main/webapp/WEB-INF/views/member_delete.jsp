@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SHOES4JO | 회원 탈퇴</title>
+<title>회원 탈퇴 | SHOES4JO</title>
 <%@include file="header-head.jsp"%>
 
 <style>
@@ -71,12 +68,9 @@
 				<h1>회원 탈퇴</h1>
 				<form name="deleteForm" onsubmit="return delete();">
 					<div class="form-button-wrapper">
-						<button class="btn btn-danger" id="deleteMemberBtn" type="submit">회원 탈퇴</button>
+						<button class="btn-basic btn-red" id="deleteMemberBtn" type="submit">회원 탈퇴</button>
 					</div>
 				</form>
-				<br>
-				<hr>
-				<br>
 			</div>
 
 		</div>

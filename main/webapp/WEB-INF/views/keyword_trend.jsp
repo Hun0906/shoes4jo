@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SHOES4JO | 상품별 트렌드</title>
+<title>상품별 트렌드 | SHOES4JO</title>
 <%@include file="header-head.jsp"%>
 
 <script>

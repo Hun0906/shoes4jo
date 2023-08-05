@@ -22,6 +22,17 @@ h1{
     line-height: 1.8;
 }
 
+h2{
+    font-size: 2rem;
+    width: fit-content;
+    text-align: center;
+    background-image: linear-gradient(60deg, #6ECCAF 0%, #ADE792 30%, #ADE792 50%, #E9FFC2 90%, #FDFFAE 100%);
+    background-repeat: no-repeat;
+    background-position: left 0 bottom -4px;
+    background-size: 120% 6px;
+    margin: 2rem auto;
+}
+
 a{
 	color:#6ECCAF;
 }
@@ -129,6 +140,17 @@ footer a {
 
 .btn-line-color2:hover {
 	border: 1px solid #6ECCAFaa;
+}
+
+.btn-red {
+	border: 1px solid red;
+	background-color: red;
+}
+
+.btn-line-red {
+	border: 1px solid red;
+	color: red;
+	background-color: white;
 }
 
 .form-wrapper{

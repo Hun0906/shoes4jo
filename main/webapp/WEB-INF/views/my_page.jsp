@@ -6,30 +6,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>마이 페이지</title>
+<title>마이페이지 | SHOES4JO</title>
 <%@include file="header-head.jsp"%>
 </head>
 <body>
 	<%@include file="header.jsp"%>
-	<h2>마이페이지</h2>
-	<p>회원 정보</p>
-	<p>
-		이름:
-		<%=session.getAttribute("memberName")%></p>
-	<p>
-		아이디:
-		<%=session.getAttribute("memberId")%></p>
-	<p>
-		<p>
-		이메일:
-		<%=session.getAttribute("memberEmail")%></p>
-	<p>
-		가입날짜:
-		<%=session.getAttribute("signupDate")%></p>
-
-
-	<button onclick="location.href='my_edit'">수정하기</button>
-	<button onclick="location.href='member_delete'">탈퇴하기</button>
+	<div class="form-wrapper">
+	<h1>마이페이지</h1>
+	<h2>회원 정보</h2>
+		<div class="input-wrapper">
+		<label>이름</label><input type="text" class="form-control" value="" readonly>
+		</div>
+		<div class="input-wrapper">
+		<label>아이디</label><input type="text" class="form-control" value="<%=session.getAttribute("member_id")%>" readonly>
+		</div>
+		<div class="input-wrapper">
+		<label>가입일</label><input type="text" class="form-control" value="" readonly>
+		</div>
+					<div class="form-button-wrapper">
+	<button onclick="location.href='my_edit'" class="btn-basic">수정하기</button>
+</div>		
+			<div class="form-button-wrapper">
+	<span class="btn-basic btn-line-red" onclick="location.href='member_delete'">탈퇴하기</span>
+		</div>
+	</div>
+	
 	<%@include file="footer.jsp"%>
 </body>
 </html>
