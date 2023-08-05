@@ -13,7 +13,7 @@
 	<%@include file="header.jsp"%>
 	<div class="form-wrapper">
 	<h1>마이페이지</h1>
-	<h3>회원 정보</h3>
+	<h2>회원 정보</h2>
 		<div class="input-wrapper">
 		<label>이름</label><input type="text" class="form-control" value="" readonly>
 		</div>
