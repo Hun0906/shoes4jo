@@ -32,61 +32,54 @@ public class MainController {
 	@RequestMapping(value = "/keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
 	public String keyword_trend() {
 		logger.info("keyword_trend() called");
-		return "keyword_trend";
+		return "common/keyword_trend";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup() {
 		logger.info("signup() called");
-		return "signup";
+		return "member/signup";
 	}	
 	
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
 	public String about() {
 		logger.info("about() called");
 		
-		return "about";
+		return "common/about";
 	}
 	
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		logger.info("login() called");
-		return "login";
+		return "member/login";
 	}
 
 	@RequestMapping(value = "/my_page", method = RequestMethod.GET)
 	public String my_page() {
 		logger.info("my_page() called");
 
-		return "my_page";
+		return "member/my_page";
 	}
 
 	@RequestMapping(value = "/my_edit", method = RequestMethod.GET)
 	public String my_edit() {
 		logger.info("my_edit() called");
 
-		return "my_edit";
+		return "member/my_edit";
 	}
 	
 	@RequestMapping(value = "/acknowledgement", method = RequestMethod.GET)
 	public String acknowledgement() {
 		logger.info("acknowledgement() called");
 		
-		return "acknowledgement";
-	}
-	
-	@RequestMapping(value = "/member_update", method = RequestMethod.GET)
-	public String member_update() {
-		logger.info("member_update() called");
-
-		return "member_update";
+		return "common/acknowledgement";
 	}
 
 	@RequestMapping(value = "/member_delete", method = RequestMethod.GET)
 	public String member_delete() {
 		logger.info("member_delete() called");
 
-		return "member_delete";
+		return "member/member_delete";
 	}
 }

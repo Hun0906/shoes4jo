@@ -9,17 +9,20 @@ public class MemberVO {
 	private String member_pw;
 	private String signup_date;
 	private String member_email;
+	private String member_phone;
 
 	public MemberVO() {
 
 	}
 
-	public MemberVO(String member_id, String member_name, String member_pw, String signup_date) {
+	public MemberVO(String member_id, String member_name, String member_pw, String signup_date, String member_email,
+			String member_phone) {
 		this.member_id = member_id;
 		this.member_name = member_name;
 		this.member_pw = member_pw;
 		this.signup_date = signup_date;
 		this.member_email = member_email;
+		this.member_phone = member_phone;
 	}
 
 	public String getmember_id() {
@@ -50,15 +53,23 @@ public class MemberVO {
 		return signup_date;
 	}
 
-	public void setsignup_date(String joinDate) {
+	public void setsignup_date(String signup_date) {
 		this.signup_date = signup_date;
 	}
-	
+
 	public String getmember_email() {
 		return member_email;
 	}
 
 	public void setmember_email(String member_email) {
 		this.member_email = member_email;
+	}
+	
+	public String getmember_phone() {
+		return member_phone;
+	}
+
+	public void setmember_phone(String member_phone) {
+		this.member_phone = member_phone;
 	}
 }

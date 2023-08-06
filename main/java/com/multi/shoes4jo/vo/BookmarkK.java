@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookmarkK {
-		private int BookMarkID;
-		private String MemberID;
-		private String StartDate;
-		private String EndDate;
-		private String TimeUnit;
-		private String Keywords;
-		private String Device;
-		private String Gender;
-		private String Ages;
-		private String AddDate;
+		private int bookmark_id;
+		private String member_id;
+		private String start_date;
+		private String end_date;
+		private String time_unit;
+		private String keywords;
+		private String device;
+		private String gender;
+		private String ages;
+		private String add_date;
 	}
 

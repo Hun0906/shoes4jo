@@ -13,18 +13,17 @@ import com.multi.shoes4jo.service.MemberService;
 import com.multi.shoes4jo.vo.MemberVO;
 
 @Controller
-
 @RequestMapping("/controller")
 public class LoginController {
 
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping(value = "/login", method = { RequestMethod.POST })
-	public String login(MemberVO vo, Model model, HttpServletRequest request) {
+	@RequestMapping(value = "login", method = { RequestMethod.POST })
+	public String login(MemberVO vo, Model model, HttpServletRequest request) throws Exception {
 		String memberID = request.getParameter("member_id");
 		String memberPW = request.getParameter("member_pw");
-		
+
 		System.out.printf("member_id: %s, member_pw: %s\n", memberID, memberPW);
 
 		vo.setmember_id(memberID);
@@ -35,7 +34,7 @@ public class LoginController {
 			HttpSession session = request.getSession();
 			session.setAttribute("member_id", memberID);
 
-			System.out.println(memberID + " ∑Œ±◊¿Œ º∫∞¯");
+			System.out.println(memberID + " Î°úÍ∑∏Ïù∏ ÏÑ±Í≥µ");
 
 			model.addAttribute("res", loginRes);
 			return "redirect:/login";
