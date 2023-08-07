@@ -32,7 +32,13 @@ public class MainController {
 	@RequestMapping(value = "/keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
 	public String keyword_trend() {
 		logger.info("keyword_trend() called");
-		return "common/keyword_trend";
+		return "trend/keyword_trend";
+	}
+	
+	@RequestMapping(value = "/keyword_trend2", method = { RequestMethod.GET, RequestMethod.POST })
+	public String keyword_trend2() {
+		logger.info("keyword_trend2() called");
+		return "trend/keyword_trend2";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
