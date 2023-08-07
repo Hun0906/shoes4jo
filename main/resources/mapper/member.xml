@@ -25,10 +25,7 @@
 		<result property="member_pw" column="member_pw" />
 		<result property="signup_date" column="signup_date" />
 		<result property="member_email" column="member_email" />
-		<result property="member_phone" column="member_phone" />
 	</resultMap>
-
-
 
 	<!-- result property, column은 memberVO에서 쓸 sql 컬럼명이랑 DB컬럼명들 맞추는거(column이 
 		원래 DB 컬럼명) resultMap 타입 속성에 HashMap도 있는데(여러 정보 처리) HashMap사용할땐 타입에 MemberVO대신 
@@ -50,8 +47,8 @@
 	<insert id="insertMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
     <![CDATA[
-        insert into shoes_4jo.member(member_id, member_name, member_pw, signup_date,member_email, member_phone)
-        values(#{member_id}, #{member_name}, #{member_pw}, NOW(), #{member_email}, #{member_phone})
+        insert into shoes_4jo.member(member_id, member_name, member_pw, signup_date,member_email)
+        values(#{member_id}, #{member_name}, #{member_pw}, NOW(), #{member_email})
     ]]>
 	</insert>
 
@@ -72,8 +69,7 @@
 	<select id="memberInfo" resultMap="memResult"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
 		SELECT * FROM shoes_4jo.member
-		WHERE member_id =
-		#{member_id}
+		WHERE member_id = #{member_id}
 	</select>
 
 
@@ -83,7 +79,7 @@
      <![CDATA[
 	     update shoes_4jo.member
 	     set member_name=#{member_name}, member_pw=#{member_pw}
-	     , member_email=#{member_email},member_phone=#{member_phone}
+	     , member_email=#{member_email}
 	     where
 	     member_id=#{member_id}
       ]]>
@@ -108,37 +104,20 @@
 	<!-- deleteMember : 회원 탈퇴 쿼리문 -->
 
 
-	<!-- <select id="memberIdSearch" parameterType="com.multi.shoes4jo.vo.memberVO" 
-		resultType="com.multi.shoes4jo.vo.memberVO"> <![CDATA[ select * from shoes_4jo.member 
-		where member_name = #{member_name} and member_phone = #{member_phone} ]]> 
-		</select> -->
-
-
-	<update id="findPw">
-		update shoes_4jo.member set member_pw =
-		#{member_pw}
-		where
-		member_email = #{member_email} and member_id =
-		#{member_id}
-	</update>
-
-	<select id="findPwCheck" resultType="int">
-		select count(*) from
-		shoes_4jo.member where member_email =
-		#{member_email} and
-		member_id =
-		#{member_id}
-	</select>
-
-	<!-- 비밀번호 찾기 쿼리문(이메일,아이디로 비밀번호 업데이트 시킴) -->
-
-
 
 
 	<!-- <insert id="insertKakaoMember" parameterType="memberVO"> INSERT INTO 
 		shoes4jo ( member_id, member_name, member_pw, signup_date ) VALUES ( #{member_id}, 
 		#{member_name}, #{member_pw}, NULL, NULL, 'Y', DEFAULT, DEFAULT ) 카카오 로그인 
 		쿼리문 보관 </insert> -->
+
+	<select id="duplicationId" resultType="int"
+		parameterType="com.multi.shoes4jo.vo.MemberVO">
+     <![CDATA[
+		SELECT count(*) cnt FROM shoes_4jo.member
+		WHERE member_id = #{member_id} 
+      ]]>
+	</select>
 
 
 

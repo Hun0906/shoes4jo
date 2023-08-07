@@ -1,24 +1,23 @@
 package com.multi.shoes4jo.dao;
 
-import java.util.List;
 import com.multi.shoes4jo.vo.MemberVO;
 
 public interface MemberDAO
 
 {
-	public int insertMember(MemberVO member) throws Exception;
-
-	public int loginMember(MemberVO member) throws Exception;
-
-	public void updateMember(MemberVO member) throws Exception;
+	int insertMember(MemberVO member);
 	
-	public MemberVO memberInfo(String memberId) throws Exception;
+	int loginMember(MemberVO member);
+	
+    int memberInfo(MemberVO member);
 
-	public int deleteMember(String id) throws Exception;
+	int updateMember(MemberVO member);
 
-	public int findPwCheck(MemberVO memberVO) throws Exception;
+	int deleteMember(String id);
 
-	public int findPw(String member_pw, String member_email, String member_id) throws Exception;
-
+	void setMemberDAO(MemberDAO memberDAO);
+	
+	int duplicationId(String id);
+	
 
 }
