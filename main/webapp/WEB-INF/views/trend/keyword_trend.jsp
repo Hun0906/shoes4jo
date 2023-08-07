@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품별 트렌드 | SHOES4JO</title>
-<%@include file="header-head.jsp"%>
+<%@include file="../common/header-head.jsp"%>
 
 <script>
 
@@ -58,7 +58,7 @@
 
 </head>
 <body>
-	<%@include file="header.jsp"%>
+	<%@include file="../common/header.jsp"%>
 
 	<div class="contents">
 		<div class="container" id="container" style="text-align: center;">
@@ -105,6 +105,6 @@ function setPosition() {
 
 setPosition();
 </script>
-	<%@include file="footer.jsp"%>
+	<%@include file="../common/footer.jsp"%>
 </body>
 </html>

@@ -32,7 +32,13 @@ public class MainController {
 	@RequestMapping(value = "/keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
 	public String keyword_trend() {
 		logger.info("keyword_trend() called");
-		return "common/keyword_trend";
+		return "trend/keyword_trend";
+	}
+	
+	@RequestMapping(value = "/keyword_trend2", method = { RequestMethod.GET, RequestMethod.POST })
+	public String keyword_trend2() {
+		logger.info("keyword_trend2() called");
+		return "trend/keyword_trend2";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -81,5 +87,12 @@ public class MainController {
 		logger.info("member_delete() called");
 
 		return "member/member_delete";
+	}
+	
+	@RequestMapping(value = "/coupang_dummy", method = RequestMethod.GET)
+	public String coupang_dummy() {
+		logger.info("coupang_dummy() called");
+		
+		return "test/coupang_dummy";
 	}
 }

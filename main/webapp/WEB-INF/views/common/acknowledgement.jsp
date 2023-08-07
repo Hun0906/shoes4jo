@@ -47,7 +47,7 @@ margin: 0.5rem;
 		<div class="input-wrapper">
 		<label>네이버 데이터랩</label>
 		<a href="https://datalab.naver.com/keyword/trendSearch.naver">
-		https://datalab.naver.com/keyword/trendSearch.naver
+		https://datalab.naver.com/
 		</a>
 		</div>
 		<div class="input-wrapper">
@@ -59,7 +59,13 @@ margin: 0.5rem;
 		<div class="input-wrapper">
 		<label>인스파일러</label>
 		<a href="https://insfiler.com/detail/rt_shop_daily_kr-0001">
-		https://insfiler.com/detail/rt_shop_daily_kr-0001
+		https://insfiler.com/
+		</a>
+		</div>
+		<div class="input-wrapper">
+		<label>마대리</label>
+		<a href="https://www.maderi.co.kr/keyword/simple">
+		https://www.maderi.co.kr/
 		</a>
 		</div>
 		</div>

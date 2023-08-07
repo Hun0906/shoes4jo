@@ -1,7 +1,6 @@
 package com.multi.shoes4jo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.dao.MemberDAO;
@@ -13,63 +12,39 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 
-	public void setMemberDAO(MemberDAO memberDAO)throws Exception  {
+	public void setMemberDAO(MemberDAO memberDAO) {
 		this.memberDAO = memberDAO;
 	}
 
 	@Override
-	public int insertMember(MemberVO member)throws Exception  {
-		try {
-			return memberDAO.insertMember(member);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
+	public int insertMember(MemberVO member) {
+		return memberDAO.insertMember(member);
+	}
+	
+	@Override
+	public int loginMember(MemberVO member) {
+	    return memberDAO.loginMember(member);
+	}
+	
+	@Override
+	public int memberInfo(MemberVO member) {
+	    return memberDAO.memberInfo(member);
 	}
 
 	@Override
-	public int loginMember(MemberVO member) throws Exception {
-		try {
-			return memberDAO.loginMember(member);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	public MemberVO memberInfo(String memberId) throws Exception {
-		return memberDAO.memberInfo(memberId);
+	public int updateMember(MemberVO member) {
+		return memberDAO.updateMember(member);
 	}
 
 	@Override
-	public void updateMember(MemberVO member) throws Exception {
-		try {
-			memberDAO.updateMember(member);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public int deleteMember(String id) {
+		return memberDAO.deleteMember(id);
 	}
-
-
-	@Override
-	public int deleteMember(String id) throws Exception {
-		try {
-			return memberDAO.deleteMember(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	@Override
-	public int findPw(String member_email, String member_id) throws Exception  {
-
-		return 0;
-	}
-
-	@Override
-	public int findPwCheck(MemberVO memberVO)throws Exception  {
-
-		return 0;
-	}
+	
+    @Override 
+    public int duplicationId(String id) {
+        return memberDAO.duplicationId(id);
+ 	     
+    }
+	 
 }

@@ -170,6 +170,19 @@ footer a {
 	margin: 2rem;
 }
 
+.input-with-button{
+	display: grid;
+	grid-template-columns: 1fr 105px;
+}
+
+.button-with-input{
+    cursor: pointer;
+    border: 1px solid black;
+    width: fit-content;
+    padding: 0.3rem 1rem 0.3rem 1rem;
+    margin-left: 0.3rem;
+}
+
 .input-wrapper>label{
 	font-weight: bold;
 	text-align: left;
