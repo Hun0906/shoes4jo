@@ -82,4 +82,11 @@ public class MainController {
 
 		return "member/member_delete";
 	}
+	
+	@RequestMapping(value = "/coupang_dummy", method = RequestMethod.GET)
+	public String coupang_dummy() {
+		logger.info("coupang_dummy() called");
+		
+		return "test/coupang_dummy";
+	}
 }
