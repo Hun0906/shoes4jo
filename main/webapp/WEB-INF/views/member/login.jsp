@@ -24,52 +24,52 @@
 </style>
 
 <script>
-	window.onload = function() {
-		getCode();
+
+window.onload = function() {
+	getCode();
+}
+
+function getCode() {
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const code = urlParams.get('res');
+
+	if (code === "-1") {
+		// 로그인 실패 처리
+		alert("로그인에 실패하였습니다.");
+		window.location = "login";
+    } else if (code == "0") {
+        alert("아이디 또는 비밀번호 오류입니다.");
+        window.location = "login";
+    } else if (code == "1") {
+        alert("로그인에 성공하였습니다.");
+        window.location = "main";
+    } else if (code == "109") {
+        alert("로그아웃에 성공하였습니다.");
+        window.location = "main";
+    }
+}
+
+function login() {
+
+	let id = document.loginForm.id.value;
+	let pw = document.loginForm.pw.value;
+
+	if (!id) {
+		alert("아이디를 입력하세요.");
+		$("#id").focus();
+		return false;
 	}
 
-	function getCode() {
-		const queryString = window.location.search;
-		const urlParams = new URLSearchParams(queryString);
-		const code = urlParams.get('res');
-
-		if (code === "-1") {
-			// 로그인 실패 처리
-			alert("로그인에 실패하였습니다.");
-			window.location = "login";
-	    } else if (code == "0") {
-	        alert("아이디 또는 비밀번호 오류입니다.");
-	        window.location = "login";
-	    } else if (code == "1") {
-	        alert("로그인에 성공하였습니다.");
-	        window.location = "main";
-	    } else if (code == "109") {
-	        alert("로그아웃에 성공하였습니다.");
-	        window.location = "main";
-	    }
+	if (!pw) {
+		alert("비밀번호를 입력하세요.");
+		$("#pw").focus();
+		return false;
 	}
 
-	function login() {
-
-		let id = document.loginForm.id.value;
-		let pw = document.loginForm.pw.value;
-
-		if (!id) {
-			alert("아이디를 입력하세요.");
-			$("#id").focus();
-			return false;
-		}
-
-		if (!pw) {
-			alert("비밀번호를 입력하세요.");
-			$("#pw").focus();
-			return false;
-		}
-
-		document.loginForm.action = "<%=context%>/controller/login";
-		document.loginForm.submit();
-
-	}
+	document.loginForm.action = "<%=context%>/controller/login";
+	document.loginForm.submit();
+}
 </script>
 </head>
 
@@ -105,17 +105,14 @@
 				<h4>간편 로그인</h4>
 				<div>
 					<p class="simpleLogin"
-						style="background-image: url(<%=context%>/assets/img/logo_kakao.svg);"></p>
+						style="background-image: url(<%=context%>../assets/img/logo_kakao.svg);"></p>
 					<p class="simpleLogin"
-						style="background-image: url(<%=context%>/assets/img/logo_google.svg);"></p>
+						style="background-image: url(<%=context%>../assets/img/logo_google.svg);"></p>
 				</div>
 			</div>
 
-
 		</div>
 	</div>
-
-
 
 	<%@include file="../common/footer.jsp"%>
 

@@ -1,20 +1,19 @@
 package com.multi.shoes4jo.service;
 
-import org.springframework.dao.DataAccessException;
 import com.multi.shoes4jo.vo.MemberVO;
 
 public interface MemberService {
 
-	public int insertMember(MemberVO memberVO) throws DataAccessException;
+	public int insertMember(MemberVO memberVO) throws Exception;
 	
-	public int loginMember(MemberVO memberVO) throws DataAccessException;
+	public int loginMember(MemberVO memberVO) throws Exception;
+
+	public void updateMember(MemberVO memberVO) throws Exception;
 	
-	public int memberInfo(MemberVO member) throws DataAccessException;
+	MemberVO memberInfo(String memberId) throws Exception;
 
-	public int updateMember(MemberVO member) throws DataAccessException;
+	public int deleteMember(String memberVO) throws Exception;
 
-	public int deleteMember(String member_id) throws DataAccessException;
+	public int duplicationId(String member_id) throws Exception;
 
-	public int duplicationId(String member_id) throws DataAccessException;
-	 
 }
