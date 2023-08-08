@@ -5,8 +5,8 @@
 <img src="<%=context %>/assets/img/logo01.svg" style="width: 100%; padding: 1rem;" onclick="location.href='<%=context %>/'">
 <div class="menu_container">
 <a href="<%=context %>/">메인</a>
-<a href="<%=context %>/keyword_trend">네이버 쇼핑인사이트 상품별 트렌드</a>
-<a href="<%=context %>/keyword_trend2">구글 트렌드 위젯</a>
+<a href="<%=context %>/naver_keyword_trend">네이버 쇼핑인사이트 상품별 트렌드</a>
+<a href="<%=context %>/google_trend">구글 트렌드 위젯</a>
 </div>
 
 <div class="dropdown" style="
@@ -28,7 +28,7 @@
   <hr class="menu-member" style="margin: 0.6rem 0;">
     <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context%>/login'">로그인</a></li>
     <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context%>/signup'">회원가입</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/controller/memberInfo'">마이페이지</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/memberInfo'">마이페이지</a></li>
     <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/bookmark_chart'">즐겨찾기</a></li>
     <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/controller/logout'">로그아웃</a></li>
   </ul>

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,7 +73,7 @@ public class MemberControllerImpl implements MemberController {
   }
 
 	@Override
-	@PostMapping("/memberInfo")
+	@RequestMapping("/memberInfo")
 	public ModelAndView memberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("member_id");

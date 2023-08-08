@@ -96,7 +96,7 @@
 					<div class="form-button-wrapper">
 						<button class="btn-basic">로그인</button>
 						<span class="btn-basic btn-line-basic"
-							onclick="location.href='/signup'">가입하기</span>
+							onclick="location.href='<%=context%>/signup'">가입하기</span>
 					</div>
 				</form>
 				<br>
