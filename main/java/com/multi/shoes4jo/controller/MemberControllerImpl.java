@@ -1,7 +1,5 @@
 package com.multi.shoes4jo.controller;
 
-import java.util.Collections;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +18,7 @@ import com.multi.shoes4jo.service.MemberService;
 import com.multi.shoes4jo.vo.MemberVO;
 
 @Controller
+@RequestMapping(value = "/controller", method = { RequestMethod.POST, RequestMethod.GET })
 public class MemberControllerImpl implements MemberController {
 
 	@Autowired
@@ -51,7 +50,7 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	@Override
-	@RequestMapping(value = "/controller/login", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/login", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    String memberID = request.getParameter("member_id");
 	    String memberPW = request.getParameter("member_pw");
@@ -83,7 +82,7 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 
-	@RequestMapping(value = "/controller/logout", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/logout", method = { RequestMethod.POST, RequestMethod.GET })
 	public String logout(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		session.invalidate();
@@ -92,7 +91,7 @@ public class MemberControllerImpl implements MemberController {
 	}
  
 	@Override
-	@RequestMapping(value = "/controller/memberInfo", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/memberInfo", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView memberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
@@ -107,8 +106,9 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	@Override
-	@RequestMapping(value = "/controller/my_edit", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/my_edit", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView updateMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("my_edit 호출됨");
 		MemberVO member = new MemberVO();
 
 		String member_id = request.getParameter("member_id");
@@ -125,9 +125,6 @@ public class MemberControllerImpl implements MemberController {
 
 		memberService.updateMember(member);
 
-		HttpSession session = request.getSession();
-		session.invalidate();
-
 		return new ModelAndView("redirect:/my_edit");
 	}
 
@@ -135,7 +132,7 @@ public class MemberControllerImpl implements MemberController {
 
 	@Override
 	@ResponseBody
-	@RequestMapping(value = "/controller/member_delete", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/member_delete", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 

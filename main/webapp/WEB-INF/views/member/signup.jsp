@@ -24,6 +24,7 @@
 <script>
     function signup() {
         let id = document.signupForm.MEMBER_ID.value;
+        let isDupIdCheck = document.signupForm.MEMBER_ID.readOnly;
         let name = document.signupForm.MEMBER_NAME.value;
         let pw = document.signupForm.MEMBER_PW.value;
         let pwCheck = document.signupForm.MEMBER_PWCheck.value;
@@ -34,6 +35,12 @@
 
 		if (!id) {
 			alert("아이디를 입력하세요.");
+			$("#id").focus();
+			return false;
+		}
+
+		if (!isDupIdCheck) {
+			alert("아이디 중복 확인이 필요합니다.");
 			$("#id").focus();
 			return false;
 		}
@@ -76,7 +83,7 @@
 
         $.ajax({
             method: "post",
-            url: "insertMember",
+            url: "controller/insertMember",
             dataType: "text",
             data: {
                 "member_id": id,
@@ -110,7 +117,7 @@
 
 	    $.ajax({
 	        method : "POST",
-	        url : "duplicationId",
+	        url : "controller/duplicationId",
 	        dataType : "text",
 	        data : {
 	            "member_id" : id
@@ -119,11 +126,10 @@
 	        	if(response == '1'){
 		            console.log("아이디 중복 체크 > 사용할 수 없는 아이디.");
 		            alert("이미 사용 중인 아이디입니다.");
-		            $('input[name=duplicationId]').attr('value',"Y");
 	        	} else {
 		            console.log("아이디 중복 체크 > 사용할 수 있는 아이디.");
 		            alert("사용 가능한 아이디입니다.");
-		            $('input[name=duplicationId]').attr('value',"N");
+		            $('#id').attr("readonly",true); 
 	        	}
 	        },
 	        error : function(xhr, status, error) {
@@ -146,23 +152,23 @@
 		<h1>회원가입</h1>
 		<form name="signupForm" onsubmit="event.preventDefault(); signup();">
 		<div class="input-wrapper">
-		<label>아이디</label><div class="input-with-button"><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control">
+		<label>아이디</label><div class="input-with-button"><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control" required>
 		<span class="button-with-input" id="idre" name="idre" onclick="duplacationId()">중복 확인</span></div>
 		</div>
 		<div class="input-wrapper">
-		<label>이름</label><input type="text" id="name" name="MEMBER_NAME" placeholder="이름" class="form-control">
+		<label>이름</label><input type="text" id="name" name="MEMBER_NAME" placeholder="이름" class="form-control" required>
 		</div>
 		<div class="input-wrapper">
-		<label>이메일</label><input type="text" id="email" name="MEMBER_EMAIL" placeholder="이메일" class="form-control">
+		<label>이메일</label><input type="email" id="email" name="MEMBER_EMAIL" placeholder="이메일" class="form-control" pattern="^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required>
 		</div>
 		<div class="input-wrapper">
-		<label>휴대전화</label><input type="text" id="phone" name="MEMBER_PHONE" placeholder="휴대전화" class="form-control" required>
+		<label>휴대전화</label><input type="tel" id="phone" name="MEMBER_PHONE" placeholder="휴대전화" class="form-control" pattern="^01[016789]{1}-?[1-9]{1}[0-9]{2,3}-?[0-9]{4}$" title="01x-xxxx-xxxx" maxlength="13" required>
 		</div>
 		<div class="input-wrapper">
-		<label>비밀번호</label><input type="password" id="pw" name="MEMBER_PW" placeholder="비밀번호" class="form-control">
+		<label>비밀번호</label><input type="password" id="pw" name="MEMBER_PW" placeholder="비밀번호" class="form-control" required>
 		</div>
 		<div class="input-wrapper">
-		<label>비밀번호 확인</label><input type="password" id="pwCheck" name="MEMBER_PWCheck" placeholder="비밀번호" class="form-control">
+		<label>비밀번호 확인</label><input type="password" id="pwCheck" name="MEMBER_PWCheck" placeholder="비밀번호" class="form-control" required>
 		</div>
 		<div class="form-button-wrapper">
 		<button class="btn-basic" type="submit">회원가입</button>
