@@ -3,12 +3,12 @@
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
-
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SHOES4JO | 회원가입</title>
+<title>회원가입 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 
 <style>
@@ -25,14 +25,15 @@
 </style>
 
 <script>
-	function signup() {
-		let id = document.signupForm.id.value;
-		let name = document.signupForm.name.value;
-		let pw = document.signupForm.pw.value;
-		let pwCheck = document.signupForm.MEMBER_PWCheck.value;
-		let today = new Date();
-		let signup_date = today.toLocaleDateString();
-		let email = document.signupForm.email.value;
+    function signup() {
+        let id = document.signupForm.MEMBER_ID.value;
+        let name = document.signupForm.MEMBER_NAME.value;
+        let pw = document.signupForm.MEMBER_PW.value;
+        let pwCheck = document.signupForm.MEMBER_PWCheck.value;
+        let today = new Date();
+        let signup_date = today.toLocaleDateString();
+        let email = document.signupForm.MEMBER_EMAIL.value;
+        let phone = document.signupForm.MEMBER_PHONE.value;
 
 		if (!id) {
 			alert("아이디를 입력하세요.");
@@ -68,22 +69,30 @@
 			$("#email").focus();
 			return false;
 		}
+		
+		if (!phone) {
+			alert("휴대폰 번호를 입력하세요.");
+			$("#phone").focus();
+			return false;
+		}
 
-	    $.ajax({
-	        method : "POST",
-	        url : "insertMember",
-	        dataType : "text",
-	        data : {
-	            "member_id" : id,
-	            "member_name" : name,
-	            "member_pw" : pw,
-	            "signup_date" : signup_date,
-	            "member_email": email,
-	        },
+
+        $.ajax({
+            method: "post",
+            url: "insertMember",
+            dataType: "text",
+            data: {
+                "member_id": id,
+                "member_name": name,
+                "member_pw": pw,
+                "signup_date": signup_date,
+                "member_email": email,
+                "member_phone": phone,
+            },
 	        success : function(response) {
 	            console.log("회원가입 성공");
 	            alert("회원 가입 하셨습니다.");
-	            window.location.href = "login";
+	            window.location.href = "/login";
 	        },
 	        error : function(xhr, status, error) {
 	            console.log("Class 호출 실패: ", status, error);
@@ -91,6 +100,7 @@
 	    });
 
 	}
+    
 
 	function duplacationId() {
 		let id = document.signupForm.id.value;
@@ -135,23 +145,21 @@
 	<div class="contents">
 		<div class="container">
 		
-		<div class= "form-wrapper">
+		<div class="form-wrapper">
 		<h1>회원가입</h1>
-		<form name="signupForm" action="javascript:signup();">
-		<input type="hidden" id="duplicationId" name="duplicationId" value="">
-    	<div class="input-wrapper"> 
-        <label>아이디</label>
- <div class="input-with-button">
-        <input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control">
-	    <span class="button-with-input" id="idre" name="idre" onclick="duplacationId()">중복 확인</span>
- </div>
- 
-	    </div>
+		<form name="signupForm" onsubmit="event.preventDefault(); signup();">
+		<div class="input-wrapper">
+		<label>아이디</label><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control">
+		<span class="button-with-input" id="idre" name="idre" onclick="duplacationId()">중복 확인</span>
+		</div>
 		<div class="input-wrapper">
 		<label>이름</label><input type="text" id="name" name="MEMBER_NAME" placeholder="이름" class="form-control">
 		</div>
 		<div class="input-wrapper">
 		<label>이메일</label><input type="text" id="email" name="MEMBER_EMAIL" placeholder="이메일" class="form-control">
+		</div>
+		<div class="input-wrapper">
+		<label>휴대전화</label><input type="text" id="phone" name="MEMBER_PHONE" placeholder="휴대전화" class="form-control" required>
 		</div>
 		<div class="input-wrapper">
 		<label>비밀번호</label><input type="password" id="pw" name="MEMBER_PW" placeholder="비밀번호" class="form-control">
@@ -160,7 +168,7 @@
 		<label>비밀번호 확인</label><input type="password" id="pwCheck" name="MEMBER_PWCheck" placeholder="비밀번호" class="form-control">
 		</div>
 		<div class="form-button-wrapper">
-		<button class="btn-basic" onclick="signup();">회원가입</button>
+		<button class="btn-basic" type="submit">회원가입</button>
 		</div>
 		</form>
 		</div>
