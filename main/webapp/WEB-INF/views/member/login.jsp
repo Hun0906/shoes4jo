@@ -105,9 +105,9 @@ function login() {
 				<h4>간편 로그인</h4>
 				<div>
 					<p class="simpleLogin"
-						style="background-image: url(<%=context%>../assets/img/logo_kakao.svg);"></p>
+						style="background-image: url(<%=context%>/assets/img/logo_kakao.svg);"></p>
 					<p class="simpleLogin"
-						style="background-image: url(<%=context%>../assets/img/logo_google.svg);"></p>
+						style="background-image: url(<%=context%>/assets/img/logo_google.svg);"></p>
 				</div>
 			</div>
 
