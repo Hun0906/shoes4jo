@@ -33,5 +33,4 @@
     <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/controller/logout'">로그아웃</a></li>
   </ul>
 </div>
-  
 </header>
