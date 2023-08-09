@@ -28,7 +28,7 @@
   <hr class="menu-member" style="margin: 0.6rem 0;">
     <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context%>/login'">로그인</a></li>
     <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context%>/signup'">회원가입</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/memberInfo'">마이페이지</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/contoller/memberInfo'">마이페이지</a></li>
     <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/bookmark_chart'">즐겨찾기</a></li>
     <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/controller/logout'">로그아웃</a></li>
   </ul>
