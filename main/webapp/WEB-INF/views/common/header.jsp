@@ -5,8 +5,8 @@
 <img src="<%=context %>/assets/img/logo01.svg" style="width: 100%; padding: 1rem;" onclick="location.href='<%=context %>/'">
 <div class="menu_container">
 <a href="<%=context %>/">메인</a>
-<a href="keyword_trend">상품별 트렌드</a>
-<a href="category_trend">카테고리별 트렌드</a>
+<a href="<%=context %>/naver_keyword_trend">네이버 쇼핑인사이트 상품별 트렌드</a>
+<a href="<%=context %>/google_trend">구글 트렌드 위젯</a>
 </div>
 
 <div class="dropdown" style="
@@ -33,5 +33,5 @@
     <li><a class="dropdown-item menu-member" onclick="location.href='/controller/logout'">로그아웃</a></li>
   </ul>
 </div>
- 
+
 </header>
