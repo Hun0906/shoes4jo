@@ -1,128 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- (회원 정보) 관련 SQL문 설정 -->
+
 <!-- https://lotuus.tistory.com/75 사용법 읽어보기 xml파일에 저장된거 dao클래스에 쓰는법은 848p 
 	등등에 나옴 인터페이스로 선언한 후에 @Mapper @Repository 어노테이션 쓰면 자동으로 Mapper로 인식 가능 그다음 
-	@Select(),@Insert(),@Update(),@Delete() 써서 SQL작성 (지금은 그거 대신 member-mapper.xml파일에 
-	써둠) 파라미터는 xml,어노테이션 방식 모두 #,$ 사용함 동적인 처리가 이뤄져야 하는 SQL문은 XML에서 작성해야함 연관관계 
-	맵핑 : <resultMap>,<association>,<collection> 동적으로 쿼리 조작 : <trim>,<if>,<choose>,<where>등 -->
-
-
+	@Select(),@Insert(),@Update(),@Delete() 써서 SQL작성 (지금은 그거 대신 member-mapper.xml파일에써둠) 
+	파라미터는 xml,어노테이션 방식 모두 #,$ 사용함 동적인 처리가 이뤄져야 하는 SQL문은 XML에서 작성해야함 연관관계맵핑 : 
+	<resultMap>,<association>,<collection> 동적으로 쿼리 조작 : <trim>,<if>,<choose>,<where>등 -->
+ 
 <mapper namespace="mapper.member">
+
 	<!-- member.xml파일의 네임스페이스 지정(Repository 패키지 경로) -->
+ 
 
 
-	<resultMap type="memberVO" id="memResult">
-		<!--resultMap(sql문 실행 후 반환되는 회원 정보 레코드 정보를 저장하기 위함) type: SQL문 실행 후 반환되는 
-			레코드들을 mybatis-config.xml파일의 <typeAlias>태그에서 지정한 MemberVO빈에 저장, 각 레코드는 한 개의 
-			memberVO 객체를 생성 후 지정한 속성에 따라 레코드의 컬럼 값을 저장한다. -->
-		<result property="member_id" column="member_id" />
-		<result property="member_name" column="member_name" />
-		<result property="member_pw" column="member_pw" />
-		<result property="signup_date" column="signup_date" />
-		<result property="member_email" column="member_email" />
+	<resultMap id="memResult" type="memberVO">
+
+		<!--resultMap(sql문 실행 후 반환되는 회원 정보 레코드 정보를 저장하기 위함) type: SQL문 실행 후 반환되는레코드들을 
+			mybatis-config.xml파일의 <typeAlias>태그에서 지정한 MemberVO빈에 저장, 각 레코드는 한 개의 memberVO 
+			객체를 생성 후 지정한 속성에 따라 레코드의 컬럼 값을 저장한다. -->
+
+
+		<result column="member_id" property="member_id" />
+
+		<result column="member_name" property="member_name" />
+
+		<result column="member_pw" property="member_pw" />
+
+		<result column="signup_date" property="signup_date" />
+
+		<result column="member_email" property="member_email" />
+
+		<result column="member_phone" property="member_phone" />
+
 	</resultMap>
 
-	<!-- result property, column은 memberVO에서 쓸 sql 컬럼명이랑 DB컬럼명들 맞추는거(column이 
-		원래 DB 컬럼명) resultMap 타입 속성에 HashMap도 있는데(여러 정보 처리) HashMap사용할땐 타입에 MemberVO대신 
+	<!-- result property, column은 memberVO에서 쓸 sql 컬럼명이랑 DB컬럼명들 맞추는거(column이원래 
+		DB 컬럼명) resultMap 타입 속성에 HashMap도 있는데(여러 정보 처리) HashMap사용할땐 타입에 MemberVO대신 
 		HashMap쓰고 sql문 실행 시 레코드의 컬럼 이름을 key로 지정하고 값을 value로 해서 HashMap에 차례대로 저장함(856p) 
-		이렇게 씀 <resultMap id="MemResult" type="java.util.HashMap"> <result property="member_id" 
-		column="member_id"/> <result property="member_name" column="member_name"/> 
-		<result property="member_pw" column="member_pw"/> <result property="signup_date" 
-		column="signup_date"/> </resultMap> -->
+		이렇게 씀 <resultMap id="MemResult" type="java.util.HashMap"> <result property="member_id"column="member_id"/> 
+		<result property="member_name" column="member_name"/><result property="member_pw" 
+		column="member_pw"/> <result property="signup_date"column="signup_date"/> 
+		</resultMap> -->
+
 
 	<!-- 마이바티스 쿼리문 예제 https://mybatis.org/mybatis-3/ko/sqlmap-xml.html -->
 
 
-	<!-- select태그의 id속성은 MemberDAO(회원정보 DB연동하는 클래스)에서 SQL문을 구분해서 호출하기 위한 용도로 
-		사용되고 반환되는 레코드를 id가 memberResultMap인 resultMap에 저장한다 id로 MemberDAO에서 접근할때 
-		사용 할 sql문의 id를 지정하고 parameterType으로 속성 지정하고 sql문으로 조회한 결과(여기선 아이디,아이디니까 문자열) 
-		호출한 메서드로 반환한다 -->
+	<!-- select태그의 id속성은 MemberDAO(회원정보 DB연동하는 클래스)에서 SQL문을 구분해서 호출하기 위한 용도로사용되고 
+		반환되는 레코드를 id가 memberResultMap인 resultMap에 저장한다 id로 MemberDAO에서 접근할때사용 할 sql문의 
+		id를 지정하고 parameterType으로 속성 지정하고 sql문으로 조회한 결과(여기선 아이디,아이디니까 문자열) 호출한 메서드로 
+		반환한다 -->
+
 
 
 	<insert id="insertMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
-    <![CDATA[
-        insert into shoes_4jo.member(member_id, member_name, member_pw, signup_date,member_email)
-        values(#{member_id}, #{member_name}, #{member_pw}, NOW(), #{member_email})
+
+<![CDATA[
+        insert into shoes_4jo.member(member_id, member_name, member_pw, signup_date,member_email, member_phone)
+        values(#{member_id}, #{member_name}, #{member_pw}, NOW(), #{member_email}, #{member_phone})
     ]]>
 	</insert>
 
-	<!-- insertMember : 회원 가입 쿼리문 insert into shoes4jo(우리 스키마 이름)에 member_id등등에 
-		등록할 회원 정보를 memberVO 빈에 설정한 후 parameterType의 memberVO로 전달함 values 다음에 #{속성이름}을 
-		나열하면 memberVO 빈의 속성 값이 설정됨 HashMap쓸때는 parameterType "java.util.Map"으로만 바꿔줌 -->
+	<!-- insertMember : 회원 가입 쿼리문 insert into shoes4jo(우리 스키마 이름)에 member_id등등에등록할 
+		회원 정보를 memberVO 빈에 설정한 후 parameterType의 memberVO로 전달함 values 다음에 #{속성이름}을나열하면 
+		memberVO 빈의 속성 값이 설정됨 HashMap쓸때는 parameterType "java.util.Map"으로만 바꿔줌 -->
+
 
 	<!-- 쿼리문 쓸때 앞에 스키마 쓴다음 . 찍고 테이블명 쓰기 -->
 
-	<select id="loginMember" resultType="int"
-		parameterType="com.multi.shoes4jo.vo.MemberVO">
-		SELECT count(*) FROM shoes_4jo.member
-		WHERE member_id =
-		#{member_id} AND member_pw = #{member_pw}
+
+	<select id="loginMember"
+		parameterType="com.multi.shoes4jo.vo.MemberVO" resultType="int">SELECT
+		count(*) FROM shoes_4jo.member WHERE member_id =#{member_id} AND
+		member_pw = #{member_pw}
 	</select>
 
-
-	<select id="memberInfo" resultMap="memResult"
-		parameterType="com.multi.shoes4jo.vo.MemberVO">
-		SELECT * FROM shoes_4jo.member
-		WHERE member_id = #{member_id}
+	<select id="memberInfo"
+		parameterType="com.multi.shoes4jo.vo.MemberVO" resultMap="memResult">SELECT * FROM
+		shoes_4jo.member WHERE member_id =#{member_id}
 	</select>
-
 
 
 	<update id="updateMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
-     <![CDATA[
+
+<![CDATA[
 	     update shoes_4jo.member
 	     set member_name=#{member_name}, member_pw=#{member_pw}
-	     , member_email=#{member_email}
+	     , member_email=#{member_email},member_phone=#{member_phone}
 	     where
 	     member_id=#{member_id}
       ]]>
 	</update>
 
 	<!-- updateMember : 회원 정보 수정(이름,비밀번호) 쿼리문, 아이디 이용해서 조회함 parameterType속성은 
-		MemberDAO에서 메서드 호출할 때 전달될 MemberVO클래스 타입으로 지정함 update문에서 수정할 컬럼 값들을 MemberVO속성 
-		이름으로 지정하고 수정할 회원 ID에 해당하는 조건 값도 MemberVO의 id속성 값으로 지정 -->
+		MemberDAO에서 메서드 호출할 때 전달될 MemberVO클래스 타입으로 지정함 update문에서 수정할 컬럼 값들을 MemberVO속성이름으로 
+		지정하고 수정할 회원 ID에 해당하는 조건 값도 MemberVO의 id속성 값으로 지정 -->
 
 
 
+<delete id="deleteMember" parameterType="com.multi.shoes4jo.vo.MemberVO">
+<![CDATA[
+   delete from shoes_4jo.member
+   where
+   member_id=#{member_id}
+]]>
+</delete>
 
-	<delete id="deleteMember"
-		parameterType="com.multi.shoes4jo.vo.MemberVO">
-	<![CDATA[
-	   delete from shoes_4jo.member
-	   where
-	   member_id=#{member_id}
-	]]>
-	</delete>
 
 	<!-- deleteMember : 회원 탈퇴 쿼리문 -->
 
+	<!-- <insert id="insertKakaoMember" parameterType="memberVO"> INSERT INTOshoes4jo 
+		( member_id, member_name, member_pw, signup_date ) VALUES ( #{member_id},#{member_name}, 
+		#{member_pw}, NULL, NULL, 'Y', DEFAULT, DEFAULT ) 카카오 로그인쿼리문 보관 </insert> -->
 
+	<select id="duplicationId"
+		parameterType="com.multi.shoes4jo.vo.MemberVO" resultType="int">
 
-
-	<!-- <insert id="insertKakaoMember" parameterType="memberVO"> INSERT INTO 
-		shoes4jo ( member_id, member_name, member_pw, signup_date ) VALUES ( #{member_id}, 
-		#{member_name}, #{member_pw}, NULL, NULL, 'Y', DEFAULT, DEFAULT ) 카카오 로그인 
-		쿼리문 보관 </insert> -->
-
-	<select id="duplicationId" resultType="int"
-		parameterType="com.multi.shoes4jo.vo.MemberVO">
-     <![CDATA[
+<![CDATA[
 		SELECT count(*) cnt FROM shoes_4jo.member
 		WHERE member_id = #{member_id} 
       ]]>
 	</select>
+	<!-- 아이디 중복검사 -->
 
 
-
-	<!-- https://mybatis.org/mybatis-3/ko/dynamic-sql.html 동적 sql 설명 874p -->
 </mapper>
-
-
- 

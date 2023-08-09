@@ -14,7 +14,7 @@
 		}
 		document.getElementById('btnEdit').style.display = 'none';
 		document.getElementById('btnSaveCancel').style.display = 'block';
-	}
+	} 
 </script>
 </head>
 <body>
@@ -24,7 +24,7 @@
 		<h2>회원 정보</h2>
 		<form action="/controlloer/my_edit" method="post">
 			<%
-			MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+			MemberVO memberInfo = (MemberVO) request.getAttribute("memberInfo");
 			if (memberInfo == null) {
 				out.println("로그인이 필요합니다.");
 			} else {

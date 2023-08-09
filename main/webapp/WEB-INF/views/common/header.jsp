@@ -26,11 +26,11 @@
   padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
   cursor: default;">반가워요🙌<br><%=sessionID %>님!</p>
   <hr class="menu-member" style="margin: 0.6rem 0;">
-    <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context%>/login'">로그인</a></li>
-    <li><a class="dropdown-item menu-visitor" onclick="location.href='<%=context%>/signup'">회원가입</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/controller/memberInfo'">마이페이지</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/bookmark_chart'">즐겨찾기</a></li>
-    <li><a class="dropdown-item menu-member" onclick="location.href='<%=context%>/controller/logout'">로그아웃</a></li>
+    <li><a class="dropdown-item menu-visitor" onclick="location.href='login'">로그인</a></li>
+    <li><a class="dropdown-item menu-visitor" onclick="location.href='signup'">회원가입</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='controller/memberInfo'">마이페이지</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='bookmark_chart'">즐겨찾기</a></li>
+    <li><a class="dropdown-item menu-member" onclick="location.href='/controller/logout'">로그아웃</a></li>
   </ul>
 </div>
 

@@ -32,7 +32,7 @@ if (memberInfo == null) {
 		</div>
 		<div class="input-wrapper">
 			<label>가입일</label> <input type="text" class="form-control"
-				value="<%=memberInfo.getsignup_date().substring(0,10)%>" readonly>
+				value="<%=memberInfo.getsignup_date()%>" readonly>
 		</div>
 		<div class="input-wrapper">
 			<label>이메일</label> <input type="text" class="form-control"
@@ -51,7 +51,7 @@ if (memberInfo == null) {
 				onclick="location.href='member_delete'">탈퇴하기</span>
 		</div>
 	</div>
-
+ 
 	<%@include file="../common/footer.jsp"%>
 </body>
 </html>

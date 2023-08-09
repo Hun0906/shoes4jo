@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%
 String context = ((HttpServletRequest)request).getContextPath(); 
-String sessionID = (String) session.getAttribute("member_id");
+String sessionID = (String) session.getAttribute("memberInfo");
 %>
-
+ 
 <!-- 스타일시트 -->
 <link href="<%=context %>/assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<%=context %>/assets/css/main.css" rel="stylesheet">
@@ -35,4 +35,5 @@ function menuToggle() {
 		  });
 	}
 }
+
 </script>

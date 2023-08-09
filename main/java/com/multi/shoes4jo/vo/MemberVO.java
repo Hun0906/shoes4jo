@@ -10,7 +10,7 @@ public class MemberVO {
 	private String signup_date;
 	private String member_email;
 	private String member_phone;
-
+ 
 	public MemberVO() {
 
 	}
