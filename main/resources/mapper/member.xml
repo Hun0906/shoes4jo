@@ -9,11 +9,11 @@
 	@Select(),@Insert(),@Update(),@Delete() 써서 SQL작성 (지금은 그거 대신 member-mapper.xml파일에써둠) 
 	파라미터는 xml,어노테이션 방식 모두 #,$ 사용함 동적인 처리가 이뤄져야 하는 SQL문은 XML에서 작성해야함 연관관계맵핑 : 
 	<resultMap>,<association>,<collection> 동적으로 쿼리 조작 : <trim>,<if>,<choose>,<where>등 -->
-
+ 
 <mapper namespace="mapper.member">
 
 	<!-- member.xml파일의 네임스페이스 지정(Repository 패키지 경로) -->
-
+ 
 
 
 	<resultMap id="memResult" type="memberVO">

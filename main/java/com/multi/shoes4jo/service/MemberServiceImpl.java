@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
 	public void setMemberDAO(MemberDAO memberDAO)throws Exception  {
 		this.memberDAO = memberDAO;
 	}
-
+ 
 	@Override
 	public int insertMember(MemberVO member)throws Exception  {
 		try {

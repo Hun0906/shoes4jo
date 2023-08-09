@@ -51,7 +51,7 @@ if (memberInfo == null) {
 				onclick="location.href='member_delete'">탈퇴하기</span>
 		</div>
 	</div>
-
+ 
 	<%@include file="../common/footer.jsp"%>
 </body>
 </html>

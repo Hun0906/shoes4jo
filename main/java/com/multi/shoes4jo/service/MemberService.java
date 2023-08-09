@@ -15,5 +15,5 @@ public interface MemberService {
 	public int deleteMember(String memberVO) throws Exception;
 
 	public int duplicationId(String member_id) throws Exception;
-
+  
 }

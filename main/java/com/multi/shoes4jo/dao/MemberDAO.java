@@ -1,5 +1,5 @@
 package com.multi.shoes4jo.dao;
-
+ 
 import java.util.List;
 import com.multi.shoes4jo.vo.MemberVO;
 
@@ -18,3 +18,4 @@ public interface MemberDAO
 
 	public int duplicationId(String id);
 }
+ 

@@ -29,16 +29,16 @@ public class MainController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
-	public String keyword_trend() {
-		logger.info("keyword_trend() called");
-		return "trend/keyword_trend";
+	@RequestMapping(value = "/naver_keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
+	public String naver_keyword_trend() {
+		logger.info("naver_keyword_trend() called");
+		return "trend/naver_keyword_trend";
 	}
 	
-	@RequestMapping(value = "/keyword_trend2", method = { RequestMethod.GET, RequestMethod.POST })
-	public String keyword_trend2() {
-		logger.info("keyword_trend2() called");
-		return "trend/keyword_trend2";
+	@RequestMapping(value = "/google_trend", method = { RequestMethod.GET, RequestMethod.POST })
+	public String google_trend() {
+		logger.info("google_trend() called");
+		return "trend/google_trend";
 	}
 
 	@RequestMapping(value = "/signup", method = { RequestMethod.GET, RequestMethod.POST })

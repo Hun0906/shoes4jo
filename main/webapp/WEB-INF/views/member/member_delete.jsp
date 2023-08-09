@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>회원 탈퇴 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
-
+ 
 <style>
 .simplesignup {
 	border: 1px solid black;

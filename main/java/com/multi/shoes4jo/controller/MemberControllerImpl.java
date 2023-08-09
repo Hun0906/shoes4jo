@@ -83,14 +83,14 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 
-	@RequestMapping(value = "/logout", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/controller/logout", method = { RequestMethod.POST, RequestMethod.GET })
 	public String logout(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		model.addAttribute("res", 109);
 		return "redirect:/login";
 	}
-
+ 
 	@Override
 	@RequestMapping(value = "/controller/memberInfo", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView memberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {

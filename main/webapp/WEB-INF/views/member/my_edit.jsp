@@ -14,7 +14,7 @@
 		}
 		document.getElementById('btnEdit').style.display = 'none';
 		document.getElementById('btnSaveCancel').style.display = 'block';
-	}
+	} 
 </script>
 </head>
 <body>
