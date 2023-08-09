@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,8 +88,8 @@
             },
 	        success : function(response) {
 	            console.log("회원가입 성공");
-	            alert("회원 가입 하셨습니다.");
-	            window.location.href = "/login";
+	            alert("회원가입이 완료되었습니다.");
+	            window.location.href = "<%=context%>/login";
 	        },
 	        error : function(xhr, status, error) {
 	            console.log("Class 호출 실패: ", status, error);
@@ -149,8 +146,8 @@
 		<h1>회원가입</h1>
 		<form name="signupForm" onsubmit="event.preventDefault(); signup();">
 		<div class="input-wrapper">
-		<label>아이디</label><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control">
-		<span class="button-with-input" id="idre" name="idre" onclick="duplacationId()">중복 확인</span>
+		<label>아이디</label><div class="input-with-button"><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control">
+		<span class="button-with-input" id="idre" name="idre" onclick="duplacationId()">중복 확인</span></div>
 		</div>
 		<div class="input-wrapper">
 		<label>이름</label><input type="text" id="name" name="MEMBER_NAME" placeholder="이름" class="form-control">

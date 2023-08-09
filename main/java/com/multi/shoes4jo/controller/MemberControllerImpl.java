@@ -70,7 +70,7 @@ public class MemberControllerImpl implements MemberController {
 
 	        System.out.println(memberID + " 로그인 성공");
 
-	        mav.setViewName("redirect:/main");
+	        mav.setViewName("redirect:/login"); //alert를 띄우기 위해 main이 아니라 login으로 보내게 되어 있습니다.
 	        mav.addObject("res", 1); // 성공 코드
 	    } else if (loginRes == 0) {
 	        mav.setViewName("redirect:/login");
