@@ -74,6 +74,12 @@ public class MainController {
 
 		return "member/my_edit";
 	}
+	@RequestMapping(value = "/updateMember", method = { RequestMethod.GET, RequestMethod.POST })
+	public String updateMember() {
+		logger.info("updateMember() called");
+
+		return "updateMember";
+	}
 	
 	@RequestMapping(value = "/acknowledgement", method = RequestMethod.GET)
 	public String acknowledgement() {
