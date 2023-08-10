@@ -46,7 +46,7 @@ function getCode() {
         window.location = "main";
     } else if (code == "109") {
         alert("로그아웃에 성공하였습니다.");
-        window.location = "main";
+        window.location = "login";
     }
 }
 

@@ -22,7 +22,7 @@
 	<div class="form-wrapper">
 		<h1>마이페이지</h1>
 		<h2>회원 정보</h2>
-		<form action="/controlloer/my_edit" method="post">
+		<form action="/controller/my_edit" method="post">
 			<%
 			MemberVO memberInfo = (MemberVO) request.getAttribute("memberInfo");
 			if (memberInfo == null) {
