@@ -43,7 +43,9 @@
 	<div class="form-wrapper">
 		<h1>마이페이지</h1>
 		<h2>회원 정보</h2>
+
 		<form id="updateForm" enctype="multipart/form-data">
+
 			<%
 			MemberVO memberInfo = (MemberVO) request.getAttribute("memberInfo");
 			if (memberInfo == null) {
