@@ -110,15 +110,16 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/controller/my_edit", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView updateMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		String member_id = (String) session.getAttribute("memberInfo");
+		
 		String member_name = request.getParameter("member_name");
+		String member_id = (String) session.getAttribute("memberInfo");
 	    String member_pw = request.getParameter("member_pw");
 	    String member_email = request.getParameter("member_email");
 	    String member_phone = request.getParameter("member_phone");
 	    
 	    MemberVO updatedMember = new MemberVO();
-	    updatedMember.setmember_id(member_id);
 	    updatedMember.setmember_name(member_name);
+	    updatedMember.setmember_id(member_id);
 	    updatedMember.setmember_pw(member_pw);
 	    updatedMember.setmember_email(member_email);
 	    updatedMember.setmember_phone(member_phone);
