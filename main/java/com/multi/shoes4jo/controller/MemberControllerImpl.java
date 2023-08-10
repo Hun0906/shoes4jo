@@ -1,5 +1,6 @@
 package com.multi.shoes4jo.controller;
 
+<<<<<<< HEAD
 import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+=======
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+>>>>>>> 92d651ae45846ea42a9f4420d8d0f7ae6df88132
 import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.shoes4jo.service.MemberService;
@@ -24,6 +34,7 @@ public class MemberControllerImpl implements MemberController {
 
 	@Autowired
 	private MemberService memberService;
+<<<<<<< HEAD
 
 	@Override
 	@RequestMapping(value = "/insertMember", method = { RequestMethod.POST, RequestMethod.GET })
@@ -47,10 +58,87 @@ public class MemberControllerImpl implements MemberController {
 
 		int result = memberService.insertMember(memberVO);
 		ModelAndView mav = new ModelAndView("redirect:/signup");
+=======
+	private MemberVO member_id;
+
+  
+  //@PostMapping : post요청 처리하는 어노테이션(데이터 생성, 수정 시 클래스 내의 특정 메서드가 POST 요청을 처리)
+
+  @Override
+  @PostMapping("/insertMember") public ModelAndView
+  insertMember(HttpServletRequest request, HttpServletResponse response) throws
+  Exception { request.setCharacterEncoding("utf-8"); MemberVO memberVO = new
+  MemberVO();
+  
+  String id = request.getParameter("member_id"); String name =
+  request.getParameter("member_name"); String pw =
+  request.getParameter("member_pw"); String signup =
+  request.getParameter("signup_date");
+  
+  memberVO.setmember_id(id); memberVO.setmember_name(name);
+  memberVO.setmember_pw(pw); memberVO.setsignup_date(signup);
+  
+  int result = memberService.insertMember(memberVO); ModelAndView mav = new
+  ModelAndView("redirect:/signup"); return mav; }
+
+  
+  
+  @Override
+  @PostMapping("/loginMember")
+  public ModelAndView loginMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+      request.setCharacterEncoding("utf-8");
+      MemberVO memberVO = new MemberVO();
+
+      String id = request.getParameter("member_id");
+      String pw = request.getParameter("member_pw");
+
+      memberVO.setmember_id(id);
+      memberVO.setmember_pw(pw);
+
+      int result = memberService.loginMember(memberVO);
+      ModelAndView mav;
+
+      if (result == 1) {
+          mav = new ModelAndView("redirect:/main");
+      } else {
+          mav = new ModelAndView("redirect:/login");
+      }
+
+      return mav;
+  }
+
+	@Override
+	@PostMapping("/memberInfo")
+	public ModelAndView memberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String id = request.getParameter("member_id");
+		memberService.memberInfo(member_id);
+		ModelAndView mav = new ModelAndView("redirect:/my_page");
+		return mav;
+	}
+
+
+  
+	@Override
+	@PostMapping("/updateMember")
+	public ModelAndView updateMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		MemberVO memberVO = new MemberVO();
+
+		String name = request.getParameter("member_name");
+		String pw = request.getParameter("member_pw");
+
+		memberVO.setmember_name(name);
+		memberVO.setmember_pw(pw);
+
+		int result = memberService.updateMember(memberVO);
+		ModelAndView mav = new ModelAndView("redirect:/my_edit");
+>>>>>>> 92d651ae45846ea42a9f4420d8d0f7ae6df88132
 		return mav;
 	}
 
 	@Override
+<<<<<<< HEAD
 	@RequestMapping(value = "/controller/login", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    String memberID = request.getParameter("member_id");
@@ -170,3 +258,15 @@ public class MemberControllerImpl implements MemberController {
 		return resEntity;
 	}
 }
+=======
+	@PostMapping("/deleteMember")
+	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String id = request.getParameter("member_id");
+		memberService.deleteMember(id);
+		ModelAndView mav = new ModelAndView("redirect:/member_delete");
+		return mav;
+	}
+
+}
+>>>>>>> 92d651ae45846ea42a9f4420d8d0f7ae6df88132

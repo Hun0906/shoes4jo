@@ -12,6 +12,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 
+<<<<<<< HEAD
 	public void setMemberDAO(MemberDAO memberDAO)throws Exception  {
 		this.memberDAO = memberDAO;
 	}
@@ -67,3 +68,35 @@ public class MemberServiceImpl implements MemberService {
  	     
     }
 }
+=======
+	public void setMemberDAO(MemberDAO memberDAO) {
+		this.memberDAO = memberDAO;
+	}
+
+	@Override
+	public int insertMember(MemberVO member) {
+		return memberDAO.insertMember(member);
+	}
+	
+	@Override
+	public int loginMember(MemberVO member) {
+	    return memberDAO.loginMember(member);
+	}
+	
+	@Override
+	public int memberInfo(MemberVO member) {
+	    return memberDAO.memberInfo(member);
+	}
+
+	@Override
+	public int updateMember(MemberVO member) {
+		return memberDAO.updateMember(member);
+	}
+
+	@Override
+	public int deleteMember(String id) {
+		return memberDAO.deleteMember(id);
+	}
+
+}
+>>>>>>> 92d651ae45846ea42a9f4420d8d0f7ae6df88132

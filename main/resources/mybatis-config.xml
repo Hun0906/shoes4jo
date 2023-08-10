@@ -8,5 +8,9 @@
 
 
 <!-- 
+<<<<<<< HEAD
 MyBatis의 핵심 설정 파일이며, 일반적인 MyBatis 설정에 대해 적용됨. typeAliases,
+=======
+ MyBatis의 핵심 설정 파일이며, 일반적인 MyBatis 설정에 대해 적용됨. typeAliases,
+>>>>>>> 92d651ae45846ea42a9f4420d8d0f7ae6df88132
 typeHandlers, plugins, environments, mappers 등 -->
