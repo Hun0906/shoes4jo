@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 String context = ((HttpServletRequest)request).getContextPath(); 
-<<<<<<< HEAD:main/webapp/WEB-INF/views/common/header-head.jsp
 String sessionID = (String) session.getAttribute("memberInfo");
-=======
-String sessionID = (String) session.getAttribute("MemberID");
->>>>>>> 92d651ae45846ea42a9f4420d8d0f7ae6df88132:main/webapp/WEB-INF/views/header-head.jsp
 %>
  
 <!-- 스타일시트 -->

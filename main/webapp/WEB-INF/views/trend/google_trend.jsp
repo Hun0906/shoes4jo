@@ -37,6 +37,30 @@
 	</div>
 
 	<div>
+	<h2>운동화 관련 인기 검색어</h2>
+				<script type="text/javascript"
+					src="https://ssl.gstatic.com/trends_nrtr/3349_RC01/embed_loader.js"></script>
+				<script type="text/javascript">
+					trends.embed
+							.renderExploreWidget(
+									"RELATED_QUERIES",
+									{
+										"comparisonItem" : [ {
+											"keyword" : "운동화",
+											"geo" : "KR",
+											"time" : "now 1-d"
+										} ],
+										"category" : 0,
+										"property" : ""
+									},
+									{
+										"exploreQuery" : "q=%EC%9A%B4%EB%8F%99%ED%99%94&date=now%201-d&geo=KR&hl=ko",
+										"guestPath" : "https://trends.google.com:443/trends/embed/"
+									});
+				</script>
+			</div>
+
+	<div>
 	<h2>신발 관련 주제</h2>
 		<script type="text/javascript">
 			trends.embed
