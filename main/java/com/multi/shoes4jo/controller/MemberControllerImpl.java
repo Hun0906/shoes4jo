@@ -176,7 +176,7 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	@Override
-	@RequestMapping("/duplicationId")
+	@RequestMapping(value = "/duplicationId", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity duplicationId(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
