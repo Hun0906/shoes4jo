@@ -68,14 +68,14 @@ function login() {
 	}
 
 	document.loginForm.action = "<%=context%>/controller/login";
-	document.loginForm.submit();
-}
+		document.loginForm.submit();
+	}
 </script>
 </head>
 
 <body>
 	<%@include file="../common/header.jsp"%>
-	
+
 	<div class="contents">
 		<div class="container">
 
@@ -91,7 +91,9 @@ function login() {
 							placeholder="비밀번호" class="form-control">
 					</div>
 					<div class="form-button-wrapper">
-						<a href="">아이디 찾기</a> &nbsp;&nbsp; <a href="">비밀번호 찾기</a>
+						<a href="<%=request.getContextPath()%>/find_id">아이디 찾기</a>&nbsp;&nbsp;
+						<a href="<%=request.getContextPath()%>/find_pw">비밀번호 찾기</a>
+
 					</div>
 					<div class="form-button-wrapper">
 						<button class="btn-basic">로그인</button>
@@ -118,4 +120,3 @@ function login() {
 
 </body>
 </html>
- 

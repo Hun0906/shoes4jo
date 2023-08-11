@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>회원가입 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
+ <script src="/assets/js/addHypen.js"></script>
 
 <style>
 .simplesignup {
@@ -139,6 +140,7 @@
 
 	}	
 	
+	
 </script>
 </head>
 
@@ -162,7 +164,7 @@
 		<label>이메일</label><input type="email" id="email" name="MEMBER_EMAIL" placeholder="이메일" class="form-control" pattern="^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required>
 		</div>
 		<div class="input-wrapper">
-		<label>휴대전화</label><input type="tel" id="phone" name="MEMBER_PHONE" placeholder="휴대전화" class="form-control" pattern="^01[016789]{1}-?[1-9]{1}[0-9]{2,3}-?[0-9]{4}$" title="01x-xxxx-xxxx" maxlength="13" required>
+		<label>휴대전화</label><input type="tel" id="phone" name="MEMBER_PHONE" placeholder="휴대전화" class="form-control" pattern="^01[016789]{1}-?[1-9]{1}[0-9]{2,3}-?[0-9]{4}$" title="01x-xxxx-xxxx" maxlength="13" oninput="addHypen(this)" required>
 		</div>
 		<div class="input-wrapper">
 		<label>비밀번호</label><input type="password" id="pw" name="MEMBER_PW" placeholder="비밀번호" class="form-control" required>

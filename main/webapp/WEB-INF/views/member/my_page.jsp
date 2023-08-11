@@ -23,16 +23,16 @@ if (memberInfo == null) {
 		<h1>마이페이지</h1>
 		<h2>회원 정보</h2>
 		<div class="input-wrapper">
-			<label>이름</label> <input type="text" class="form-control"
-				value="<%=memberInfo.getmember_name()%>" readonly>
-		</div>
-		<div class="input-wrapper">
 			<label>아이디</label> <input type="text" class="form-control"
 				value="<%=memberInfo.getmember_id()%>" readonly>
 		</div>
 		<div class="input-wrapper">
 			<label>가입일</label> <input type="text" class="form-control"
 				value="<%=memberInfo.getsignup_date()%>" readonly>
+		</div>
+		<div class="input-wrapper">
+			<label>이름</label> <input type="text" class="form-control"
+				value="<%=memberInfo.getmember_name()%>" readonly>
 		</div>
 		<div class="input-wrapper">
 			<label>이메일</label> <input type="text" class="form-control"
