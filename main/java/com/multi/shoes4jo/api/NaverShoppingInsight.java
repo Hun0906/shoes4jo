@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.common;
+package com.multi.shoes4jo.api;
 
 import java.io.BufferedReader;
 
@@ -9,8 +9,8 @@ import java.net.URL;
 
 public class NaverShoppingInsight {
 	public static void main(String[] args) {
-		String clientId = "Client ID : JzcrBZHimsCICRuNqbzk"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client ID
-		String clientSecret = "secret : 9fgwNuy1pM"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client Secret
+		String clientId = "Client ID : JzcrBZHimsCICRuNqbzk"; // ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ Client ID
+		String clientSecret = "secret : 9fgwNuy1pM"; // ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ Client Secret
 		try {
 			String apiURL = "https://openapi.naver.com/v1/datalab/shopping/top100";
 			URL url = new URL(apiURL);

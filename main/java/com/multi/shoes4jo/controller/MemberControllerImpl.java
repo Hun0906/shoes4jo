@@ -117,22 +117,35 @@ public class MemberControllerImpl implements MemberController {
 	    String member_email = request.getParameter("member_email");
 	    String member_phone = request.getParameter("member_phone");
 	    
-	    MemberVO updatedMember = new MemberVO();
-	    updatedMember.setmember_name(member_name);
-	    updatedMember.setmember_id(member_id);
-	    updatedMember.setmember_pw(member_pw);
-	    updatedMember.setmember_email(member_email);
-	    updatedMember.setmember_phone(member_phone);
+	    //request 잘 됐는지 검사용
+	    System.out.println("name: "+member_name);
+	    System.out.println("id: "+member_id);
+	    System.out.println("pw: "+member_pw);
+	    System.out.println("email: "+member_email);
+	    System.out.println("phone: "+member_phone);
+
+		MemberVO member = new MemberVO();
+		member.setmember_id(member_id);
+		member.setmember_pw(member_pw);
+		Integer loginRes = memberService.loginMember(member);
 	    
-	    memberService.updateMember(updatedMember);
-	    
-		MemberVO updatedMemberInfo = memberService.memberInfo(member_id);
-		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member/my_edit");
-		mav.addObject("memberInfo",updatedMemberInfo);
-		mav.addObject("updateSucess", true);
-		
+		mav.setViewName("redirect:memberInfo");
+
+	    if (loginRes == 0) {
+			mav.addObject("res", 0); // 비밀번호 오류
+			return mav;
+	    } else if (loginRes == 1) {
+	    	member.setmember_name(member_name);
+	    	member.setmember_id(member_id);
+	    	member.setmember_pw(member_pw);
+	    	member.setmember_email(member_email);
+	    	member.setmember_phone(member_phone);
+		    
+		    memberService.updateMember(member);
+		    
+			mav.addObject("res", 1); // 성공
+	    }
 		return mav;
 
 	}
