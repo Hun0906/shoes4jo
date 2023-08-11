@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.common;
+package com.multi.shoes4jo.api;
 
 import java.io.*;
 
@@ -13,8 +13,8 @@ import java.util.Map;
 public class DatalabTrendShopping {
 
     public static void main(String[] args) {
-		String clientId = "JzcrBZHimsCICRuNqbzk"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client ID
-		String clientSecret = "9fgwNuy1pM"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client Secret
+		String clientId = "JzcrBZHimsCICRuNqbzk"; // ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ Client ID
+		String clientSecret = "9fgwNuy1pM"; // ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ Client Secret
 
         String apiUrl = "https://openapi.naver.com/v1/datalab/shopping/category/keywords";
 
@@ -24,7 +24,7 @@ public class DatalabTrendShopping {
         requestHeaders.put("Content-Type", "application/json");
         
         String today = LocalDate.now().toString();
-        String keyword = "¾Æµð´Ù½º"; //request.getParameter("keyword");
+        String keyword = "ï¿½Æµï¿½Ù½ï¿½"; //request.getParameter("keyword");
 
         String requestBody = "{"
                 + "   \"startDate\": \"2017-08-01\","
@@ -54,15 +54,15 @@ public class DatalabTrendShopping {
             }
 
             int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) { // Á¤»ó ÀÀ´ä
+            if (responseCode == HttpURLConnection.HTTP_OK) { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 return readBody(con.getInputStream());
-            } else {  // ¿¡·¯ ÀÀ´ä
+            } else {  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 return readBody(con.getErrorStream());
             }
         } catch (IOException e) {
-            throw new RuntimeException("API ¿äÃ»°ú ÀÀ´ä ½ÇÆÐ", e);
+            throw new RuntimeException("API ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½", e);
         } finally {
-            con.disconnect(); // ConnectionÀ» ÀçÈ°¿ëÇÒ ÇÊ¿ä°¡ ¾ø´Â ÇÁ·Î¼¼½ºÀÏ °æ¿ì
+            con.disconnect(); // Connectionï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ä°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
     }
 
@@ -71,9 +71,9 @@ public class DatalabTrendShopping {
             URL url = new URL(apiUrl);
             return (HttpURLConnection) url.openConnection();
         } catch (MalformedURLException e) {
-            throw new RuntimeException("API URLÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. : " + apiUrl, e);
+            throw new RuntimeException("API URLï¿½ï¿½ ï¿½ß¸ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. : " + apiUrl, e);
         } catch (IOException e) {
-            throw new RuntimeException("¿¬°áÀÌ ½ÇÆÐÇß½À´Ï´Ù. : " + apiUrl, e);
+            throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. : " + apiUrl, e);
         }
     }
 
@@ -90,7 +90,7 @@ public class DatalabTrendShopping {
 
             return responseBody.toString();
         } catch (IOException e) {
-            throw new RuntimeException("API ÀÀ´äÀ» ÀÐ´Â µ¥ ½ÇÆÐÇß½À´Ï´Ù.", e);
+            throw new RuntimeException("API ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.", e);
         }
     }
 }
