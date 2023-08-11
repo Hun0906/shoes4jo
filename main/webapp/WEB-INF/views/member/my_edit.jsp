@@ -1,23 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.multi.shoes4jo.vo.MemberVO"%>
-<script src="/assets/js/addHypen.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
 <title>회원정보 수정 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
+<script src="/assets/js/addHypen.js"></script>
 <script type="text/javascript">
-
-	function enableEditing() {
-		var inputs = document.querySelectorAll('.form-control');
-		for (var i = 0; i < inputs.length; i++) {
-			inputs[i].removeAttribute('readonly');
-		}
-		document.getElementById('btnEdit').style.display = 'none';
-		document.getElementById('btnSaveCancel').style.display = 'block';
-	}
-
 	function updateMemberInfo() {
 		var formData = new FormData(document.getElementById("updateForm"));
 
@@ -55,27 +45,23 @@
 			%>
 			<div class="input-wrapper">
 				<label>이름</label> <input type="text" class="form-control"
-					name="member_name" value="<%=memberInfo.getmember_name()%>">
+					name="member_name" value="<%=memberInfo.getmember_name()%>" required>
 			</div>
 			<div class="input-wrapper">
 				<label>비밀번호</label> <input type="password" class="form-control"
-					name="member_pw" value="<%=memberInfo.getmember_pw()%>">
+					name="member_pw" value="<%=memberInfo.getmember_pw()%>" required>
 			</div>
 			<div class="input-wrapper">
-				<label>이메일</label> <input type="text" class="form-control"
-					name="member_email" value="<%=memberInfo.getmember_email()%>">
+				<label>이메일</label> <input type="email" class="form-control"
+					name="member_email" value="<%=memberInfo.getmember_email()%>" required>
 			</div>
 			<div class="input-wrapper">
-				<label>휴대폰 번호</label> <input type="text" class="form-control"
-					name="member_phone" value="<%=memberInfo.getmember_phone()%>" oninput="addHypen(this)">
+				<label>휴대폰 번호</label> <input type="tel" class="form-control"
+					name="member_phone" value="<%=memberInfo.getmember_phone()%>" oninput="addHypen(this)" required>
 			</div>
 			<div class="form-button-wrapper">
-				<span class="btn-basic" id="btnEdit" onclick="enableEditing()">수정하기</span>
-				<div id="btnSaveCancel" style="display: none;">
+					<button type="button" class="btn-basic btn-line-basic" onclick="history.go(0)">취소</button>
 					<button class="btn-basic" onclick="updateMemberInfo()">저장</button>
-					<button type="button" class="btn-basic btn-line-basic"
-						onclick="location.href='reload'">취소</button>
-				</div>
 			</div>
 			<%
 			}
