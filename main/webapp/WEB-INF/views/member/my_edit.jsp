@@ -13,7 +13,7 @@
 
 		$.ajax({
 			method : "POST",
-			url : "/controller/updateMember",
+			url : "/controller/my_edit",
 			data : formData,
 			processData : false,
 			contentType : false,

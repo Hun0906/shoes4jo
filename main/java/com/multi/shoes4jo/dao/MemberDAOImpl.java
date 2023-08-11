@@ -41,12 +41,12 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public int deleteMember(String id) {
+    public int deleteMember(String id) throws Exception {
     	return sqlSession.delete(ns + "deleteMember", id);
     }
 
 	@Override
-	public int duplicationId(String id) {
+	public int duplicationId(String id)throws Exception  {
 	    return sqlSession.selectOne(ns + "duplicationId", id);
 	}
 

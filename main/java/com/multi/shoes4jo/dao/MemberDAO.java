@@ -16,6 +16,6 @@ public interface MemberDAO
 
 	public int deleteMember(String id) throws Exception;
 
-	public int duplicationId(String id);
+	public int duplicationId(String id)throws Exception ;
 }
  

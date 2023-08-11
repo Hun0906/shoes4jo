@@ -29,6 +29,6 @@
  * JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
  * mailSender.setJavaMailProperties(mailProperties);
  * mailSender.setHost("smtp.gmail.com"); mailSender.setPort(587);
- * mailSender.setUsername(0123aqq); mailSender.setPassword(nuhghjxvmjizzfgm);
+ * mailSender.setUsername(0123aqq); mailSender.setPassword(일단 비워둠 발급받은거 여기 쓰기);
  * mailSender.setDefaultEncoding("utf-8"); return mailSender; } }
  */
