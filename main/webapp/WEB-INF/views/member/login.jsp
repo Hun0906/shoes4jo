@@ -67,8 +67,7 @@ function login() {
 		return false;
 	}
 
-	document.loginForm.action = "<%=context%>
-	/controller/login";
+	document.loginForm.action = "<%=context%>/controller/login";
 		document.loginForm.submit();
 	}
 </script>
