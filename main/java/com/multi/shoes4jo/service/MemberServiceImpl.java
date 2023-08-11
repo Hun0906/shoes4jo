@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override 
-    public int duplicationId(String id) {
+    public int duplicationId(String id) throws Exception {
         return memberDAO.duplicationId(id);
  	     
     }

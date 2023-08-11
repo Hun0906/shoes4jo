@@ -163,6 +163,10 @@ public class MemberControllerImpl implements MemberController {
 		ModelAndView mav = new ModelAndView();
 		if (result > 0) {
 			HttpSession session = request.getSession();
+			
+			session.invalidate();
+			
+			
 			session.setAttribute("memberInfo", member_id);
 			mav.setViewName("redirect:/login");
 		} else {

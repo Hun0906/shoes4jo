@@ -68,14 +68,14 @@
 								src="https://avatars.githubusercontent.com/u/130541650?s=100&v=4"
 								onclick="window.open('https://github.com/0123aqq')">
 							<h3>하세라</h3>
-							<span>비밀번호 찾기</span> <span>페이지 즐겨찾기</span> <span>마이바티스 세팅</span>
+							<span>아이디, 비밀번호 찾기</span> <span>마이바티스 세팅</span>
 						</div>
 						<div class="team-card">
 							<img
 								src="https://avatars.githubusercontent.com/u/134472331?s=100&v=4"
 								onclick="window.open('https://github.com/heebanggg')">
 							<h3>박희범</h3>
-							<span>회원가입</span>
+							<span>회원가입</span> <span>2차 DB 설계</span>
 						</div>
 						<div class="team-card">
 							<img src="https://avatars.githubusercontent.com/u/134472216?v=4"
