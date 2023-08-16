@@ -2,14 +2,80 @@ package com.multi.shoes4jo.vo;
 
 import org.springframework.stereotype.Component;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Component("BookmarkC")
 public class BookmarkC {
+	public int getBookmark_id() {
+		return bookmark_id;
+	}
+	public void setBookmark_id(int bookmark_id) {
+		this.bookmark_id = bookmark_id;
+	}
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	public String getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+	public String getTime_unit() {
+		return time_unit;
+	}
+	public void setTime_unit(String time_unit) {
+		this.time_unit = time_unit;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getCategory_name() {
+		return category_name;
+	}
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+	public String getCategory_param() {
+		return category_param;
+	}
+	public void setCategory_param(String category_param) {
+		this.category_param = category_param;
+	}
+	public String getDevice() {
+		return device;
+	}
+	public void setDevice(String device) {
+		this.device = device;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getAges() {
+		return ages;
+	}
+	public void setAges(String ages) {
+		this.ages = ages;
+	}
+	public String getAdd_date() {
+		return add_date;
+	}
+	public void setAdd_date(String add_date) {
+		this.add_date = add_date;
+	}
 	private int bookmark_id;
 	private String member_id;
 	private String start_date;
@@ -26,12 +92,3 @@ public class BookmarkC {
 
 
 
-     /* @Component 어노테이션은 스프링 프레임워크에서 사용되며, 클래스를 스프링 빈으로 등록하고, 빈의 이름을 지정하는 역할
-     *(빈 이름은 다른 빈들이 해당 컴포넌트에 의존성 주입을 요청할 때 사용)
-     *
-	 * @Data: 클래스에 이 어노테이션을 사용하면 자동으로 getter,setter,toString(), equals() 및 hashCode() 메서드 생성
-	 * 
-	 * @NoArgsConstructor: 인자가 없는 기본 생성자를 자동으로 생성
-	 * 
-	 * @AllArgsConstructor: 모든 필드 값을 인자로 갖는 생성자를 자동으로 생성. 클래스의 모든 멤버 변수를 초기화
-	 */

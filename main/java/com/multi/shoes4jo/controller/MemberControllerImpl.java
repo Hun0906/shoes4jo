@@ -1,5 +1,8 @@
 package com.multi.shoes4jo.controller;
 
+import java.security.SecureRandom;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,24 +14,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.shoes4jo.service.MemberService;
 import com.multi.shoes4jo.vo.MemberVO;
 
+// Model과 View는 서로 연결되어 있지 않기 때문에 Controller가 그 사이에서 통신 매체 되어줌.
+// 모델은 데이터 관리 및 비즈니스 로직 처리 담당(DAO,VO(DTO),Service)
+// 객체(생성해서 등록해둔 빈) 주입할때 @Autowired 어노테이션 사용
+
 @Controller
-@RequestMapping(value = "/controller", method = { RequestMethod.POST, RequestMethod.GET })
+@RequestMapping("/controller")
 public class MemberControllerImpl implements MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	private String member_name;
 
 	@Override
 	@RequestMapping(value = "/insertMember", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView insertMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		MemberVO memberVO = new MemberVO();
+		MemberVO MemberVO = new MemberVO();
 
 		String member_id = request.getParameter("member_id");
 		String member_name = request.getParameter("member_name");
@@ -37,14 +46,14 @@ public class MemberControllerImpl implements MemberController {
 		String member_email = request.getParameter("member_email");
 		String member_phone = request.getParameter("member_phone");
 
-		memberVO.setmember_id(member_id);
-		memberVO.setmember_name(member_name);
-		memberVO.setmember_pw(member_pw);
-		memberVO.setsignup_date(signup_date);
-		memberVO.setmember_email(member_email);
-		memberVO.setmember_phone(member_phone);
+		MemberVO.setmember_id(member_id);
+		MemberVO.setmember_name(member_name);
+		MemberVO.setmember_pw(member_pw);
+		MemberVO.setsignup_date(signup_date);
+		MemberVO.setmember_email(member_email);
+		MemberVO.setmember_phone(member_phone);
 
-		int result = memberService.insertMember(memberVO);
+		int result = memberService.insertMember(MemberVO);
 		ModelAndView mav = new ModelAndView("redirect:/signup");
 		return mav;
 	}
@@ -60,6 +69,7 @@ public class MemberControllerImpl implements MemberController {
 		MemberVO member = new MemberVO();
 		member.setmember_id(memberID);
 		member.setmember_pw(memberPW);
+
 		Integer loginRes = memberService.loginMember(member);
 
 		ModelAndView mav = new ModelAndView();
@@ -104,48 +114,47 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
-	
 	@Override
 	@RequestMapping(value = "/my_edit", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView updateMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
-		
+
 		String member_name = request.getParameter("member_name");
 		String member_id = (String) session.getAttribute("memberInfo");
-	    String member_pw = request.getParameter("member_pw");
-	    String member_email = request.getParameter("member_email");
-	    String member_phone = request.getParameter("member_phone");
-	    
-	    //request 잘 됐는지 검사용
-	    System.out.println("name: "+member_name);
-	    System.out.println("id: "+member_id);
-	    System.out.println("pw: "+member_pw);
-	    System.out.println("email: "+member_email);
-	    System.out.println("phone: "+member_phone);
+		String member_pw = request.getParameter("member_pw");
+		String member_email = request.getParameter("member_email");
+		String member_phone = request.getParameter("member_phone");
+
+		// request 잘 됐는지 검사용
+		System.out.println("name: " + member_name);
+		System.out.println("id: " + member_id);
+		System.out.println("pw: " + member_pw);
+		System.out.println("email: " + member_email);
+		System.out.println("phone: " + member_phone);
 
 		MemberVO member = new MemberVO();
 		member.setmember_id(member_id);
 		member.setmember_pw(member_pw);
 		Integer loginRes = memberService.loginMember(member);
-	    
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:memberInfo");
 
-	    if (loginRes == 0) {
+		if (loginRes == 0) {
 			mav.addObject("res", 0); // 비밀번호 오류
 			return mav;
-	    } else if (loginRes == 1) {
-	    	member.setmember_name(member_name);
-	    	member.setmember_id(member_id);
-	    	member.setmember_pw(member_pw);
-	    	member.setmember_email(member_email);
-	    	member.setmember_phone(member_phone);
-		    
-		    memberService.updateMember(member);
-		    
+		} else if (loginRes == 1) {
+			member.setmember_name(member_name);
+			member.setmember_id(member_id);
+			member.setmember_pw(member_pw);
+			member.setmember_email(member_email);
+			member.setmember_phone(member_phone);
+
+			memberService.updateMember(member);
+
 			mav.addObject("res", 1); // 성공
-	    }
+		}
 		return mav;
 
 	}
@@ -163,10 +172,9 @@ public class MemberControllerImpl implements MemberController {
 		ModelAndView mav = new ModelAndView();
 		if (result > 0) {
 			HttpSession session = request.getSession();
-			
+
 			session.invalidate();
-			
-			
+
 			session.setAttribute("memberInfo", member_id);
 			mav.setViewName("redirect:/login");
 		} else {
@@ -180,12 +188,101 @@ public class MemberControllerImpl implements MemberController {
 	@ResponseBody
 	public ResponseEntity duplicationId(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		MemberVO memberVO = new MemberVO();
+		MemberVO MemberVO = new MemberVO();
 		String id = request.getParameter("member_id");
-		memberVO.setmember_id(id);
+		MemberVO.setmember_id(id);
 		int cnt = memberService.duplicationId(id);
 		ResponseEntity resEntity = null;
 		resEntity = new ResponseEntity(cnt, HttpStatus.OK);
 		return resEntity;
 	}
+	
+	
+	
+	
+	
+	
+    @RequestMapping(value = "/search_id", method = RequestMethod.GET)
+    public String search_id(HttpServletRequest request, Model model) {
+        return "service/search_id";
+    }
+    
+    
+    
+
+    @Override
+    @RequestMapping(value = "/result_id", method = RequestMethod.POST)
+    public String result_id(HttpServletRequest request, Model model,
+          @RequestParam(required = true, value = "member_name") String member_name,
+          @RequestParam(required = true, value = "member_phone") String member_phone) {
+
+    	    MemberVO searchVO = new MemberVO();
+    	    
+    	    try {
+    	        searchVO.setmember_name(member_name);
+    	        searchVO.setmember_phone(member_phone);
+    	        List<MemberVO> memberSearchList = memberService.memberIdSearch(searchVO);
+
+    	        if (!memberSearchList.isEmpty()) {
+    	            model.addAttribute("searchVO", memberSearchList.get(0));
+    	        }
+    	    } catch (Exception e) {
+    	        System.out.println(e.toString());
+    	        model.addAttribute("msg", "error.");
+    	    }
+    	    return "service/result_id";
+    }
+    
+    
+    
+    @RequestMapping(value = "/search_pw", method = RequestMethod.GET)
+    public String search_pw(HttpServletRequest request, Model model) {
+        return "service/search_pw";
+    }
+
+    @RequestMapping(value = "/result_pw", method = RequestMethod.POST)
+    public String result_pw(HttpServletRequest request, Model model,
+        @RequestParam(required = true, value = "member_name") String member_name, 
+        @RequestParam(required = true, value = "member_phone") String member_phone, 
+        @RequestParam(required = true, value = "member_id") String member_id, 
+        MemberVO searchVO) {
+
+        try {
+            
+            searchVO.setmember_name(member_name);
+            searchVO.setmember_phone(member_phone);
+            searchVO.setmember_id(member_id);
+            int memberSearch = memberService.pwCheck(searchVO);
+            
+            if(memberSearch == 0) {
+                model.addAttribute("msg", "잘못 입력하셨습니다. 다시 입력해주세요.");
+                return "/service/search_pw";
+            }
+            
+            String newPw = generateRandomNumerString(10);
+            searchVO.setmember_pw(newPw);
+
+            memberService.pwUpdate(searchVO);
+
+            model.addAttribute("newPw", newPw);
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            model.addAttribute("msg", "error.");
+        }
+
+        return "/service/result_pw";
+    }
+
+   public String generateRandomNumerString(int length) {
+      StringBuilder randomStringBuilder = new StringBuilder();
+      SecureRandom random = new SecureRandom();
+
+      for (int i = 0; i < length; i++) {
+          randomStringBuilder.append(Integer.toString(random.nextInt(10)));
+      }
+
+      return randomStringBuilder.toString();
+   }
 }
+

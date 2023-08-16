@@ -1,5 +1,7 @@
 package com.multi.shoes4jo.service;
 
+import java.util.List;
+
 import com.multi.shoes4jo.vo.MemberVO;
 
 public interface MemberService {
@@ -10,10 +12,17 @@ public interface MemberService {
 
 	public void updateMember(MemberVO memberVO) throws Exception;
 	
-	MemberVO memberInfo(String memberId) throws Exception;
+	public MemberVO memberInfo(String memberId) throws Exception;
 
 	public int deleteMember(String memberVO) throws Exception;
 
 	public int duplicationId(String id) throws Exception;
+	
+	public List<MemberVO> memberIdSearch(MemberVO searchVO);
+	
+	public int pwCheck(MemberVO searchVO);
+	
+	public void pwUpdate(MemberVO searchVO);
+
   
 }
