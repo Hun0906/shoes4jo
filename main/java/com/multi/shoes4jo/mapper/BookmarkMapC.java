@@ -2,15 +2,16 @@ package com.multi.shoes4jo.mapper;
 
 import java.util.List;
 
-import com.multi.shoes4jo.vo.BookmarkC;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface BookmarkMapC {
 
 	@Results(id = "bookmarkCResult", value = { @Result(property = "bookmark_id", column = "bookmark_id"),
@@ -23,7 +24,7 @@ public interface BookmarkMapC {
 			@Result(property = "device", column = "device"), @Result(property = "gender", column = "gender"),
 			@Result(property = "ages", column = "ages"), @Result(property = "add_date", column = "add_date") })
 	@Select("SELECT * FROM shoes_4jo.bookmark_category WHERE member_id = #{member_id}")
-	List<BookmarkMapC> findByMemberId(String memberId);
+	List<BookmarkMapC> findByMemberId(String member_id);
 
 	@Insert("INSERT INTO shoes_4jo.bookmark_category (bookmark_id, member_id, start_date, end_date, "
 			+ "time_unit, category, category_name, category_param, device, gender, ages, add_date) "

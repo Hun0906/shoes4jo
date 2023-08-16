@@ -7,8 +7,6 @@
 	xmlns="http://www.springframework.org/schema/beans">
 
 
-<!-- 마이바티스 관련 빈 설정 -->
-
 	<!-- Property Placeholder Configurer -->
 	<bean id="propertyPlaceholderConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

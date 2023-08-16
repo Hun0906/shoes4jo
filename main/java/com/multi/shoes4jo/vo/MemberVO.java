@@ -2,6 +2,10 @@ package com.multi.shoes4jo.vo;
 
 import org.springframework.stereotype.Component;
 
+//DTO,VO는 각 계층(Layer)간 데이터 교환을 위한 객체(Java Beans)
+//로직이 없는 순수한 데이터 객체이며, getter/setter 메소드만을 갖는다.
+//@Component("MemberVO")으로 빈 생성함
+
 @Component("MemberVO")
 public class MemberVO {
 	private String member_id;
@@ -10,6 +14,7 @@ public class MemberVO {
 	private String signup_date;
 	private String member_email;
 	private String member_phone;
+	private String admin_check;
  
 	public MemberVO() {
 
@@ -23,6 +28,7 @@ public class MemberVO {
 		this.signup_date = signup_date;
 		this.member_email = member_email;
 		this.member_phone = member_phone;
+		this.admin_check = admin_check;
 	}
 
 	public String getmember_id() {
@@ -71,5 +77,13 @@ public class MemberVO {
 
 	public void setmember_phone(String member_phone) {
 		this.member_phone = member_phone;
+	}
+	
+	public String getadmin_check() {
+		return admin_check;
+	}
+
+	public void setadmin_check(String admin_check) {
+		this.admin_check = admin_check;
 	}
 }

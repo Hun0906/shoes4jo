@@ -1,4 +1,4 @@
-package com.multi.shoes4jo;
+package com.multi.shoes4jo.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +15,7 @@ public class MainController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping("/")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", "index");
@@ -60,20 +60,14 @@ public class MainController {
 		logger.info("login() called");
 		return "member/login";
 	}
-
-	@RequestMapping(value = "/my_page", method = { RequestMethod.GET, RequestMethod.POST })
-	public String my_page() {
-		logger.info("my_page() called");
-
-		return "member/my_page";
-	}
-
+	
 	@RequestMapping(value = "/my_edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String my_edit() {
 		logger.info("my_edit() called");
 
 		return "member/my_edit";
 	}
+
 
 	@RequestMapping(value = "/acknowledgement", method = RequestMethod.GET)
 	public String acknowledgement() {
@@ -82,12 +76,6 @@ public class MainController {
 		return "common/acknowledgement";
 	}
 
-	@RequestMapping(value = "/member_delete", method = { RequestMethod.GET, RequestMethod.POST })
-	public String member_delete() {
-		logger.info("member_delete() called");
-
-		return "member/member_delete";
-	}
 	
 	@RequestMapping(value = "/coupang_dummy", method = RequestMethod.GET)
 	public String coupang_dummy() {
@@ -95,4 +83,12 @@ public class MainController {
 		
 		return "test/coupang_dummy";
 	}
+	
+	@RequestMapping(value = "/board_list", method = RequestMethod.GET)
+	public String board_list() {
+		logger.info("board_list() called");
+		
+		return "board/board_list";
+	}
+	
 }

@@ -1,25 +1,24 @@
 package com.multi.shoes4jo.service;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.multi.shoes4jo.dao.MemberDAO;
 import com.multi.shoes4jo.vo.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	private MemberDAO memberDAO;
+	private SqlSession sqlSession;
+	private MemberServiceImpl memberMapper;
 
-	public void setMemberDAO(MemberDAO memberDAO)throws Exception  {
-		this.memberDAO = memberDAO;
-	}
- 
 	@Override
-	public int insertMember(MemberVO member)throws Exception  {
+	public int insertMember(MemberVO member) throws Exception {
 		try {
-			return memberDAO.insertMember(member);
+			return sqlSession.insert("memberMapper.insertMember", member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -29,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int loginMember(MemberVO member) throws Exception {
 		try {
-			return memberDAO.loginMember(member);
+			return sqlSession.selectOne("memberMapper.loginMember", member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -37,33 +36,48 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	public MemberVO memberInfo(String memberId) throws Exception {
-		return memberDAO.memberInfo(memberId);
+		return sqlSession.selectOne("memberMapper.memberInfo", memberId);
 	}
 
 	@Override
 	public void updateMember(MemberVO member) throws Exception {
 		try {
-			memberDAO.updateMember(member);
+			sqlSession.update("memberMapper.updateMember", member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	@Override
 	public int deleteMember(String id) throws Exception {
 		try {
-			return memberDAO.deleteMember(id);
+			return sqlSession.delete("memberMapper.deleteMember", id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
 
+	@Override
+	public int duplicationId(String id) throws Exception {
+		return sqlSession.selectOne("memberMapper.duplicationId", id);
+	}
 
-    @Override 
-    public int duplicationId(String id) throws Exception {
-        return memberDAO.duplicationId(id);
- 	     
-    }
+	
+	@Override
+	public List<MemberVO> memberIdSearch(MemberVO searchVO) {
+	return sqlSession.selectList("memberMapper.memberIdSearch", searchVO);
+	}
+	
+	
+	@Override
+	public int pwCheck(MemberVO searchVO) {
+		return sqlSession.selectOne("memberMapper.pwCheck", searchVO); 
+	}
+	 
+	@Override
+	public void pwUpdate(MemberVO searchVO) {
+		sqlSession.update("memberMapper.pwUpdate", searchVO);
+	}
+	    
 }
