@@ -40,14 +40,14 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2"><input class="btn-basic" type="submit" value="등록"><!-- 수정: btn-basic 클래스 추가 -->
+                        <td colspan="2"><input class="btn-basic" type="submit" value="등록">
                         </td>
                     </tr>
                 </table>
 
             </form>
 
-            <button class="btn btn-secondary" onclick="location.href = '/board/list.do'">목록으로 돌아가기<!-- 수정: btn-basic 클래스 추가 --></button>
+            <button class="btn btn-secondary" onclick="location.href = '/board/list.do'">목록으로 돌아가기</button>
         </div>
 
     </div>

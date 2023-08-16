@@ -21,10 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.multi.shoes4jo.service.MemberService;
 import com.multi.shoes4jo.vo.MemberVO;
 
-// Model과 View는 서로 연결되어 있지 않기 때문에 Controller가 그 사이에서 통신 매체 되어줌.
-// 모델은 데이터 관리 및 비즈니스 로직 처리 담당(DAO,VO(DTO),Service)
-// 객체(생성해서 등록해둔 빈) 주입할때 @Autowired 어노테이션 사용
-
 @Controller
 @RequestMapping("/controller")
 public class MemberControllerImpl implements MemberController {
@@ -79,7 +75,7 @@ public class MemberControllerImpl implements MemberController {
 
 			System.out.println(memberID + " 로그인 성공");
 
-			mav.setViewName("redirect:/login"); // alert를 띄우기 위해 main이 아니라 login으로 보내게 되어 있습니다.
+			mav.setViewName("redirect:/login"); // alert를 띄우기 위해 main이 아니라 login으로 보냄
 			mav.addObject("res", 1); // 성공 코드
 		} else if (loginRes == 0) {
 			mav.setViewName("redirect:/login");
