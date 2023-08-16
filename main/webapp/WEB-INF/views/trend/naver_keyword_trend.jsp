@@ -96,14 +96,10 @@ var keyword = document.getElementById("keyword").value;
 
 if (keyword != "" && keyword != "null" && keyword != null) {
 	document.keywordTrendForm.submit();
+} else {
+	alert("검색어를 입력하세요.");
+	location.href="main";
 }
-
-function setPosition() {
-	    document.getElementById("container").setAttribute('style', 'text-align: center; height: calc(100vh - 330px);');
-		document.forms['keywordTrendForm'].setAttribute('style', 'position: relative; top: calc(50vh - 192px)');
-	}
-
-setPosition();
 </script>
 	<%@include file="../common/footer.jsp"%>
 </body>
