@@ -3,7 +3,6 @@ package com.multi.shoes4jo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,15 +25,6 @@ public class BoardController {
 	@Autowired
 	HttpServletRequest request;
 
-	private boolean admin_check() {
-		HttpSession session = request.getSession();
-		Integer adminCheck = (Integer) session.getAttribute("admin_check");
-
-		if (adminCheck != null && adminCheck == 1) {
-			return true;
-		}
-		return false;
-	}
 
 
 	@RequestMapping(value = "/list.do")
@@ -86,6 +76,4 @@ public class BoardController {
 	
 }
 
-	
-	
 	
