@@ -79,5 +79,10 @@ public class MemberServiceImpl implements MemberService {
 	public void pwUpdate(MemberVO searchVO) {
 		sqlSession.update("memberMapper.pwUpdate", searchVO);
 	}
-	    
-}
+	
+    @Override
+    public List<MemberVO> listMembers() throws Exception {
+        return sqlSession.selectList("memberMapper.showMember");
+    }
+}  
+

@@ -26,7 +26,7 @@
 			</thead>
 
 			<tbody>
-				<c:forEach var="board" items="${list }">
+				<c:forEach var="board" items="${list}">
 					<tr>
 						<td class="text-center">${board.bno }</td>
 						<td class="text-center"><a href="/board/view.do?bno=${board.bno}">${board.title} </a></td>
@@ -45,7 +45,7 @@
 
 			</tbody>
 		</table>
-
+ 
 	</div>
 	<%@include file="../common/footer.jsp"%>
 </body>

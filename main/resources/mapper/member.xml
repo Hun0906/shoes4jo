@@ -31,6 +31,11 @@
 		id를 지정하고 parameterType으로 속성 지정하고 sql문으로 조회한 결과(여기선 아이디,아이디니까 문자열) 호출한 메서드로 
 		반환한다 -->
 
+ 
+<select id="showMember" resultMap="memResult">
+    SELECT * FROM shoes_4jo.member
+</select>
+ 
 
 	<insert id="insertMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">

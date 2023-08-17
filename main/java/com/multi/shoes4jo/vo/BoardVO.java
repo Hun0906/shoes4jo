@@ -11,9 +11,10 @@ public class BoardVO {
 	private String writer;
 	private int viewcnt;
 	private String regdate;
-
+	private String thumb;
+	private String link;
+  
 	public BoardVO() {
-		super();
 	}
 
 	public BoardVO(int bno, String title, String content, String writer, int viewcnt, String regdate) {
@@ -23,21 +24,23 @@ public class BoardVO {
 		this.writer = writer;
 		this.viewcnt = viewcnt;
 		this.regdate = regdate;
+		this.thumb = thumb;
+		this.link = link;
 	}
 
-	public int getbno() {
+	public int getBno() {
 		return bno;
 	}
 
-	public void setbno(int bno) {
+	public void setBno(int bno) {
 		this.bno = bno;
 	}
 
-	public String gettitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void settitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -49,28 +52,44 @@ public class BoardVO {
 		this.content = content;
 	}
 
-	public String getwriter() {
+	public String getWriter() {
 		return writer;
 	}
 
-	public void setwriter(String writer) {
+	public void setWriter(String writer) {
 		this.writer = writer;
 	}
 
-	public int getviewcnt() {
+	public int getViewcnt() {
 		return viewcnt;
 	}
 
-	public void setviewcnt(int viewcnt) {
+	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
 
-	public String getregdate() {
+	public String getRegdate() {
 		return regdate;
 	}
 
-	public void setregdate(String regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 
+	public String getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+ 
 }

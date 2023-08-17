@@ -23,6 +23,8 @@ public interface MemberService {
 	public int pwCheck(MemberVO searchVO);
 	
 	public void pwUpdate(MemberVO searchVO);
-
-  
+	
+	public List<MemberVO> listMembers() throws Exception;
+ 
+   
 }

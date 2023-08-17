@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -280,5 +280,13 @@ public class MemberControllerImpl implements MemberController {
 
       return randomStringBuilder.toString();
    }
-}
+   
+   @RequestMapping(value = "/showMember", method = RequestMethod.GET)
+   public String showMember(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
+   List<MemberVO> member_list = memberService.listMembers();
+   model.addAttribute("member_list", member_list);
+   return "/admin/member_list";
+   }
+}
+ 
