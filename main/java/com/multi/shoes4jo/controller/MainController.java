@@ -85,4 +85,12 @@ public class MainController {
 	}
 	
 	
+	@RequestMapping(value = "/magazine", method = RequestMethod.GET)
+	public String magazine() {
+		logger.info("magazine() called");
+		
+		return "board/magazine";
+	}
+	
+	
 }
