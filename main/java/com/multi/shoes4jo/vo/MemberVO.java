@@ -14,7 +14,6 @@ public class MemberVO {
 	private String signup_date;
 	private String member_email;
 	private String member_phone;
-	private String admin_check;
  
 	public MemberVO() {
 
@@ -28,7 +27,6 @@ public class MemberVO {
 		this.signup_date = signup_date;
 		this.member_email = member_email;
 		this.member_phone = member_phone;
-		this.admin_check = admin_check;
 	}
 
 	public String getmember_id() {
@@ -79,11 +77,4 @@ public class MemberVO {
 		this.member_phone = member_phone;
 	}
 	
-	public String getadmin_check() {
-		return admin_check;
-	}
-
-	public void setadmin_check(String admin_check) {
-		this.admin_check = admin_check;
-	}
 }

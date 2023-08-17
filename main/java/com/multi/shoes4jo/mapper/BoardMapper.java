@@ -19,10 +19,10 @@ public interface BoardMapper {
     @Select("SELECT * FROM board WHERE bno = #{bno}")
     BoardVO select(@Param("bno") String bno);
 
-    @Insert("INSERT INTO board (title, content, writer) VALUES (#{title}, #{content}, #{writer})")
+    @Insert("INSERT INTO board (title, content, writer, thumb, link) VALUES (#{title}, #{content}, #{writer}, #{thumb}, #{link})")
     void insert(BoardVO board);
 
-    @Update("UPDATE board SET title = #{title}, content = #{content} WHERE bno = #{bno}")
+    @Update("UPDATE board SET title = #{title}, content = #{content}, thumb = #{thumb}, link = #{link} WHERE bno = #{bno}")
     void update(BoardVO board);
 
     @Update("UPDATE board SET viewcnt = viewcnt + 1 WHERE bno = #{bno}")
