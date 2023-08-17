@@ -35,6 +35,6 @@ public interface MemberController {
     public String search_pw(HttpServletRequest request, Model model) throws Exception;
     
     public String showMember(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception;
-
+ 
 }
 

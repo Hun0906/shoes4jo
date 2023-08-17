@@ -289,4 +289,4 @@ public class MemberControllerImpl implements MemberController {
    return "/admin/member_list";
    }
 }
-
+ 

@@ -35,7 +35,7 @@
 <select id="showMember" resultMap="memResult">
     SELECT * FROM shoes_4jo.member
 </select>
-
+ 
 
 	<insert id="insertMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">

@@ -25,6 +25,6 @@ public interface MemberService {
 	public void pwUpdate(MemberVO searchVO);
 	
 	public List<MemberVO> listMembers() throws Exception;
-
+ 
   
 }

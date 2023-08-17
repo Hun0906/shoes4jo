@@ -13,7 +13,7 @@ public class BoardVO {
 	private String regdate;
 	private String thumb;
 	private String link;
-
+ 
 	public BoardVO() {
 	}
 
