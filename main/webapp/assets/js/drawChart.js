@@ -7,26 +7,25 @@ function jsonParse(target){
 	let data = string_parse.results[0].data; //차트 그리기용 데이터셋
 	
 	if (data == "") {
-		alert("결과가 없습니다.");
-    	document.forms['keywordTrendForm'].setAttribute('style', 'position: relative; top: calc(50vh - 192px);');
-		document.getElementById('myChart').destroy();
+		alert("검색 결과가 없습니다.");
+		window.location="main";
 	}
 	
 	
 	if (target == "y"){
 		let y_arr = [];
 		
-		for (i = 0; i < data.length; i++){
-			y_arr.push(data[i].period.substring(0,7));
-		};
+		data.forEach((e) => {
+			y_arr.push(e.period.substring(5,7)+"월 "+e.period.substring(8)+"일");
+		});
 		
 		return y_arr;
 	} else if (target == "x") {
 		let x_arr = [];
 		
-		for (i = 0; i < data.length; i++){
-			x_arr.push(data[i].ratio);
-		};
+		data.forEach((e) => {
+			x_arr.push(e.ratio);
+		});
 			
 		return x_arr;
 	}

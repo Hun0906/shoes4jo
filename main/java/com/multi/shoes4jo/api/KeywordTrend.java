@@ -43,11 +43,11 @@ public class KeywordTrend {
         requestHeaders.put("Content-Type", "application/json");
         
         String today = LocalDate.now().toString();
-        String oneMonthAgo = LocalDate.now().minusMonths(1).toString();
+        String twoWeeksBefore = LocalDate.now().minusWeeks(2).toString();
         System.out.println("keyword: " + keyword);
 
         String requestBody = "{"
-                + "   \"startDate\": \"" + oneMonthAgo + "\"," //가장 빠른 날: 2017-08-01
+                + "   \"startDate\": \"" + twoWeeksBefore + "\"," //가장 빠른 날: 2017-08-01
                 + "   \"endDate\": \"" + today + "\","
                 + "   \"timeUnit\": \"date\","
                 + "   \"category\": \"50000001\","

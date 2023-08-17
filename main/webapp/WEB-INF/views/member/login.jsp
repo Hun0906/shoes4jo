@@ -91,8 +91,8 @@ function login() {
 							placeholder="비밀번호" class="form-control">
 					</div>
 					<div class="form-button-wrapper">
-						<a href="<%=request.getContextPath()%>controller/search_id">아이디 찾기</a>&nbsp;&nbsp;
-						<a href="<%=request.getContextPath()%>controller/search_pw">비밀번호 찾기</a>
+						<a href="<%=context%>/controller/search_id">아이디 찾기</a>&nbsp;&nbsp;
+						<a href="<%=context%>/controller/search_pw">비밀번호 찾기</a>
 
 					</div>
 					<div class="form-button-wrapper">
