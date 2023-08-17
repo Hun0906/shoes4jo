@@ -77,4 +77,4 @@ public class MemberVO {
 		this.member_phone = member_phone;
 	}
 	
-}
+} 

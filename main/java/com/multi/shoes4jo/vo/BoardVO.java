@@ -13,7 +13,7 @@ public class BoardVO {
 	private String regdate;
 	private String thumb;
 	private String link;
- 
+  
 	public BoardVO() {
 	}
 
@@ -91,5 +91,5 @@ public class BoardVO {
 	public void setLink(String link) {
 		this.link = link;
 	}
-
+ 
 }

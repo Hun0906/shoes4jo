@@ -26,5 +26,5 @@ public interface MemberService {
 	
 	public List<MemberVO> listMembers() throws Exception;
  
-  
+   
 }

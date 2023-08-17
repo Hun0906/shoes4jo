@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>member_list | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
- 
+   
 </head>
 
 <body>

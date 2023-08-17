@@ -84,11 +84,5 @@ public class MainController {
 		return "test/coupang_dummy";
 	}
 	
-	@RequestMapping(value = "/board_list", method = RequestMethod.GET)
-	public String board_list() {
-		logger.info("board_list() called");
-		
-		return "board/board_list";
-	}
 	
 }

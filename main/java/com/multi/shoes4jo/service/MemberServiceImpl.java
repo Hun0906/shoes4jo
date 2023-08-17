@@ -84,5 +84,5 @@ public class MemberServiceImpl implements MemberService {
     public List<MemberVO> listMembers() throws Exception {
         return sqlSession.selectList("memberMapper.showMember");
     }
-} 
+}  
 
