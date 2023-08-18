@@ -16,6 +16,13 @@ header{
 	margin-bottom: 3rem;
 }
 
+header img{
+	width: 100%;
+	max-width: 145px;
+	padding: 1rem;
+	margin-left:0.5rem;
+}
+
 h1{
 	font-size: 2.5rem;
     margin-bottom: 2rem;
@@ -193,4 +200,69 @@ footer a {
 .form-control:focus {
     border-color: #ADE792 !important;
     box-shadow: 0 0 0 0.25rem #ADE79250 !important;
+}
+
+.responsive-menu-wrapper{
+    position: absolute;
+    display: none;
+    margin-top: -3rem;
+	width: 100%;
+    background-color: #eeeeee75;
+    padding: 1rem 0rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 10px -3px #00000030;
+    transform: translate(-50%, -50%) scale(0);
+	animation: scale-up 0.3s forwards;
+    z-index: 1;
+}
+
+@keyframes scale-up {
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+}
+
+.responsive-menu-wrapper div{
+	width: 100%;
+	padding: 0.8rem 2rem;
+	font-size: 1.3rem;
+}
+
+.responsive-menu-wrapper div>a{
+	text-decoration: none;
+	color: #333;
+}
+
+.responsive-menu-wrapper div>a:hover{
+	color: #6ECCAF;
+}
+
+.responsive-menu-wrapper div:hover{
+	background-color: #ADE79250;
+}
+/* 반응형 */
+
+@media (max-width: 1024px){
+	.menu_container{
+	display: none;
+	}
+	.menu_in_toggle{
+	display: block;
+	}
+	header{
+	grid-template-columns: 100px 1fr 100px;
+	}
+	header img {
+	margin: 0 auto;
+	}
+	#responsive-menu{
+	display: inline !important;
+	margin-left: 1.5rem;
+	}
+}
+
+@media (max-width: 600px){
+	.form-wrapper{
+	padding: 0.5rem 2rem;
+	}
 }
