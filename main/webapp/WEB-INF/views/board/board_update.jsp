@@ -72,12 +72,12 @@ font-weight: bold;}
                 </table>
                 
                 <div class="form-button-wrapper" style="text-align:center;">
+        <span class="btn-basic btn-line-basic" onclick="history.back()">수정 취소</span>
                 <input type="submit" class="btn-basic" value="수정하기">
                 </div>
             </form>
                 <div class="form-button-wrapper" style="text-align:center;">
-        <button class="btn-basic btn-line-basic" onclick="location.href='/board/list.do'">글 목록 보기</button>
-        <button class="btn-basic btn-line-basic" onclick="history.back()">수정 취소</button>
+        <button class="btn-basic btn-line-basic" onclick="location.href='<%=context %>/board/list.do'">글 목록 보기</button>
                 </div>
 
         </div>

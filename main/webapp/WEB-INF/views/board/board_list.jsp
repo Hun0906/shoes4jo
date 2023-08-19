@@ -14,7 +14,14 @@
 <%@include file="../common/header.jsp"%>
 	<div class="container">
 		<h2 class="text-center">게시판</h2>
-		<div class="form-button-wrapper" style="text-align: right;">
+		<div style="display: flex; justify-content: space-between; margin: 1rem 0;">
+		<select class="form-select" style="width: fit-content" onchange="window.open(value,'_self')">
+          <option value="">카테고리 선택</option>
+          <option value="list.do">전체 글 보기</option>
+          <option value="list.do?category=news">뉴스</option>
+          <option value="list.do?category=events">이벤트</option>
+          <option value="list.do?category=columns">칼럼</option>
+        </select>
 		<input type="button" class="btn-basic" value="글쓰기" id="writeBtn"
 						onclick="location.href='<%=context %>/board/write.do'">
 		</div>
@@ -38,7 +45,7 @@
 						<td class="text-center"><a href="<%=context %>/board/view.do?bno=${board.bno}">${board.title} </a></td>
 						<td class="text-center">${board.writer}</td>
 						<td class="text-center">${board.viewcnt}</td>
-						<td class="text-center">${board.regdate}</td>
+						<td class="text-center">${board.regdate.substring(0,16)}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

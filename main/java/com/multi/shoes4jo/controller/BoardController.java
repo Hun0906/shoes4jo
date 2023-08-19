@@ -28,12 +28,17 @@ public class BoardController {
 
 
 	@RequestMapping(value = "/list.do")
-	public String list(Model model) {
-		List<BoardVO> list = boardService.selectList();
-		model.addAttribute("list", list);
-		return "board/board_list";
-
+	public String list(Model model, @RequestParam(required = false) String category) {
+	    List<BoardVO> list;
+	    if (category != null && !category.isEmpty()) {
+	        list = boardService.selectOneCat(category);
+	    } else {
+	        list = boardService.selectList();
+	    }
+	    model.addAttribute("list", list);
+	    return "board/board_list";
 	}
+
 	
 	@RequestMapping(value = "/magazine")
 	public String magazine(Model model) {

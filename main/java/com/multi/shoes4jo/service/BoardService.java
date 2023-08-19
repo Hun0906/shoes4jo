@@ -14,6 +14,8 @@ public interface BoardService {
 	
 	public List<BoardVO> selectColumns();
 	
+	public List<BoardVO> selectOneCat(String category);
+	
 	public BoardVO selectOne(String bno);
 	
 	public void updateviewcnt(String bno);
