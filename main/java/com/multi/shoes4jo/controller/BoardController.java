@@ -34,6 +34,18 @@ public class BoardController {
 		return "board/board_list";
 
 	}
+	
+	@RequestMapping(value = "/magazine")
+	public String magazine(Model model) {
+		List<BoardVO> newslist = boardService.selectNews();
+		List<BoardVO> eventslist = boardService.selectEvents();
+		List<BoardVO> columnslist = boardService.selectColumns();
+		model.addAttribute("newslist", newslist);
+		model.addAttribute("eventslist", eventslist);
+		model.addAttribute("columnslist", columnslist);
+		return "board/magazine";
+		
+	}
 
 	@RequestMapping(value = "/view.do")
 	public ModelAndView view(@RequestParam String bno) {

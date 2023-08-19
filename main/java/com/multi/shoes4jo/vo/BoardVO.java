@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 public class BoardVO {
 
 	private int bno;
+	private String category;
 	private String title;
 	private String content;
 	private String writer;
@@ -17,8 +18,9 @@ public class BoardVO {
 	public BoardVO() {
 	}
 
-	public BoardVO(int bno, String title, String content, String writer, int viewcnt, String regdate) {
+	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate, String thumb, String link) {
 		this.bno = bno;
+		this.category = category;
 		this.title = title;
 		this.content = content;
 		this.writer = writer;
@@ -34,6 +36,14 @@ public class BoardVO {
 
 	public void setBno(int bno) {
 		this.bno = bno;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getTitle() {

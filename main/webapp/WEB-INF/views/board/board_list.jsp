@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board_list | SHOES4JO</title>
+<title>게시판 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 
 </head>
@@ -14,10 +14,15 @@
 <%@include file="../common/header.jsp"%>
 	<div class="container">
 		<h2 class="text-center">게시판</h2>
+		<div class="form-button-wrapper" style="text-align: right;">
+		<input type="button" class="btn-basic" value="글쓰기" id="writeBtn"
+						onclick="location.href='<%=context %>/board/write.do'">
+		</div>
 		<table class="table table-board table-hover">
 			<thead>
 				<tr>
 					<th class="text-center">번호</th>
+					<th class="text-center">카테고리</th>
 					<th class="text-center">제목</th>
 					<th class="text-center">작성자</th>
 					<th class="text-center">조회수</th>
@@ -29,20 +34,13 @@
 				<c:forEach var="board" items="${list}">
 					<tr>
 						<td class="text-center">${board.bno }</td>
-						<td class="text-center"><a href="/board/view.do?bno=${board.bno}">${board.title} </a></td>
+						<td class="text-center">${board.category}</td>
+						<td class="text-center"><a href="<%=context %>/board/view.do?bno=${board.bno}">${board.title} </a></td>
 						<td class="text-center">${board.writer}</td>
 						<td class="text-center">${board.viewcnt}</td>
 						<td class="text-center">${board.regdate}</td>
 					</tr>
 				</c:forEach>
-
-				<tr>
-					<td colspan="5" class="text-center"><input type="button" class="btn-basic"
-						value="글쓰기" id="writeBtn"
-						onclick="location.href='${pageContext.request.contextPath}/board/write.do'">
-					</td>
-				</tr>
-
 			</tbody>
 		</table>
  
