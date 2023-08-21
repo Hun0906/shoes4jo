@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha384-KyZXEAg3QhqLMpG8r+KnujslD/7++XK0KzbQzUP2q0U11fdsojspornfooONU65"
 	crossorigin="anonymous"></script>
-<title>search_result_id | SHOES4JO</title>
+<title>result_id | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 </head>
 

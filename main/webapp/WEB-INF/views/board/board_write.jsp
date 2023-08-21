@@ -32,7 +32,7 @@ font-weight: bold;}
                 <table class="table table-board table-hover">
                     <tr>
                         <td style="width: 20%; min-width: 140px;">썸네일</td>
-                        <td><input class="form-control" type="file" name="thumb" value="default.jpg" maxlength=260></td>
+                        <td><input class="form-control" type="file" name="file" value="default.jpg" maxlength=260></td>
                     </tr>
                     <tr>
                         <td>작성자</td>
