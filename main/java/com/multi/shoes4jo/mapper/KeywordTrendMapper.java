@@ -10,16 +10,16 @@ import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Mapper
 public interface KeywordTrendMapper {
-    @Select("SELECT * FROM api_search_all WHERE keyword = #{keyword}")
+    @Select("SELECT * FROM 4jo_api_search_all WHERE keyword = #{keyword}")
     KeywordTrendVO select(@Param("keyword") String keyword);
 
-    @Insert("INSERT INTO api_search_all (period_sdata, keyword, ratio_cnt) VALUES (#{period_sdata}, #{keyword}, #{ratio_cnt})")
+    @Insert("INSERT INTO 4jo_api_search_all (period_sdata, keyword, ratio_cnt) VALUES (#{period_sdata}, #{keyword}, #{ratio_cnt})")
     void insert(KeywordTrendVO KeywordTrend);
 
-    @Update("UPDATE api_search_all SET title = #{title}, content = #{content}, thumb = #{thumb}, link = #{link} WHERE bno = #{bno}")
+    @Update("UPDATE 4jo_api_search_all SET title = #{title}, content = #{content}, thumb = #{thumb}, link = #{link} WHERE bno = #{bno}")
     void update(KeywordTrendVO KeywordTrend);
 
-    @Update("UPDATE api_search_all SET ratio_cnt = #{ratio_cnt} WHERE keyword = #{keyword} and period_sdata = #{period_sdata}")
+    @Update("UPDATE 4jo_api_search_all SET ratio_cnt = #{ratio_cnt} WHERE keyword = #{keyword} and period_sdata = #{period_sdata}")
     void updateRatio(@Param("period_sdata") String period_sdata, @Param("keyword") String keyword);
 
 }
