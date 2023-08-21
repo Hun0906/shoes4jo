@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
- 
+
 import com.multi.shoes4jo.vo.BoardVO;
 
 @Mapper
@@ -31,12 +31,12 @@ public interface BoardMapper {
     @Select("SELECT * FROM 4jo_board WHERE bno = #{bno}")
     BoardVO select(@Param("bno") String bno);
 
-    @Insert("INSERT INTO 4jo_board (category, title, content, writer, file, file_path, link) VALUES (#{category}, #{title}, #{content}, #{writer}, #{file}, #{file_path}, #{link})")
+    @Insert("INSERT INTO 4jo_board (category, title, content, writer, file_path, link) VALUES (#{category}, #{title}, #{content}, #{writer}, #{file_path}, #{link})")
     void insert(BoardVO board);
 
-    @Update("UPDATE 4jo_board SET category = #{category}, title = #{title}, content = #{content}, file = #{file}, link = #{link} WHERE bno = #{bno}")
+    @Update("UPDATE 4jo_board SET category = #{category}, title = #{title}, content = #{content}, file_path = #{file_path}, link = #{link} WHERE bno = #{bno}")
     void update(BoardVO board);
-
+    
     @Update("UPDATE 4jo_board SET viewcnt = viewcnt + 1 WHERE bno = #{bno}")
     void updateCount(@Param("bno") String bno);
 
