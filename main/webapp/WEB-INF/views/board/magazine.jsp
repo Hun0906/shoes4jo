@@ -106,21 +106,21 @@ gap: 3rem;
 		<h2>뉴스</h2>
 		<div class="card-wrapper">
 	<c:forEach var="board" items="${newslist}">
-		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.thumb})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
+		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
 	</c:forEach>
 		</div>
 		<hr>
 		<h2>이벤트</h2>
 		<div class="card-wrapper">
 	<c:forEach var="board" items="${eventslist}">
-		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.thumb})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
+		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
 	</c:forEach>
 		</div>
 		<hr>
 		<h2>칼럼</h2>
 		<div class="card-wrapper">
 	<c:forEach var="board" items="${columnslist}">
-		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.thumb})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
+		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
 	</c:forEach>
 		</div>
 		</div>

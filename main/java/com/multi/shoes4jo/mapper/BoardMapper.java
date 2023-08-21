@@ -13,33 +13,33 @@ import com.multi.shoes4jo.vo.BoardVO;
 
 @Mapper
 public interface BoardMapper {
-    @Select("SELECT * FROM board ORDER BY bno DESC")
+    @Select("SELECT * FROM 4jo_board ORDER BY bno DESC")
     List<BoardVO> selectAll();
 
-    @Select("SELECT * FROM board where category = 'news' ORDER BY bno DESC limit 3")
+    @Select("SELECT * FROM 4jo_board where category = 'news' ORDER BY bno DESC limit 3")
     List<BoardVO> selectNews();
     
-    @Select("SELECT * FROM board where category = 'events' ORDER BY bno DESC limit 3")
+    @Select("SELECT * FROM 4jo_board where category = 'events' ORDER BY bno DESC limit 3")
     List<BoardVO> selectEvents();
     
-    @Select("SELECT * FROM board where category = 'columns' ORDER BY bno DESC limit 3")
+    @Select("SELECT * FROM 4jo_board where category = 'columns' ORDER BY bno DESC limit 3")
     List<BoardVO> selectColumns();
     
-    @Select("SELECT * FROM board WHERE category = #{category} ORDER BY bno DESC")
+    @Select("SELECT * FROM 4jo_board WHERE category = #{category} ORDER BY bno DESC")
     List<BoardVO> selectOneCat(@Param("category") String category);
 
-    @Select("SELECT * FROM board WHERE bno = #{bno}")
+    @Select("SELECT * FROM 4jo_board WHERE bno = #{bno}")
     BoardVO select(@Param("bno") String bno);
 
-    @Insert("INSERT INTO board (category, title, content, writer, thumb, link) VALUES (#{category}, #{title}, #{content}, #{writer}, #{thumb}, #{link})")
+    @Insert("INSERT INTO 4jo_board (category, title, content, writer, file, link) VALUES (#{category}, #{title}, #{content}, #{writer}, #{file}, #{link})")
     void insert(BoardVO board);
 
-    @Update("UPDATE board SET category = #{category}, title = #{title}, content = #{content}, thumb = #{thumb}, link = #{link} WHERE bno = #{bno}")
+    @Update("UPDATE 4jo_board SET category = #{category}, title = #{title}, content = #{content}, file = #{file}, link = #{link} WHERE bno = #{bno}")
     void update(BoardVO board);
 
-    @Update("UPDATE board SET viewcnt = viewcnt + 1 WHERE bno = #{bno}")
+    @Update("UPDATE 4jo_board SET viewcnt = viewcnt + 1 WHERE bno = #{bno}")
     void updateCount(@Param("bno") String bno);
 
-    @Delete("DELETE FROM board WHERE bno = #{bno}")
+    @Delete("DELETE FROM 4jo_board WHERE bno = #{bno}")
     void delete(@Param("bno") String bno);
 }
