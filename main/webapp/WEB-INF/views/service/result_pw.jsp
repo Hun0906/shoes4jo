@@ -17,7 +17,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>search_result_pw | SHOES4JO</title>
+<title>result_pw | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 </head>
 

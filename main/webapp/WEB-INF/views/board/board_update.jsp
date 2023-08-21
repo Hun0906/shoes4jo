@@ -39,7 +39,7 @@ font-weight: bold;}
                     </tr>
                     <tr>
                         <td style="width: 20%; min-width: 140px;">썸네일</td>
-                        <td><input class="form-control" type="file" name="thumb" value="${board.thumb}" maxlength=260></td>
+                        <td><input class="form-control" type="file" name="file" value="${board.file}" maxlength=260></td>
                     </tr>
                     <tr>
                         <td>작성자</td>
