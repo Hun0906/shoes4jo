@@ -21,15 +21,15 @@ public interface BookmarkMapK {
 			@Result(property = "keywords", column = "keywords"), @Result(property = "device", column = "device"),
 			@Result(property = "gender", column = "gender"), @Result(property = "ages", column = "ages"),
 			@Result(property = "add_date", column = "add_date") })
-	@Select("SELECT * FROM shoes_4jo.bookmark_keyword WHERE member_id = #{member_id}")
+	@Select("SELECT * FROM campusDB.4jo_bookmark_keyword WHERE member_id = #{member_id}")
 	List<BookmarkMapK> findByMemberId(String member_id);
 
-	@Insert("INSERT INTO shoes_4jo.bookmark_keyword (bookmark_id, member_id, start_date, end_date, "
+	@Insert("INSERT INTO campusDB.4jo_bookmark_keyword (bookmark_id, member_id, start_date, end_date, "
 			+ "time_unit, keywords, device, gender, device, ages, add_date) "
 			+ "VALUES (#{bookmark_id}, #{member_id}, #{start_date}, #{end_date}, "
 			+ "#{time_unit}, #{keywords}, #{device}, #{gender}, " + "#{device}, #{ages}, #{add_date})")
 	int insertBookmarkK(BookmarkMapK bookmarkK);
 
-	@Delete("DELETE FROM shoes_4jo.bookmark_keyword " + "WHERE bookmark_id = #{bookmark_id}")
+	@Delete("DELETE FROM campusDB.4jo_bookmark_keyword " + "WHERE bookmark_id = #{bookmark_id}")
 	int deleteBookmarkK(BookmarkMapK bookmarkK);
 }

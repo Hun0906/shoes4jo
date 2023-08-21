@@ -6,9 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+import javax.ws.rs.core.MediaType;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -179,22 +179,20 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
+
+	
 	@Override
-	@RequestMapping(value = "/duplicationId", produces = "application/json")
 	@ResponseBody
-	public ResponseEntity duplicationId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/duplicationId", produces = MediaType.APPLICATION_JSON)
+	public ResponseEntity<String> duplicationId(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		MemberVO MemberVO = new MemberVO();
 		String id = request.getParameter("member_id");
 		MemberVO.setmember_id(id);
 		int cnt = memberService.duplicationId(id);
-		ResponseEntity resEntity = null;
-		resEntity = new ResponseEntity(cnt, HttpStatus.OK);
-		return resEntity;
+
+		return ResponseEntity.ok(Integer.toString(cnt));
 	}
-	
-	
-	
 	
 	
 	
