@@ -20,6 +20,30 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public List<BoardVO> selectNews() {
+		List<BoardVO> list = boardMapper.selectNews();
+		return list;
+	}
+	
+	@Override
+	public List<BoardVO> selectEvents() {
+		List<BoardVO> list = boardMapper.selectEvents();
+		return list;
+	}
+	
+	@Override
+	public List<BoardVO> selectColumns() {
+		List<BoardVO> list = boardMapper.selectColumns();
+		return list;
+	}
+	
+	@Override
+	public List<BoardVO> selectOneCat(String category) {
+		List<BoardVO> list = boardMapper.selectOneCat(category);
+		return list;
+	}
+
+	@Override
 	public BoardVO selectOne(String bno) {
 		BoardVO board = boardMapper.select(bno);
 		return board;
