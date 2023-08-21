@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${board.title.substring(0,8)}... | SHOES4JO</title>
+<title>${board.title.length() > 10? board.title.substring(0,10).concat("..."): board.title} | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 <style>
 .form-wrapper{
