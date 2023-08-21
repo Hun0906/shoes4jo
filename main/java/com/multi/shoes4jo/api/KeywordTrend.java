@@ -44,7 +44,7 @@ public class KeywordTrend {
         
         String today = LocalDate.now().toString();
         String twoWeeksBefore = LocalDate.now().minusWeeks(2).toString();
-        System.out.println("keyword: " + keyword);
+        System.out.println("검색어 (=title): " + keyword);
 
         String requestBody = "{"
                 + "   \"startDate\": \"" + twoWeeksBefore + "\"," //가장 빠른 날: 2017-08-01

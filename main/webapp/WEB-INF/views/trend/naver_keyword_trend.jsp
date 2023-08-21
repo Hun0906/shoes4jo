@@ -31,28 +31,28 @@
 		}
 
 		console.log("keyword: "+keyword);
-		// Step3: java 이용해서 호출
-		$.ajax({
-			method : "GET",
-			url : "api/keywordtrend",
-			dataType : "json",
-			data : {
-				"keyword" : keyword,
-			},
-			success : function(response) {
-				// Step4: Process the API response
-				var resultData = '';
-				resultData += JSON.stringify(response);
-				document.getElementById("result").innerHTML = resultData;
-				drawChart();
-			},
-			error : function(xhr, status, error) {
-				console.log("API 호출 실패: ", status, error);
-			}
-		});
+//		// Step3: java 이용해서 호출
+//		$.ajax({
+//			method : "GET",
+//			url : "api/keywordtrend",
+//			dataType : "json",
+//			data : {
+//				"keyword" : keyword,
+//			},
+//			success : function(response) {
+//				// Step4: Process the API response
+//				var resultData = '';
+//				resultData += JSON.stringify(response);
+//				document.getElementById("result").innerHTML = resultData;
+//				drawChart();
+//			},
+//			error : function(xhr, status, error) {
+//				console.log("API 호출 실패: ", status, error);
+//			}
+//		});
 		
-		document.getElementById("container").setAttribute('style', 'text-align: center;');
-		document.forms['keywordTrendForm'].setAttribute('style', '');
+		//데이터가 잘 들어가지는부터 확인해야함
+		document.keywordTrendForm.action = "<%=context%>/keytrendcon/insert.do";
 	}
 </script>
 
@@ -66,7 +66,7 @@
 				<%
 				String keyword = request.getParameter("keyword");
 				%>
-				<input type="text" class="main_search" id="keyword"
+				<input type="text" class="main_search" id="keyword" name="keyword"
 					value="<%=(keyword == null) ? "" : keyword%>"/>
 				<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button>
 			</form>
