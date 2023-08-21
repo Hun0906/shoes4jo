@@ -16,7 +16,7 @@ public interface KeywordTrendMapper {
     @Insert("INSERT INTO 4jo_api_search_all (period_sdata, keyword, ratio_cnt) VALUES (#{period_sdata}, #{keyword}, #{ratio_cnt})")
     void insert(KeywordTrendVO KeywordTrend);
 
-    @Update("UPDATE 4jo_api_search_all SET title = #{title}, content = #{content}, thumb = #{thumb}, link = #{link} WHERE bno = #{bno}")
+    @Update("UPDATE 4jo_api_search_all SET title = #{title}, content = #{content}, file = #{file}, link = #{link} WHERE bno = #{bno}")
     void update(KeywordTrendVO KeywordTrend);
 
     @Update("UPDATE 4jo_api_search_all SET ratio_cnt = #{ratio_cnt} WHERE keyword = #{keyword} and period_sdata = #{period_sdata}")

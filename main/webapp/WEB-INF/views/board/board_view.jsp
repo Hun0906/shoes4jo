@@ -64,7 +64,7 @@ function checkDelete(bno){
         <div class="line"></div>
         
         <div class="content" style="padding: 0 2rem; line-height: 1.8;">
-        <div class="file"><img src="<%=context%>/assets/img/${board.file}"></div>
+        <div class="thumb"><img src="<%=context%>/assets/img/${board.file}"></div>
 
 		<p>${board.content}</p>
 		

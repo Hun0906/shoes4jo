@@ -88,7 +88,6 @@ public class BoardVO {
 		this.regdate = regdate;
 	}
 
-
 	public String getFile() {
 		return file;
 	}
@@ -104,7 +103,6 @@ public class BoardVO {
 	public void setFile_path(String file_path) {
 		this.file_path = file_path;
 	}
-
 
 	public String getLink() {
 		return link;
