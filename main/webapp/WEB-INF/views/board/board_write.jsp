@@ -5,49 +5,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    
-<meta charset="UTF-8">
-<title>Board_write | SHOES4JO</title>
+<title>새 글 작성 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
+
+<style>
+.form-wrapper{
+max-width: 768px;
+}
+
+.table{
+vertical-align: middle;
+}
+
+table td:nth-child(1){
+width: 20%;
+font-weight: bold;}
+</style>
 </head>
 <body>
     <%@include file="../common/header.jsp"%>
 
     <div class="container">
-        <h2>글 작성</h2>
-        <div class="write-form"> <!-- 수정: 글 작성폼에 클래스 추가 -->
-            <form method="post" action="/board/writeOk.do">
+        <h2>글 작성하기</h2>
+        <div class="form-wrapper">
+            <form name="boardWriting" method="post" action="<%=context %>/board/writeOk.do">
                 <table class="table table-board table-hover">
                     <tr>
-                        <td>작성자</td>
-                        <td><input type="text" name="writer"></td>
+                        <td style="width: 20%; min-width: 140px;">썸네일</td>
+                        <td><input class="form-control" type="file" name="thumb" value="default.jpg" maxlength=260></td>
                     </tr>
-
-
+                    <tr>
+                        <td>작성자</td>
+                        <td><input class="form-control" type="text" name="writer" maxlength=10></td>
+                    </tr>
+                    <tr>
+                        <td>카테고리</td>
+                        <td>
+                        <select class="form-select" name="category">
+                        <option value="news">뉴스</option>
+                        <option value="events">이벤트</option>
+                        <option value="columns">칼럼</option>
+                        </select>
+                        </td>
+                    </tr>
                     <tr>
                         <td>제목</td>
-                        <td><input type="text" name="title"></td>
+                        <td><input class="form-control" type="text" name="title" maxlength=45></td>
                     </tr>
-
                     <tr>
-                        <td colspan="2">내용</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2"><textarea rows="10" cols="150" name="content"></textarea>
+                        <td>내용</td>
+                        <td>
+                        <textarea class="form-control" rows="4" name="content" maxlength=100></textarea>
                         </td>
                     </tr>
-
                     <tr>
-                        <td colspan="2"><input class="btn-basic" type="submit" value="등록">
-                        </td>
+                        <td>더 알아보기 링크</td>
+                        <td><input class="form-control" type="text" name="link" maxlength=260></td>
                     </tr>
                 </table>
+                
+                <div class="form-button-wrapper" style="text-align:center;">
+            <span class="btn-basic btn-line-basic" onclick="location.href = '<%=context%>/board/list.do'">글 목록 보기</span>
+                <input class="btn-basic" type="submit" value="등록">
+                </div>
 
             </form>
 
-            <button class="btn btn-secondary" onclick="location.href = '/board/list.do'">목록으로 돌아가기</button>
         </div>
 
     </div>

@@ -5,35 +5,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board_view | SHOES4JO</title>
+<title>${board.title.substring(0,8)}... | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 <style>
-    .button-group {
-        text-align: center;
-        margin-top: 1rem;
-    }
-    .button-group .btn-basic {
-        margin: 0 0.5rem;
-    }
-    th, td { 
-        text-align: center;
-    }
-    .content-title {
-        font-weight: bold;
-    }
-    .content-cell {
-        white-space: pre-wrap;
-    }
-    .col-bno, .col-writer, .col-regdate {
-        width: 15%;
-    }
+.form-wrapper{
+max-width: 768px;
+}
+
+.table{
+vertical-align: middle;
+}
+
+.thumb img{
+width: 50%;
+min-width: 400px;
+margin: 2rem 0;
+}
+
+table td:nth-child(1){
+width: 20%;
+font-weight: bold;
+}
+
+table td:nth-child(2){
+text-align:left;
+}
+
+.line{
+background: linear-gradient(60deg, #6ECCAF 0%, #ADE792 30%, #ADE792 50%, #E9FFC2 90%, #FDFFAE 100%);
+height: 3px;
+margin: 1rem 0;
+}
 </style>
 <script>
 function checkDelete(bno){
-    var remove = confirm("삭제하시겠습니까?");
+    var remove = confirm("글을 삭제하시겠습니까?");
 
     if(remove) {
-        location.href = '/board/delete.do?bno=' + bno;
+        location.href = '<%=context%>/board/delete.do?bno=' + bno;
     }
 }
 </script>
@@ -42,38 +51,40 @@ function checkDelete(bno){
 <body>
     <%@include file="../common/header.jsp"%>
     <div class="container">
-        <h2>${board.title }</h2>
-        <table class="table table-board table-hover">
-            <tr>
-                <th class="col-bno">번호</th>
-                <td class="col-bno">${board.bno}</td>
-                <th class="col-writer">작성자</th>
-                <td class="col-writer">${board.writer}</td>
-                <th class="col-regdate">등록일</th>
-                <td class="col-regdate">${board.regdate}</td>
-            </tr>
+        <div class="form-wrapper">
+        <div style="display: flex; justify-content: space-evenly;">
+	        <a href="<%=context%>/board/list.do?category=${board.category}" style="font-size: 1.2rem;"><b>${board.category}</b></a>
+        </div>
+        <p style="font-size: 2.2rem; margin-top: 1.5rem; font-weight: 500;">${board.title }</p>
+        <div style="display: flex; justify-content: space-between; color: #999">
+	        <div><b>작성자</b> ${board.writer}</div>
+	        <div>${board.viewcnt} Views | ${board.regdate.substring(0,10)}</div>
+        </div>
+        
+        <div class="line"></div>
+        
+        <div class="content" style="padding: 0 2rem; line-height: 1.8;">
+        <div class="thumb"><img src="<%=context%>/assets/img/${board.thumb}"></div>
 
-            <tr>
-                <td colspan="6" class="content-title">내용</td>
-            </tr>
+		<p>${board.content}</p>
+		
+         <div class="form-button-wrapper">
+		<button class="btn-basic btn-color1" onclick="window.open='${board.link}'">👟더 알아보기</button>
+        </div>
+        
+		</div>
+		
+        <div class="line"></div>
 
-            <tr>
-                <td colspan="6" class="content-cell">${board.content }</td> 
-            </tr>
-
-            <tr>
-                <td colspan="6">
-                    <div class="button-group">
-                        <button class="btn-basic"
-                            onclick="location.href='/board/update.do?bno=${board.bno }'">수정하기</button>
-                        <button class="btn-basic" onclick="location.href='/board/list.do'">목록보기</button>
-                        <button class="btn-basic" onclick="checkDelete(${board.bno})">삭제하기</button>
-                    </div>
-                </td>
-            </tr>
-        </table>
+         <div class="form-button-wrapper">
+             <span class="btn-basic btn-line-red" onclick="checkDelete(${board.bno})">삭제하기</span>
+             <button class="btn-basic" onclick="location.href='<%=context%>/board/update.do?bno=${board.bno }'">수정하기</button>
+         </div>
+         <div class="form-button-wrapper">
+             <button class="btn-basic btn-line-basic" onclick="location.href='<%=context%>/board/list.do'">글 목록 보기</button>
+         </div>
     </div>
-
+</div>
     <%@include file="../common/footer.jsp"%>
 </body>
 </html>

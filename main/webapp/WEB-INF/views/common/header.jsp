@@ -19,7 +19,7 @@
 <a href="<%=context %>/ranking">랭킹</a>
 <a href="<%=context %>/word_cloud">연관 주제</a>
 <a href="<%=context %>/">시장 규모</a>
-<a href="<%=context %>/magazine">매거진</a>
+<a href="<%=context %>/board/magazine">매거진</a>
 </div>
 
 <!-- 메뉴토글 -->
