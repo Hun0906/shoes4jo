@@ -45,7 +45,7 @@ height: 3.3rem;
 font-weight: 300;
 }
 
-.thumb{
+.{
 width: 100%;
 padding-bottom: 100%;
 margin: 0 auto;

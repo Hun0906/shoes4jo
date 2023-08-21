@@ -13,7 +13,6 @@
 		<result column="signup_date" property="signup_date" />
 		<result column="member_email" property="member_email" />
 		<result column="member_phone" property="member_phone" />
-		<result column="admin_check" property="admin_check" />
 	</resultMap>
 
 
@@ -31,17 +30,17 @@
 		id를 지정하고 parameterType으로 속성 지정하고 sql문으로 조회한 결과(여기선 아이디,아이디니까 문자열) 호출한 메서드로 
 		반환한다 -->
 
- 
-<select id="showMember" resultMap="memResult">
-    SELECT * FROM 4jo_member
-</select>
- 
+
+	<select id="showMember" resultMap="memResult">
+		SELECT * FROM campusDB.4jo_member
+	</select>
+
 
 	<insert id="insertMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
 
 <![CDATA[
-        insert into 4jo_member(member_id, member_name, member_pw, signup_date,member_email, member_phone)
+        insert into campusDB.4jo_member(member_id, member_name, member_pw, signup_date,member_email, member_phone)
         values(#{member_id}, #{member_name}, #{member_pw}, NOW(), #{member_email}, #{member_phone})
     ]]>
 	</insert>
@@ -49,13 +48,13 @@
 
 	<select id="loginMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO" resultType="int">SELECT
-		count(*) FROM 4jo_member WHERE member_id =#{member_id} AND
+		count(*) FROM campusDB.4jo_member WHERE member_id =#{member_id} AND
 		member_pw = #{member_pw}
 	</select>
 
 	<select id="memberInfo"
 		parameterType="com.multi.shoes4jo.vo.MemberVO" resultMap="memResult">SELECT * FROM
-		4jo_member WHERE member_id =#{member_id}
+		campusDB.4jo_member WHERE member_id =#{member_id}
 	</select>
 
 
@@ -63,7 +62,7 @@
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
 
 <![CDATA[
-	     update 4jo_member
+	     update campusDB.4jo_member
 	     set member_name=#{member_name}, member_pw=#{member_pw}
 	     , member_email=#{member_email},member_phone=#{member_phone}
 	     where
@@ -74,7 +73,7 @@
 	<delete id="deleteMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
 <![CDATA[
-   delete from 4jo_member
+   delete from campusDB.4jo_member
    where
    member_id=#{member_id}
 ]]>
@@ -85,7 +84,7 @@
 		parameterType="com.multi.shoes4jo.vo.MemberVO" resultType="int">
 
 <![CDATA[
-		SELECT count(*) cnt FROM 4jo_member
+		SELECT count(*) cnt FROM campusDB.4jo_member
 		WHERE member_id = #{member_id} 
       ]]>
 	</select>
@@ -94,19 +93,19 @@
 	<select id="memberIdSearch"
 		parameterType="com.multi.shoes4jo.vo.MemberVO" resultMap="memResult">
 <![CDATA[
-    select * from 4jo_member where member_name = #{member_name} and member_phone = #{member_phone} ]]>
+    select * from campusDB.4jo_member where member_name = #{member_name} and member_phone = #{member_phone} ]]>
 	</select>
 
 
 
- <select id="pwCheck"
-            parameterType="com.multi.shoes4jo.vo.MemberVO"
-            resultType="java.lang.Integer">
+	<select id="pwCheck"
+		parameterType="com.multi.shoes4jo.vo.MemberVO"
+		resultType="java.lang.Integer">
 <![CDATA[
     select
         count(*)
     from
-        4jo_member
+        campusDB.4jo_member
     where
         member_name = #{member_name}
     and
@@ -114,20 +113,20 @@
     and
         member_id = #{member_id}
 ]]>
-    </select>
+	</select>
 
-    <update id="pwUpdate"
-            parameterType="com.multi.shoes4jo.vo.MemberVO">
-        UPDATE
-        4jo_member
-        SET
-        member_pw = #{member_pw}
-        where
-        member_name = #{member_name}
-        and
-        member_phone = #{member_phone}
-        and
-        member_id = #{member_id}
-    </update>
+	<update id="pwUpdate"
+		parameterType="com.multi.shoes4jo.vo.MemberVO">
+		UPDATE
+		campusDB.4jo_member
+		SET
+		member_pw = #{member_pw}
+		where
+		member_name = #{member_name}
+		and
+		member_phone = #{member_phone}
+		and
+		member_id = #{member_id}
+	</update>
 
 </mapper>

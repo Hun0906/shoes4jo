@@ -31,7 +31,7 @@ public interface BoardMapper {
     @Select("SELECT * FROM 4jo_board WHERE bno = #{bno}")
     BoardVO select(@Param("bno") String bno);
 
-    @Insert("INSERT INTO 4jo_board (category, title, content, writer, file, link) VALUES (#{category}, #{title}, #{content}, #{writer}, #{file}, #{link})")
+    @Insert("INSERT INTO 4jo_board (category, title, content, writer, file, file_path, link) VALUES (#{category}, #{title}, #{content}, #{writer}, #{file}, #{file_path}, #{link})")
     void insert(BoardVO board);
 
     @Update("UPDATE 4jo_board SET category = #{category}, title = #{title}, content = #{content}, file = #{file}, link = #{link} WHERE bno = #{bno}")

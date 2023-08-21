@@ -13,13 +13,13 @@ public class BoardVO {
 	private int viewcnt;
 	private String regdate;
 	private String file;
-	private String filepath;
+	private String file_path;
 	private String link;
   
 	public BoardVO() {
 	}
 
-	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate, String file, String link) {
+	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate, String file, String file_path, String link) {
 		this.bno = bno;
 		this.category = category;
 		this.title = title;
@@ -28,6 +28,7 @@ public class BoardVO {
 		this.viewcnt = viewcnt;
 		this.regdate = regdate;
 		this.file = file;
+		this.file_path = file_path;
 		this.link = link;
 	}
 
@@ -95,12 +96,12 @@ public class BoardVO {
 		this.file = file;
 	}
 
-	public String getFilepath() {
-		return filepath;
+	public String getFile_path() {
+		return file_path;
 	}
 
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
 	}
 
 	public String getLink() {
