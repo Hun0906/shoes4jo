@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>LOGIN | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
+
+<%@ page import="java.net.URLEncoder"%>
+<%@ page import="java.security.SecureRandom"%>
+<%@ page import="java.math.BigInteger"%>
+
 
 <style>
 .simpleLogin {
@@ -22,6 +28,7 @@
 	background-size: 100%;
 }
 </style>
+
 
 <script>
 
@@ -49,6 +56,8 @@ function getCode() {
         window.location = "login";
     }
 }
+
+
 
 function login() {
 
@@ -106,10 +115,28 @@ function login() {
 				<br>
 				<h4>간편 로그인</h4>
 				<div>
-					<p class="simpleLogin"
-						style="background-image: url(<%=context%>/assets/img/logo_kakao.svg);"></p>
-					<p class="simpleLogin"
-						style="background-image: url(<%=context%>/assets/img/logo_google.svg);"></p>
+					<a
+						href="https://kauth.kakao.com/oauth/authorize?client_id=cff88eebed1871d04bd76c76c9ca3c23&redirect_uri=http://localhost:8084/kakao_callback&response_type=code">
+						<span class="simpleLogin"
+						style="background-image: url(<%=context%>/assets/img/logo_kakao.svg);"></span>
+					</a>
+
+
+					<%
+					String clientId = "N9xv13b4_0J3uwaUMfnw";
+					String redirectURI = URLEncoder.encode("http://localhost:8084/naver_callback", "UTF-8");
+					SecureRandom random = new SecureRandom();
+					String state = new BigInteger(130, random).toString();
+					String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code" + "&client_id=" + clientId
+							+ "&redirect_uri=" + redirectURI + "&state=" + state;
+					session.setAttribute("state", state);
+					%>
+					<a
+						href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=N9xv13b4_0J3uwaUMfnw&state=STATE_STRING&redirect_uri=http://localhost:8084/naver_callback"
+						id="naver_callback"> <span class="simpleLogin"
+						style="background-image: url(<%=context%>/assets/img/logo_naver.png);"></span></a>
+
+
 				</div>
 			</div>
 
