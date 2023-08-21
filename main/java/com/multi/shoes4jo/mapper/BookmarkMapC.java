@@ -23,17 +23,17 @@ public interface BookmarkMapC {
 			@Result(property = "category_param", column = "category_param"),
 			@Result(property = "device", column = "device"), @Result(property = "gender", column = "gender"),
 			@Result(property = "ages", column = "ages"), @Result(property = "add_date", column = "add_date") })
-	@Select("SELECT * FROM campusDB.4jo_bookmark_category WHERE member_id = #{member_id}")
+	@Select("SELECT * FROM 4jo_bookmark_category WHERE member_id = #{member_id}")
 	List<BookmarkMapC> findByMemberId(String member_id);
 
-	@Insert("INSERT INTO campusDB.4jo_bookmark_category (bookmark_id, member_id, start_date, end_date, "
+	@Insert("INSERT INTO 4jo_bookmark_category (bookmark_id, member_id, start_date, end_date, "
 			+ "time_unit, category, category_name, category_param, device, gender, ages, add_date) "
 			+ "VALUES (#{bookmark_id}, #{member_id}, #{start_date}, #{end_date}, "
 			+ "#{time_unit}, #{category}, #{category_name}, #{category_param}, "
 			+ "#{device}, #{gender}, #{ages}, #{add_date})")
 	int insertBookmarkC(BookmarkMapC bookmarkC);
 
-	@Delete("DELETE FROM campusDB.4jo_bookmark_category " + "WHERE member_id = #{member_id}")
+	@Delete("DELETE FROM 4jo_bookmark_category " + "WHERE member_id = #{member_id}")
 	int deleteBookmarkC(BookmarkMapC bookmarkC);
 }
 

@@ -1,7 +1,5 @@
 package com.multi.shoes4jo.controller;
  
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
- 
-import com.multi.shoes4jo.vo.MemberVO;
 
 public interface MemberController {
 
