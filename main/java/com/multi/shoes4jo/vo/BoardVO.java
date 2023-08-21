@@ -1,6 +1,7 @@
 package com.multi.shoes4jo.vo;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component("BoardVO")
 public class BoardVO {
@@ -12,14 +13,14 @@ public class BoardVO {
 	private String writer;
 	private int viewcnt;
 	private String regdate;
-	private String file;
+	private MultipartFile file;
 	private String file_path;
 	private String link;
   
 	public BoardVO() {
 	}
 
-	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate, String file, String file_path, String link) {
+	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate, MultipartFile file, String file_path, String link) {
 		this.bno = bno;
 		this.category = category;
 		this.title = title;
@@ -88,11 +89,11 @@ public class BoardVO {
 		this.regdate = regdate;
 	}
 
-	public String getFile() {
+	public MultipartFile getFile() {
 		return file;
 	}
 
-	public void setFile(String file) {
+	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
 
