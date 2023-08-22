@@ -16,15 +16,9 @@ public interface BoardMapper {
     @Select("SELECT * FROM 4jo_board ORDER BY bno DESC")
     List<BoardVO> selectAll();
 
-    @Select("SELECT * FROM 4jo_board where category = 'news' ORDER BY bno DESC limit 3")
-    List<BoardVO> selectNews();
-    
-    @Select("SELECT * FROM 4jo_board where category = 'events' ORDER BY bno DESC limit 3")
-    List<BoardVO> selectEvents();
-    
-    @Select("SELECT * FROM 4jo_board where category = 'columns' ORDER BY bno DESC limit 3")
-    List<BoardVO> selectColumns();
-    
+    @Select("SELECT * FROM 4jo_board where category = #{category} ORDER BY bno DESC limit 3")
+    List<BoardVO> selectForMagazine(@Param("category") String category);
+
     @Select("SELECT * FROM 4jo_board WHERE category = #{category} ORDER BY bno DESC")
     List<BoardVO> selectOneCat(@Param("category") String category);
 

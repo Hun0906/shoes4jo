@@ -47,9 +47,9 @@ public class BoardController {
 
 	@RequestMapping(value = "/magazine")
 	public String magazine(Model model) {
-		List<BoardVO> newslist = boardService.selectNews();
-		List<BoardVO> eventslist = boardService.selectEvents();
-		List<BoardVO> columnslist = boardService.selectColumns();
+		List<BoardVO> newslist = boardService.selectForMagazine("news");
+		List<BoardVO> eventslist = boardService.selectForMagazine("events");
+		List<BoardVO> columnslist = boardService.selectForMagazine("columns");
 		model.addAttribute("newslist", newslist);
 		model.addAttribute("eventslist", eventslist);
 		model.addAttribute("columnslist", columnslist);

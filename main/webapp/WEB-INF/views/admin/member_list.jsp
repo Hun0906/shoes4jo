@@ -29,7 +29,7 @@
                 <c:forEach var="member" items="${member_list}">
                     <tr>
                         <td class="text-center">${member.member_id }</td>
-                        <td class="text-center"><a href="/controller/showMember?member_id=${member.member_id}">${member.member_name} </a></td>
+                        <td class="text-center"><a href="<%=context %>/controller/showMember?member_id=${member.member_id}">${member.member_name} </a></td>
                         <td class="text-center">${member.signup_date}</td>
                         <td class="text-center">${member.member_email}</td>
                         <td class="text-center">${member.member_phone}</td>
