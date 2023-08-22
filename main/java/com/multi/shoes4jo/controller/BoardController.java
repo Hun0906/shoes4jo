@@ -27,9 +27,6 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	@Autowired
-	HttpServletRequest request;
-
 	@RequestMapping(value = "/list.do")
 	public String list(Model model, @RequestParam(required = false) String category) {
 		List<BoardVO> list;
@@ -60,7 +57,6 @@ public class BoardController {
 		return new ModelAndView("board/board_view", "board", board);
 	}
 
-
 	@RequestMapping(value = "/write.do")
 	public String write() {
 		return "board/board_write";
@@ -68,7 +64,8 @@ public class BoardController {
 
 	@RequestMapping("/writeOk.do")
 	public String writeOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request) throws IOException {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request)
+			throws IOException {
 
 		ServletContext context = request.getSession().getServletContext();
 		String basePath = context.getRealPath("/assets/img");
@@ -88,19 +85,16 @@ public class BoardController {
 		return "redirect:/board/list.do";
 	}
 
-	
-	
 	@RequestMapping("/update.do")
 	public ModelAndView update(@RequestParam String bno) {
 		BoardVO board = boardService.selectOne(bno);
 		return new ModelAndView("board/board_update", "board", board);
 	}
 
-	
-
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request) throws IOException {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request)
+			throws IOException {
 
 		if (file != null && !file.isEmpty()) {
 			// 기존 이미지 삭제 로직 추가
@@ -129,9 +123,6 @@ public class BoardController {
 		boardService.updateOne(board);
 		return "redirect:/board/list.do";
 	}
-	
-	
-	
 
 	@RequestMapping("/delete.do")
 	public String deleteOk(@RequestParam String bno) {
