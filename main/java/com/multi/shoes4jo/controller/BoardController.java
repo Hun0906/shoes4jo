@@ -1,15 +1,12 @@
 package com.multi.shoes4jo.controller;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +60,7 @@ public class BoardController {
 		return new ModelAndView("board/board_view", "board", board);
 	}
 
+
 	@RequestMapping(value = "/write.do")
 	public String write() {
 		return "board/board_write";
@@ -70,65 +68,75 @@ public class BoardController {
 
 	@RequestMapping("/writeOk.do")
 	public String writeOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file) throws IOException {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request) throws IOException {
+
+		ServletContext context = request.getSession().getServletContext();
+		String basePath = context.getRealPath("/assets/img");
+		File currentDirPath = new File(basePath);
+
+		String fileName = "";
 
 		if (file != null && !file.isEmpty()) {
-			String originalFilename = file.getOriginalFilename();
-			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
-			board.setFile_path(newFileName);
-			String realPath = request.getSession().getServletContext().getRealPath("/") + "/assets/img";
-
-			File newFile = new File(realPath, newFileName);
-			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
-//이미지 크기 지정
-			resizeImage(newFile, newFile, 512, 512);
+			fileName = file.getOriginalFilename();
+			File uploadFile = new File(currentDirPath, fileName);
+			file.transferTo(uploadFile);
 		}
+
+		board.setFile_path(fileName);
+
 		boardService.insertOne(board);
 		return "redirect:/board/list.do";
 	}
 
+	
+	
 	@RequestMapping("/update.do")
 	public ModelAndView update(@RequestParam String bno) {
 		BoardVO board = boardService.selectOne(bno);
 		return new ModelAndView("board/board_update", "board", board);
 	}
 
+	
+
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file) throws IOException {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request) throws IOException {
 
 		if (file != null && !file.isEmpty()) {
+			// 기존 이미지 삭제 로직 추가
+			if (board.getFile_path() != null) {
+				String realPath = request.getSession().getServletContext().getRealPath("/assets/img");
+				File oldFile = new File(realPath, board.getFile_path());
+				if (oldFile.exists()) {
+					oldFile.delete();
+				}
+			}
 			String originalFilename = file.getOriginalFilename();
 			String extension = FilenameUtils.getExtension(originalFilename);
 			String newFileName = System.currentTimeMillis() + "." + extension;
+
+			// 파일 이름 및 확장자 설정 (newFileName)
+			File currentDirPath = new File(request.getSession().getServletContext().getRealPath("/assets/img"));
+
+			// 새로운 파일 업로드 (newFileName)
+			File uploadFile = new File(currentDirPath, newFileName);
+			file.transferTo(uploadFile);
+
+			// 파일 경로를 VO에 설정 (newFileName)
 			board.setFile_path(newFileName);
-			String realPath = request.getSession().getServletContext().getRealPath("/") + "/assets/img";
-
-			File newFile = new File(realPath, newFileName);
-
-			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
-
-			resizeImage(newFile, newFile, 512, 512);
 		}
 
 		boardService.updateOne(board);
 		return "redirect:/board/list.do";
 	}
-
-	private void resizeImage(File inputFile, File outputFile, int newWidth, int newHeight) throws IOException {
-		BufferedImage originalImage = ImageIO.read(inputFile);
-		BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
-		g.dispose();
-
-		ImageIO.write(resizedImage, "JPEG", outputFile);
-	}
+	
+	
+	
 
 	@RequestMapping("/delete.do")
 	public String deleteOk(@RequestParam String bno) {
 		boardService.deleteOne(bno);
 		return "redirect:/board/list.do";
 	}
+
 }

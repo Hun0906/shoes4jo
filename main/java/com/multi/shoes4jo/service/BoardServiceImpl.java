@@ -10,8 +10,8 @@ import com.multi.shoes4jo.vo.BoardVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
-    @Autowired
-    private BoardMapper boardMapper;
+	@Autowired
+	private BoardMapper boardMapper;
 
 	@Override
 	public List<BoardVO> selectList() {
@@ -24,7 +24,7 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardVO> list = boardMapper.selectForMagazine(category);
 		return list;
 	}
-	
+
 	@Override
 	public List<BoardVO> selectOneCat(String category) {
 		List<BoardVO> list = boardMapper.selectOneCat(category);
@@ -42,8 +42,11 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.updateCount(bno);
 	}
 
+
 	@Override
 	public void insertOne(BoardVO board) {
+		Integer maxBno = boardMapper.maxBno();
+		board.setBno((maxBno == null) ? 1 : maxBno + 1);
 		boardMapper.insert(board);
 	}
 
