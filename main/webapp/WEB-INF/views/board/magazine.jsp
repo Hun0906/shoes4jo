@@ -86,6 +86,9 @@ gap: 3rem;
 	<%@include file="../common/header.jsp"%>
 
 	<div class="contents">
+	<div class="form-wrapper">
+		<h1>매거진</h1>
+	</div>
 		<div class="container">
 		<h2>뉴스</h2>
 		<div class="card-wrapper">

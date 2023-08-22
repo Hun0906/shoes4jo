@@ -86,7 +86,7 @@ footer{
 	display: grid;
 	text-align: center;
 	align-items: center;
-	margin-top: 3rem;
+	margin-top: 6rem;
 	padding: 1rem 0;
 	border-top: 1px solid #ccc;
 }
@@ -195,6 +195,14 @@ footer a {
 	font-weight: bold;
 	text-align: left;
     margin-top: 0.4rem;
+}
+
+.search-wrapper{
+	display: grid;
+    align-items: stretch;
+    height: 16rem;
+    align-content: center;
+    gap: 1rem
 }
 
 .form-control:focus {
