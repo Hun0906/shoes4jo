@@ -55,7 +55,7 @@
                 <tr>
                     <td>내용</td>
                     <td>
-                        <textarea class="form-control" rows="4" name="content" maxlength="100"></textarea>
+                        <textarea class="form-control" rows="4" name="content" style="min-height: 5.4rem; max-height: 30rem;">${board.content}</textarea>
                     </td>
                 </tr>
                 <tr>

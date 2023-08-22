@@ -13,14 +13,14 @@ public class BoardVO {
 	private String writer;
 	private int viewcnt;
 	private String regdate;
-	private MultipartFile file;
+	private MultipartFile file_name;
 	private String file_path;
 	private String link;
   
 	public BoardVO() {
 	}
 
-	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate, MultipartFile file, String file_path, String link) {
+	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate, MultipartFile file_name, String file_path, String link) {
 		this.bno = bno;
 		this.category = category;
 		this.title = title;
@@ -28,7 +28,7 @@ public class BoardVO {
 		this.writer = writer;
 		this.viewcnt = viewcnt;
 		this.regdate = regdate;
-		this.file = file;
+		this.file_name = file_name;
 		this.file_path = file_path;
 		this.link = link;
 	}
@@ -89,12 +89,12 @@ public class BoardVO {
 		this.regdate = regdate;
 	}
 
-	public MultipartFile getFile() {
-		return file;
+	public MultipartFile getFile_name() {
+		return file_name;
 	}
 
-	public void setFile(MultipartFile file) {
-		this.file = file;
+	public void setFile(MultipartFile file_name) {
+		this.file_name = file_name;
 	}
 
 	public String getFile_path() {
