@@ -42,9 +42,12 @@
                     </tr>
                     <tr>
                         <td style="width: 20%; min-width: 140px;">썸네일</td>
-                        <td>
-                            <input class="form-control" type="file" name="file" id="fileInput" maxlength=260>
-                            <span>현재 파일 : ${board.file_path}</span>
+                        <td style="text-align: left;">
+                        <c:if test="${board.file_path != null && not empty board.file_path}">
+							<img src="<%=context%>/assets/img/${board.file_path}" alt="uploaded-image" style="width: 200px;">
+						</c:if>
+						<span>${board.file_path}</span>
+                            <input class="form-control" type="file" name="file" id="fileInput" maxlength=260 style="margin-top: 5px;">
                         </td>
                     </tr>
 
@@ -80,7 +83,7 @@
                     <tr>
                         <td>내용</td>
                         <td>
-                            <textarea class="form-control" rows="4" name="content" maxlength=100>${board.content}</textarea>
+                            <textarea class="form-control" rows="4" name="content" style="min-height: 5.4rem; max-height: 30rem;">${board.content}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -105,7 +108,7 @@
             document.boardUpdate.onsubmit = function () {
                 // 파일명 변경 및 삭제 로직
                 if (imageFileChanged) {
-                    let fileName = "${board.file}";
+                    let fileName = "${board.file_path}";
                     let bno = "${board.bno}";
                     if (fileName != null) {
                         let delFile = new File(realPath + "\\" + bno + "default.jpg");

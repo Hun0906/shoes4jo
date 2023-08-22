@@ -45,7 +45,7 @@ height: 3.3rem;
 font-weight: 300;
 }
 
-.{
+.thumb{
 width: 100%;
 padding-bottom: 100%;
 margin: 0 auto;
@@ -54,32 +54,16 @@ background-position: center;
 }
 
 .btn-basic:hover{
-	background: linear-gradient(160deg, 
-	#000000aa 0%, 
-	#6ECCAFaa 12%, 
-	#ADE792aa 14%, 
-	#ADE792aa 15%, 
-	#E9FFC2aa 19%, 
-	#FDFFAFaa 21%, 
-	#000000aa 34%);
-	background-color: black;
-	background-size: 500% 100%;
-	animation: gradient-move 10s linear infinite;
+	animation: gradient 3s linear infinite;
 }
 
-@keyframes gradient-move {
-  0% {
-    background-position: 100% 50%;
-  }
-  10% {
-    background-position: 0% 50%;
-  }
-  15% {
-    background-position: -50% 0%;
-  }
-  100% {
-    background-position: -50% 0%;
-  }
+@keyframes gradient {
+  0% { color: #6ECCAF }
+  20% { color: #ADE792 }
+  40% { color: #ADE792 }
+  80% { color: #E9FFC2 }
+  90% { color: #FDFFAF }
+  100% { color: #6ECCAF }
 }
 
 @media (max-width: 1024px){
@@ -106,21 +90,21 @@ gap: 3rem;
 		<h2>뉴스</h2>
 		<div class="card-wrapper">
 	<c:forEach var="board" items="${newslist}">
-		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
+		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file_path})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="window.open('${board.link}')">더 알아보기</button></div>
 	</c:forEach>
 		</div>
 		<hr>
 		<h2>이벤트</h2>
 		<div class="card-wrapper">
 	<c:forEach var="board" items="${eventslist}">
-		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
+		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file_path})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="window.open('${board.link}')">더 알아보기</button></div>
 	</c:forEach>
 		</div>
 		<hr>
 		<h2>칼럼</h2>
 		<div class="card-wrapper">
 	<c:forEach var="board" items="${columnslist}">
-		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="location.href='${board.link}'">더 알아보기</button></div>
+		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file_path})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="window.open('${board.link}')">더 알아보기</button></div>
 	</c:forEach>
 		</div>
 		</div>
