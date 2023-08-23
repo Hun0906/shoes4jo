@@ -1,16 +1,15 @@
 package com.multi.shoes4jo.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.multi.shoes4jo.command.PageInfo;
+import com.multi.shoes4jo.util.Criteria;
 import com.multi.shoes4jo.vo.BoardVO;
 
 public interface BoardService {
 
-	public List<BoardVO> selectBoardList(PageInfo pageInfo, Map<String, String> param);
+	public List<BoardVO> listPage(Criteria cri);
 
-	public int selectBoardCount(Map<String, String> param);
+	public int listCount();
 
 	public List<BoardVO> selectForMagazine(String category);
 

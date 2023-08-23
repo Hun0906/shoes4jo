@@ -3,6 +3,8 @@ package com.multi.shoes4jo.vo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.multi.shoes4jo.util.Criteria;
+
 @Component("BoardVO")
 public class BoardVO {
 
@@ -16,12 +18,13 @@ public class BoardVO {
 	private String file_name;
 	private String file_path;
 	private String link;
+	private MultipartFile file;
 
 	public BoardVO() {
 	}
 
 	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate,
-			String file_name, String file_path, String link) {
+			String file_name, String file_path, String link, MultipartFile file) {
 		this.bno = bno;
 		this.category = category;
 		this.title = title;
@@ -29,7 +32,16 @@ public class BoardVO {
 		this.writer = writer;
 		this.viewcnt = viewcnt;
 		this.regdate = regdate;
+		this.file_name = file_name;
+		this.file_path = file_path;
 		this.link = link;
+		this.file = file;
+	}
+	
+	
+	public class boardVO extends Criteria {
+		
+		
 	}
 
 	public int getBno() {
@@ -110,6 +122,14 @@ public class BoardVO {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 
 }
