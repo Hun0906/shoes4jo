@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/api")
-public class KeywordTrend {
+public class KeywordTrendAPI {
 	
-	private static final Logger logger = LoggerFactory.getLogger(KeywordTrend.class);
+	private static final Logger logger = LoggerFactory.getLogger(KeywordTrendAPI.class);
 
 	@RequestMapping(value = "/keywordtrend", method = { RequestMethod.GET, RequestMethod.POST } )
 	@ResponseBody
@@ -43,11 +43,11 @@ public class KeywordTrend {
         requestHeaders.put("Content-Type", "application/json");
         
         String today = LocalDate.now().toString();
-        String twoWeeksBefore = LocalDate.now().minusWeeks(2).toString();
+        //String twoWeeksBefore = LocalDate.now().minusWeeks(2).toString();
         System.out.println("검색어 (=title): " + keyword);
 
         String requestBody = "{"
-                + "   \"startDate\": \"" + twoWeeksBefore + "\"," //가장 빠른 날: 2017-08-01
+                + "   \"startDate\": \"" + "2017-08-01" + "\"," //가장 빠른 날: 2017-08-01
                 + "   \"endDate\": \"" + today + "\","
                 + "   \"timeUnit\": \"date\","
                 + "   \"category\": \"50000001\","
