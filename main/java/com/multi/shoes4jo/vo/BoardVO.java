@@ -1,6 +1,7 @@
 package com.multi.shoes4jo.vo;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component("BoardVO")
 public class BoardVO {
@@ -28,8 +29,6 @@ public class BoardVO {
 		this.writer = writer;
 		this.viewcnt = viewcnt;
 		this.regdate = regdate;
-		this.file_name = file_name;
-		this.file_path = file_path;
 		this.link = link;
 	}
 

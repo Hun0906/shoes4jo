@@ -1,13 +1,13 @@
 package com.multi.shoes4jo.controller;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.multi.shoes4jo.command.PageInfo;
 import com.multi.shoes4jo.service.BoardService;
 import com.multi.shoes4jo.vo.BoardVO;
 
@@ -28,14 +29,40 @@ public class BoardController {
 	BoardService boardService;
 
 	@RequestMapping(value = "/list.do")
-	public String list(Model model, @RequestParam(required = false) String category) {
-		List<BoardVO> list;
-		if (category != null && !category.isEmpty()) {
-			list = boardService.selectOneCat(category);
-		} else {
-			list = boardService.selectList();
+	public String list(Model model, @RequestParam Map<String, String> param) {
+		int page = 1;
+		if (param.get("page") != null) {
+			page = Integer.parseInt(param.get("page"));
 		}
+
+		String searchValue = param.get("searchValue");
+
+		int boardsPerPage = 10;
+
+		Map<String, String> searchMap = new HashMap<String, String>();
+		if (searchValue != null && searchValue.length() > 0) {
+			String type = param.get("searchType") == null ? "title" : param.get("searchType");
+			if (type.equals("title")) {
+				searchMap.put("titleKeyword", searchValue);
+			} else if (type.equals("content")) {
+				searchMap.put("contentKeyword", searchValue);
+			} else if (type.equals("writer")) {
+				searchMap.put("writerKeyword", searchValue);
+			}
+		}
+
+		String category = param.get("category");
+		if (category != null && !category.isEmpty()) {
+			searchMap.put("category", category);
+		}
+
+		PageInfo pageInfo = new PageInfo(page, boardsPerPage, boardService.selectBoardCount(searchMap), 10);
+		List<BoardVO> list = boardService.selectBoardList(pageInfo, searchMap);
+
 		model.addAttribute("list", list);
+		model.addAttribute("param", param);
+		model.addAttribute("pageInfo", pageInfo);
+
 		return "board/board_list";
 	}
 
@@ -65,21 +92,25 @@ public class BoardController {
 	@RequestMapping("/writeOk.do")
 	public String writeOk(@ModelAttribute BoardVO board,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request)
-			throws IOException {
-
-		ServletContext context = request.getSession().getServletContext();
-		String basePath = context.getRealPath("/assets/img");
-		File currentDirPath = new File(basePath);
-
-		String fileName = "";
+			throws Exception {
 
 		if (file != null && !file.isEmpty()) {
-			fileName = file.getOriginalFilename();
-			File uploadFile = new File(currentDirPath, fileName);
-			file.transferTo(uploadFile);
-		}
+			String basePath = request.getServletContext().getRealPath("/assets/img/");
+			File currentDirPath = new File(basePath);
 
-		board.setFile_path(fileName);
+			if (!currentDirPath.exists()) {
+				currentDirPath.mkdirs();
+			}
+
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid + "_" + file.getOriginalFilename();
+			File saveFile = new File(currentDirPath, fileName);
+
+			file.transferTo(saveFile);
+
+			board.setFile_name(fileName);
+			board.setFile_path("/assets/img/" + fileName);
+		}
 
 		boardService.insertOne(board);
 		return "redirect:/board/list.do";
@@ -94,30 +125,28 @@ public class BoardController {
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute BoardVO board,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request)
-			throws IOException {
+			throws Exception {
 
-		if (file != null && !file.isEmpty()) {
-			// 기존 이미지 삭제 로직 추가
+		if (!file.isEmpty()) {
+			// 파일 삭제
 			if (board.getFile_path() != null) {
-				String realPath = request.getSession().getServletContext().getRealPath("/assets/img");
-				File oldFile = new File(realPath, board.getFile_path());
+				File oldFile = new File(board.getFile_path());
 				if (oldFile.exists()) {
 					oldFile.delete();
 				}
 			}
-			String originalFilename = file.getOriginalFilename();
-			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
+			String basePath = request.getServletContext().getRealPath("/assets/img/");
+			File currentDirPath = new File(basePath);
+			if (!currentDirPath.exists()) {
+				currentDirPath.mkdirs();
+			}
 
-			// 파일 이름 및 확장자 설정 (newFileName)
-			File currentDirPath = new File(request.getSession().getServletContext().getRealPath("/assets/img"));
-
-			// 새로운 파일 업로드 (newFileName)
-			File uploadFile = new File(currentDirPath, newFileName);
-			file.transferTo(uploadFile);
-
-			// 파일 경로를 VO에 설정 (newFileName)
-			board.setFile_path(newFileName);
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid + "_" + file.getOriginalFilename();
+			File saveFile = new File(currentDirPath, fileName);
+			file.transferTo(saveFile);
+			board.setFile_name(fileName);
+			board.setFile_path("/assets/img/" + fileName);
 		}
 
 		boardService.updateOne(board);
@@ -129,5 +158,4 @@ public class BoardController {
 		boardService.deleteOne(bno);
 		return "redirect:/board/list.do";
 	}
-
 }
