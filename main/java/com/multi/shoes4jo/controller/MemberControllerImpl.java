@@ -216,9 +216,12 @@ public class MemberControllerImpl implements MemberController {
     	        searchVO.setmember_name(member_name);
     	        searchVO.setmember_phone(member_phone);
     	        List<MemberVO> memberSearchList = memberService.memberIdSearch(searchVO);
-
+    	        
     	        if (!memberSearchList.isEmpty()) {
     	            model.addAttribute("searchVO", memberSearchList.get(0));
+    	        } else {
+    	        	model.addAttribute("msg", "입력한 정보로 가입된 정보가 없습니다.");
+                    return "/service/search_id";
     	        }
     	    } catch (Exception e) {
     	        System.out.println(e.toString());
@@ -249,7 +252,7 @@ public class MemberControllerImpl implements MemberController {
             int memberSearch = memberService.pwCheck(searchVO);
             
             if(memberSearch == 0) {
-                model.addAttribute("msg", "잘못 입력하셨습니다. 다시 입력해주세요.");
+                model.addAttribute("msg", "입력한 정보로 가입된 정보가 없습니다.");
                 return "/service/search_pw";
             }
             

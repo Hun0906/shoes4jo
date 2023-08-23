@@ -6,8 +6,12 @@ public interface KeywordTrendService {
 
 	public KeywordTrendVO select(String keyword);
 	
-	public void insert(KeywordTrendVO KeywordTrend);
+	public void insert(KeywordTrendVO vo);
 	
-	public void updateRatio(String period_sdata, String keyword);
+	public boolean isExists(String period_sdata, String keyword);
+
+	public long oldRatio(String period_sdata, String keyword);
+	
+	public void update(KeywordTrendVO vo);
  
 }

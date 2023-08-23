@@ -29,8 +29,7 @@ public class RankingServiceImpl implements RankingService {
 
 	@Override
 	public void update(String keyword, String date) {
-		// TODO Auto-generated method stub
-		
+		rankingMapper.update(keyword, date);
 	}
 
 

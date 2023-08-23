@@ -14,12 +14,11 @@ public interface RankingMapper {
     RankingVO selectAll(@Param("keyword") String keyword);
     
     @Select("SELECT count(*) FROM 4jo_ranking WHERE keyword = #{keyword} and date = #{date}")
-    int isExists(String keyword, String date);
+    int isExists(@Param("keyword") String keyword, @Param("date") String date);
     
     @Insert("INSERT INTO 4jo_ranking (keyword, title) VALUES (#{keyword}, #{title})")
-    void insert(String keyword, String title);
+    void insert(@Param("keyword") String keyword, @Param("title") String title);
     
-    @Update("UPDATE 4jo_ranking SET cnt += 1 WHERE keyword = #{keyword} and date = #{date}")
-    void update(String keyword, String date);
-
+    @Update("UPDATE 4jo_ranking SET  cnt = cnt + 1 WHERE keyword = #{keyword} and date = #{date}")
+    void update(@Param("keyword") String keyword, @Param("date") String date);
 }

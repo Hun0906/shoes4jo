@@ -53,6 +53,23 @@
 	filter: opacity(0.5);
 }
 </style>
+
+<script>
+window.onload = function() {
+	getCode();
+}
+
+function getCode() {
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const code = urlParams.get('err');
+
+	if (code === "nodata") {
+		alert("데이터가 없습니다. 다른 검색어를 사용하세요.");
+		window.location = "main";
+    }
+}
+</script>
 </head>
 
 <body>

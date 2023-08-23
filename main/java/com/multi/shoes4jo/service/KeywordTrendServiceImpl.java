@@ -23,8 +23,19 @@ public class KeywordTrendServiceImpl implements KeywordTrendService {
 	}
 
 	@Override
-	public void updateRatio(String period_sdata, String keyword) {
-		keywordTrendMapper.updateRatio(period_sdata, keyword);
+	public void update(KeywordTrendVO vo) {
+		keywordTrendMapper.update(vo);
+	}
+
+	@Override
+	public boolean isExists(String period_sdata, String keyword) {
+		int num = keywordTrendMapper.isExists(period_sdata, keyword);
+		return num == 1;
+	}
+
+	@Override
+	public long oldRatio(String period_sdata, String keyword) {
+		return keywordTrendMapper.oldRatio(period_sdata, keyword);
 	}
 
 }
