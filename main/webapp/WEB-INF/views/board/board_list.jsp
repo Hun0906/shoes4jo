@@ -8,14 +8,33 @@
 <title>게시판 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 
+<style>
+.form-wrapper{
+	max-width: 100%;
+}
+
+.pagination{
+    justify-content: center
+}
+
+.page-link{
+color: #6ECCAF;
+}
+
+.page-link:hover{
+background: white;
+filter: brightness(95%);
+}
+</style>
 </head>
 
 <body>
 	<%@include file="../common/header.jsp"%>
+	
 	<div class="container">
-		<h2 class="text-center">게시판</h2>
-		<div
-			style="display: flex; justify-content: space-between; margin: 1rem 0;">
+	<div class="form-wrapper">
+		<h2>게시판</h2>
+		<div style="display: flex; justify-content: space-between; margin: 1rem 0;">
 			<select class="form-select" style="width: fit-content"
 				onchange="window.open(value,'_self')">
 				<option value="">카테고리 선택</option>
@@ -74,39 +93,49 @@
 				</c:choose>
 			</tbody>
 			<tfoot>
-				<tr>
-					<td colspan="6" align="center">
-						<!-- 페이징 --> 
-<a href="list.do?page=${pageInfo.prevPage}${param.category != null ? '&category=' + param.category : ''}">&lt;</a>
-						<c:forEach begin="${pageInfo.start}" end="${pageInfo.end}"
-							step="1" varStatus="status">
-							<c:choose>
-								<c:when
-									test="${status.index + pageInfo.start == pageInfo.currentPage}">
-									<span class="current">${status.index + pageInfo.start}</span>
-								</c:when>
-								<c:otherwise>
-									<a
-										href="list.do?page=${status.index + pageInfo.start}&${param.category != null ? 'category=' + param.category : '' }">${status.index + pageInfo.start}</a>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach> 
-<a href="list.do?page=${pageInfo.nextPage}${param.category != null ? '&category=' + param.category : ''}">&gt;</a>
-					</td>
-				</tr>
 				<!-- pageInfo 확인 -->
 				<tr>
 					<td colspan="6">
 						<h3>pageInfo 확인(테스트용)</h3>
-						<p>currentPage: ${pageInfo.currentPage}</p>
-						<p>start: ${pageInfo.start}</p>
-						<p>end: ${pageInfo.end}</p>
-						<p>prevPage: ${pageInfo.prevPage}</p>
-						<p>nextPage: ${pageInfo.nextPage}</p>
+						<p>currentPage: ${pageInfo.currentPage}<br>
+						start: ${pageInfo.start}<br>
+						end: ${pageInfo.end}<br>
+						prevPage: ${pageInfo.prevPage}<br>
+						nextPage: ${pageInfo.nextPage}</p>
 					</td>
 				</tr>
 			</tfoot>
 		</table>
+		<!-- 페이지네이션 -->
+		<div class="form-button-wrapper">
+	<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="list.do?page=${pageInfo.prevPage}${param.category != null ? '&category=' + param.category : ''}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <c:forEach begin="${pageInfo.start}" end="${pageInfo.end}" step="1" varStatus="status">
+		<c:choose>
+			<c:when test="${status.index + pageInfo.start -1 == pageInfo.currentPage}">
+				<li class="page-item"><span class="page-link current">${status.index + pageInfo.start - 1}</span></li>
+			</c:when>
+			<c:otherwise>
+			    <li class="page-item"><a class="page-link" href="list.do?page=${status.index + pageInfo.start}&${param.category != null ? 'category=' + param.category : '' }">
+			    ${status.index + pageInfo.start - 1}
+			    </a></li>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach> 
+    <li class="page-item">
+      <a class="page-link" href="list.do?page=${pageInfo.nextPage}${param.category != null ? '&category=' + param.category : ''}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+		</div>
+	</div>
 	</div>
 	<%@include file="../common/footer.jsp"%>
 </body>
