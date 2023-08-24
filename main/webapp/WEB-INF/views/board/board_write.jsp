@@ -21,21 +21,6 @@
             font-weight: bold;
         }
     </style>
-    
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-function loadImage(event) {
-	  var reader = new FileReader();  
-	  reader.onload = function() {
-	    var thumb_img = document.getElementById("thumb_img");  
-	    thumb_img.src = reader.result;
-	  };
-	  reader.readAsDataURL(event.target.files[0]);  
-	}
-</script>
-    
-    
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
@@ -43,14 +28,11 @@ function loadImage(event) {
 <div class="container">
     <h2>글 작성하기</h2>
     <div class="form-wrapper">
-        <form name="boardWriting" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/board/writeOk.do">
+        <form name="boardWriting" method="post" enctype="multipart/form-data" action="<%= context %>/board/writeOk.do">
             <table class="table table-board table-hover">
                 <tr>
                     <td style="width: 20%; min-width: 140px;">썸네일</td>
-<td>
-    <input type="file" id="imageUpload" name="thumb_img" accept="/*" onchange="loadImage(event)" maxlength="255">
-    <img id="thumb_img" src="/assets/img/default.jpg" alt="Thumbnail" width="200" height="200" style="margin-top: 10px;">
-</td>
+                    <td><input class="form-control" type="file" name="file" value="default.jpg" maxlength="260"></td>
                 </tr>
                 <tr>
                     <td>작성자</td>

@@ -26,19 +26,6 @@ table td:nth-child(1) {
 </style>
 </head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-function loadImage(event) {
-	  var reader = new FileReader();  
-	  reader.onload = function() {
-	    var thumb_img = document.getElementById("thumb_img");  
-	    thumb_img.src = reader.result;
-	  };
-	  reader.readAsDataURL(event.target.files[0]);  
-	}
-
-</script>
-
 
 <body>
 	<%@ include file="../common/header.jsp"%>
@@ -48,6 +35,8 @@ function loadImage(event) {
 		<div class="form-wrapper">
 			<form name="boardUpdate" method="post" enctype="multipart/form-data"
 				action="<%=context%>/board/updateOk.do">
+                <input type='hidden' name='bno' value='${board.bno}'/>
+<!-- 글 번호 실제 데이터 전송!!!!이거때문에 수정 안되던거였음 -->
 				<table class="table table-board table-hover">
 					<tr>
 						<td>글 번호</td>
@@ -59,11 +48,8 @@ function loadImage(event) {
 					</tr>
 					<tr>
 						<td style="width: 20%; min-width: 140px;">썸네일</td>
-<td style="text-align: left;">
-      <input type="file" id="imageUpload" name="file" accept="image/*" onchange="loadImage(event)" maxlength="255" style="margin-top: 5px;">
-      <img id="thumb_img" src="/img/default.jpg" alt="Thumbnail" width="100" height="100" style="margin-top: 5px;">
- </td>
-
+						<td style="text-align: left;"><input class="form-control"
+							type="file" name="file" maxlength="260"></td>
 					</tr>
 
 					<tr>
@@ -73,11 +59,13 @@ function loadImage(event) {
 					</tr>
 					<tr>
 						<td>카테고리</td>
-						<td><select class="form-select" name="category"
-							value="${board.category}">
-								<option value="news">뉴스</option>
-								<option value="events">이벤트</option>
-								<option value="columns">칼럼</option>
+						<td><select class="form-select" name="category">
+								<option value="news"
+									${board.category == 'news' ? 'selected' : ''}>뉴스</option>
+								<option value="events"
+									${board.category == 'events' ? 'selected' : ''}>이벤트</option>
+								<option value="columns"
+									${board.category == 'columns' ? 'selected' : ''}>칼럼</option>
 						</select></td>
 					</tr>
 					<tr>

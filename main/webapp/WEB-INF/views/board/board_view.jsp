@@ -69,7 +69,7 @@ table td:nth-child(2) {
 			<div class="content" style="padding: 0 2rem; line-height: 1.8;">
 			<div class="thumb">
 				<c:if test="${board.file_path != null && not empty board.file_path}">
-					<img src="<%=context%>/assets/img/${board.file_path}" alt="uploaded-image">
+					<img src="<%=context%>/assets/img/${board.file_path}">
 				</c:if>
 			</div>
 			</div>

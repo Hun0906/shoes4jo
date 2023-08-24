@@ -1,15 +1,12 @@
 package com.multi.shoes4jo.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.multi.shoes4jo.command.PageInfo;
 import com.multi.shoes4jo.mapper.BoardMapper;
+import com.multi.shoes4jo.util.Criteria;
 import com.multi.shoes4jo.vo.BoardVO;
 
 @Service("boardService")
@@ -19,29 +16,13 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper boardMapper;
 
 	@Override
-	public List<BoardVO> selectBoardList(PageInfo pageInfo, Map<String, String> param) {
-		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
-		RowBounds rowBounds = new RowBounds(offset, pageInfo.getListLimit());
-
-		Map<String, String> searchMap = new HashMap<String, String>();
-		String searchValue = param.get("searchValue");
-		if (searchValue != null && searchValue.length() > 0) {
-			String type = param.get("searchType");
-			if (type.equals("title")) {
-				searchMap.put("titleKeyword", searchValue);
-			} else if (type.equals("content")) {
-				searchMap.put("contentKeyword", searchValue);
-			} else if (type.equals("writer")) {
-				searchMap.put("writerKeyword", searchValue);
-			}
-		}
-
-		return boardMapper.selectBoardList(pageInfo, searchMap);
+	public List<BoardVO> listPage(Criteria cri) {
+		return boardMapper.listPage(cri);
 	}
 
 	@Override
-	public int selectBoardCount(Map<String, String> searchMap) {
-		return boardMapper.selectBoardCount(searchMap);
+	public int listCount() {
+		return boardMapper.listCount();
 	}
 
 	@Override
