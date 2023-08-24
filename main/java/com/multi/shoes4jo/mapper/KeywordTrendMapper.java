@@ -17,7 +17,7 @@ public interface KeywordTrendMapper {
     int isExists(@Param("period_sdata") String period_sdata, @Param("keyword") String keyword);
     
     @Select("SELECT ratio_cnt FROM 4jo_api_search_all WHERE period_sdata = #{period_sdata} and keyword = #{keyword}")
-    long oldRatio(@Param("period_sdata") String period_sdata, @Param("keyword") String keyword);
+    int oldRatio(@Param("period_sdata") String period_sdata, @Param("keyword") String keyword);
 
     @Insert("INSERT INTO 4jo_api_search_all (period_sdata, keyword, ratio_cnt) VALUES (#{period_sdata}, #{keyword}, #{ratio_cnt})")
     void insert(KeywordTrendVO vo);

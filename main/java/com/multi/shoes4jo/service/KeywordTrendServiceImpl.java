@@ -34,7 +34,7 @@ public class KeywordTrendServiceImpl implements KeywordTrendService {
 	}
 
 	@Override
-	public long oldRatio(String period_sdata, String keyword) {
+	public int oldRatio(String period_sdata, String keyword) {
 		return keywordTrendMapper.oldRatio(period_sdata, keyword);
 	}
 

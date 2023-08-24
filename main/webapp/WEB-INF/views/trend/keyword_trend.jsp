@@ -15,35 +15,38 @@ window.onload = function() {
 
 function getCode() {
 	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	const code = urlParams.get('do');
 	
-	if (code == ""){
+	if (queryString == ""){
 		getAPIResult();
-	} else if (code == "show"){
+	} else {
+		const urlParams = new URLSearchParams(queryString);
+		const code = urlParams.get('do');
+		if (code == "show"){
 		showAPIResult();
+		}
 	}
 }
 
 function getAPIResult() {
 	var keyword = document.getElementById("keyword").value;
 
-	if (!keyword) {
+	if (!keyword || keyword === "" || keyword === "null" || keyword === null) {
 		alert("검색어를 입력하세요.");
-		setTimeout(function() {
-			$("#keyword").focus();
-		}, 100);
-		return false;
+		location.href="main";
 	}
+	var keyword = document.getElementById("keyword").value;
 
-	console.log("keyword: "+keyword);
-	document.keywordTrendForm.action = "<%=context%>/keytrendcon/insert.do";
 	showLoading();
+	console.log("keyword: "+keyword);
+	document.keywordTrendForm.action = "<%=context%>/keyword_trend/con/insert.do";
+	document.keywordTrendForm.submit();
 }
 
 function showAPIResult() {
 	closeLoading();
 	alert("성공");
+	document.getElementById("result").innerHTML = //DB data...
+	drawChart();
 }
 </script>
 
@@ -81,16 +84,7 @@ function showAPIResult() {
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="<%=context%>/assets/js/drawChart.js"></script>
-<script>
-var keyword = document.getElementById("keyword").value;
 
-if (keyword != "" && keyword != "null" && keyword != null) {
-	document.keywordTrendForm.submit();
-} else {
-	alert("검색어를 입력하세요.");
-	location.href="main";
-}
-</script>
 	<%@include file="../common/footer.jsp"%>
 </body>
 </html>

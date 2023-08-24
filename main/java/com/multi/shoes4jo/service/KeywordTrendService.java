@@ -10,7 +10,7 @@ public interface KeywordTrendService {
 	
 	public boolean isExists(String period_sdata, String keyword);
 
-	public long oldRatio(String period_sdata, String keyword);
+	public int oldRatio(String period_sdata, String keyword);
 	
 	public void update(KeywordTrendVO vo);
  
