@@ -1,16 +1,13 @@
 package com.multi.shoes4jo.controller;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.multi.shoes4jo.command.PageInfo;
 import com.multi.shoes4jo.service.BoardService;
 import com.multi.shoes4jo.vo.BoardVO;
 
@@ -30,18 +28,41 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	@Autowired
-	HttpServletRequest request;
-
 	@RequestMapping(value = "/list.do")
-	public String list(Model model, @RequestParam(required = false) String category) {
-		List<BoardVO> list;
-		if (category != null && !category.isEmpty()) {
-			list = boardService.selectOneCat(category);
-		} else {
-			list = boardService.selectList();
+	public String list(Model model, @RequestParam Map<String, String> param) {
+		int page = 1;
+		if (param.get("page") != null) {
+			page = Integer.parseInt(param.get("page"));
 		}
+
+		String searchValue = param.get("searchValue");
+
+		int boardsPerPage = 10;
+
+		Map<String, String> searchMap = new HashMap<String, String>();
+		if (searchValue != null && searchValue.length() > 0) {
+			String type = param.get("searchType") == null ? "title" : param.get("searchType");
+			if (type.equals("title")) {
+				searchMap.put("titleKeyword", searchValue);
+			} else if (type.equals("content")) {
+				searchMap.put("contentKeyword", searchValue);
+			} else if (type.equals("writer")) {
+				searchMap.put("writerKeyword", searchValue);
+			}
+		}
+
+		String category = param.get("category");
+		if (category != null && !category.isEmpty()) {
+			searchMap.put("category", category);
+		}
+
+		PageInfo pageInfo = new PageInfo(page, boardsPerPage, boardService.selectBoardCount(searchMap), 10);
+		List<BoardVO> list = boardService.selectBoardList(pageInfo, searchMap);
+
 		model.addAttribute("list", list);
+		model.addAttribute("param", param);
+		model.addAttribute("pageInfo", pageInfo);
+
 		return "board/board_list";
 	}
 
@@ -70,20 +91,27 @@ public class BoardController {
 
 	@RequestMapping("/writeOk.do")
 	public String writeOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file) throws IOException {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request)
+			throws Exception {
 
 		if (file != null && !file.isEmpty()) {
-			String originalFilename = file.getOriginalFilename();
-			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
-			board.setFile_path(newFileName);
-			String realPath = request.getSession().getServletContext().getRealPath("/") + "/assets/img";
+			String basePath = request.getServletContext().getRealPath("/assets/img/");
+			File currentDirPath = new File(basePath);
 
-			File newFile = new File(realPath, newFileName);
-			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
-//이미지 크기 지정
-			resizeImage(newFile, newFile, 512, 512);
+			if (!currentDirPath.exists()) {
+				currentDirPath.mkdirs();
+			}
+
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid + "_" + file.getOriginalFilename();
+			File saveFile = new File(currentDirPath, fileName);
+
+			file.transferTo(saveFile);
+
+			board.setFile_name(fileName);
+			board.setFile_path("/assets/img/" + fileName);
 		}
+
 		boardService.insertOne(board);
 		return "redirect:/board/list.do";
 	}
@@ -96,34 +124,33 @@ public class BoardController {
 
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file) throws IOException {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request)
+			throws Exception {
 
-		if (file != null && !file.isEmpty()) {
-			String originalFilename = file.getOriginalFilename();
-			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
-			board.setFile_path(newFileName);
-			String realPath = request.getSession().getServletContext().getRealPath("/") + "/assets/img";
+		if (!file.isEmpty()) {
+			// 파일 삭제
+			if (board.getFile_path() != null) {
+				File oldFile = new File(board.getFile_path());
+				if (oldFile.exists()) {
+					oldFile.delete();
+				}
+			}
+			String basePath = request.getServletContext().getRealPath("/assets/img/");
+			File currentDirPath = new File(basePath);
+			if (!currentDirPath.exists()) {
+				currentDirPath.mkdirs();
+			}
 
-			File newFile = new File(realPath, newFileName);
-
-			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
-
-			resizeImage(newFile, newFile, 512, 512);
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid + "_" + file.getOriginalFilename();
+			File saveFile = new File(currentDirPath, fileName);
+			file.transferTo(saveFile);
+			board.setFile_name(fileName);
+			board.setFile_path("/assets/img/" + fileName);
 		}
 
 		boardService.updateOne(board);
 		return "redirect:/board/list.do";
-	}
-
-	private void resizeImage(File inputFile, File outputFile, int newWidth, int newHeight) throws IOException {
-		BufferedImage originalImage = ImageIO.read(inputFile);
-		BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
-		g.dispose();
-
-		ImageIO.write(resizedImage, "JPEG", outputFile);
 	}
 
 	@RequestMapping("/delete.do")

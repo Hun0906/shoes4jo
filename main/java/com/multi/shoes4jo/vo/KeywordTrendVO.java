@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class KeywordTrendVO {
 	private String period_sdata;
 	private String keyword;
-	private int ratio_cnt;
+	private long ratio_cnt;
 	
 	public KeywordTrendVO() {
 	}
@@ -29,10 +29,10 @@ public class KeywordTrendVO {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	public int getRatio_cnt() {
+	public long getRatio_cnt() {
 		return ratio_cnt;
 	}
-	public void setRatio_cnt(int ratio_cnt) {
+	public void setRatio_cnt(long ratio_cnt) {
 		this.ratio_cnt = ratio_cnt;
 	}
 	

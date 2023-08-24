@@ -7,59 +7,49 @@
 <title>상품별 트렌드 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 
+<script src="<%=context%>/assets/js/script.js"></script>
 <script>
+window.onload = function() {
+	getCode();
+}
 
-	function getAPIResult() {
-		// Step1: Set your API credentials here
-		const clientId = "JzcrBZHimsCICRuNqbzk"; // 애플리케이션의 Client ID
-		const clientSecret = "9fgwNuy1pM"; // 애플리케이션의 Client Secret
-
-		//Step2: 값 입력하기
-		let date = new Date();
-		let today = date.getFullYear() + '-'
-				+ String(date.getMonth() + 1).padStart(2, '0') + '-'
-				+ String(date.getDate()).padStart(2, '0');
-
-		var keyword = document.getElementById("keyword").value;
-
-		if (!keyword) {
-			alert("검색어를 입력하세요.");
-			setTimeout(function() {
-				$("#keyword").focus();
-			}, 100);
-			return false;
-		}
-
-		console.log("keyword: "+keyword);
-//		// Step3: java 이용해서 호출
-//		$.ajax({
-//			method : "GET",
-//			url : "api/keywordtrend",
-//			dataType : "json",
-//			data : {
-//				"keyword" : keyword,
-//			},
-//			success : function(response) {
-//				// Step4: Process the API response
-//				var resultData = '';
-//				resultData += JSON.stringify(response);
-//				document.getElementById("result").innerHTML = resultData;
-//				drawChart();
-//			},
-//			error : function(xhr, status, error) {
-//				console.log("API 호출 실패: ", status, error);
-//			}
-//		});
-		
-		//데이터가 잘 들어가지는부터 확인해야함
-		document.keywordTrendForm.action = "<%=context%>/keytrendcon/insert.do";
+function getCode() {
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const code = urlParams.get('do');
+	
+	if (code == ""){
+		getAPIResult();
+	} else if (code == "show"){
+		showAPIResult();
 	}
+}
+
+function getAPIResult() {
+	var keyword = document.getElementById("keyword").value;
+
+	if (!keyword) {
+		alert("검색어를 입력하세요.");
+		setTimeout(function() {
+			$("#keyword").focus();
+		}, 100);
+		return false;
+	}
+
+	console.log("keyword: "+keyword);
+	document.keywordTrendForm.action = "<%=context%>/keytrendcon/insert.do";
+	showLoading();
+}
+
+function showAPIResult() {
+	closeLoading();
+	alert("성공");
+}
 </script>
 
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-
 	<div class="contents">
 		<div class="container" id="container" style="text-align: center;">
 			<form name="keywordTrendForm" action="javascript:getAPIResult();">
