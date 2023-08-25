@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -43,9 +43,6 @@ public class BoardController {
 		return "board/board_list";
 	}
 
-	
-	
-	
 	@RequestMapping(value = "/magazine")
 	public String magazine(Model model) {
 		List<BoardVO> newslist = boardService.selectForMagazine("news");
@@ -71,8 +68,7 @@ public class BoardController {
 
 	@RequestMapping("/writeOk.do")
 	public String writeOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request)
-			throws Exception {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
 		// 파일이 비어있지 않은 경우
 		if (file != null && !file.isEmpty()) {
@@ -83,7 +79,7 @@ public class BoardController {
 			board.setFile_name(originalFilename); // 보드의 파일 이름을 새로운 파일 이름으로 설정
 			board.setFile_path(newFileName); // 보드의 파일 경로를 새로운 파일 경로로 설정
 
-			String realPath = request.getServletContext().getRealPath("assets/img/");
+			String realPath = session.getServletContext().getRealPath("assets/img/");
 			System.out.println("파일 저장 성공: " + realPath);
 
 			File newFile = new File(realPath, newFileName);
@@ -104,7 +100,7 @@ public class BoardController {
 
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request) {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
 		if (file != null && !file.isEmpty()) {
 			String originalFilename = file.getOriginalFilename();
@@ -117,14 +113,14 @@ public class BoardController {
 
 			BoardVO oldBoardData = boardService.selectOne(String.valueOf(board.getBno()));
 			if (oldBoardData != null && oldBoardData.getFile_path() != null) {
-				File oldFile = new File(request.getServletContext().getRealPath("assets/img/"),
+				File oldFile = new File(session.getServletContext().getRealPath("assets/img/"),
 						oldBoardData.getFile_path());
 				if (oldFile.exists()) {
 					oldFile.delete();
 				}
 			}
 			// 이전 파일이 null값이 아니면 삭제하기
-			String realPath = request.getServletContext().getRealPath("assets/img/");
+			String realPath = session.getServletContext().getRealPath("assets/img/");
 			System.out.println("파일 저장 성공: " + realPath);
 			// boardService에 있는 selectOne메서드로 번호에 해당하는 거 조회하고
 			// 원래 데이터가 null이 아닐때 예전 파일을 새로운 파일로 교체하고(원래꺼 삭제) 파일 저장됐으면 realPath에 설정한 저장 경로
