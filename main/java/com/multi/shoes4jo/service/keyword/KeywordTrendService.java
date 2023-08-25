@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service;
+package com.multi.shoes4jo.service.keyword;
 
 import com.multi.shoes4jo.vo.KeywordTrendVO;
 
