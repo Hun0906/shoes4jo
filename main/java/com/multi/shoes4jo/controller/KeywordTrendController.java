@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
 
 import com.multi.shoes4jo.api.KeywordTrendAPI;
 import com.multi.shoes4jo.service.keyword.KeywordTrendService;
@@ -75,7 +77,8 @@ public class KeywordTrendController {
 			int ratio_cnt;
 
 			// 첫날 값에 대해 정규화하여 저장 (api가 주어진 기간 내 최댓값을 100으로 하여 데이터를 제공하기 때문)
-			double first_ratio = (double) ((JSONObject) data.get(0)).get("ratio");
+			Number first_ratio_num = (Number)((JSONObject)data.get(0)).get("ratio");
+			double first_ratio = first_ratio_num.doubleValue();
 			for (int i = 0; i < data.size(); i++) {
 				period_sdata = (String) ((JSONObject) data.get(i)).get("period");
 				vo.setPeriod_sdata(period_sdata);
@@ -101,24 +104,25 @@ public class KeywordTrendController {
 		}
 
         String encodedKeyword = URLEncoder.encode(title, StandardCharsets.UTF_8);
-		return "redirect:/keyword_trend?do=show&keyword="+encodedKeyword;
+		return "redirect:/keyword_trend?show=f&keyword="+encodedKeyword;
 	}
 	
 	@RequestMapping(value = "/drawchart", method = { RequestMethod.GET, RequestMethod.POST } )
-	@ResponseBody
-	public String[][] drawchart(@RequestParam String rawkeyword) {
+	public String drawchart(@RequestParam String keyword, Model model) {
 		System.out.println("drawchart() 호출됨");
-		String keyword = rawkeyword.replace(" ", "");
-		System.out.println("정리된 keyword: "+keyword);
-		System.out.println(keywordTrendService.select(keyword, "4jo_api_search_all"));
+		String clean_keyword = keyword.replace(" ", "");
 		
-		String[] line_y_arr = {"test1", "test2", "test3"};
-		String[] line_x_arr = {"1","2","3"};
-		String[] pie_w_data = {"30"};
-		String[] pie_m_data = {"70"};
-		String[] bar_data = {"1","2","1","2","1","2"};
+		List<KeywordTrendVO> selectAll = keywordTrendService.selectAll(clean_keyword);
+		//List<KeywordTrendVO> selectGen = keywordTrendService.selectGen(clean_keyword);
+		//List<KeywordTrendVO> selectAge = keywordTrendService.selectAge(clean_keyword);
 		
-		String[][] responseBody = {line_y_arr, line_x_arr, pie_w_data, pie_m_data, bar_data};
-		return responseBody;
+		model.addAttribute("selectAll", selectAll);
+		//model.addAttribute("selectGen", selectGen);
+		//model.addAttribute("selectAge", selectAge);
+		
+		model.addAttribute("show", "t");
+		model.addAttribute("keyword", keyword);
+
+		return "trend/keyword_trend";
 	}
 }

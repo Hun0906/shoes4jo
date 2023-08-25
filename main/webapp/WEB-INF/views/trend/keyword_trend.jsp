@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,21 +12,19 @@
 <script src="<%=context%>/assets/js/script.js"></script>
 <script>
 window.onload = function() {
+	showLoading();
 	getCode();
 }
 
 function getCode() {
-	let queryString = window.location.search;
-	
-	if (queryString == ""){
-		getAPIResult();
-	} else {
-		let urlParams = new URLSearchParams(queryString);
-		let code = urlParams.get('do');
-		if (code == "show"){
-		showAPIResult();
-		}
-	}
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const code = urlParams.get('show');
+	if (code == 'f') {
+    	getDBdata();
+    } else {
+		drawChart();
+    }
 }
 
 function getAPIResult() {
@@ -42,34 +42,53 @@ function getAPIResult() {
 	document.keywordTrendForm.submit();
 }
 
-function showAPIResult() {
-	closeLoading();
-	getDBdata();
-}
-
 function getDBdata() {
-	alert("getDBdata() 호출됨3");
-	// db에서 데이터를 가져옴
 	let keyword = document.getElementById("keyword").value;
 
-	$.ajax({
-			method : "GET",
-			url : "keyword_trend/con/drawchart",
-			dataType : "text",
-			data : { rawkeyword: keyword },
-			success : function(response) {
-				console.log(response);
-				let [line_y_arr, line_x_arr, pie_w_data, pie_m_data, bar_data] = response;
-				drawLineChart(line_y_arr, line_x_arr);
-				drawPiChart(pie_w_data[0], pie_m_data[0]);
-				drawBarChart(bar_data);
-			},
-			error : function(xhr, status, error) {
-				console.log("DB 데이터 불러오기 실패: ", status, error);
-			}
-		});
+	if (!keyword || keyword === "" || keyword === "null" || keyword === null) {
+		alert("검색어를 입력하세요.");
+		location.href="main";
+	}
+
+	showLoading();
+	
+	console.log("keyword: "+keyword);
+	document.keywordTrendForm.action = "<%=context%>/keyword_trend/con/drawchart";
+	document.keywordTrendForm.submit();
+}
+
+function drawChart() {
+	let xArr = document.getElementById("selectAll_x").innerHTML.trim().split(" ");
+	let yArr = document.getElementById("selectAll_y").innerHTML.trim().split(" ");
+	drawLineChart(yArr, xArr);
+	
+	let Wval = document.getElementById("selectGen_w").innerHTML;
+	let Mval = document.getElementById("selectGen_m").innerHTML;
+	drawPieChart(Wval,Mval);
+	
+	let barData = document.getElementById("selectAge").innerHTML.split(",");
+	drawBarChart(barData);
+
+	closeLoading();
 }
 </script>
+
+<style>
+.keyword_trend_header{
+margin-bottom: 2rem;
+}
+
+.keyword_trend_header a{
+	position: relative;
+    top: -0.8rem;
+    margin: 0.3rem;
+    border-radius: 10px;
+    padding: 3px 10px 5px 10px;
+    background: #f7f7f7;
+    color: #5c5c5c;
+    text-decoration: none;
+}
+</style>
 
 </head>
 <body>
@@ -84,7 +103,11 @@ function getDBdata() {
 					value="<%=(keyword == null) ? "" : keyword%>"/>
 				<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button>
 			</form>
-			<br>
+			<div class="keyword_trend_header">
+			<hr>
+			<h2><%=(keyword == null) ? "" : keyword%></h2>
+			<a href="">⭐즐겨찾기 등록</a><a href="">🔎상품 상세페이지</a>
+			</div>
 			<div style="display: none;">
 				<a target="_blank" href="https://developers.naver.com/docs/serviceapi/datalab/shopping/shopping.md#%EC%87%BC%ED%95%91%EC%9D%B8%EC%82%AC%EC%9D%B4%ED%8A%B8-%ED%82%A4%EC%9B%8C%EB%93%9C%EB%B3%84-%ED%8A%B8%EB%A0%8C%EB%93%9C-%EC%A1%B0%ED%9A%8C">
 					API Docs</a>
@@ -93,11 +116,24 @@ function getDBdata() {
 				<a target="_blank" href="https://developers.naver.com/docs/common/openapiguide/errorcode.md#%EC%A3%BC%EC%9A%94-%EC%98%A4%EB%A5%98-%EC%BD%94%EB%93%9C">
 				오류 코드</a>
 			</div>
-
-			<div>
+			<div style="/*display: none;*/">
+			<span id="selectAll_x"><c:forEach var="selectAll" items="${selectAll}">${selectAll.period_sdata} </c:forEach></span>
+			<span id="selectAll_y"><c:forEach var="selectAll" items="${selectAll}">${selectAll.ratio_cnt} </c:forEach></span>
+			<span id="selectGen_w"><c:forEach var="selectGen" items="${selectGen}">${selectGen.wVal}</c:forEach></span>
+			<span id="selectGen_m"><c:forEach var="selectGen" items="${selectGen}">${selectGen.mVal}</c:forEach></span>
+			<span id="selectAge"><c:forEach var="selectAge" items="${selectAge}">${selectAge.ratio_cnt} </c:forEach></span>
+			</div>
+			
+			<div style="display: grid; row-gap: 3rem;">
 				<canvas id="lineChart"></canvas>
+				<div style="display: grid; grid-template-columns: 30% 1fr; justify-items: center; gap: 1rem;">
+				<div>
 				<canvas id="pieChart"></canvas>
+				</div>
+				<div style="width: 100%;">
 				<canvas id="barChart"></canvas>
+				</div>
+				</div>
 			</div>
 
 		</div>

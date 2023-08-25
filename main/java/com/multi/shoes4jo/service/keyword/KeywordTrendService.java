@@ -1,10 +1,15 @@
 package com.multi.shoes4jo.service.keyword;
 
+import java.util.List;
 import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 public interface KeywordTrendService {
 
-	public KeywordTrendVO select(String keyword, String table);
+	public List<KeywordTrendVO> selectAll(String keyword);
+	
+	public List<KeywordTrendVO> selectGen(String keyword);
+	
+	public List<KeywordTrendVO> selectAge(String keyword);
 	
 	public void insert(KeywordTrendVO vo);
 	

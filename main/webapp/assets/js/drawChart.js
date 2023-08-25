@@ -13,7 +13,7 @@ function drawLineChart(line_y_arr, line_x_arr) {
     data: {
       labels: line_x_arr,
       datasets: [{
-        label: datasets_label + " 검색 추이",
+        label: "Trend",
         data: line_y_arr,
         borderColor: "#6ECCAF",
         borderWidth: 1,
@@ -22,6 +22,10 @@ function drawLineChart(line_y_arr, line_x_arr) {
     },
     options: {
       responsive: true,
+	  title: {
+		display: true,
+		text: datasets_label + " 검색 추이",
+	  },
       plugins: {
         legend: {
           display: true
@@ -69,8 +73,8 @@ function drawPieChart(pie_w_data, pie_m_data) {
       labels: ['여성', '남성'],
 	  datasets: [{
 	  data: [pie_w_data, pie_m_data],
-	  backgroundColor: ['#FF0000', '#00FF00'], // 섹션의 색상 설정
-	  hoverBackgroundColor: ['#FF6384', '#36A2EB'], // 호버 시의 색상 설정
+	  backgroundColor: ['#6ECCAF', '#ADE792'], // 섹션의 색상 설정
+	  hoverBackgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 호버 시의 색상 설정
 	  }]
 	},
     options: {
@@ -81,7 +85,7 @@ function drawPieChart(pie_w_data, pie_m_data) {
         },
         title: {
           display: true,
-          text: 'Chart.js Pie Chart'
+          text: "성별 별 "+ datasets_label + " 관심도",
         }
       }
     }
@@ -104,8 +108,9 @@ function drawDoughnutChart(pie_w_data, pie_m_data) {
       labels: ['여성', '남성'],
 	  datasets: [{
 	  data: [pie_w_data, pie_m_data],
-	  backgroundColor: ['#FF0000', '#00FF00'], // 섹션의 색상 설정
-	  hoverBackgroundColor: ['#FF6384', '#36A2EB'], // 호버 시의 색상 설정
+	  backgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 섹션의 색상 설정
+	  borderColor: ['#6ECCAF', '#ADE792'], // 섹션의 색상 설정
+	  hoverBackgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 호버 시의 색상 설정
 	  }]
 	},
     options: {
@@ -116,7 +121,7 @@ function drawDoughnutChart(pie_w_data, pie_m_data) {
         },
         title: {
           display: true,
-          text: 'Chart.js Doughnut Chart'
+          text: "도넛",
         }
       }
     }
@@ -138,11 +143,13 @@ function drawBarChart(bar_data) {
     data: {
       labels: ['10대','20대','30대','40대','50대','60대 이상'],
       datasets: [{
-        label: datasets_label + " 검색 추이",
+        label: "Trend",
         data: bar_data,
         borderColor: "#6ECCAF",
         borderWidth: 1,
         pointRadius: 3,
+        fill: "#6ECCAFaa",
+        backgroundColor: "#6ECCAFaa",
       }]
     },
     options: {
@@ -153,8 +160,18 @@ function drawBarChart(bar_data) {
         },
         title: {
           display: true,
-          text: 'Chart.js Bar Chart'
-        }
+          text: "세대 별 "+ datasets_label + " 관심도",
+        },
+                y: {
+          title: {
+            display: true,
+            text: "상대 비율 (arb. unit)"
+          },
+          grid: {
+            display: true
+          },
+          beginAtZero: true
+        },
       }
     }
   });

@@ -1,5 +1,7 @@
 package com.multi.shoes4jo.service.keyword;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,21 @@ public class KeywordTrendServiceImpl implements KeywordTrendService {
     @Autowired
     private KeywordTrendMapper keywordTrendMapper;
 
+    @Override
+	public List<KeywordTrendVO> selectAll(String keyword) {
+	    List<KeywordTrendVO> resultList = keywordTrendMapper.selectAll(keyword);
+	    return resultList;
+	}
+	
 	@Override
-	public KeywordTrendVO select(String keyword, String table) {
-		KeywordTrendVO vo = keywordTrendMapper.select(keyword, table);
+	public List<KeywordTrendVO> selectGen(String keyword) {
+		List<KeywordTrendVO> vo = keywordTrendMapper.selectGen(keyword);
+		return vo;
+	}
+	
+	@Override
+	public List<KeywordTrendVO> selectAge(String keyword) {
+		List<KeywordTrendVO> vo = keywordTrendMapper.selectAge(keyword);
 		return vo;
 	}
 
