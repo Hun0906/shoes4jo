@@ -3,8 +3,6 @@ package com.multi.shoes4jo.vo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.multi.shoes4jo.util.Criteria;
-
 @Component("BoardVO")
 public class BoardVO {
 
@@ -36,12 +34,6 @@ public class BoardVO {
 		this.file_path = file_path;
 		this.link = link;
 		this.file = file;
-	}
-	
-	
-	public class boardVO extends Criteria {
-		
-		
 	}
 
 	public int getBno() {

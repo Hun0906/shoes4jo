@@ -47,9 +47,6 @@
 	    </select> 
 
 	    <a href="${context}/board/write.do" class="btn-basic">글쓰기</a>
-
-<%-- 	    <input type="button" class="btn-basic" value = "글쓰기"
-	    	onclick = "location.href='<%= context %>/board/write.do'"> --%>
 			
 		</div>
 		
@@ -84,24 +81,28 @@
 	</div>
 
 <div>
-  <ul class="pagination">
-    
-   <c:if test="${pageMaker.prev}">
-      <li><a class="page-link" href="/board/list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-   </c:if> 
+		<ul class="pagination">
 
-   <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-      <li><a class="page-link" href="/board/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
-   </c:forEach>
+			<c:if test="${pageMaker.prev}">
+				<li><a class="page-link"
+					href="${context}/board/list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+			</c:if>
 
-   <c:if test="${pageMaker.next && page_maker.end_page > 0}">
-      <li><a class="page-link" href="/board/list.do${page_maker.make_query(page_maker.end_page + 1)}">다음</a></li>
-   </c:if>  
-   
-  </ul>
-</div>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
+				var="idx">
+				<li><a class="page-link"
+					href="${context}/board/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+			</c:forEach>
 
-   
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a class="page-link"
+					href="${context}/board/list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+			</c:if>
+
+		</ul>
+	</div>
+
+
 	<%@include file="../common/footer.jsp"%>
 </body>
 </html>
