@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.shoes4jo.api.KeywordTrendAPI;
-import com.multi.shoes4jo.service.KeywordTrendService;
-import com.multi.shoes4jo.service.RankingService;
+import com.multi.shoes4jo.service.keyword.KeywordTrendService;
+import com.multi.shoes4jo.service.ranking.RankingService;
 import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Controller

@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service;
+package com.multi.shoes4jo.service.board;
 
 import java.util.List;
 

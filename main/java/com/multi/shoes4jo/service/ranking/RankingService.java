@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service;
+package com.multi.shoes4jo.service.ranking;
 
 import com.multi.shoes4jo.vo.RankingVO;
 

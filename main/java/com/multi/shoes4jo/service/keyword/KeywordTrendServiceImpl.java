@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service;
+package com.multi.shoes4jo.service.keyword;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
