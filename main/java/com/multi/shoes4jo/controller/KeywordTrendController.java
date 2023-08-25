@@ -13,11 +13,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
 
 import com.multi.shoes4jo.api.KeywordTrendAPI;
 import com.multi.shoes4jo.service.keyword.KeywordTrendService;
@@ -43,21 +42,19 @@ public class KeywordTrendController {
 	@RequestMapping(value = "/insert.do")
 	public String insert(KeywordTrendVO vo) throws Exception {
 		String title = request.getParameter("keyword");
-		String naverApiRes = keywordTrend.getTrendData(title);
+		String searchAll = keywordTrend.getTrendData(title);
 
 		// json parsing
 		JSONParser parser = new JSONParser();
-		JSONObject jsonObj = (JSONObject) parser.parse(naverApiRes);
-		String startDate = (String) jsonObj.get("startDate");
-		String endDate = (String) jsonObj.get("endDate");
-		String timeUnit = (String) jsonObj.get("timeUnit");
+		JSONObject jsonObj = (JSONObject) parser.parse(searchAll);
 
 		JSONObject results = (JSONObject) ((JSONArray) jsonObj.get("results")).get(0);
 		String keyword = (String) ((JSONArray) results.get("keyword")).get(0);
 		JSONArray data = (JSONArray) results.get("data");
+		
 
 		if (data.size() != 0) {
-			// 랭킹 테이블에 값 추가
+			/* 랭킹 테이블에 값 추가 */
 			Date dateObj = new Date();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String date = simpleDateFormat.format(dateObj);
@@ -70,12 +67,14 @@ public class KeywordTrendController {
 				System.out.println(date + " / " + keyword + " added to Ranking");
 				rankingService.insert(keyword, title);
 			}
+			/* 랭킹 테이블에 값 추가 */
 
-			// api_search_all에 데이터 추가
+			//api_search DB들에 저장하기 위한 공통 선언부
 			String period_sdata;
 			vo.setKeyword(keyword);
 			int ratio_cnt;
 
+			/* api_search_all에 데이터 추가 */
 			// 첫날 값에 대해 정규화하여 저장 (api가 주어진 기간 내 최댓값을 100으로 하여 데이터를 제공하기 때문)
 			Number first_ratio_num = (Number)((JSONObject)data.get(0)).get("ratio");
 			double first_ratio = first_ratio_num.doubleValue();
@@ -99,6 +98,11 @@ public class KeywordTrendController {
 					System.out.println(period_sdata+" 데이터 추가됨");
 				}
 			}
+			/* api_search_all에 데이터 추가 */
+			
+			
+			
+			
 		} else {
 			return "redirect:/main?err=nodata";
 		}
@@ -113,8 +117,9 @@ public class KeywordTrendController {
 		String clean_keyword = keyword.replace(" ", "");
 		
 		List<KeywordTrendVO> selectAll = keywordTrendService.selectAll(clean_keyword);
-		//List<KeywordTrendVO> selectGen = keywordTrendService.selectGen(clean_keyword);
-		//List<KeywordTrendVO> selectAge = keywordTrendService.selectAge(clean_keyword);
+//		List<KeywordTrendVO> selectFemale = keywordTrendService.selectGen(clean_keyword, "f");
+//		List<KeywordTrendVO> selectMale = keywordTrendService.selectGen(clean_keyword, "m");
+//		List<KeywordTrendVO> selectAge = keywordTrendService.selectAge(clean_keyword);
 		
 		model.addAttribute("selectAll", selectAll);
 		//model.addAttribute("selectGen", selectGen);

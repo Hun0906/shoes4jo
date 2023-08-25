@@ -58,13 +58,13 @@ function getDBdata() {
 }
 
 function drawChart() {
-	let xArr = document.getElementById("selectAll_x").innerHTML.trim().split(" ");
-	let yArr = document.getElementById("selectAll_y").innerHTML.trim().split(" ");
-	drawLineChart(yArr, xArr);
+	let xArr = document.getElementById("selectAll_x").innerHTML.trim().split(" ").reverse(); //내림차순 정렬이기 때문에 reverse
+	let yArr = document.getElementById("selectAll_y").innerHTML.trim().split(" ").reverse();
+	drawLineChart(yArr.map(e=>e/Math.max(...yArr)), xArr.map(e=>e.slice(5,7)+"/"+e.slice(8))); //최대값으로 정규화
 	
-	let Wval = document.getElementById("selectGen_w").innerHTML;
+	let Fval = document.getElementById("selectGen_f").innerHTML;
 	let Mval = document.getElementById("selectGen_m").innerHTML;
-	drawPieChart(Wval,Mval);
+	drawPieChart(Fval,Mval);
 	
 	let barData = document.getElementById("selectAge").innerHTML.split(",");
 	drawBarChart(barData);
@@ -116,11 +116,11 @@ margin-bottom: 2rem;
 				<a target="_blank" href="https://developers.naver.com/docs/common/openapiguide/errorcode.md#%EC%A3%BC%EC%9A%94-%EC%98%A4%EB%A5%98-%EC%BD%94%EB%93%9C">
 				오류 코드</a>
 			</div>
-			<div style="/*display: none;*/">
+			<div style="display: none;">
 			<span id="selectAll_x"><c:forEach var="selectAll" items="${selectAll}">${selectAll.period_sdata} </c:forEach></span>
 			<span id="selectAll_y"><c:forEach var="selectAll" items="${selectAll}">${selectAll.ratio_cnt} </c:forEach></span>
-			<span id="selectGen_w"><c:forEach var="selectGen" items="${selectGen}">${selectGen.wVal}</c:forEach></span>
-			<span id="selectGen_m"><c:forEach var="selectGen" items="${selectGen}">${selectGen.mVal}</c:forEach></span>
+			<span id="selectGen_f"><c:forEach var="selectGen_f" items="${selectGen}">${selectGen_f.ratio_cnt} </c:forEach></span>
+			<span id="selectGen_m"><c:forEach var="selectGen_m" items="${selectGen}">${selectGen_m.ratio_cnt} </c:forEach></span>
 			<span id="selectAge"><c:forEach var="selectAge" items="${selectAge}">${selectAge.ratio_cnt} </c:forEach></span>
 			</div>
 			
