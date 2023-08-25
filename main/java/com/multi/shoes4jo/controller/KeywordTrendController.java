@@ -1,11 +1,8 @@
 package com.multi.shoes4jo.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
-import javax.json.Json;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
@@ -16,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.shoes4jo.api.KeywordTrendAPI;
-import com.multi.shoes4jo.service.KeywordTrendService;
-import com.multi.shoes4jo.service.RankingService;
+import com.multi.shoes4jo.service.keyword.KeywordTrendService;
+import com.multi.shoes4jo.service.ranking.RankingService;
 import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Controller
@@ -79,7 +76,7 @@ public class KeywordTrendController {
 				vo.setPeriod_sdata(period_sdata);
 				
 				ratio_cnt = ((long) ((JSONObject) data.get(i)).get("ratio")) / first_ratio; // 유효숫자는 맞추지 않음
-				vo.setRatio_cnt(ratio_cnt);
+				vo.setRatio_cnt((int) ratio_cnt);
 				
 				if (keywordTrendService.isExists(period_sdata, keyword)) { //사용한 검색어가 해당 날짜에 값이 있고
 					if (ratio_cnt != keywordTrendService.oldRatio(period_sdata, keyword)) { //ratio 값이 다르다면
