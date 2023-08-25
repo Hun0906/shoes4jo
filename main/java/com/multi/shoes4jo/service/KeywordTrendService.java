@@ -4,7 +4,7 @@ import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 public interface KeywordTrendService {
 
-	public KeywordTrendVO select(String keyword);
+	public KeywordTrendVO select(String keyword, String table);
 	
 	public void insert(KeywordTrendVO vo);
 	
@@ -13,5 +13,5 @@ public interface KeywordTrendService {
 	public int oldRatio(String period_sdata, String keyword);
 	
 	public void update(KeywordTrendVO vo);
- 
+
 }

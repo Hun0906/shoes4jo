@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.multi.shoes4jo">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

@@ -1,93 +1,161 @@
+function drawLineChart(line_y_arr, line_x_arr) {
+  const ctx = document.getElementById('lineChart');
+  let lineChart;
 
-//데이터파싱
-function jsonParse(target){
-	//string에는 ajax로 불러온 리턴값이 들어가야 함
-	let string = document.getElementById("result").innerHTML;
-	let string_parse = JSON.parse(string); //점 표기법으로 데이터를 불러올 수 있게 됨
-	let data = string_parse.results[0].data; //차트 그리기용 데이터셋
-	
-	if (data == "") {
-		alert("검색 결과가 없습니다.");
-		window.location="main";
-	}
-	
-	
-	if (target == "y"){
-		let y_arr = [];
-		
-		data.forEach((e) => {
-			y_arr.push(e.period.substring(5,7)+"월 "+e.period.substring(8)+"일");
-		});
-		
-		return y_arr;
-	} else if (target == "x") {
-		let x_arr = [];
-		
-		data.forEach((e) => {
-			x_arr.push(e.ratio);
-		});
-			
-		return x_arr;
-	}
+  if (lineChart) {
+    lineChart.destroy();
+  }
+
+  let datasets_label = document.getElementById("keyword").value;
+
+  lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: line_x_arr,
+      datasets: [{
+        label: datasets_label + " 검색 추이",
+        data: line_y_arr,
+        borderColor: "#6ECCAF",
+        borderWidth: 1,
+        pointRadius: 3,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true
+        },
+      },
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: "날짜"
+          },
+          grid: {
+            display: true
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: "상대 비율 (arb. unit)"
+          },
+          grid: {
+            display: true
+          },
+          beginAtZero: true
+        }
+      }
+    }
+  });
 }
 
-//차트그리기
-const ctx = document.getElementById('myChart');
-let myChart;
+function drawPieChart(pie_w_data, pie_m_data) {
+  const ctx = document.getElementById('pieChart');
+  let pieChart;
 
-function drawChart() {
-  document.forms['keywordTrendForm'].setAttribute('style', '');
-
-  if (myChart) {
-      myChart.destroy();
+  if (pieChart) {
+    pieChart.destroy();
   }
-  
-  y_arr = jsonParse("y");
-  x_arr = jsonParse("x");
-  
-  datasets_label = document.getElementById("keyword").value;
 
-  myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-			labels: y_arr,
-          datasets: [{
-              label: datasets_label + " 검색 추이",
-              data: x_arr,
-              borderColor: "#6ECCAF",
-              borderWidth: 1,
-              pointRadius: 3,
-          }]
-      },
-      options: {
-          plugins: {
-              legend: {
-                  display: true
-              },
-          },
-          scales: {
-              x: {
-                  display: true,
-                  title: {
-                      display: true,
-                      text: "period (month)"
-                  },
-                  grid: {
-                      display: true
-                  }
-              },
-              y: {
-                  title: {
-                      display: true,
-                      text: "ratio (arb. unit)"
-                  },
-                  grid: {
-                      display: true
-                  },
-                  beginAtZero: true
-              }
-          }
+  let datasets_label = document.getElementById("keyword").value;
+  
+  pieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['여성', '남성'],
+	  datasets: [{
+	  data: [pie_w_data, pie_m_data],
+	  backgroundColor: ['#FF0000', '#00FF00'], // 섹션의 색상 설정
+	  hoverBackgroundColor: ['#FF6384', '#36A2EB'], // 호버 시의 색상 설정
+	  }]
+	},
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Pie Chart'
+        }
       }
+    }
   });
+}
 
+function drawDoughnutChart(pie_w_data, pie_m_data) {
+  const ctx = document.getElementById('doughnutChart');
+  let doughnutChart;
+
+  if (doughnutChart) {
+    doughnutChart.destroy();
+  }
+
+  let datasets_label = document.getElementById("keyword").value;
+  
+  doughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['여성', '남성'],
+	  datasets: [{
+	  data: [pie_w_data, pie_m_data],
+	  backgroundColor: ['#FF0000', '#00FF00'], // 섹션의 색상 설정
+	  hoverBackgroundColor: ['#FF6384', '#36A2EB'], // 호버 시의 색상 설정
+	  }]
+	},
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Doughnut Chart'
+        }
+      }
+    }
+  });
+}
+
+function drawBarChart(bar_data) {
+  const ctx = document.getElementById('barChart');
+  let barChart;
+
+  if (barChart) {
+    barChart.destroy();
+  }
+
+  let datasets_label = document.getElementById("keyword").value;
+  
+  barChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['10대','20대','30대','40대','50대','60대 이상'],
+      datasets: [{
+        label: datasets_label + " 검색 추이",
+        data: bar_data,
+        borderColor: "#6ECCAF",
+        borderWidth: 1,
+        pointRadius: 3,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Bar Chart'
+        }
+      }
+    }
+  });
 }

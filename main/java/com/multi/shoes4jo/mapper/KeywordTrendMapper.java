@@ -10,8 +10,8 @@ import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Mapper
 public interface KeywordTrendMapper {
-    @Select("SELECT * FROM 4jo_api_search_all WHERE keyword = #{keyword}")
-    KeywordTrendVO select(@Param("keyword") String keyword);
+    @Select("SELECT * FROM #{table} WHERE keyword = #{keyword}")
+    KeywordTrendVO select(@Param("keyword") String keyword, @Param("table") String table);
 
     @Select("SELECT count(*) FROM 4jo_api_search_all WHERE period_sdata = #{period_sdata} and keyword = #{keyword}")
     int isExists(@Param("period_sdata") String period_sdata, @Param("keyword") String keyword);

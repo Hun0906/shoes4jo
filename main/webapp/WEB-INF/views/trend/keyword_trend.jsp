@@ -14,13 +14,13 @@ window.onload = function() {
 }
 
 function getCode() {
-	const queryString = window.location.search;
+	let queryString = window.location.search;
 	
 	if (queryString == ""){
 		getAPIResult();
 	} else {
-		const urlParams = new URLSearchParams(queryString);
-		const code = urlParams.get('do');
+		let urlParams = new URLSearchParams(queryString);
+		let code = urlParams.get('do');
 		if (code == "show"){
 		showAPIResult();
 		}
@@ -28,15 +28,15 @@ function getCode() {
 }
 
 function getAPIResult() {
-	var keyword = document.getElementById("keyword").value;
+	let keyword = document.getElementById("keyword").value;
 
 	if (!keyword || keyword === "" || keyword === "null" || keyword === null) {
 		alert("검색어를 입력하세요.");
 		location.href="main";
 	}
-	var keyword = document.getElementById("keyword").value;
 
 	showLoading();
+	
 	console.log("keyword: "+keyword);
 	document.keywordTrendForm.action = "<%=context%>/keyword_trend/con/insert.do";
 	document.keywordTrendForm.submit();
@@ -44,9 +44,30 @@ function getAPIResult() {
 
 function showAPIResult() {
 	closeLoading();
-	alert("성공");
-	document.getElementById("result").innerHTML = //DB data...
-	drawChart();
+	getDBdata();
+}
+
+function getDBdata() {
+	alert("getDBdata() 호출됨3");
+	// db에서 데이터를 가져옴
+	let keyword = document.getElementById("keyword").value;
+
+	$.ajax({
+			method : "GET",
+			url : "keyword_trend/con/drawchart",
+			dataType : "text",
+			data : { rawkeyword: keyword },
+			success : function(response) {
+				console.log(response);
+				let [line_y_arr, line_x_arr, pie_w_data, pie_m_data, bar_data] = response;
+				drawLineChart(line_y_arr, line_x_arr);
+				drawPiChart(pie_w_data[0], pie_m_data[0]);
+				drawBarChart(bar_data);
+			},
+			error : function(xhr, status, error) {
+				console.log("DB 데이터 불러오기 실패: ", status, error);
+			}
+		});
 }
 </script>
 
@@ -73,10 +94,10 @@ function showAPIResult() {
 				오류 코드</a>
 			</div>
 
-			<div id="result" style="display: none"></div>
-
-			<div id="parse_result">
-				<canvas id="myChart"></canvas>
+			<div>
+				<canvas id="lineChart"></canvas>
+				<canvas id="pieChart"></canvas>
+				<canvas id="barChart"></canvas>
 			</div>
 
 		</div>

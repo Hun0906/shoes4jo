@@ -12,8 +12,8 @@ public class KeywordTrendServiceImpl implements KeywordTrendService {
     private KeywordTrendMapper keywordTrendMapper;
 
 	@Override
-	public KeywordTrendVO select(String keyword) {
-		KeywordTrendVO vo = keywordTrendMapper.select(keyword);
+	public KeywordTrendVO select(String keyword, String table) {
+		KeywordTrendVO vo = keywordTrendMapper.select(keyword, table);
 		return vo;
 	}
 

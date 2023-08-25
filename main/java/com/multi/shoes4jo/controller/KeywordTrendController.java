@@ -13,6 +13,9 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.shoes4jo.api.KeywordTrendAPI;
 import com.multi.shoes4jo.service.KeywordTrendService;
@@ -97,8 +100,25 @@ public class KeywordTrendController {
 			return "redirect:/main?err=nodata";
 		}
 
-		System.out.println("성공");
         String encodedKeyword = URLEncoder.encode(title, StandardCharsets.UTF_8);
 		return "redirect:/keyword_trend?do=show&keyword="+encodedKeyword;
+	}
+	
+	@RequestMapping(value = "/drawchart", method = { RequestMethod.GET, RequestMethod.POST } )
+	@ResponseBody
+	public String[][] drawchart(@RequestParam String rawkeyword) {
+		System.out.println("drawchart() 호출됨");
+		String keyword = rawkeyword.replace(" ", "");
+		System.out.println("정리된 keyword: "+keyword);
+		System.out.println(keywordTrendService.select(keyword, "4jo_api_search_all"));
+		
+		String[] line_y_arr = {"test1", "test2", "test3"};
+		String[] line_x_arr = {"1","2","3"};
+		String[] pie_w_data = {"30"};
+		String[] pie_m_data = {"70"};
+		String[] bar_data = {"1","2","1","2","1","2"};
+		
+		String[][] responseBody = {line_y_arr, line_x_arr, pie_w_data, pie_m_data, bar_data};
+		return responseBody;
 	}
 }
