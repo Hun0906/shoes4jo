@@ -29,10 +29,10 @@ public class MainController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/naver_keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
-	public String naver_keyword_trend() {
-		logger.info("naver_keyword_trend() called");
-		return "trend/naver_keyword_trend";
+	@RequestMapping(value = "/keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
+	public String keyword_trend() {
+		logger.info("keyword_trend() called");
+		return "trend/keyword_trend";
 	}
 	
 	@RequestMapping(value = "/google_trend", method = { RequestMethod.GET, RequestMethod.POST })

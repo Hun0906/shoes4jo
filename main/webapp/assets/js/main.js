@@ -93,7 +93,8 @@ function drawChart() {
             }]
         },
         options: {
-            plugins: {
+               responsive: true,
+               plugins: {
                 legend: {
                     display: false
                 },
