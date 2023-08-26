@@ -92,7 +92,7 @@ public class KeywordTrendAPI {
 				+ "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01
 				+ "   \"endDate\": \"" + today + "\","
 				+ "   \"timeUnit\": \"date\","
-				+ "   \"ages\": \""+age+"\"," // 10~60
+		        + "   \"ages\": [\""+age+"\"]," //10~60
 				+ "   \"category\": \"50000001\","
 				+ "   \"keyword\": [{\"name\":\"" + keyword + "\", \"param\": [\"" + keyword + "\"] }]"
 				+ "}";

@@ -101,7 +101,83 @@ public class KeywordTrendController {
 			/* api_search_all에 데이터 추가 */
 			
 			
+			/* api_search_gender에 데이터 추가 */
+			String[] genders = {"f","m"};
+			for (String gen:genders) {
+				String search = keywordTrend.getGenderTrend(title,gen);
+				vo.setGender(gen);
+
+				// json parsing
+				jsonObj = (JSONObject) parser.parse(search);
+				results = (JSONObject) ((JSONArray) jsonObj.get("results")).get(0);
+				data = (JSONArray) results.get("data");
+				if (data.size() != 0) {
+					// 첫날 값에 대해 정규화하여 저장 (api가 주어진 기간 내 최댓값을 100으로 하여 데이터를 제공하기 때문)
+					first_ratio_num = (Number)((JSONObject)data.get(0)).get("ratio");
+					first_ratio = first_ratio_num.doubleValue();
+					for (int i = 0; i < data.size(); i++) {
+						period_sdata = (String) ((JSONObject) data.get(i)).get("period");
+						vo.setPeriod_sdata(period_sdata);
+						
+						// double 변환해 계산 후 int 변경 시 값이 100일 때 오류가 나기 때문에 단계적으로 변환
+						Number ratioNumber = (Number)((JSONObject)data.get(i)).get("ratio");
+						double ratioDouble = ratioNumber.doubleValue();
+						ratio_cnt = (int)((ratioDouble / first_ratio)*100);
+						vo.setRatio_cnt(ratio_cnt);
+						
+						if (keywordTrendService.isExistsGen(period_sdata, keyword, gen)) { //사용한 검색어가 해당 날짜에 값이 있고
+							if (ratio_cnt != keywordTrendService.oldRatioGen(period_sdata, keyword, gen)) { //ratio 값이 다르다면
+								keywordTrendService.updateGen(vo); //업데이트
+								System.out.println(period_sdata+" ("+gen+") 데이터 업데이트됨");
+							}
+						} else { //사용한 검색어가 해당 날짜에 값이 없다면
+							keywordTrendService.insertGen(vo); //추가
+							System.out.println(period_sdata+" ("+gen+") 데이터 추가됨");
+						}
+					}
+				}
+			}
+			/* api_search_gender에 데이터 추가 */
 			
+			
+			/* api_search_ages에 데이터 추가 */
+			int[] ages = {10,20,30,40,50,60};
+			for (int age:ages) {
+				String search = keywordTrend.getAgeTrend(title,age);
+				vo.setAge(age);
+
+				// json parsing
+				jsonObj = (JSONObject) parser.parse(search);
+				results = (JSONObject) ((JSONArray) jsonObj.get("results")).get(0);
+				data = (JSONArray) results.get("data");
+				
+				if (data.size() != 0) {
+					// 첫날 값에 대해 정규화하여 저장 (api가 주어진 기간 내 최댓값을 100으로 하여 데이터를 제공하기 때문)
+					first_ratio_num = (Number)((JSONObject)data.get(0)).get("ratio");
+					first_ratio = first_ratio_num.doubleValue();
+					for (int i = 0; i < data.size(); i++) {
+						period_sdata = (String) ((JSONObject) data.get(i)).get("period");
+						vo.setPeriod_sdata(period_sdata);
+						
+						// double 변환해 계산 후 int 변경 시 값이 100일 때 오류가 나기 때문에 단계적으로 변환
+						Number ratioNumber = (Number)((JSONObject)data.get(i)).get("ratio");
+						double ratioDouble = ratioNumber.doubleValue();
+						ratio_cnt = (int)((ratioDouble / first_ratio)*100);
+						vo.setRatio_cnt(ratio_cnt);
+						
+						if (keywordTrendService.isExistsAge(period_sdata, keyword, age)) { //사용한 검색어가 해당 날짜에 값이 있고
+							if (ratio_cnt != keywordTrendService.oldRatioAge(period_sdata, keyword, age)) { //ratio 값이 다르다면
+								keywordTrendService.updateAge(vo); //업데이트
+								System.out.println(period_sdata+" ("+age+"대) 데이터 업데이트됨");
+							}
+						} else { //사용한 검색어가 해당 날짜에 값이 없다면
+							keywordTrendService.insertAge(vo); //추가
+							System.out.println(period_sdata+" ("+age+"대) 데이터 추가됨");
+						}
+					}
+				}
+			}
+			/* api_search_ages에 데이터 추가 */
 			
 		} else {
 			return "redirect:/main?err=nodata";
@@ -117,13 +193,18 @@ public class KeywordTrendController {
 		String clean_keyword = keyword.replace(" ", "");
 		
 		List<KeywordTrendVO> selectAll = keywordTrendService.selectAll(clean_keyword);
-//		List<KeywordTrendVO> selectFemale = keywordTrendService.selectGen(clean_keyword, "f");
-//		List<KeywordTrendVO> selectMale = keywordTrendService.selectGen(clean_keyword, "m");
-//		List<KeywordTrendVO> selectAge = keywordTrendService.selectAge(clean_keyword);
-		
 		model.addAttribute("selectAll", selectAll);
-		//model.addAttribute("selectGen", selectGen);
-		//model.addAttribute("selectAge", selectAge);
+		
+		List<KeywordTrendVO> selectFemale = keywordTrendService.selectGen(clean_keyword, "f");
+		List<KeywordTrendVO> selectMale = keywordTrendService.selectGen(clean_keyword, "m");
+		model.addAttribute("selectFemale", selectFemale);
+		model.addAttribute("selectMale", selectMale);
+		
+		int[] ages = {10,20,30,40,50,60};
+		for (int age:ages) {
+			List<KeywordTrendVO> selectAge = keywordTrendService.selectAge(clean_keyword, age);
+			model.addAttribute("selectAge"+age, selectAge);
+		}
 		
 		model.addAttribute("show", "t");
 		model.addAttribute("keyword", keyword);

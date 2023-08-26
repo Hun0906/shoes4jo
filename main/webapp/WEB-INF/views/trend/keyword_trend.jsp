@@ -62,12 +62,21 @@ function drawChart() {
 	let yArr = document.getElementById("selectAll_y").innerHTML.trim().split(" ").reverse();
 	drawLineChart(yArr.map(e=>e/Math.max(...yArr)), xArr.map(e=>e.slice(5,7)+"/"+e.slice(8))); //최대값으로 정규화
 	
-	let Fval = document.getElementById("selectGen_f").innerHTML;
-	let Mval = document.getElementById("selectGen_m").innerHTML;
-	drawPieChart(Fval,Mval);
+	let fArr = document.getElementById("selectGen_f").innerHTML.trim().split(" ");
+	let mArr = document.getElementById("selectGen_m").innerHTML.trim().split(" ");
+	let fVal = fArr.reduce((acc,e)=>acc+e); //기간 내 데이터 합산
+	let mVal = mArr.reduce((acc,e)=>acc+e);
+	drawPieChart((fVal*100)/(fVal+mVal),(mVal*100)/(fVal+mVal)); //퍼센티지화
 	
-	let barData = document.getElementById("selectAge").innerHTML.split(",");
-	drawBarChart(barData);
+	
+	let selectAge_10 = document.getElementById("selectAge_10").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
+	let selectAge_20 = document.getElementById("selectAge_20").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
+	let selectAge_30 = document.getElementById("selectAge_30").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
+	let selectAge_40 = document.getElementById("selectAge_40").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
+	let selectAge_50 = document.getElementById("selectAge_50").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
+	let selectAge_60 = document.getElementById("selectAge_60").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
+	let barArr = [selectAge_10,selectAge_20,selectAge_30,selectAge_40,selectAge_50,selectAge_60];
+	drawBarChart(barArr.map(e=>e/Math.max(...barArr)));
 
 	closeLoading();
 }
@@ -119,9 +128,14 @@ margin-bottom: 2rem;
 			<div style="display: none;">
 			<span id="selectAll_x"><c:forEach var="selectAll" items="${selectAll}">${selectAll.period_sdata} </c:forEach></span>
 			<span id="selectAll_y"><c:forEach var="selectAll" items="${selectAll}">${selectAll.ratio_cnt} </c:forEach></span>
-			<span id="selectGen_f"><c:forEach var="selectGen_f" items="${selectGen}">${selectGen_f.ratio_cnt} </c:forEach></span>
-			<span id="selectGen_m"><c:forEach var="selectGen_m" items="${selectGen}">${selectGen_m.ratio_cnt} </c:forEach></span>
-			<span id="selectAge"><c:forEach var="selectAge" items="${selectAge}">${selectAge.ratio_cnt} </c:forEach></span>
+			<span id="selectGen_f"><c:forEach var="selectFemale" items="${selectFemale}">${selectFemale.ratio_cnt} </c:forEach></span>
+			<span id="selectGen_m"><c:forEach var="selectMale" items="${selectMale}">${selectMale.ratio_cnt} </c:forEach></span>
+			<span id="selectAge_10"><c:forEach var="selectAge10" items="${selectAge10}">${selectAge10.ratio_cnt} </c:forEach></span>
+			<span id="selectAge_20"><c:forEach var="selectAge20" items="${selectAge20}">${selectAge20.ratio_cnt} </c:forEach></span>
+			<span id="selectAge_30"><c:forEach var="selectAge30" items="${selectAge30}">${selectAge30.ratio_cnt} </c:forEach></span>
+			<span id="selectAge_40"><c:forEach var="selectAge40" items="${selectAge40}">${selectAge40.ratio_cnt} </c:forEach></span>
+			<span id="selectAge_50"><c:forEach var="selectAge50" items="${selectAge50}">${selectAge50.ratio_cnt} </c:forEach></span>
+			<span id="selectAge_60"><c:forEach var="selectAge60" items="${selectAge60}">${selectAge60.ratio_cnt} </c:forEach></span>
 			</div>
 			
 			<div style="display: grid; row-gap: 3rem;">
