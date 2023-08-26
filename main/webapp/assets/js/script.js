@@ -1,8 +1,11 @@
 function showLoading() {
     //화면에 로딩 레이어 추가
     let mask = "<div id='mask' style='display: none;'><img id='mask-img' src='/Shoes4Jo/assets/img/gooey_ring.svg'></div>";
-    $('body').append(mask)
+    $('body').css({
+    	'overflow': 'hidden',
+    })
  
+    $('body').append(mask)
     $('#mask').css({
 	    'z-index': '9999',
 	    'position': 'absolute',
