@@ -4,6 +4,6 @@
 <%=sessionID %>	전용<br>관리 페이지</p>
 <hr class="menu-member" style="margin: 0.6rem 0;">
 <li><a class="dropdown-item" onclick="location.href='<%=context%>/controller/showMember'">👥가입자 리스트</a></li> 
-<li><a class="dropdown-item" onclick="location.href='<%=context%>/goodscon/list.do'">ㅁ둥록 상품 리스트</a></li> 
+<li><a class="dropdown-item" onclick="location.href='<%=context%>/goodscon/list.do'">🥾등록 상품 리스트</a></li> 
 <li><a class="dropdown-item" onclick="location.href='<%=context%>/board/list.do'">📚게시판 관리</a></li>
 <li><a class="dropdown-item" onclick="location.href='<%=context%>/controller/logout'">🔑로그아웃</a></li> 
