@@ -79,6 +79,9 @@ function drawChart() {
 	drawBarChart(barArr.map(e=>e/Math.max(...barArr)));
 
 	closeLoading();
+    $('body').css({
+    	'overflow': '',
+    })
 }
 </script>
 

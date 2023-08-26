@@ -49,7 +49,7 @@ font-weight: 300;
 width: 100%;
 padding-bottom: 100%;
 margin: 0 auto;
-background-size: 100%;
+background-size: cover;
 background-position: center;
 }
 

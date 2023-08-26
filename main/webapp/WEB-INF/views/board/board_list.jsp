@@ -40,13 +40,13 @@
 		<select class="form-select" style="width: fit-content"
 			onchange="window.open(value,'_self')">
 			<option value="">카테고리 선택</option>
-			<option value="${context}/board/list.do">전체 글 보기</option>
-			<option value="${context}/board/list.do?category=news">뉴스</option>
-			<option value="${context}/board/list.do?category=events">이벤트</option>
-			<option value="${context}/board/list.do?category=columns">칼럼</option> 
+			<option value="<%=context %>/board/list.do">전체 글 보기</option>
+			<option value="<%=context %>/board/list.do?category=news">뉴스</option>
+			<option value="<%=context %>/board/list.do?category=events">이벤트</option>
+			<option value="<%=context %>/board/list.do?category=columns">칼럼</option> 
 	    </select> 
 
-	    <a href="${context}/board/write.do" class="btn-basic">글쓰기</a>
+	    <button onclick="location.href='<%=context %>/board/write.do'" class="btn-basic">글쓰기</button>
 			
 		</div>
 		
@@ -85,18 +85,18 @@
 
 			<c:if test="${pageMaker.prev}">
 				<li><a class="page-link"
-					href="${context}/board/list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+					href="<%=context %>/board/list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
 
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
 				var="idx">
 				<li><a class="page-link"
-					href="${context}/board/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+					href="<%=context %>/board/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 				<li><a class="page-link"
-					href="${context}/board/list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+					href="<%=context %>/board/list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 			</c:if>
 
 		</ul>
