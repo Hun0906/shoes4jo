@@ -33,12 +33,15 @@ public class BoardController {
 	public String list(Model model, Criteria cri) throws Exception {
 		List<BoardVO> list = boardService.listPage(cri);
 		model.addAttribute("list", list);
+		// 페이지 정보와 게시글 목록을 가져옴
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(boardService.listCount());
+		// 총 게시글 개수를 가져와 페이지 메이커에 설정
 
 		model.addAttribute("pageMaker", pageMaker);
+		// 페이지메이커 객체를 모델에 추가해서 뷰로 실어보내줌
 
 		return "board/board_list";
 	}
@@ -70,24 +73,24 @@ public class BoardController {
 	public String writeOk(@ModelAttribute BoardVO board,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
-		// 파일이 비어있지 않은 경우
+		// 사용자가 파일 첨부하지 않고 글을 쓸 경우를 처리하기 위한 코드
 		if (file != null && !file.isEmpty()) {
 			String originalFilename = file.getOriginalFilename(); // 원본 파일 이름을 가져옴
 			String extension = FilenameUtils.getExtension(originalFilename); // 원본 파일의 확장자를 가져옴
-			String newFileName = System.currentTimeMillis() + "." + extension; // 새로운 파일 이름 생성
+			String newFileName = System.currentTimeMillis() + "." + extension; // 시스템 현재시간과 확장자를 이용하여 새로운 파일 이름 생성
 
-			board.setFile_name(originalFilename); // 보드의 파일 이름을 새로운 파일 이름으로 설정
-			board.setFile_path(newFileName); // 보드의 파일 경로를 새로운 파일 경로로 설정
+			board.setFile_name(originalFilename); // 게시글 정보에 원본 파일 이름 설정
+			board.setFile_path(newFileName);// 게시글 정보에 파일 경로를 새로 설정
 
-			String realPath = session.getServletContext().getRealPath("assets/img/");
-			System.out.println("파일 저장 성공: " + realPath);
+			String realPath = session.getServletContext().getRealPath("assets/img/");// 실제 저장 경로 설정
+			System.out.println("파일 저장 성공: " + realPath);// 저장 경로 어디로 해놨는지 출력해봄
 
 			File newFile = new File(realPath, newFileName);
 
-			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile); // 새로 업로드된 이미지 경로에 저장
+			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile); // 업로드된 이미지를 실제 저장 경로에 복사
 		}
 
-		boardService.insertOne(board); // 게시글 DB에 저장하는 메서드 호출
+		boardService.insertOne(board); // BoardServiceImpl에 만들어놨던 새 게시글 DB에 저장하는 insertOne 메서드 호출
 
 		return "redirect:/board/list.do"; // 목록 페이지로 리다이렉트
 	}
@@ -98,18 +101,18 @@ public class BoardController {
 		return new ModelAndView("board/board_update", "board", board);
 	}
 
-	@RequestMapping("/updateOk.do")
+	@RequestMapping("/updateOk.do") // HTTP 요청 경로 설정
 	public String updateOk(@ModelAttribute BoardVO board,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
-		if (file != null && !file.isEmpty()) {
-			String originalFilename = file.getOriginalFilename();
-			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
+		if (file != null && !file.isEmpty()) { // 만약 업로드된 파일이 존재하면
+			String originalFilename = file.getOriginalFilename();// 원본 파일 이름을 가져옴
+			String extension = FilenameUtils.getExtension(originalFilename);// 원본 파일의 확장자를 가져옴
+			String newFileName = System.currentTimeMillis() + "." + extension; // 새로운 파일 이름을 생성 (현재 시간.확장자)
 
 			board.setFile_name(originalFilename);
 			board.setFile_path(newFileName);
-			// 파일이 비어있지 않으면 원본 파일명,확장자 가져오고 새 파일 이름 생성->보드에 새 파일명,파일 경로로 설정
+			// 위에서 생성한 새로운 파일명과 원본파일명을 BoardVO 객체(board)에 설정
 
 			BoardVO oldBoardData = boardService.selectOne(String.valueOf(board.getBno()));
 			if (oldBoardData != null && oldBoardData.getFile_path() != null) {
@@ -119,7 +122,6 @@ public class BoardController {
 					oldFile.delete();
 				}
 			}
-			// 이전 파일이 null값이 아니면 삭제하기
 			String realPath = session.getServletContext().getRealPath("assets/img/");
 			System.out.println("파일 저장 성공: " + realPath);
 			// boardService에 있는 selectOne메서드로 번호에 해당하는 거 조회하고
@@ -132,17 +134,18 @@ public class BoardController {
 				FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			} // MultipartFile 객체에서 InputStream을 얻어와서 실제 경로에 해당 InputStream으로부터 읽은 데이터를 저장함
 		} else {
+			// 사용자가 이미지 업데이트 없이 다른 정보만 수정한거면 기존 이미지 정보 유지하게 함
 			BoardVO oldBoardData = boardService.selectOne(String.valueOf(board.getBno()));
 			if (oldBoardData != null) {
-				// 새로 업로드 한 이미지를 경로에 저장. 이미지 업데이트 안했으면 기존 이미지 정보 유지함
+
 				board.setFile_name(oldBoardData.getFile_name());
 				board.setFile_path(oldBoardData.getFile_path());
 			}
 		}
 
-		// BoardService의 selectOne메서드(게시물 번호에 해당하는거 가져오는거)사용해서 DB에 업데이트 된 정보 저장
+		// BoardService의 updateOne메서드 사용해서 DB에 수정한 정보 저장
 		boardService.updateOne(board);
 
 		return "redirect:/board/list.do";
