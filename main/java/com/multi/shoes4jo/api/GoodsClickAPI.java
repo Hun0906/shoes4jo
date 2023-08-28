@@ -62,7 +62,6 @@ public class GoodsClickAPI {
 	@ResponseBody
 	public String getGenderTrend(@RequestParam String keyword, @RequestParam String gender) throws Exception {
 		logger.info("getGenderTrend() called");
-		System.out.println("검색어 (=title): " + keyword);
 		
 		String requestBody = "{"
 				+ "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01
@@ -85,7 +84,6 @@ public class GoodsClickAPI {
 	@ResponseBody
 	public String getDeviceTrend(@RequestParam String keyword, @RequestParam String device) throws Exception {
 		logger.info("getDeviceTrend() called");
-		System.out.println("검색어 (=title): " + keyword);
 		
 		String requestBody = "{"
 				+ "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01
@@ -108,7 +106,6 @@ public class GoodsClickAPI {
 	@ResponseBody
 	public String getAgeTrend(@RequestParam String keyword, @RequestParam int age) throws Exception {
 		logger.info("getAgeTrend() called");
-		System.out.println("검색어 (=title): " + keyword);
 		
 		String requestBody = "{"
 				+ "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01

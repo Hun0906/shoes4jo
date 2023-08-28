@@ -57,6 +57,9 @@ public class GoodsTrendController {
 			List<GoodsTrendVO> selectAll = goodsTrendService.selectAll(clean_keyword);
 			model.addAttribute("selectAll", selectAll);
 			
+			List<GoodsTrendVO> search = goodsTrendService.selectSearch(clean_keyword);
+			model.addAttribute("search", search);
+			
 			List<GoodsTrendVO> selectFemale = goodsTrendService.selectGen(clean_keyword, "f");
 			List<GoodsTrendVO> selectMale = goodsTrendService.selectGen(clean_keyword, "m");
 			model.addAttribute("selectFemale", selectFemale);

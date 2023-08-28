@@ -38,19 +38,16 @@ public class GoodsSearchAPI {
 
 	
 	@ResponseBody
-    public String getSearchData(@RequestParam String keyword) throws Exception {
-		logger.info("getTrendData() called");
+    public String getTrendData(@RequestParam String keyword) throws Exception {
+		logger.info("getTrendData() of GoodsSearch called");
         System.out.println("검색어 (=title): " + keyword);
 
         String requestBody = "{"
-                + "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-01-01
-                + "   \"endDate\": \"" + today + "\","
-                + "   \"timeUnit\": \"date\","
-                + "   \"keywordGroups\":[{\"groupName\":\"" + keyword + "\"," + "\"keywords\":[\"" + keyword + "\"]},"
-                //+ "\"device\":\"pc\","
-                //+ "\"ages\":[\"1\",\"2\"],"
-                //+ "\"gender\":\"f\"}"
-                + "}";
+        	    + "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-01-01
+        	    + "   \"endDate\": \"" + today + "\","
+        	    + "   \"timeUnit\": \"date\","
+        	    + "   \"keywordGroups\":[{\"groupName\":\"" + keyword + "\"," + "\"keywords\":[\"" + keyword + "\"]}]"
+        	    + "}";
         
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);

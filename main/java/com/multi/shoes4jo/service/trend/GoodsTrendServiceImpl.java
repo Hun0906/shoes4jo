@@ -13,12 +13,19 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
     @Autowired
     private GoodsTrendMapper goodsTrendMapper;
 
+    //list
     @Override
 	public List<GoodsTrendVO> selectAll(String keyword) {
 	    List<GoodsTrendVO> resultList = goodsTrendMapper.selectAll(keyword);
 	    return resultList;
 	}
-	
+
+	@Override
+	public List<GoodsTrendVO> selectSearch(String keyword) {
+		List<GoodsTrendVO> resultList = goodsTrendMapper.selectSearch(keyword);
+	    return resultList;
+	}
+
 	@Override
 	public List<GoodsTrendVO> selectGen(String keyword, String gender) {
 		List<GoodsTrendVO> vo = goodsTrendMapper.selectGen(keyword, gender);
@@ -37,9 +44,16 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 		return vo;
 	}
 
+	
+	//insert
 	@Override
 	public void insert(GoodsTrendVO vo) {
 		goodsTrendMapper.insert(vo);
+	}
+
+	@Override
+	public void insertSearch(GoodsTrendVO vo) {
+		goodsTrendMapper.insertSearch(vo);
 	}
 	
 	@Override
@@ -57,9 +71,16 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 		goodsTrendMapper.insertAge(vo);
 	}
 
+	
+	//update
 	@Override
 	public void update(GoodsTrendVO vo) {
 		goodsTrendMapper.update(vo);
+	}
+
+	@Override
+	public void updateSearch(GoodsTrendVO vo) {
+		goodsTrendMapper.updateSearch(vo);
 	}
 	
 	@Override
@@ -77,9 +98,17 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 		goodsTrendMapper.updateAge(vo);
 	}
 
+	
+	//isExists
 	@Override
 	public boolean isExists(String period_sdata, String keyword) {
 		int num = goodsTrendMapper.isExists(period_sdata, keyword);
+		return num == 1;
+	}
+	
+	@Override
+	public boolean isExistsSearch(String period_sdata, String keyword) {
+		int num = goodsTrendMapper.isExistsSearch(period_sdata, keyword);
 		return num == 1;
 	}
 	
@@ -101,11 +130,18 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 		return num == 1;
 	}
 
+	
+	//oldRatio
 	@Override
 	public int oldRatio(String period_sdata, String keyword) {
 		return goodsTrendMapper.oldRatio(period_sdata, keyword);
 	}
 
+	@Override
+	public int oldRatioSearch(String period_sdata, String keyword) {
+		return goodsTrendMapper.oldRatioSearch(period_sdata, keyword);
+	}
+	
 	@Override
 	public int oldRatioGen(String period_sdata, String keyword, String gender) {
 		return goodsTrendMapper.oldRatioGen(period_sdata, keyword, gender);

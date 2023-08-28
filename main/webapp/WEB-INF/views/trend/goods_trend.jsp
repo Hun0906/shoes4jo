@@ -65,8 +65,9 @@ function getDBdata() {
 
 function drawChart() {
 	let xArr = document.getElementById("selectAll_x").innerHTML.trim().split(" ").reverse(); //내림차순 정렬이기 때문에 reverse
-	let yArr = document.getElementById("selectAll_y").innerHTML.trim().split(" ").reverse();
-	drawLineChart(yArr.map(e=>e/Math.max(...yArr)), xArr.map(e=>e.slice(5,7)+"/"+e.slice(8))); //최대값으로 정규화
+	let yArr1 = document.getElementById("selectAll_y").innerHTML.trim().split(" ").reverse();
+	let yArr2 = document.getElementById("search_y").innerHTML.trim().split(" ").reverse();
+	drawLineChart(yArr1.map(e=>e/Math.max(...yArr1)), yArr2.map(e=>e/Math.max(...yArr2)), xArr.map(e=>e.slice(5,7)+"/"+e.slice(8))); //최대값으로 정규화
 	
 	let fArr = document.getElementById("selectGen_f").innerHTML.trim().split(" ");
 	let mArr = document.getElementById("selectGen_m").innerHTML.trim().split(" ");
@@ -98,18 +99,31 @@ function drawChart() {
 
 <style>
 .goods_trend_header{
-margin-bottom: 2rem;
+margin: 2rem 0;
 }
 
 .goods_trend_header a{
 	position: relative;
-    top: -0.8rem;
+    top: -0.5rem;
     margin: 0.3rem;
     border-radius: 10px;
     padding: 3px 10px 5px 10px;
     background: #f7f7f7;
     color: #5c5c5c;
     text-decoration: none;
+}
+
+h2{
+display: inline;
+}
+
+.normal{
+	background: none;
+	font-size: 2rem;
+}
+
+hr{
+margin: 2.25rem 0;
 }
 </style>
 
@@ -127,9 +141,9 @@ margin-bottom: 2rem;
 				<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button>
 			</form>
 			<div class="goods_trend_header">
-			<hr>
-			<h2><%=(keyword == null) ? "" : keyword%></h2>
 			<a href="">⭐즐겨찾기 등록</a><a href="">🔎상품 상세페이지</a>
+			<hr>
+			<h2><%=(keyword == null) ? "" : keyword%></h2><span class="normal">에 대한 사람들의 관심도는?</span>
 			</div>
 			<div style="display: none;">
 				<a target="_blank" href="https://developers.naver.com/docs/serviceapi/datalab/shopping/shopping.md#%EC%87%BC%ED%95%91%EC%9D%B8%EC%82%AC%EC%9D%B4%ED%8A%B8-%ED%82%A4%EC%9B%8C%EB%93%9C%EB%B3%84-%ED%8A%B8%EB%A0%8C%EB%93%9C-%EC%A1%B0%ED%9A%8C">
@@ -142,6 +156,7 @@ margin-bottom: 2rem;
 			<div style="display: none;">
 			<span id="selectAll_x"><c:forEach var="selectAll" items="${selectAll}">${selectAll.period_sdata} </c:forEach></span>
 			<span id="selectAll_y"><c:forEach var="selectAll" items="${selectAll}">${selectAll.ratio_cnt} </c:forEach></span>
+			<span id="search_y"><c:forEach var="search" items="${search}">${search.ratio_cnt} </c:forEach></span>
 			<span id="selectGen_f"><c:forEach var="selectFemale" items="${selectFemale}">${selectFemale.ratio_cnt} </c:forEach></span>
 			<span id="selectGen_m"><c:forEach var="selectMale" items="${selectMale}">${selectMale.ratio_cnt} </c:forEach></span>
 			<span id="selectDev_pc"><c:forEach var="selectPC" items="${selectPC}">${selectPC.ratio_cnt} </c:forEach></span>
