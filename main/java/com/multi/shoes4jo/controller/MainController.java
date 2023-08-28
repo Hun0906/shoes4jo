@@ -29,10 +29,10 @@ public class MainController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
-	public String keyword_trend() {
-		logger.info("keyword_trend() called");
-		return "trend/keyword_trend";
+	@RequestMapping(value = "/goods_trend", method = { RequestMethod.GET, RequestMethod.POST })
+	public String goods_trend() {
+		logger.info("goods_trend() called");
+		return "trend/goods_trend";
 	}
 	
 	@RequestMapping(value = "/google_trend", method = { RequestMethod.GET, RequestMethod.POST })
@@ -52,6 +52,12 @@ public class MainController {
 		logger.info("ranking() called");
 		return "trend/ranking";
 	}
+	
+	@RequestMapping(value = "/trend_save", method = { RequestMethod.GET, RequestMethod.POST })
+	public String trend_save() {
+		logger.info("trend_save() called");
+		return "trend/trend_save";
+	}
 
 	@RequestMapping(value = "/signup", method = { RequestMethod.GET, RequestMethod.POST })
 	public String signup() {
@@ -62,7 +68,6 @@ public class MainController {
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
 	public String about() {
 		logger.info("about() called");
-		
 		return "common/about";
 	}
 	
@@ -76,23 +81,18 @@ public class MainController {
 	@RequestMapping(value = "/my_edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String my_edit() {
 		logger.info("my_edit() called");
-
 		return "member/my_edit";
 	}
-
 
 	@RequestMapping(value = "/acknowledgement", method = RequestMethod.GET)
 	public String acknowledgement() {
 		logger.info("acknowledgement() called");
-		
 		return "common/acknowledgement";
 	}
-
 	
 	@RequestMapping(value = "/coupang_dummy", method = RequestMethod.GET)
 	public String coupang_dummy() {
 		logger.info("coupang_dummy() called");
-		
 		return "test/coupang_dummy";
 	}
 	

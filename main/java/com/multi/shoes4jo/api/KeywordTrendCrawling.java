@@ -9,7 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class CoupangDummy {
+public class KeywordTrendCrawling {
 
 	public static void main(String[] args) {
         // 키워드 리스트를 정의합니다.

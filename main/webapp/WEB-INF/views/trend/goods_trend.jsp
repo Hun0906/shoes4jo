@@ -12,33 +12,39 @@
 <script src="<%=context%>/assets/js/script.js"></script>
 <script>
 window.onload = function() {
-	showLoading();
 	getCode();
 }
 
 function getCode() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
-	const code = urlParams.get('show');
-	if (code == 'f') {
+
+	const keyword = urlParams.get('keyword');
+	if (!keyword){
+		alert("검색어를 입력하세요.");
+		location.href="<%=context%>/main";
+	}
+	
+	const msg = urlParams.get('msg');
+	if (msg == 'get') {
     	getDBdata();
-    } else {
-		drawChart();
+    } else if (msg == 'err') {
+    	if (confirm("데이터가 없습니다. 추가하시겠습니까?")){
+    		getAPIResult();
+    	} else {
+    		location.href="<%=context%>/main";
+    	}
     }
+	drawChart();
 }
 
 function getAPIResult() {
-	let keyword = document.getElementById("keyword").value;
-
-	if (!keyword || keyword === "" || keyword === "null" || keyword === null) {
-		alert("검색어를 입력하세요.");
-		location.href="main";
-	}
-
 	showLoading();
+
+	let keyword = document.getElementById("keyword").value;
 	
 	console.log("keyword: "+keyword);
-	document.keywordTrendForm.action = "<%=context%>/keyword_trend/con/insert.do";
+	document.keywordTrendForm.action = "<%=context%>/save/goods_trend";
 	document.keywordTrendForm.submit();
 }
 
@@ -53,7 +59,7 @@ function getDBdata() {
 	showLoading();
 	
 	console.log("keyword: "+keyword);
-	document.keywordTrendForm.action = "<%=context%>/keyword_trend/con/drawchart";
+	document.keywordTrendForm.action = "<%=context%>/goods_trend/get_data";
 	document.keywordTrendForm.submit();
 }
 
@@ -64,8 +70,8 @@ function drawChart() {
 	
 	let fArr = document.getElementById("selectGen_f").innerHTML.trim().split(" ");
 	let mArr = document.getElementById("selectGen_m").innerHTML.trim().split(" ");
-	let fVal = fArr.reduce((acc,e)=>acc+e); //기간 내 데이터 합산
-	let mVal = mArr.reduce((acc,e)=>acc+e);
+	let fVal = fArr.reduce((acc,e)=>e,0); //기간 내 데이터 합산
+	let mVal = mArr.reduce((acc,e)=>e,0);
 	drawPieChart((fVal*100)/(fVal+mVal),(mVal*100)/(fVal+mVal)); //퍼센티지화
 	
 	
@@ -86,11 +92,11 @@ function drawChart() {
 </script>
 
 <style>
-.keyword_trend_header{
+.goods_trend_header{
 margin-bottom: 2rem;
 }
 
-.keyword_trend_header a{
+.goods_trend_header a{
 	position: relative;
     top: -0.8rem;
     margin: 0.3rem;
@@ -107,7 +113,7 @@ margin-bottom: 2rem;
 	<%@include file="../common/header.jsp"%>
 	<div class="contents">
 		<div class="container" id="container" style="text-align: center;">
-			<form name="keywordTrendForm" action="javascript:getAPIResult();">
+			<form name="keywordTrendForm" action="javascript:getDBdata();">
 				<%
 				String keyword = request.getParameter("keyword");
 				%>
@@ -115,7 +121,7 @@ margin-bottom: 2rem;
 					value="<%=(keyword == null) ? "" : keyword%>"/>
 				<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button>
 			</form>
-			<div class="keyword_trend_header">
+			<div class="goods_trend_header">
 			<hr>
 			<h2><%=(keyword == null) ? "" : keyword%></h2>
 			<a href="">⭐즐겨찾기 등록</a><a href="">🔎상품 상세페이지</a>

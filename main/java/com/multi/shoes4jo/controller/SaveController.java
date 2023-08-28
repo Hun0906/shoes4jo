@@ -4,7 +4,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,36 +12,33 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.multi.shoes4jo.api.KeywordTrendAPI;
-import com.multi.shoes4jo.service.keyword.KeywordTrendService;
+import com.multi.shoes4jo.api.GoodsClickAPI;
 import com.multi.shoes4jo.service.ranking.RankingService;
-import com.multi.shoes4jo.vo.KeywordTrendVO;
+import com.multi.shoes4jo.service.trend.GoodsTrendService;
+import com.multi.shoes4jo.vo.GoodsTrendVO;
 
 @Controller
-@RequestMapping("/keyword_trend/con")
-public class KeywordTrendController {
+@RequestMapping("/save")
+public class SaveController {
 
 	@Autowired
-	KeywordTrendService keywordTrendService;
+	GoodsTrendService goodsTrendService;
 
 	@Autowired
 	RankingService rankingService;
 
 	@Autowired
-	KeywordTrendAPI keywordTrend;
+	GoodsClickAPI goodsClick;
 
 	@Autowired
 	HttpServletRequest request;
 
-	@RequestMapping(value = "/insert.do")
-	public String insert(KeywordTrendVO vo) throws Exception {
+	@RequestMapping(value = "/goods_trend")
+	public String goods_trend(GoodsTrendVO vo) throws Exception {
 		String title = request.getParameter("keyword");
-		String searchAll = keywordTrend.getTrendData(title);
+		String searchAll = goodsClick.getTrendData(title);
 
 		// json parsing
 		JSONParser parser = new JSONParser();
@@ -54,21 +50,6 @@ public class KeywordTrendController {
 		
 
 		if (data.size() != 0) {
-			/* 랭킹 테이블에 값 추가 */
-			Date dateObj = new Date();
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String date = simpleDateFormat.format(dateObj);
-
-			boolean isExists = rankingService.isExists(keyword, date);
-			if (isExists) {
-				System.out.println(date + " / " + keyword + " count on Ranking updated");
-				rankingService.update(keyword, date);
-			} else {
-				System.out.println(date + " / " + keyword + " added to Ranking");
-				rankingService.insert(keyword, title);
-			}
-			/* 랭킹 테이블에 값 추가 */
-
 			//api_search DB들에 저장하기 위한 공통 선언부
 			String period_sdata;
 			vo.setKeyword(keyword);
@@ -88,13 +69,13 @@ public class KeywordTrendController {
 				ratio_cnt = (int)((ratioDouble / first_ratio)*100);
 				vo.setRatio_cnt(ratio_cnt);
 				
-				if (keywordTrendService.isExists(period_sdata, keyword)) { //사용한 검색어가 해당 날짜에 값이 있고
-					if (ratio_cnt != keywordTrendService.oldRatio(period_sdata, keyword)) { //ratio 값이 다르다면
-						keywordTrendService.update(vo); //업데이트
+				if (goodsTrendService.isExists(period_sdata, keyword)) { //사용한 검색어가 해당 날짜에 값이 있고
+					if (ratio_cnt != goodsTrendService.oldRatio(period_sdata, keyword)) { //ratio 값이 다르다면
+						goodsTrendService.update(vo); //업데이트
 						System.out.println(period_sdata+" 데이터 업데이트됨");
 					}
 				} else { //사용한 검색어가 해당 날짜에 값이 없다면
-					keywordTrendService.insert(vo); //추가
+					goodsTrendService.insert(vo); //추가
 					System.out.println(period_sdata+" 데이터 추가됨");
 				}
 			}
@@ -104,7 +85,7 @@ public class KeywordTrendController {
 			/* api_search_gender에 데이터 추가 */
 			String[] genders = {"f","m"};
 			for (String gen:genders) {
-				String search = keywordTrend.getGenderTrend(title,gen);
+				String search = goodsClick.getGenderTrend(title,gen);
 				vo.setGender(gen);
 
 				// json parsing
@@ -125,13 +106,13 @@ public class KeywordTrendController {
 						ratio_cnt = (int)((ratioDouble / first_ratio)*100);
 						vo.setRatio_cnt(ratio_cnt);
 						
-						if (keywordTrendService.isExistsGen(period_sdata, keyword, gen)) { //사용한 검색어가 해당 날짜에 값이 있고
-							if (ratio_cnt != keywordTrendService.oldRatioGen(period_sdata, keyword, gen)) { //ratio 값이 다르다면
-								keywordTrendService.updateGen(vo); //업데이트
+						if (goodsTrendService.isExistsGen(period_sdata, keyword, gen)) { //사용한 검색어가 해당 날짜에 값이 있고
+							if (ratio_cnt != goodsTrendService.oldRatioGen(period_sdata, keyword, gen)) { //ratio 값이 다르다면
+								goodsTrendService.updateGen(vo); //업데이트
 								System.out.println(period_sdata+" ("+gen+") 데이터 업데이트됨");
 							}
 						} else { //사용한 검색어가 해당 날짜에 값이 없다면
-							keywordTrendService.insertGen(vo); //추가
+							goodsTrendService.insertGen(vo); //추가
 							System.out.println(period_sdata+" ("+gen+") 데이터 추가됨");
 						}
 					}
@@ -143,7 +124,7 @@ public class KeywordTrendController {
 			/* api_search_ages에 데이터 추가 */
 			int[] ages = {10,20,30,40,50,60};
 			for (int age:ages) {
-				String search = keywordTrend.getAgeTrend(title,age);
+				String search = goodsClick.getAgeTrend(title,age);
 				vo.setAge(age);
 
 				// json parsing
@@ -165,13 +146,13 @@ public class KeywordTrendController {
 						ratio_cnt = (int)((ratioDouble / first_ratio)*100);
 						vo.setRatio_cnt(ratio_cnt);
 						
-						if (keywordTrendService.isExistsAge(period_sdata, keyword, age)) { //사용한 검색어가 해당 날짜에 값이 있고
-							if (ratio_cnt != keywordTrendService.oldRatioAge(period_sdata, keyword, age)) { //ratio 값이 다르다면
-								keywordTrendService.updateAge(vo); //업데이트
+						if (goodsTrendService.isExistsAge(period_sdata, keyword, age)) { //사용한 검색어가 해당 날짜에 값이 있고
+							if (ratio_cnt != goodsTrendService.oldRatioAge(period_sdata, keyword, age)) { //ratio 값이 다르다면
+								goodsTrendService.updateAge(vo); //업데이트
 								System.out.println(period_sdata+" ("+age+"대) 데이터 업데이트됨");
 							}
 						} else { //사용한 검색어가 해당 날짜에 값이 없다면
-							keywordTrendService.insertAge(vo); //추가
+							goodsTrendService.insertAge(vo); //추가
 							System.out.println(period_sdata+" ("+age+"대) 데이터 추가됨");
 						}
 					}
@@ -184,31 +165,6 @@ public class KeywordTrendController {
 		}
 
         String encodedKeyword = URLEncoder.encode(title, StandardCharsets.UTF_8);
-		return "redirect:/keyword_trend?show=f&keyword="+encodedKeyword;
-	}
-	
-	@RequestMapping(value = "/drawchart", method = { RequestMethod.GET, RequestMethod.POST } )
-	public String drawchart(@RequestParam String keyword, Model model) {
-		System.out.println("drawchart() 호출됨");
-		String clean_keyword = keyword.replace(" ", "");
-		
-		List<KeywordTrendVO> selectAll = keywordTrendService.selectAll(clean_keyword);
-		model.addAttribute("selectAll", selectAll);
-		
-		List<KeywordTrendVO> selectFemale = keywordTrendService.selectGen(clean_keyword, "f");
-		List<KeywordTrendVO> selectMale = keywordTrendService.selectGen(clean_keyword, "m");
-		model.addAttribute("selectFemale", selectFemale);
-		model.addAttribute("selectMale", selectMale);
-		
-		int[] ages = {10,20,30,40,50,60};
-		for (int age:ages) {
-			List<KeywordTrendVO> selectAge = keywordTrendService.selectAge(clean_keyword, age);
-			model.addAttribute("selectAge"+age, selectAge);
-		}
-		
-		model.addAttribute("show", "t");
-		model.addAttribute("keyword", keyword);
-
-		return "trend/keyword_trend";
+		return "redirect:/goods_trend?msg=show&keyword="+encodedKeyword;
 	}
 }

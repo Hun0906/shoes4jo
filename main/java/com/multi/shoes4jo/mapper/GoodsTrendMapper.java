@@ -8,18 +8,18 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
  
-import com.multi.shoes4jo.vo.KeywordTrendVO;
+import com.multi.shoes4jo.vo.GoodsTrendVO;
 
 @Mapper
-public interface KeywordTrendMapper {
+public interface GoodsTrendMapper {
     @Select("SELECT * FROM `4jo_api_search_all` WHERE keyword = #{keyword} ORDER BY period_sdata DESC limit 30")
-    List<KeywordTrendVO> selectAll(@Param("keyword") String keyword);
+    List<GoodsTrendVO> selectAll(@Param("keyword") String keyword);
 
     @Select("SELECT * FROM `4jo_api_search_gender` WHERE keyword = #{keyword} and gender = #{gender} ORDER BY period_sdata DESC limit 30")
-    List<KeywordTrendVO> selectGen(@Param("keyword") String keyword, @Param("gender") String gender);
+    List<GoodsTrendVO> selectGen(@Param("keyword") String keyword, @Param("gender") String gender);
     
     @Select("SELECT * FROM `4jo_api_search_ages` WHERE keyword = #{keyword} and age = #{age} ORDER BY period_sdata DESC limit 30")
-    List<KeywordTrendVO> selectAge(@Param("keyword") String keyword, @Param("age") int age);
+    List<GoodsTrendVO> selectAge(@Param("keyword") String keyword, @Param("age") int age);
     
     @Select("SELECT count(*) FROM 4jo_api_search_all WHERE period_sdata = #{period_sdata} and keyword = #{keyword}")
     int isExists(@Param("period_sdata") String period_sdata, @Param("keyword") String keyword);
@@ -40,21 +40,21 @@ public interface KeywordTrendMapper {
     int oldRatioAge(@Param("period_sdata") String period_sdata, @Param("keyword") String keyword, @Param("age") int age);
 
     @Insert("INSERT INTO 4jo_api_search_all (period_sdata, keyword, ratio_cnt) VALUES (#{period_sdata}, #{keyword}, #{ratio_cnt})")
-    void insert(KeywordTrendVO vo);
+    void insert(GoodsTrendVO vo);
     
     @Insert("INSERT INTO 4jo_api_search_gender (period_sdata, keyword, gender, ratio_cnt) VALUES (#{period_sdata}, #{keyword}, #{gender}, #{ratio_cnt})")
-    void insertGen(KeywordTrendVO vo);
+    void insertGen(GoodsTrendVO vo);
     
     @Insert("INSERT INTO 4jo_api_search_ages (period_sdata, keyword, age, ratio_cnt) VALUES (#{period_sdata}, #{keyword}, #{age}, #{ratio_cnt})")
-    void insertAge(KeywordTrendVO vo);
+    void insertAge(GoodsTrendVO vo);
 
     @Update("UPDATE 4jo_api_search_all SET ratio_cnt = #{ratio_cnt} WHERE period_sdata = #{period_sdata} and keyword = #{keyword}")
-    void update(KeywordTrendVO vo);
+    void update(GoodsTrendVO vo);
     
     @Update("UPDATE 4jo_api_search_gender SET ratio_cnt = #{ratio_cnt} WHERE period_sdata = #{period_sdata} and keyword = #{keyword} and gender = #{gender}")
-    void updateGen(KeywordTrendVO vo);
+    void updateGen(GoodsTrendVO vo);
     
     @Update("UPDATE 4jo_api_search_ages SET ratio_cnt = #{ratio_cnt} WHERE period_sdata = #{period_sdata} and keyword = #{keyword} and age = #{age}")
-    void updateAge(KeywordTrendVO vo);
+    void updateAge(GoodsTrendVO vo);
 
 }
