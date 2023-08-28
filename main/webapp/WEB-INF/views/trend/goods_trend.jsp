@@ -74,13 +74,18 @@ function drawChart() {
 	let mVal = mArr.reduce((acc,e)=>e,0);
 	drawPieChart((fVal*100)/(fVal+mVal),(mVal*100)/(fVal+mVal)); //퍼센티지화
 	
+	let pcArr = document.getElementById("selectDev_pc").innerHTML.trim().split(" ");
+	let moArr = document.getElementById("selectDev_mo").innerHTML.trim().split(" ");
+	let pcVal = pcArr.reduce((acc,e)=>e,0); //기간 내 데이터 합산
+	let moVal = moArr.reduce((acc,e)=>e,0);
+	drawDoughnutChart((pcVal*100)/(pcVal+moVal),(moVal*100)/(pcVal+moVal)); //퍼센티지화
 	
-	let selectAge_10 = document.getElementById("selectAge_10").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
-	let selectAge_20 = document.getElementById("selectAge_20").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
-	let selectAge_30 = document.getElementById("selectAge_30").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
-	let selectAge_40 = document.getElementById("selectAge_40").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
-	let selectAge_50 = document.getElementById("selectAge_50").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
-	let selectAge_60 = document.getElementById("selectAge_60").innerHTML.trim().split(" ").reduce((acc,e)=>acc+e);
+	let selectAge_10 = document.getElementById("selectAge_10").innerHTML.trim().split(" ").reduce((acc,e)=>e);
+	let selectAge_20 = document.getElementById("selectAge_20").innerHTML.trim().split(" ").reduce((acc,e)=>e);
+	let selectAge_30 = document.getElementById("selectAge_30").innerHTML.trim().split(" ").reduce((acc,e)=>e);
+	let selectAge_40 = document.getElementById("selectAge_40").innerHTML.trim().split(" ").reduce((acc,e)=>e);
+	let selectAge_50 = document.getElementById("selectAge_50").innerHTML.trim().split(" ").reduce((acc,e)=>e);
+	let selectAge_60 = document.getElementById("selectAge_60").innerHTML.trim().split(" ").reduce((acc,e)=>e);
 	let barArr = [selectAge_10,selectAge_20,selectAge_30,selectAge_40,selectAge_50,selectAge_60];
 	drawBarChart(barArr.map(e=>e/Math.max(...barArr)));
 
@@ -139,6 +144,8 @@ margin-bottom: 2rem;
 			<span id="selectAll_y"><c:forEach var="selectAll" items="${selectAll}">${selectAll.ratio_cnt} </c:forEach></span>
 			<span id="selectGen_f"><c:forEach var="selectFemale" items="${selectFemale}">${selectFemale.ratio_cnt} </c:forEach></span>
 			<span id="selectGen_m"><c:forEach var="selectMale" items="${selectMale}">${selectMale.ratio_cnt} </c:forEach></span>
+			<span id="selectDev_pc"><c:forEach var="selectPC" items="${selectPC}">${selectPC.ratio_cnt} </c:forEach></span>
+			<span id="selectDev_mo"><c:forEach var="selectMobile" items="${selectMobile}">${selectMobile.ratio_cnt} </c:forEach></span>
 			<span id="selectAge_10"><c:forEach var="selectAge10" items="${selectAge10}">${selectAge10.ratio_cnt} </c:forEach></span>
 			<span id="selectAge_20"><c:forEach var="selectAge20" items="${selectAge20}">${selectAge20.ratio_cnt} </c:forEach></span>
 			<span id="selectAge_30"><c:forEach var="selectAge30" items="${selectAge30}">${selectAge30.ratio_cnt} </c:forEach></span>
@@ -149,14 +156,15 @@ margin-bottom: 2rem;
 			
 			<div style="display: grid; row-gap: 3rem;">
 				<canvas id="lineChart"></canvas>
-				<div style="display: grid; grid-template-columns: 30% 1fr; justify-items: center; gap: 1rem;">
-				<div>
-				<canvas id="pieChart"></canvas>
+				<div style="display: grid; grid-template-columns: 1fr 1fr; justify-items: center; gap: 1rem;">
+					<div>
+					<canvas id="pieChart"></canvas>
+					</div>
+					<div>
+					<canvas id="doughnutChart"></canvas>
+					</div>
 				</div>
-				<div style="width: 100%;">
 				<canvas id="barChart"></canvas>
-				</div>
-				</div>
 			</div>
 
 		</div>

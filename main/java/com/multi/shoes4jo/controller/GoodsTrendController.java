@@ -62,6 +62,11 @@ public class GoodsTrendController {
 			model.addAttribute("selectFemale", selectFemale);
 			model.addAttribute("selectMale", selectMale);
 			
+			List<GoodsTrendVO> selectPC = goodsTrendService.selectDev(clean_keyword, "pc");
+			List<GoodsTrendVO> selectMobile = goodsTrendService.selectDev(clean_keyword, "mo");
+			model.addAttribute("selectPC", selectPC);
+			model.addAttribute("selectMobile", selectMobile);
+			
 			int[] ages = {10,20,30,40,50,60};
 			for (int age:ages) {
 				List<GoodsTrendVO> selectAge = goodsTrendService.selectAge(clean_keyword, age);

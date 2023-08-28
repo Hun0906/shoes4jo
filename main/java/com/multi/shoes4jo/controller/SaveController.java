@@ -121,6 +121,45 @@ public class SaveController {
 			/* api_search_gender에 데이터 추가 */
 			
 			
+			/* api_search_device에 데이터 추가 */
+			String[] devices = {"pc","mo"};
+			for (String dev:devices) {
+				String search = goodsClick.getDeviceTrend(title,dev);
+				vo.setDevice(dev);
+				
+				// json parsing
+				jsonObj = (JSONObject) parser.parse(search);
+				results = (JSONObject) ((JSONArray) jsonObj.get("results")).get(0);
+				data = (JSONArray) results.get("data");
+				if (data.size() != 0) {
+					// 첫날 값에 대해 정규화하여 저장 (api가 주어진 기간 내 최댓값을 100으로 하여 데이터를 제공하기 때문)
+					first_ratio_num = (Number)((JSONObject)data.get(0)).get("ratio");
+					first_ratio = first_ratio_num.doubleValue();
+					for (int i = 0; i < data.size(); i++) {
+						period_sdata = (String) ((JSONObject) data.get(i)).get("period");
+						vo.setPeriod_sdata(period_sdata);
+						
+						// double 변환해 계산 후 int 변경 시 값이 100일 때 오류가 나기 때문에 단계적으로 변환
+						Number ratioNumber = (Number)((JSONObject)data.get(i)).get("ratio");
+						double ratioDouble = ratioNumber.doubleValue();
+						ratio_cnt = (int)((ratioDouble / first_ratio)*100);
+						vo.setRatio_cnt(ratio_cnt);
+						
+						if (goodsTrendService.isExistsGen(period_sdata, keyword, dev)) { //사용한 검색어가 해당 날짜에 값이 있고
+							if (ratio_cnt != goodsTrendService.oldRatioGen(period_sdata, keyword, dev)) { //ratio 값이 다르다면
+								goodsTrendService.updateDev(vo); //업데이트
+								System.out.println(period_sdata+" ("+dev+") 데이터 업데이트됨");
+							}
+						} else { //사용한 검색어가 해당 날짜에 값이 없다면
+							goodsTrendService.insertDev(vo); //추가
+							System.out.println(period_sdata+" ("+dev+") 데이터 추가됨");
+						}
+					}
+				}
+			}
+			/* api_search_device에 데이터 추가 */
+			
+			
 			/* api_search_ages에 데이터 추가 */
 			int[] ages = {10,20,30,40,50,60};
 			for (int age:ages) {
@@ -165,6 +204,6 @@ public class SaveController {
 		}
 
         String encodedKeyword = URLEncoder.encode(title, StandardCharsets.UTF_8);
-		return "redirect:/goods_trend?msg=show&keyword="+encodedKeyword;
+		return "redirect:/goods_trend?msg=get&keyword="+encodedKeyword;
 	}
 }

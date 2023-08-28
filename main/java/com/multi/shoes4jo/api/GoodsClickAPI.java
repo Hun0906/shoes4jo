@@ -83,6 +83,29 @@ public class GoodsClickAPI {
 	}
 	
 	@ResponseBody
+	public String getDeviceTrend(@RequestParam String keyword, @RequestParam String device) throws Exception {
+		logger.info("getDeviceTrend() called");
+		System.out.println("검색어 (=title): " + keyword);
+		
+		String requestBody = "{"
+				+ "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01
+				+ "   \"endDate\": \"" + today + "\","
+				+ "   \"timeUnit\": \"date\","
+				+ "   \"device\": \""+device+"\"," // pc || mo
+				+ "   \"category\": \"50000001\","
+				+ "   \"keyword\": [{\"name\":\"" + keyword + "\", \"param\": [\"" + keyword + "\"] }]"
+				+ "}";
+		
+		requestHeaders.put("X-Naver-Client-Id", clientId);
+		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+		requestHeaders.put("Content-Type", "application/json");
+		
+		String responseBody = post(apiUrl, requestHeaders, requestBody);
+		System.out.println(responseBody);
+		return responseBody;
+	}
+	
+	@ResponseBody
 	public String getAgeTrend(@RequestParam String keyword, @RequestParam int age) throws Exception {
 		logger.info("getAgeTrend() called");
 		System.out.println("검색어 (=title): " + keyword);
@@ -161,6 +184,5 @@ public class GoodsClickAPI {
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }
     }
-	
 
 }

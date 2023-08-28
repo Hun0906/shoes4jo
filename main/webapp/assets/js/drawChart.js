@@ -92,7 +92,7 @@ function drawPieChart(pie_w_data, pie_m_data) {
   });
 }
 
-function drawDoughnutChart(pie_w_data, pie_m_data) {
+function drawDoughnutChart(dn_w_data, dn_m_data) {
   const ctx = document.getElementById('doughnutChart');
   let doughnutChart;
 
@@ -105,12 +105,12 @@ function drawDoughnutChart(pie_w_data, pie_m_data) {
   doughnutChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['여성', '남성'],
+      labels: ['PC', 'Mobile'],
 	  datasets: [{
-	  data: [pie_w_data, pie_m_data],
-	  backgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 섹션의 색상 설정
-	  borderColor: ['#6ECCAF', '#ADE792'], // 섹션의 색상 설정
-	  hoverBackgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 호버 시의 색상 설정
+		  data: [dn_w_data, dn_m_data],
+		  backgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 섹션의 색상 설정
+		  borderColor: ['#6ECCAF', '#ADE792'], // 섹션의 색상 설정
+		  hoverBackgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 호버 시의 색상 설정
 	  }]
 	},
     options: {
@@ -121,7 +121,7 @@ function drawDoughnutChart(pie_w_data, pie_m_data) {
         },
         title: {
           display: true,
-          text: "도넛",
+          text: "기기 별 "+ datasets_label + " 관심도",
         }
       }
     }
@@ -155,14 +155,25 @@ function drawBarChart(bar_data) {
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          position: 'top',
+		legend: {
+        position: 'top',
         },
         title: {
           display: true,
           text: "세대 별 "+ datasets_label + " 관심도",
         },
-                y: {
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: "세대"
+          },
+          grid: {
+            display: true
+          }
+        },
+        y: {
           title: {
             display: true,
             text: "상대 비율 (arb. unit)"
@@ -171,7 +182,8 @@ function drawBarChart(bar_data) {
             display: true
           },
           beginAtZero: true
-        },
+        }
+      }
       }
     }
   });

@@ -26,6 +26,12 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 	}
 	
 	@Override
+	public List<GoodsTrendVO> selectDev(String keyword, String device) {
+		List<GoodsTrendVO> vo = goodsTrendMapper.selectDev(keyword, device);
+		return vo;
+	}
+	
+	@Override
 	public List<GoodsTrendVO> selectAge(String keyword, int age) {
 		List<GoodsTrendVO> vo = goodsTrendMapper.selectAge(keyword, age);
 		return vo;
@@ -42,6 +48,11 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 	}
 	
 	@Override
+	public void insertDev(GoodsTrendVO vo) {
+		goodsTrendMapper.insertDev(vo);
+	}
+	
+	@Override
 	public void insertAge(GoodsTrendVO vo) {
 		goodsTrendMapper.insertAge(vo);
 	}
@@ -54,6 +65,11 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 	@Override
 	public void updateGen(GoodsTrendVO vo) {
 		goodsTrendMapper.updateGen(vo);
+	}
+	
+	@Override
+	public void updateDev(GoodsTrendVO vo) {
+		goodsTrendMapper.updateDev(vo);
 	}
 	
 	@Override
@@ -74,6 +90,12 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 	}
 	
 	@Override
+	public boolean isExistsDev(String period_sdata, String keyword, String device) {
+		int num = goodsTrendMapper.isExistsDev(period_sdata, keyword, device);
+		return num == 1;
+	}
+	
+	@Override
 	public boolean isExistsAge(String period_sdata, String keyword, int age) {
 		int num = goodsTrendMapper.isExistsAge(period_sdata, keyword, age);
 		return num == 1;
@@ -87,6 +109,11 @@ public class GoodsTrendServiceImpl implements GoodsTrendService {
 	@Override
 	public int oldRatioGen(String period_sdata, String keyword, String gender) {
 		return goodsTrendMapper.oldRatioGen(period_sdata, keyword, gender);
+	}
+	
+	@Override
+	public int oldRatioDev(String period_sdata, String keyword, String device) {
+		return goodsTrendMapper.oldRatioDev(period_sdata, keyword, device);
 	}
 
 	@Override
