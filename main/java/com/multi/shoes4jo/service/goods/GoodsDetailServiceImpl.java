@@ -1,5 +1,7 @@
 package com.multi.shoes4jo.service.goods;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,29 +17,43 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	@Autowired
 	private GoodsDetailMapper goodsMapper;
 
-	@Override
-	public void insertGoods(GoodsDetailVO vo) {
-		goodsMapper.insertGoods(vo);
-	}
+    @Override
+    public void insert(GoodsDetailVO vo) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dateString = formatter.format(new Date());
+
+        vo.setDate(dateString); 
+
+        goodsMapper.insert(vo);
+    }
 
 	@Override
 	public List<GoodsDetailVO> selectAllGoods() {
 		return goodsMapper.selectAllGoods();
 	}
-	
+
 	@Override
-	public GoodsDetailVO selectOneGoods(String goods_id) {
-		return goodsMapper.selectOneGoods(goods_id);
+	public GoodsDetailVO selectOne(int gno) {
+		return goodsMapper.selectOne(gno);
 	}
 
 	@Override
-	public void updateGoods(GoodsDetailVO vo) {
-		goodsMapper.updateGoods(vo);
+	public void update(GoodsDetailVO vo) {
+		
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dateString = formatter.format(new Date());
+
+        vo.setDate(dateString); 
+
+        
+		goodsMapper.update(vo);
 	}
 
 	@Override
-	public void deleteGoods(String goods_id) {
-		goodsMapper.deleteGoods(goods_id);
+	public void delete(int gno) {
+		goodsMapper.delete(gno);
 	}
 
 }

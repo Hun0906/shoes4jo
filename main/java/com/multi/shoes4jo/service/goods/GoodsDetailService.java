@@ -6,14 +6,14 @@ import com.multi.shoes4jo.vo.GoodsDetailVO;
 
 public interface GoodsDetailService {
 	
-    public void insertGoods(GoodsDetailVO vo);
+    public void insert(GoodsDetailVO vo);
     
     public List<GoodsDetailVO> selectAllGoods();
 
-    public GoodsDetailVO selectOneGoods(String goods_id);
+    public GoodsDetailVO selectOne(int gno);
     
-    public void updateGoods(GoodsDetailVO vo);
+    public void update(GoodsDetailVO vo);
     
-    public void deleteGoods(String goods_id);
+    public void delete(int gno);
 
 }
