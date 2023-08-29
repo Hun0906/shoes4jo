@@ -17,50 +17,49 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/api")
-public class SearchTrend {
+public class GoodsSearchAPI {
+	private static final Logger logger = LoggerFactory.getLogger(GoodsSearchAPI.class);
 	
-	private static final Logger logger = LoggerFactory.getLogger(SearchTrend.class);
+	// getTrend ê³µí†µë³€ìˆ˜ ì„ ì–¸
+	String clientId = "JzcrBZHimsCICRuNqbzk"; // ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ Client ID
+	String clientSecret = "9fgwNuy1pM"; // ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ Client Secret
 
-	@RequestMapping(value = "/searchtrend", method = { RequestMethod.GET, RequestMethod.POST } )
+	String today = LocalDate.now().toString();
+	String twoWeeksBefore = LocalDate.now().minusWeeks(2).toString();
+	String oneMonthBefore = LocalDate.now().minusMonths(1).toString();
+	
+	String apiUrl = "https://openapi.naver.com/v1/datalab/search";
+	
+	Map<String, String> requestHeaders = new HashMap<>();
+
+	
 	@ResponseBody
-    public String getSearchData(@RequestParam String keyword) throws Exception {
-		logger.info("getSearchData() called");
-		
-    	String clientId = "JzcrBZHimsCICRuNqbzk"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client ID
-		String clientSecret = "9fgwNuy1pM"; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Client Secret
+    public String getTrendData(@RequestParam String keyword) throws Exception {
+		logger.info("getTrendData() of GoodsSearch called");
+        System.out.println("ê²€ìƒ‰ì–´ (=title): " + keyword);
 
-        String apiUrl = "https://openapi.naver.com/v1/datalab/search";
-
-        Map<String, String> requestHeaders = new HashMap<>();
+        String requestBody = "{"
+        	    + "   \"startDate\": \"" + "2023-07-01" + "\"," //ê°€ì¥ ë¹ ë¥¸ ë‚ : 2017-01-01
+        	    + "   \"endDate\": \"" + today + "\","
+        	    + "   \"timeUnit\": \"date\","
+        	    + "   \"keywordGroups\":[{\"groupName\":\"" + keyword + "\"," + "\"keywords\":[\"" + keyword + "\"]}]"
+        	    + "}";
+        
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         requestHeaders.put("Content-Type", "application/json");
-        
-        String today = LocalDate.now().toString();
-        System.out.println("keyword: " + keyword);
-
-        String requestBody = 
-        "{\"startDate\":\"2017-01-01\"," +
-        "\"endDate\": \"" + today + "\"," +
-        "\"timeUnit\":\"month\"," +
-        "\"keywordGroups\":[{\"groupName\":\"ÇÑ±Û\"," + "\"keywords\":[\"ÇÑ±Û\",\"korean\"]}," +
-        "{\"groupName\":\"¿µ¾î\"," + "\"keywords\":[\"¿µ¾î\",\"english\"]}]," +
-        "\"device\":\"pc\"," +
-        "\"ages\":[\"1\",\"2\"]," +
-        "\"gender\":\"f\"}";
         
         String responseBody = post(apiUrl, requestHeaders, requestBody);
         System.out.println(responseBody);
 		return responseBody;
 	}
-
-	private static String post(String apiUrl, Map<String, String> requestHeaders, String requestBody) {
+	
+	
+    private static String post(String apiUrl, Map<String, String> requestHeaders, String requestBody) {
         HttpURLConnection con = connect(apiUrl);
 
         try {
@@ -76,26 +75,26 @@ public class SearchTrend {
             }
 
             int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) { // Á¤»ó ÀÀ´ä
+            if (responseCode == HttpURLConnection.HTTP_OK) { // ì •ìƒ ì‘ë‹µ
                 return readBody(con.getInputStream());
-            } else {  // ¿¡·¯ ÀÀ´ä
+            } else {  // ì—ëŸ¬ ì‘ë‹µ
                 return readBody(con.getErrorStream());
             }
         } catch (IOException e) {
-            throw new RuntimeException("API ¿äÃ»°ú ÀÀ´ä ½ÇÆĞ", e);
+            throw new RuntimeException("API ìš”ì²­ê³¼ ì‘ë‹µ ì‹¤íŒ¨", e);
         } finally {
-            con.disconnect(); // ConnectionÀ» ÀçÈ°¿ëÇÒ ÇÊ¿ä°¡ ¾ø´Â ÇÁ·Î¼¼½ºÀÏ °æ¿ì
+            con.disconnect(); // Connectionì„ ì¬í™œìš©í•  í•„ìš”ê°€ ì—†ëŠ” í”„ë¡œì„¸ìŠ¤ì¼ ê²½ìš°
         }
     }
-
-    private static HttpURLConnection connect(String apiUrl) {
+    
+	private static HttpURLConnection connect(String apiUrl) {
         try {
             URL url = new URL(apiUrl);
             return (HttpURLConnection) url.openConnection();
         } catch (MalformedURLException e) {
-            throw new RuntimeException("API URLÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. : " + apiUrl, e);
+            throw new RuntimeException("API URLì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. : " + apiUrl, e);
         } catch (IOException e) {
-            throw new RuntimeException("¿¬°áÀÌ ½ÇÆĞÇß½À´Ï´Ù. : " + apiUrl, e);
+            throw new RuntimeException("ì—°ê²°ì´ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. : " + apiUrl, e);
         }
     }
 
@@ -112,7 +111,9 @@ public class SearchTrend {
 
             return responseBody.toString();
         } catch (IOException e) {
-            throw new RuntimeException("API ÀÀ´äÀ» ÀĞ´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù.", e);
+            throw new RuntimeException("API ì‘ë‹µì„ ì½ëŠ” ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.", e);
         }
     }
+	
+
 }

@@ -21,9 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/api")
-public class KeywordTrendAPI {
-	private static final Logger logger = LoggerFactory.getLogger(KeywordTrendAPI.class);
+public class GoodsClickAPI {
+	private static final Logger logger = LoggerFactory.getLogger(GoodsClickAPI.class);
 	
 	// getTrend 공통변수 선언
 	String clientId = "JzcrBZHimsCICRuNqbzk"; // 애플리케이션의 Client ID
@@ -63,7 +62,6 @@ public class KeywordTrendAPI {
 	@ResponseBody
 	public String getGenderTrend(@RequestParam String keyword, @RequestParam String gender) throws Exception {
 		logger.info("getGenderTrend() called");
-		System.out.println("검색어 (=title): " + keyword);
 		
 		String requestBody = "{"
 				+ "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01
@@ -84,9 +82,30 @@ public class KeywordTrendAPI {
 	}
 	
 	@ResponseBody
+	public String getDeviceTrend(@RequestParam String keyword, @RequestParam String device) throws Exception {
+		logger.info("getDeviceTrend() called");
+		
+		String requestBody = "{"
+				+ "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01
+				+ "   \"endDate\": \"" + today + "\","
+				+ "   \"timeUnit\": \"date\","
+				+ "   \"device\": \""+device+"\"," // pc || mo
+				+ "   \"category\": \"50000001\","
+				+ "   \"keyword\": [{\"name\":\"" + keyword + "\", \"param\": [\"" + keyword + "\"] }]"
+				+ "}";
+		
+		requestHeaders.put("X-Naver-Client-Id", clientId);
+		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+		requestHeaders.put("Content-Type", "application/json");
+		
+		String responseBody = post(apiUrl, requestHeaders, requestBody);
+		System.out.println(responseBody);
+		return responseBody;
+	}
+	
+	@ResponseBody
 	public String getAgeTrend(@RequestParam String keyword, @RequestParam int age) throws Exception {
 		logger.info("getAgeTrend() called");
-		System.out.println("검색어 (=title): " + keyword);
 		
 		String requestBody = "{"
 				+ "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01
@@ -162,6 +181,5 @@ public class KeywordTrendAPI {
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }
     }
-	
 
 }
