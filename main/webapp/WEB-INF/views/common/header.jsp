@@ -15,7 +15,7 @@
 <div class="menu_container">
 <a href="<%=context %>/main">상품별 트렌드</a>
 <a href="<%=context %>/">분류별 트렌드</a>
-<a href="<%=context %>/google_trend">검색어 트렌드</a>
+<a href="<%=context %>/keyword_trend">키워드 트렌드</a>
 <a href="<%=context %>/ranking">랭킹</a>
 <a href="<%=context %>/word_cloud">연관 주제</a>
 <a href="<%=context %>/">시장 규모</a>

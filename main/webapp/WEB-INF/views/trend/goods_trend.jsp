@@ -12,6 +12,7 @@
 <script src="<%=context%>/assets/js/script.js"></script>
 <script>
 window.onload = function() {
+	showLoading();
 	getCode();
 }
 
@@ -36,11 +37,13 @@ function getCode() {
     	}
     }
 	drawChart();
+	closeLoading();
+	$('body').css({
+    	'overflow': '',
+    })
 }
 
 function getAPIResult() {
-	showLoading();
-
 	let keyword = document.getElementById("keyword").value;
 	
 	console.log("keyword: "+keyword);
@@ -55,8 +58,6 @@ function getDBdata() {
 		alert("검색어를 입력하세요.");
 		location.href="main";
 	}
-
-	showLoading();
 	
 	console.log("keyword: "+keyword);
 	document.keywordTrendForm.action = "<%=context%>/goods_trend/get_data";
@@ -89,11 +90,6 @@ function drawChart() {
 	let selectAge_60 = document.getElementById("selectAge_60").innerHTML.trim().split(" ").reduce((acc,e)=>e);
 	let barArr = [selectAge_10,selectAge_20,selectAge_30,selectAge_40,selectAge_50,selectAge_60];
 	drawBarChart(barArr.map(e=>e/Math.max(...barArr)));
-
-	closeLoading();
-    $('body').css({
-    	'overflow': '',
-    })
 }
 </script>
 
@@ -132,6 +128,7 @@ margin: 2.25rem 0;
 	<%@include file="../common/header.jsp"%>
 	<div class="contents">
 		<div class="container" id="container" style="text-align: center;">
+		<h1>상품별 트렌드</h1>
 			<form name="keywordTrendForm" action="javascript:getDBdata();">
 				<%
 				String keyword = request.getParameter("keyword");

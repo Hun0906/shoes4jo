@@ -41,6 +41,12 @@ public class MainController {
 		return "trend/google_trend";
 	}
 	
+	@RequestMapping(value = "/keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })
+	public String keyword_trend() {
+		logger.info("keyword_trend() called");
+		return "trend/keyword_trend";
+	}
+	
 	@RequestMapping(value = "/word_cloud", method = { RequestMethod.GET, RequestMethod.POST })
 	public String word_cloud() {
 		logger.info("word_cloud() called");
