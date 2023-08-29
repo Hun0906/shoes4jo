@@ -28,9 +28,11 @@ function getCode() {
 	
 	const msg = urlParams.get('msg');
 	if (msg == 'get') {
+		showLoading();
     	getDBdata();
     } else if (msg == 'err') {
     	if (confirm("데이터가 없습니다. 추가하시겠습니까?")){
+			showLoading();
     		getAPIResult();
     	} else {
     		location.href="<%=context%>/main";
@@ -44,6 +46,7 @@ function getCode() {
 }
 
 function getAPIResult() {
+	showLoading();
 	let keyword = document.getElementById("keyword").value;
 	
 	console.log("keyword: "+keyword);
