@@ -54,13 +54,10 @@
 	filter: opacity(0.5);
 }
 
-form{
-	position: relative;
-	top: -5rem;
-}
-
 @media (max-height: 800px){
-	top:0;
+	.container{
+	height: 100vh;
+	}
 }
 </style>
 
