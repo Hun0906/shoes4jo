@@ -15,41 +15,62 @@ import com.multi.shoes4jo.vo.GoodsDetailVO;
 @RequestMapping("/goodscon")
 public class GoodsDetailController {
 
-    @Autowired
-    private GoodsDetailService service;
+	@Autowired
+	private GoodsDetailService service;
 
-    @RequestMapping(value = "/list.do") //상품 전체 목록 조회
-    public String showList(Model model) {
-        List<GoodsDetailVO> goods_list = service.selectAllGoods();
-        model.addAttribute("goods_list", goods_list);
-        return "/admin/goods_list";
+	@RequestMapping(value = "/list.do") // 상품 전체 목록 조회
+	public String showList(Model model) {
+		List<GoodsDetailVO> goods_list = service.selectAllGoods();
+		model.addAttribute("goods_list", goods_list);
+		return "/admin/goods_list";
+	}
+
+	@RequestMapping(value = "/view.do") // 특정 상품 조회
+	public ModelAndView view(int gno) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("goods/goods_detail");
+		mv.addObject("goods", service.selectOne(gno));
+		return mv;
+	}
+
+	@RequestMapping(value = "/insert.do")
+	public String insert() {
+		return "/goods/goods_add";
+	}
+	
+	
+    @RequestMapping(value = "/insertOk.do")
+    public String insertOk(GoodsDetailVO vo) {
+    	service.insert(vo);
+    	return "redirect:/goodscon/list.do";
     }
+    
+    
+	
+	@RequestMapping(value = "/update.do")
+	public String update(int gno, Model model) {
+	    GoodsDetailVO vo = service.selectOne(gno);
+	    model.addAttribute("goods", vo);
+	    return "goods/goods_update";
+	}
 
-
-    @RequestMapping(value = "/view.do") //특정 상품 조회
-    public ModelAndView view(String goods_id) {
-    	ModelAndView mv = new ModelAndView();
-    	mv.setViewName("goods/goods_detail");
-    	mv.addObject("goodsInfo", service.selectOneGoods(goods_id));
-    	return mv;
+	
+	
+	
+    @RequestMapping(value = "/updateOk.do")
+    public String updateOk(GoodsDetailVO vo) {
+    	service.update(vo);
+    	return "redirect:/goodscon/list.do";
     }
+	
+	
+	
+	
+	
 
-    @RequestMapping(value = "/insert.do")
-    public String insert(GoodsDetailVO vo) {
-        service.insertGoods(vo);
-        return "redirect:/goodscon/view.do"; 
-        
-    }
-
-    @RequestMapping(value = "/update.do")
-    public String update(GoodsDetailVO vo) {
-        service.updateGoods(vo);
-        return "redirect:goods/goods_detail?goods_id=" + vo.getGoods_id();
-    }
-
-    @RequestMapping(value = "/delete.do")
-    public String delete(String goods_id) {
-        service.deleteGoods(goods_id);
-        return "redirect:/goodscon/view.do"; 
-    }
+	@RequestMapping(value = "/delete.do")
+	public String delete(int gno) {
+		service.delete(gno);
+		return "redirect:/goodscon/list.do";
+	}
 }
