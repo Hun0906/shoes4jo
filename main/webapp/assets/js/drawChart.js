@@ -1,4 +1,4 @@
-function drawLineChart(line_y_arr, line_x_arr) {
+function drawLineChart(line_y_arr1, line_y_arr2, line_x_arr) {
   const ctx = document.getElementById('lineChart');
   let lineChart;
 
@@ -13,49 +13,52 @@ function drawLineChart(line_y_arr, line_x_arr) {
     data: {
       labels: line_x_arr,
       datasets: [{
-        label: "Trend",
-        data: line_y_arr,
+        label: "쇼핑 클릭량",
+        data: line_y_arr1,
         borderColor: "#6ECCAF",
-        borderWidth: 1,
-        pointRadius: 3,
-      }]
-    },
-    options: {
-      responsive: true,
-	  title: {
-		display: true,
-		text: datasets_label + " 검색 추이",
-	  },
-      plugins: {
-        legend: {
-          display: true
-        },
+        borderWidth: 2,
+        pointRadius: 3
       },
-      scales: {
-        x: {
-          display: true,
-          title: {
-            display: true,
-            text: "날짜"
-          },
-          grid: {
-            display: true
+	  {
+		label : "검색량",
+		data : line_y_arr2,
+		borderColor : "#ADE792",
+		borderWidth : 1,
+		pointRadius :3
+	  }]
+    },
+    options:{
+      responsive:true ,
+	  title:{
+	    display:true ,
+	    text:"Keyword Trend"
+	  },
+      plugins:{
+	    legend:{
+	      display:true
+	    }
+	  },
+      scales:{
+        x:{
+          display:true ,
+          title:{
+            display:true ,
+            text:"날짜"
           }
         },
-        y: {
-          title: {
-            display: true,
-            text: "상대 비율 (arb. unit)"
-          },
-          grid: {
-            display: true
-          },
-          beginAtZero: true
-        }
-      }
-    }
-  });
+       y:{ 
+         beginAtZero:true,
+		 title:{ 
+		   display:true ,
+		   text:"상대 비율 (arb. units)"
+		 }
+       }
+     }  
+   }  
+ });
 }
+
+
 
 function drawPieChart(pie_w_data, pie_m_data) {
   const ctx = document.getElementById('pieChart');
@@ -92,7 +95,7 @@ function drawPieChart(pie_w_data, pie_m_data) {
   });
 }
 
-function drawDoughnutChart(pie_w_data, pie_m_data) {
+function drawDoughnutChart(dn_w_data, dn_m_data) {
   const ctx = document.getElementById('doughnutChart');
   let doughnutChart;
 
@@ -105,12 +108,12 @@ function drawDoughnutChart(pie_w_data, pie_m_data) {
   doughnutChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['여성', '남성'],
+      labels: ['PC', 'Mobile'],
 	  datasets: [{
-	  data: [pie_w_data, pie_m_data],
-	  backgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 섹션의 색상 설정
-	  borderColor: ['#6ECCAF', '#ADE792'], // 섹션의 색상 설정
-	  hoverBackgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 호버 시의 색상 설정
+		  data: [dn_w_data, dn_m_data],
+		  backgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 섹션의 색상 설정
+		  borderColor: ['#6ECCAF', '#ADE792'], // 섹션의 색상 설정
+		  hoverBackgroundColor: ['#6ECCAFaa', '#ADE792aa'], // 호버 시의 색상 설정
 	  }]
 	},
     options: {
@@ -121,7 +124,7 @@ function drawDoughnutChart(pie_w_data, pie_m_data) {
         },
         title: {
           display: true,
-          text: "도넛",
+          text: "기기 별 "+ datasets_label + " 관심도",
         }
       }
     }
@@ -155,14 +158,25 @@ function drawBarChart(bar_data) {
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          position: 'top',
+		legend: {
+        position: 'top',
         },
         title: {
           display: true,
           text: "세대 별 "+ datasets_label + " 관심도",
         },
-                y: {
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: "세대"
+          },
+          grid: {
+            display: true
+          }
+        },
+        y: {
           title: {
             display: true,
             text: "상대 비율 (arb. unit)"
@@ -171,7 +185,8 @@ function drawBarChart(bar_data) {
             display: true
           },
           beginAtZero: true
-        },
+        }
+      }
       }
     }
   });

@@ -81,7 +81,7 @@ function getAPIResult() {
 	}
 	
 	console.log("keyword: "+keyword);
-	document.keywordTrendForm.action = "<%=context%>/keyword_trend/con/insert.do";
+	document.keywordTrendForm.action = "<%=context%>/goods_trend?msg=get&keyword="+keyword;
 	document.keywordTrendForm.submit();
 }
 </script>

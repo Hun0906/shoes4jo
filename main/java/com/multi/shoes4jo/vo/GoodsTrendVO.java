@@ -3,30 +3,24 @@ package com.multi.shoes4jo.vo;
 import org.springframework.stereotype.Component;
 
 @Component("KeywordTrendVO")
-public class KeywordTrendVO {
+public class GoodsTrendVO {
 	private String period_sdata;
 	private String keyword;
 	private String gender;
+	private String device;
 	private int age;
 	private int ratio_cnt;
 	
-	public KeywordTrendVO() {
+	public GoodsTrendVO() {
 	}
 	
-	public KeywordTrendVO(String period_sdata, String keyword, int ratio_cnt) {
+	public GoodsTrendVO(String period_sdata, String keyword, int ratio_cnt) {
 		this.period_sdata = period_sdata;
 		this.keyword = keyword;
 		this.ratio_cnt = ratio_cnt;
 	}
 	
-	public KeywordTrendVO(String period_sdata, String keyword, String gender, int ratio_cnt) {
-		this.period_sdata = period_sdata;
-		this.keyword = keyword;
-		this.gender = gender;
-		this.ratio_cnt = ratio_cnt;
-	}
-	
-	public KeywordTrendVO(String period_sdata, String keyword, int age, int ratio_cnt) {
+	public GoodsTrendVO(String period_sdata, String keyword, int age, int ratio_cnt) {
 		this.period_sdata = period_sdata;
 		this.keyword = keyword;
 		this.age = age;
@@ -55,6 +49,14 @@ public class KeywordTrendVO {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getDevice() {
+		return device;
+	}
+
+	public void setDevice(String device) {
+		this.device = device;
 	}
 
 	public int getAge() {

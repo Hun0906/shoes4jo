@@ -90,13 +90,6 @@ gap: 3rem;
 		<h1>매거진</h1>
 	</div>
 		<div class="container">
-		<h2>뉴스</h2>
-		<div class="card-wrapper">
-	<c:forEach var="board" items="${newslist}">
-		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file_path})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="window.open('${board.link}')">더 알아보기</button></div>
-	</c:forEach>
-		</div>
-		<hr>
 		<h2>이벤트</h2>
 		<div class="card-wrapper">
 	<c:forEach var="board" items="${eventslist}">
@@ -107,6 +100,13 @@ gap: 3rem;
 		<h2>칼럼</h2>
 		<div class="card-wrapper">
 	<c:forEach var="board" items="${columnslist}">
+		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file_path})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="window.open('${board.link}')">더 알아보기</button></div>
+	</c:forEach>
+		</div>
+		<hr>
+		<h2>뉴스</h2>
+		<div class="card-wrapper">
+	<c:forEach var="board" items="${newslist}">
 		<div class="card"><div class="thumb" style="background-image: url(<%=context%>/assets/img/${board.file_path})"></div><label>${board.title}</label><p>${board.content}</p><button class="btn-basic" onclick="window.open('${board.link}')">더 알아보기</button></div>
 	</c:forEach>
 		</div>
