@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.shoes4jo.service.goods.GoodsDetailService;
 import com.multi.shoes4jo.vo.GoodsDetailVO;
@@ -26,12 +25,12 @@ public class GoodsDetailController {
 	}
 
 	@RequestMapping(value = "/view.do") // 특정 상품 조회
-	public ModelAndView view(int gno) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("goods/goods_detail");
-		mv.addObject("goods", service.selectOne(gno));
-		return mv;
-	}
+	public String view(String keyword, Model model) {
+	    List<GoodsDetailVO> goodsList = service.selectOne(keyword);
+	    model.addAttribute("goods_list", goodsList);
+	    return "/goods/goods_detail";
+    }
+
 
 	@RequestMapping(value = "/insert.do")
 	public String insert() {
@@ -44,30 +43,24 @@ public class GoodsDetailController {
     	service.insert(vo);
     	return "redirect:/goodscon/list.do";
     }
-    
-    
-	
-	@RequestMapping(value = "/update.do")
-	public String update(int gno, Model model) {
-	    GoodsDetailVO vo = service.selectOne(gno);
-	    model.addAttribute("goods", vo);
-	    return "goods/goods_update";
-	}
 
-	
-	
+    @RequestMapping(value = "/update.do")
+    public String update(String keyword, Model model) {
+        List<GoodsDetailVO> goods = service.selectOne(keyword);
+        if (!goods.isEmpty()) {
+            model.addAttribute("goods", goods.get(0));
+        }
+        return "goods/goods_update";
+    }
+
 	
     @RequestMapping(value = "/updateOk.do")
     public String updateOk(GoodsDetailVO vo) {
     	service.update(vo);
     	return "redirect:/goodscon/list.do";
     }
+    
 	
-	
-	
-	
-	
-
 	@RequestMapping(value = "/delete.do")
 	public String delete(int gno) {
 		service.delete(gno);

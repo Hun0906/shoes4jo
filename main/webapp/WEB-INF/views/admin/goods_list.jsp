@@ -36,23 +36,16 @@
 				<c:forEach var="goods" items="${goods_list}">
 					<tr>
 						<td class="text-center">${goods.gno }</td>
-						<td class="text-center"><a
-							href="<%=context %>/goodscon/view.do?gno=${goods.gno}">${goods.goods_name}
-						</a></td>
+<td class="text-center"><a href="<%=context %>/goodscon/view.do?keyword=${goods.keyword}">${goods.goods_name}</a></td> 
 						<td class="text-center">${goods.seller_name}</td>
 						<td class="text-center">${goods.goods_price}</td>
 						<td class="text-center">${goods.delivery_fee}</td>
 						<td class="text-center">${goods.date}</td>
 						<td class="text-center">${goods.category}</td>
 
-						<td class="text-center"><a
-							href="<%=context %>/goodscon/update.do?gno=${goods.gno}"
-							class="butten">수정하기</a></td>
+<td class="text-center"><a href="<%=context %>/goodscon/update.do?keyword=${goods.keyword}" class="butten">수정하기</a></td> 
 
-<td class="text-center"><a
-    href="<%=context %>/goodscon/delete.do?gno=${goods.gno}"
-    class="butten"
-    onclick="return confirm('등록 상품을 삭제하시겠습니까?')">삭제하기</a></td>
+<td class='text-center'><a href="<%=context %>/goodscon/delete.do?gno=${goods.gno}" onclick='return confirm("등록 상품을 삭제하시겠습니까?")' >삭제하기</a></td>
 
 					</tr>
 				</c:forEach>
