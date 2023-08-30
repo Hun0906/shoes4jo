@@ -83,6 +83,17 @@ public class SaveController {
 					System.out.println(period_sdata+" 데이터 추가됨");
 				}
 			}
+			
+			//api 결과에 없는 날짜에 대해 0값 추가
+			String[] periodArr = {"2023-07-01","2023-07-02","2023-07-03","2023-07-04","2023-07-05","2023-07-06","2023-07-07","2023-07-08","2023-07-09","2023-07-10","2023-07-11","2023-07-12","2023-07-13","2023-07-14","2023-07-15","2023-07-16","2023-07-17","2023-07-18","2023-07-19","2023-07-20","2023-07-21","2023-07-22","2023-07-23","2023-07-24","2023-07-25","2023-07-26","2023-07-27","2023-07-28","2023-07-29","2023-07-30","2023-07-31","2023-08-01","2023-08-02","2023-08-03","2023-08-04","2023-08-05","2023-08-06","2023-08-07","2023-08-08","2023-08-09","2023-08-10","2023-08-11","2023-08-12","2023-08-13","2023-08-14","2023-08-15","2023-08-16","2023-08-17","2023-08-18","2023-08-19","2023-08-20","2023-08-21","2023-08-22","2023-08-23","2023-08-24","2023-08-25","2023-08-26","2023-08-27","2023-08-28","2023-08-29","2023-08-30"};
+			vo.setRatio_cnt(0);
+			for (String period: periodArr) {
+				if (!goodsTrendService.isExists(period, keyword)) { //사용한 검색어가 해당 날짜에 값이 없으면
+					vo.setPeriod_sdata(period);
+					goodsTrendService.insert(vo); //추가
+					System.out.println(period+" 데이터 0 추가됨");
+				}
+			}
 			/* api_click_all에 데이터 추가 */
 			
 			
@@ -235,6 +246,16 @@ public class SaveController {
 						goodsTrendService.insertSearch(vo); //추가
 						System.out.println(period_sdata+" 데이터 추가됨");
 					}
+				}
+			}
+			
+			//api 결과에 없는 날짜에 대해 0값 추가
+			vo.setRatio_cnt(0);
+			for (String period: periodArr) {
+				if (!goodsTrendService.isExistsSearch(period, keyword)) { //사용한 검색어가 해당 날짜에 값이 없으면
+					vo.setPeriod_sdata(period);
+					goodsTrendService.insertSearch(vo); //추가
+					System.out.println(period+" 데이터 0 추가됨");
 				}
 			}
 			/* api_search에 데이터 추가 */

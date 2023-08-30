@@ -42,8 +42,7 @@ h2 {
 				</div>
 				<div class="list">
 					<script type="text/javascript">
-						trends.embed
-								.renderExploreWidget(
+						trends.embed.renderExploreWidget(
 										"RELATED_QUERIES",
 										{
 											"comparisonItem" : [ {
@@ -69,8 +68,7 @@ h2 {
 				</div>
 				<div class="list">
 					<script type="text/javascript">
-						trends.embed
-								.renderExploreWidget(
+						trends.embed.renderExploreWidget(
 										"RELATED_QUERIES",
 										{
 											"comparisonItem" : [ {
@@ -96,8 +94,7 @@ h2 {
 				</div>
 				<div class="list">
 					<script type="text/javascript">
-						trends.embed
-								.renderExploreWidget(
+						trends.embed.renderExploreWidget(
 										"RELATED_QUERIES",
 										{
 											"comparisonItem" : [ {
@@ -123,8 +120,7 @@ h2 {
 				</div>
 				<div class="list">
 					<script type="text/javascript">
-						trends.embed
-								.renderExploreWidget(
+						trends.embed.renderExploreWidget(
 										"RELATED_QUERIES",
 										{
 											"comparisonItem" : [ {
@@ -177,8 +173,7 @@ h2 {
 				</div>
 				<div class="list">
 					<script type="text/javascript">
-						trends.embed
-								.renderExploreWidget(
+						trends.embed.renderExploreWidget(
 										"RELATED_QUERIES",
 										{
 											"comparisonItem" : [ {

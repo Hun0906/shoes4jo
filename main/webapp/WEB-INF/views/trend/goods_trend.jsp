@@ -10,9 +10,10 @@
 <%@include file="../common/header-head.jsp"%>
 
 <script src="<%=context%>/assets/js/script.js"></script>
+
 <script>
 window.onload = function() {
-	showLoading();
+	closeLoading();
 	getCode();
 }
 
@@ -31,22 +32,20 @@ function getCode() {
 		showLoading();
     	getDBdata();
     } else if (msg == 'err') {
+		showLoading();
     	if (confirm("데이터가 없습니다. 추가하시겠습니까?")){
-			showLoading();
     		getAPIResult();
     	} else {
     		location.href="<%=context%>/main";
     	}
     }
 	drawChart();
-	closeLoading();
 	$('body').css({
     	'overflow': '',
     })
 }
 
 function getAPIResult() {
-	showLoading();
 	let keyword = document.getElementById("keyword").value;
 	
 	console.log("keyword: "+keyword);

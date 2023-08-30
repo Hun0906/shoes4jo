@@ -9,7 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class KeywordTrendCrawling {
+public class backup_KeywordTrendCrawling {
 
 	public static void main(String[] args) {
         // 키워드 리스트를 정의합니다.
@@ -23,10 +23,7 @@ public class KeywordTrendCrawling {
 
             // 정해진 키워드로 검색을 진행합니다.
             //String targetUrl = "https://www.coupang.com/np/search?component=&q=" + keyword + "&channel=user";
-            //String targetUrl = "http://localhost:8083/Shoes4Jo/coupang_dummy";
-        	//String targetUrl = "https://trends.google.com/trends/embed/explore/RELATED_QUERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%2Fm%2F06rrc%22%2C%22geo%22%3A%22KR%22%2C%22time%22%3A%22now%207-d%22%7D%5D%2C%22category%22%3A18%2C%22property%22%3A%22%22%7D&tz=-540&eq=cat%3D18%26date%3Dnow%25201-d%26geo%3DKR%26q%3D%252Fm%252F06rrc%26hl%3Dko";
-        	String targetUrl = "http://localhost:8083/Shoes4Jo/keyword_trend";
-
+            String targetUrl = "http://localhost:8083/Shoes4Jo/coupang_dummy";
         	Document doc = null;
             try {
             	System.out.println(targetUrl); //작동 테스트용
@@ -37,16 +34,30 @@ public class KeywordTrendCrawling {
             }
 
             // 검색 결과 페이지에서 필요한 정보를 추출합니다.
-            Element container = doc.select("div.fe-related-queries").get(0);
-            List<String> keywordsList = new ArrayList<String>();
-            List<String> keywordsVal = new ArrayList<String>();
+            Elements products = doc.select("li.search-product");
+            List<String> productNames = new ArrayList<String>();
+            List<String> productPrices = new ArrayList<String>();
+            List<String> productReviews = new ArrayList<String>();
+            List<String> productImages = new ArrayList<String>();
 
-            Element span = container.selectFirst("span[ng-bind=bidiText]");
+            for (int i = 0; i < 10; i++) { // 검색 상위 10개의 결과만 활용합니다.
+                Element product = products.get(i);
+                Element name = product.selectFirst("div.name");
+                Element price = product.selectFirst("div.price-wrap > div.price > em > strong");
+                Element review = product.selectFirst("div.other-info > div > span.rating-total-count");
+                Element image = product.selectFirst("dt > img");
 
-            keywordsList.add(span.text().replaceAll(",", ""));
+                productNames.add(name.text().replaceAll(",", ""));
+                productPrices.add(price.text().replaceAll(",", ""));
+                productReviews.add(review.text().replaceAll("[()]", ""));
+                productImages.add(image.attr("src").replace("//", ""));
+            }
 
             // 결과를 리스트에 추가합니다.
-            result.add(keywordsList);
+            result.add(productNames);
+            result.add(productPrices);
+            result.add(productReviews);
+            result.add(productImages);
 
         }
 

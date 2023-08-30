@@ -12,7 +12,7 @@
 <script src="<%=context%>/assets/js/script.js"></script>
 <script>
 function getAPIResult() {
-	
+	showLoading();
 	let keyword = document.getElementById("keyword").value;
 
 	if (!keyword || keyword === "" || keyword === "null" || keyword === null) {
