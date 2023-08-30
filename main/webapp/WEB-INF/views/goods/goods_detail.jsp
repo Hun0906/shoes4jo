@@ -21,52 +21,64 @@
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
+
 	<div class="scroll-table">
 		<section class="view" style="padding-left: 100px;">
 			<nav>
 				<h1>상품 상세정보</h1>
 				<p>
-					<span>${goods.category}</span>
+					<span>${goods_list[0].category}</span>
 				</p>
 			</nav>
+
 			<article class="info">
 				<div class="image">
-					<img src="${goods.goods_img}" alt="상품이미지" width="600"
+					<img src="${goods_list[0].goods_img}" alt="상품이미지" width="600"
 						height="600" />
-
 				</div>
 
-
 			</article>
+
 		</section>
-	</div>
-	<div style="padding-top: 50px; padding-left: 150px;">
-		<table style="border: 2px solid; width: 85%;">
-			<colgroup>
-				<col style="width: 25%;" />
-				<col style="width: 25%;" />
-				<col style="width: 25%;" />
-				<col style="width: 25%;" />
-			</colgroup>
-			<thead>
-				<tr>
-					<th>판매처</th>
-					<th>가격</th>
-					<th>배송비</th>
-					<th>바로가기</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td style="text-align: center;">${goods.seller_name}</td>
-					<td style="text-align: center;">${goods.goods_price}</td>
-					<td style="text-align: center;">${goods.delivery_fee}</td>
-					<td style="text-align: center;"><a
-						href="${goods.seller_url}">바로가기</a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<%@include file="../common/footer.jsp"%>
+
+		<div style="padding-top: 50px; padding-left: 150px;">
+			<table style="border: 2px solid; width: 85%;">
+				<colgroup>
+					<col style="width: 25%;" />
+					<col style="width: 25%;" />
+					<col style="width: 25%;" />
+					<col style="width: 25%;" />
+				</colgroup>
+
+				<thead>
+					<tr>
+
+						<th style="text-align: center;">판매처</th>
+						<th style="text-align: center;">가격</th>
+						<th style="text-align: center;">배송비</th>
+						<th style="text-align: center;">바로가기</th>
+					</tr>
+				</thead>
+
+
+				<!-- 상품 목록의 각 항목에 대해 행을 렌더링합니다. -->
+				<c:forEach var='goods' items='${goods_list}'>
+					<tbody>
+						<tr>
+
+							<td style="text-align: center;">${goods.seller_name}</td>
+							<td style="text-align: center;">${goods.goods_price}</td>
+							<td style="text-align: center;">${goods.delivery_fee}</td>
+							<td style="text-align: center;"><a
+								href="${goods.seller_url}">바로가기</a></td>
+						</tr>
+					</tbody>
+				</c:forEach>
+				<!-- End of forEach loop -->
+			</table>
+		</div>
+
+		<%@include file="../common/footer.jsp"%>
 </body>
 </html>
+
