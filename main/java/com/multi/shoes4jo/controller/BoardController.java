@@ -45,6 +45,16 @@ public class BoardController {
 
 		return "board/board_list";
 	}
+	
+	@RequestMapping(value = "/category.do")
+	public String category(@RequestParam("category") String category, Model model) {
+	    List<BoardVO> list = boardService.selectOneCat(category);
+	    model.addAttribute("list", list);
+	    model.addAttribute("selectedCategory", category); 
+	    return "board/board_list";
+	}
+
+
 
 	@RequestMapping(value = "/magazine")
 	public String magazine(Model model) {
