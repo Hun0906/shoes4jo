@@ -23,7 +23,7 @@ public interface GoodsDetailMapper {
 	List<GoodsDetailVO> selectAllGoods();
 	
 	// 특정 상품 조회
-	@Select("SELECT * FROM 4jo_goods_detail WHERE keyword=#{keyword} ORDER BY gno ASC")
+	@Select("SELECT * FROM 4jo_goods_detail WHERE keyword=#{keyword} ORDER BY goods_price ASC")
 	List<GoodsDetailVO> selectOne(@Param("keyword") String keyword);
 
 	// 상품 등록 정보 수정

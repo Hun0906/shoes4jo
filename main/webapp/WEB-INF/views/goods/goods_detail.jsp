@@ -61,7 +61,6 @@
 				</thead>
 
 
-				<!-- 상품 목록의 각 항목에 대해 행을 렌더링합니다. -->
 				<c:forEach var='goods' items='${goods_list}'>
 					<tbody>
 						<tr>
@@ -74,7 +73,6 @@
 						</tr>
 					</tbody>
 				</c:forEach>
-				<!-- End of forEach loop -->
 			</table>
 		</div>
 
