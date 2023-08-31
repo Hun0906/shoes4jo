@@ -19,8 +19,6 @@ public class BookmarkVO {
 		this.add_date = add_date;
 	}
 
-
-
 	public int getGno() {
 		return gno;
 	}
