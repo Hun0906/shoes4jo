@@ -19,7 +19,7 @@ public interface BookmarkMapper {
 	
 	//본인 아이디의 북마크 전체 조회
 	@Select("SELECT * FROM 4jo_bookmark WHERE member_id = #{member_id}")
-	List<BookmarkVO> getBookmarkList(String member_id);
+	List<BookmarkVO> BookmarkList(String member_id);
 
 	 //북마크 추가
     @Insert("INSERT INTO 4jo_bookmark(bookmark_no, gno, member_id, keyword, add_date) VALUES(#{bookmark_no},  #{gno}, #{member_id}, #{keyword}, #{add_date})")

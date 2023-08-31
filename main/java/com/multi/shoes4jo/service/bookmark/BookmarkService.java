@@ -6,9 +6,9 @@ import com.multi.shoes4jo.vo.BookmarkVO;
 
 public interface BookmarkService {
 
-	public BookmarkVO getcheck(int bookmark_no, String member_id);
+	public BookmarkVO check(int bookmark_no, String member_id);
 	
-	public List<BookmarkVO> getBookmarkList(String member_id);
+	public List<BookmarkVO> BookmarkList(String member_id);
 	//본인 아이디의 북마크 전체 조회
 
 	public void insert(BookmarkVO vo);

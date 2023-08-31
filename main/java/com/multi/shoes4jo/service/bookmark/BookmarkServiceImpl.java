@@ -16,13 +16,13 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 	
 	@Override
-	public BookmarkVO getcheck(int bookmark_no, String member_id) {
+	public BookmarkVO check(int bookmark_no, String member_id) {
 		return bookmarkMapper.check(bookmark_no, member_id);
 	}
 
 	@Override
-	public List<BookmarkVO> getBookmarkList(String member_id) {
-	    return bookmarkMapper.getBookmarkList(member_id);
+	public List<BookmarkVO> BookmarkList(String member_id) {
+	    return bookmarkMapper.BookmarkList(member_id);
 	}
 
 	@Override

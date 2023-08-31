@@ -30,7 +30,7 @@ public class BookmarkController {
 	    HttpSession session = request.getSession();
 	    String member_id = (String) session.getAttribute("memberInfo");
 	    
-	    List<BookmarkVO> bookmark_list = service.getBookmarkList(member_id);
+	    List<BookmarkVO> bookmark_list = service.BookmarkList(member_id);
 	    
 	    ModelAndView mav = new ModelAndView();
 	    mav.setViewName("bookmark/bookmark_list");
@@ -40,10 +40,10 @@ public class BookmarkController {
 	}
 
 
-	@RequestMapping(value = "/view.do") // 북마크 여부 조회
-	public String view(@RequestParam("bookmark_no") int bookmark_no, @RequestParam("member_id") String member_id,
+	@RequestMapping(value = "/check.do") // 북마크 여부 조회
+	public String check(@RequestParam("bookmark_no") int bookmark_no, @RequestParam("member_id") String member_id,
 			Model model) {
-		BookmarkVO vo = service.getcheck(bookmark_no, member_id);
+		BookmarkVO vo = service.check(bookmark_no, member_id);
 		model.addAttribute("bookmarks", vo);
 		return "/bookmark/bookmark_list";
 	}
