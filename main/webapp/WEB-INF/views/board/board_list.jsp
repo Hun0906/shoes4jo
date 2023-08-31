@@ -37,14 +37,14 @@
 
     <div style="display: flex; justify-content: space-between; margin: 1rem 0;">
         
-		<select class="form-select" style="width: fit-content"
-			onchange="window.open(value,'_self')">
-			<option value="">카테고리 선택</option>
-			<option value="<%=context %>/board/list.do">전체 글 보기</option>
-			<option value="<%=context %>/board/list.do?category=news">뉴스</option>
-			<option value="<%=context %>/board/list.do?category=events">이벤트</option>
-			<option value="<%=context %>/board/list.do?category=columns">칼럼</option> 
-	    </select> 
+<select class="form-select" style="width: fit-content"
+    onchange="window.location.href='<%=context %>/board/category.do?category=' + this.value">
+    <option value="">카테고리 선택</option>
+    <option value="news">뉴스</option>
+    <option value="events">이벤트</option>
+    <option value="columns">칼럼</option> 
+</select> 
+
 
 	    <button onclick="location.href='<%=context %>/board/write.do'" class="btn-basic">글쓰기</button>
 			
