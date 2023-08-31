@@ -18,11 +18,6 @@ public class BoardVO {
 	private String link;
 	private MultipartFile file;
 	
-	/*
-	 * MultipartFile file 필드는 BoardVO 객체에서 파일 업로드에 사용되는 데이터를 임시로 저장하는 역할(사용자가 웹페이지에서
-	 * 파일을 업로드할 때, 그 파일의 데이터를 담아서 서버로 전송하기 위한 용도) 따라서 DB에는 컬럼 안만들음
-	 */
-
 	public BoardVO() {
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,11 +19,12 @@
 	table-layout: fixed;
 }
 </style>
+
+
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
 
-	<div class="scroll-table">
 		<section class="view" style="padding-left: 100px;">
 			<nav>
 				<h1>상품 상세정보</h1>
@@ -40,7 +42,10 @@
 			</article>
 
 		</section>
+		
+		
 
+		
 		<div style="padding-top: 50px; padding-left: 150px;">
 			<table style="border: 2px solid; width: 85%;">
 				<colgroup>
@@ -77,6 +82,9 @@
 		</div>
 
 		<%@include file="../common/footer.jsp"%>
+		
+
+
+		
 </body>
 </html>
-
