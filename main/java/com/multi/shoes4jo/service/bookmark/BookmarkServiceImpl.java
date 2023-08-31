@@ -14,14 +14,15 @@ public class BookmarkServiceImpl implements BookmarkService {
 	@Autowired
 	private BookmarkMapper bookmarkMapper;
 
+	
 	@Override
-	public List<BookmarkVO> getselectAll() {
-		return bookmarkMapper.selectAll();
+	public BookmarkVO check(int bookmark_no, String member_id) {
+		return bookmarkMapper.check(bookmark_no, member_id);
 	}
 
 	@Override
-	public BookmarkVO getselectOne(int bookmark_no) {
-		return bookmarkMapper.selectOne(bookmark_no);
+	public List<BookmarkVO> BookmarkList(String member_id) {
+	    return bookmarkMapper.BookmarkList(member_id);
 	}
 
 	@Override
@@ -29,9 +30,8 @@ public class BookmarkServiceImpl implements BookmarkService {
 		this.bookmarkMapper.insert(vo);
 	}
 
-
 	@Override
-	public void delete(int bookmark_no) {
-		this.bookmarkMapper.delete(bookmark_no);
+	public void delete(int bookmark_no, String member_id) {
+		this.bookmarkMapper.delete(bookmark_no, member_id);
 	}
 }
