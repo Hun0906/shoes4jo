@@ -15,22 +15,6 @@
 		<result column="member_phone" property="member_phone" />
 	</resultMap>
 
-
-	<!-- result property, column은 memberVO에서 쓸 sql 컬럼명이랑 DB컬럼명들 맞추는거(column이원래 
-		DB 컬럼명) resultMap 타입 속성에 HashMap도 있는데(여러 정보 처리) HashMap사용할땐 타입에 MemberVO대신 
-		HashMap쓰고 sql문 실행 시 레코드의 컬럼 이름을 key로 지정하고 값을 value로 해서 HashMap에 차례대로 저장함(856p) 
-		이렇게 씀 <resultMap id="MemResult" type="java.util.HashMap"> <result property="member_id"column="member_id"/> 
-		<result property="member_name" column="member_name"/><result property="member_pw" 
-		column="member_pw"/> <result property="signup_date"column="signup_date"/> 
-		</resultMap> -->
-
-
-	<!-- select태그의 id속성은 MemberDAO(회원정보 DB연동하는 클래스)에서 SQL문을 구분해서 호출하기 위한 용도로사용되고 
-		반환되는 레코드를 id가 memberResultMap인 resultMap에 저장한다 id로 MemberDAO에서 접근할때사용 할 sql문의 
-		id를 지정하고 parameterType으로 속성 지정하고 sql문으로 조회한 결과(여기선 아이디,아이디니까 문자열) 호출한 메서드로 
-		반환한다 -->
-
-
 	<select id="showMember" resultMap="memResult">
 		SELECT * FROM campusDB.4jo_member
 	</select>
@@ -71,7 +55,7 @@
 	</update>
 
 	<delete id="deleteMember"
-		parameterType="com.multi.shoes4jo.vo.MemberVO">
+		parameterType="java.lang.String">
 <![CDATA[
    delete from campusDB.4jo_member
    where
