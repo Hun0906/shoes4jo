@@ -9,13 +9,14 @@
 <script>
 
 $(document).ready(function(){
-    var gno = ${goods_list[0].gno};
+    var gno = "${goods_list[0].gno}";
+    var keyword = "${goods_list[0].keyword}"; 
 
     $("#bookmark").click(function(){
         $.ajax({
             url: "/bookmarkcon/insert.do",
             type: "POST",
-            data: JSON.stringify({gno: gno}),
+            data: JSON.stringify({gno: gno, keyword: keyword}), 
             contentType: "application/json; charset=UTF-8",
             dataType: "json", 
             success: function(data) {

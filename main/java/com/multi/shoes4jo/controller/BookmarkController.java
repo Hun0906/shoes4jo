@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -58,21 +57,20 @@ public class BookmarkController {
 		}
 	}
 
+	@PostMapping(value = "/insert.do")
+	@ResponseBody
+	public ResponseEntity<?> insert(@RequestBody Map<String, Object> bookmarkMap, HttpSession session) {
+	    String member_id = (String) session.getAttribute("memberInfo");
 
-    @PostMapping(value = "/insert.do")
-    @ResponseBody
-    public ResponseEntity<?> insert(@RequestBody Map<String, Object> bookmarkvoMap, HttpSession session) {
-        String member_id = (String) session.getAttribute("memberInfo");
+	    BookmarkVO vo = new BookmarkVO();
+	    vo.setGno(Integer.parseInt(bookmarkMap.get("gno").toString()));
+	    vo.setMember_id(member_id);
+	    vo.setKeyword((String) bookmarkMap.get("keyword"));
 
-        BookmarkVO vo = new BookmarkVO();
-        vo.setGno((Integer) bookmarkvoMap.get("gno"));
-        vo.setMember_id(member_id);
+	    int result = service.insert(vo);
 
-        int result = service.insert(vo);
-        
-        return new ResponseEntity<>(Collections.singletonMap("result", result), HttpStatus.OK); 
-    }
-
+	    return new ResponseEntity<>(Collections.singletonMap("result", result), HttpStatus.OK);
+	}
 
 
 	@RequestMapping(value = "/delete.do")
