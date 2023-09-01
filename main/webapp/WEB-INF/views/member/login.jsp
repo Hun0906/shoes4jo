@@ -121,17 +121,8 @@ function login() {
 					<a href="https://kauth.kakao.com/oauth/authorize?client_id=cff88eebed1871d04bd76c76c9ca3c23&redirect_uri=http://localhost:8084/kakao_callback&response_type=code">
 					<span class="simpleLogin" style="background-image: url(<%=context%>/assets/img/logo_kakao.svg);"></span>
 					</a>
-					<%
-					String clientId = "N9xv13b4_0J3uwaUMfnw";
-					String redirectURI = URLEncoder.encode("http://localhost:8084/naver_callback", "UTF-8");
-					SecureRandom random = new SecureRandom();
-					String state = new BigInteger(130, random).toString();
-					String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code" + "&client_id=" + clientId
-							+ "&redirect_uri=" + redirectURI + "&state=" + state;
-					session.setAttribute("state", state);
-					%>
-					<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=N9xv13b4_0J3uwaUMfnw&state=STATE_STRING&redirect_uri=http://localhost:8084/naver_callback"
-						id="naver_callback">
+
+					<a href="<%=context%>/naver_login">
 					<span class="simpleLogin" style="background-image: url(<%=context%>/assets/img/logo_naver.png);"></span>
 					</a>
 
