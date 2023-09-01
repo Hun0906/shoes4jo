@@ -111,7 +111,7 @@ public class BoardController {
 		return new ModelAndView("board/board_update", "board", board);
 	}
 
-	@RequestMapping("/updateOk.do") // HTTP 요청 경로 설정
+	@RequestMapping("/updateOk.do") 
 	public String updateOk(@ModelAttribute BoardVO board,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
