@@ -40,7 +40,7 @@
 						<td class="text-center">${goods.seller_name}</td>
 						<td class="text-center">${goods.goods_price}</td>
 						<td class="text-center">${goods.delivery_fee}</td>
-						<td class="text-center">${goods.date}</td>
+						<td class="text-center">${goods.date.substring(0,11)}</td>
 						<td class="text-center">${goods.category}</td>
 
 <td class="text-center"><a href="<%=context %>/goodscon/update.do?keyword=${goods.keyword}" class="butten">수정하기</a></td> 
