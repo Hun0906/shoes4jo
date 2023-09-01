@@ -2,14 +2,15 @@ package com.multi.shoes4jo.service.ranking;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.multi.shoes4jo.mapper.RankingMapper;
 import com.multi.shoes4jo.vo.RankingVO;
 
 @Service("rankingService")
 public class RankingServiceImpl implements RankingService {
-    @Autowired
-    private RankingMapper rankingMapper;
-    
+	@Autowired
+	private RankingMapper rankingMapper;
+
 	@Override
 	public void insert(String keyword, String title) {
 		rankingMapper.insert(keyword, title);
@@ -31,6 +32,5 @@ public class RankingServiceImpl implements RankingService {
 	public void update(String keyword, String date) {
 		rankingMapper.update(keyword, date);
 	}
-
 
 }
