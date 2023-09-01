@@ -18,7 +18,7 @@
 				<h2>신발</h2>
 				
 			</div>
-			<div class="list" id="tlsqkf">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -48,7 +48,7 @@
 				<h2>운동화</h2>
 				
 			</div>
-			<div class="list" id="dnsehdghk">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -74,7 +74,7 @@
 				<h2>슬리퍼</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -100,7 +100,7 @@
 				<h2>스니커즈</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -126,7 +126,7 @@
 				<h2>슬립온</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -152,7 +152,7 @@
 				<h2>등산화</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -178,7 +178,7 @@
 				<h2>샌들</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -204,7 +204,7 @@
 				<h2>부츠</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -234,7 +234,7 @@
 				<h2>나이키</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -260,7 +260,7 @@
 				<h2>아디다스</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed
 							.renderExploreWidget(
@@ -287,7 +287,7 @@
 				<h2>뉴발란스</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -313,7 +313,7 @@
 				<h2>닥터마틴</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -339,7 +339,7 @@
 				<h2>아식스</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -365,7 +365,7 @@
 				<h2>리복</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -391,7 +391,7 @@
 				<h2>크록스</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -417,7 +417,7 @@
 				<h2>컨버스</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -443,7 +443,7 @@
 				<h2>반스</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",
@@ -469,7 +469,7 @@
 				<h2>스케쳐스</h2>
 				
 			</div>
-			<div class="list" id="">
+			<div class="list">
 				<script type="text/javascript">
 					trends.embed.renderExploreWidget(
 									"RELATED_QUERIES",

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,6 +37,12 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/google_trend", method = { RequestMethod.GET, RequestMethod.POST })
+	@CrossOrigin(origins = { "http://localhost:8084",
+			"https://surveys.google.com/async_survey?site=ynkoxcwrpztmeiz7uor4o7bd54",
+			"https://csp.withgoogle.com/csp/2be55311e645b93f165b75b98d852d9a",
+			"https://trends.google.com",
+			"https://www.google.com",
+			"https://ssl.gstatic.com"})
 	public String google_trend() {
 		logger.info("google_trend() called");
 		return "trend/google_trend";
