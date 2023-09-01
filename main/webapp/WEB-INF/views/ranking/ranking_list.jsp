@@ -37,44 +37,49 @@
 		<h2 class="text-center">랭킹</h2>
 
 
-		</div>
+	</div>
 
 
 
-		<table class="table table-ranking table-hover">
-			<thead>
-				<tr>
-					<th class="text-center">키워드</th>
-					<th class="text-center">건수</th>
-					<th class="text-center">랭킹</th>
-				</tr>
-			</thead>
+	<table class="table table-ranking table-hover">
+		<thead>
+			<tr>
+				<th class="text-center">키워드</th>
+				<th class="text-center">건수</th>
+				<th class="text-center">랭킹</th>
+			</tr>
+		</thead>
 
-			<tbody>
+		<tbody>
 
-				<c:choose>
-					<c:when test="${empty list}">
+			<c:choose>
+				<c:when test="${empty list}">
+					<tr>
+						<td colspan="6" class="text-center">검색 결과가 없습니다.</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+
+					<c:forEach var="ranking" items="${list}" varStatus="status">
 						<tr>
-							<td colspan="6" class="text-center">검색 결과가 없습니다.</td>
+							<td class="text-center">
+								<!-- 키워드 클릭하면 해당 상품의 상세 정보 페이지로 이동 --> <a
+								href="${pageContext.request.contextPath}/goodscon/view.do?keyword=${ranking.keyword}">
+									${ranking.keyword} </a>
+							</td>
+							<td class="text-center">${ranking.cnt}</td>
+							<td class="text-center">${ranking.ranking}</td>
 						</tr>
-					</c:when>
-					<c:otherwise>
+					</c:forEach>
 
-						<c:forEach var="ranking" items="${list}" varStatus="status">
-							<tr>
-								<td class="text-center">${ranking.keyword }</td>
-								<td class="text-center">${ranking.cnt}</td>
-								<td class="text-center">${ranking.ranking}</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
+				</c:otherwise>
+			</c:choose>
+		</tbody>
+	</table>
 
 	</div>
 
-<%-- 	<div>
+	<%-- 	<div>
 		<ul class="pagination">
 
 			<c:if test="${pageMaker.prev}">
