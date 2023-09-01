@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.multi.shoes4jo.service.ranking.RankingViewService;
+import com.multi.shoes4jo.service.ranking.RankingService;
 import com.multi.shoes4jo.util.Criteria;
 import com.multi.shoes4jo.vo.RankingVO;
 
@@ -16,7 +16,7 @@ import com.multi.shoes4jo.vo.RankingVO;
 public class RankingController {
 
 	@Autowired
-	RankingViewService service;
+	private RankingService service;
 
 	@RequestMapping(value = "/ranking.do")
 	public String list(Model model, Criteria cri) throws Exception {
