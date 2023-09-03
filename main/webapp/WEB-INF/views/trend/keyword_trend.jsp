@@ -38,7 +38,9 @@ h2 {
 					<span>추천 상품</span>
 				</div>
 				<div class="list" id="shoes4jo">
-
+				<ul>
+					<c:forEach><li>${}</li></c:forEach>
+				</ul>
 				</div>
 			</div>
 

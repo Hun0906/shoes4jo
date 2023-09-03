@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.shoes4jo.api.GoodsClickAPI;
 import com.multi.shoes4jo.api.GoodsSearchAPI;
+import com.multi.shoes4jo.api.KeywordTrendCrawling;
 import com.multi.shoes4jo.service.ranking.RankingService;
 import com.multi.shoes4jo.service.trend.GoodsTrendService;
 import com.multi.shoes4jo.vo.GoodsTrendVO;
@@ -268,8 +269,8 @@ public class SaveController {
 		return "redirect:/goods_trend?msg=get&keyword="+encodedKeyword;
 	}
 
-	@RequestMapping(value = "/run_goods_list")
-	public void runGoodsList() throws Exception {
+	@RequestMapping(value = "/all_ranking")
+	public void allRanking() throws Exception {
 	    String[] goodsList = {
 	    		"나이키 데이브레이크", 
 				"나이키 조던1 미드", 
@@ -356,6 +357,13 @@ public class SaveController {
 	        }
 	        /* 랭킹 테이블에 값 추가 */
 	    }
+	}
+	
+	@RequestMapping(value = "/crawling")
+	public String Crawling() throws Exception {
+		KeywordTrendCrawling model = new KeywordTrendCrawling();
+		model.ReadJson();
+		return "trend_save";
 	}
 
 }

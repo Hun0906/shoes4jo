@@ -1,6 +1,7 @@
 package com.multi.shoes4jo.api;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -17,7 +18,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,16 +27,8 @@ import com.multi.shoes4jo.vo.KeywordTrendVO;
 @RestController
 public class KeywordTrendCrawling {
 
-	KeywordTrendVO vo;
-
-	@GetMapping("/test")
-	@CrossOrigin(origins = { "http://localhost:8084",
-			"https://surveys.google.com/async_survey?site=ynkoxcwrpztmeiz7uor4o7bd54",
-			"https://csp.withgoogle.com/csp/2be55311e645b93f165b75b98d852d9a",
-			"https://trends.google.com",
-			"https://www.google.com",
-			"https://ssl.gstatic.com"})
-	public void test() {
+	@GetMapping("/jsoup")
+	public void jsoup() {
 		String targetUrl = "https://trends.google.com/trends/embed/explore/RELATED_QUERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%EC%8A%A4%EC%BC%80%EC%B3%90%EC%8A%A4%22%2C%22geo%22%3A%22KR%22%2C%22time%22%3A%22today%203-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-540&eq=date%3Dtoday%25203-m%26geo%3DKR%26q%3D%25EB%2589%25B4%25EB%25B0%259C%25EB%259E%2580%25EC%258A%25A4";
 		System.out.println(targetUrl);
 
@@ -63,7 +55,9 @@ public class KeywordTrendCrawling {
 	}
 	
 	@GetMapping("/readjson")
-    public void bufferread() {
+    public void ReadJson() {
+		KeywordTrendVO vo = new KeywordTrendVO();
+		
         try {
             // URL 객체 생성
         	String trendUrl = "https://trends.google.com/trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22:%7B%22geo%22:%7B%22country%22:%22KR%22%7D,%22time%22:%222023-05-31+2023-08-31%22,%22originalTimeRangeForExploreUrl%22:%22today+3-m%22,%22complexKeywordsRestriction%22:%7B%22keyword%22:%5B%7B%22type%22:%22BROAD%22,%22";
@@ -91,65 +85,92 @@ public class KeywordTrendCrawling {
 
 			Map<String, URL> urlMap = new HashMap<>();
 			
-			urlMap.put("url_shoes", 	url_shoes);
+			urlMap.put("url_shoes",        url_shoes);
+
+			urlMap.put("url_runningshoes", url_runningshoes);
+			urlMap.put("url_slipper",      url_slipper);
+			urlMap.put("url_sneakers",     url_sneakers);
+			urlMap.put("url_slipon",       url_slipon);
+			urlMap.put("url_trakingshoes", url_trakingshoes);
+			urlMap.put("url_sandal",       url_sandal);
+			urlMap.put("url_boots",        url_boots);
 			
-			urlMap.put("url_runningshoes", 	url_runningshoes);
-			urlMap.put("url_slipper", 	url_slipper);
-			urlMap.put("url_sneakers", 	url_sneakers);
-			urlMap.put("url_slipon", 	url_slipon);
-			urlMap.put("url_trakingshoes", 	url_trakingshoes);
-			urlMap.put("url_sandal", 	url_sandal);
-			urlMap.put("url_boots", 	url_boots);
+			urlMap.put("url_nike",         url_nike);
+			urlMap.put("url_adidas",       url_adidas);
+			urlMap.put("url_newbalance",   url_newbalance);
+			urlMap.put("url_drmartin",     url_drmartin);
+			urlMap.put("url_asics",        url_asics);
+			urlMap.put("url_leebok",       url_leebok);
+			urlMap.put("url_crocs",        url_crocs);
+			urlMap.put("url_canvas",       url_canvas);
+			urlMap.put("url_vans",         url_vans);
+			urlMap.put("url_sketchers",    url_sketchers);
 			
-			urlMap.put("url_nike", 	url_nike);
-			urlMap.put("url_adidas", 	url_adidas);
-			urlMap.put("url_newbalance",    url_newbalance);
-			urlMap.put("url_drmartin",      url_drmartin);
-			urlMap.put("url_asics",         url_asics);
-			urlMap.put("url_leebok",        url_leebok);
-			urlMap.put("url_crocs",         url_crocs);
-			urlMap.put("url_canvas",       	url_canvas);
-			urlMap.put("url_vans",         	url_vans);
-			urlMap.put("url_sketchers",    	url_sketchers);
-			  
+			String[] urlKeyArray = {"url_shoes",       
+					"url_runningshoes",
+					"url_slipper",     
+					"url_sneakers",    
+					"url_slipon",      
+					"url_trakingshoes",
+					"url_sandal",      
+					"url_boots",       
+					"url_nike",        
+					"url_adidas",      
+					"url_newbalance",  
+					"url_drmartin",    
+					"url_asics",       
+					"url_leebok",      
+					"url_crocs",       
+					"url_canvas",      
+					"url_vans",        
+					"url_sketchers"   };
 			  
         	// URL 연결 및 데이터 읽기
     		JSONParser parser = new JSONParser();
-        	for (URL url: urlArray) { //해시맵으로 바꿔야 됨
-        		switch (url) {
-        		case "url_shoes":
-        			vo.setGroup("general");
-        			vo.setKeyword("shoes");
-        			break;
-        		}
+//        	for (String urlKey: urlKeyArray) {
+//        		switch (urlKey) {
+//        		case "url_shoes":
+//        			vo.setGroup("general");
+//        			vo.setKeyword("shoes");
+//        			break;
+//        		}
         		
-        		BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        		String url = "C:/Users/User/Desktop/temporary/json.txt";
+        		
+//        		BufferedReader reader = new BufferedReader(new InputStreamReader(urlMap.get(urlKey).openStream()));
+        		BufferedReader reader = new BufferedReader(new FileReader(url));
 	            reader.readLine(); //첫 번째 줄 버림
 	            String line = reader.readLine();
 	            
 	            // JSON 데이터 파싱
 				try {
 		    		JSONObject jsonObj = (JSONObject) parser.parse(line);
-		    		
+		    		System.out.println(jsonObj);
 		    		JSONArray rankedList = (JSONArray) ((JSONObject) jsonObj.get("default")).get("rankedList");
-		    		JSONObject rankedKeyword = (JSONObject) rankedList.get(0);
-		    		JSONObject[] data = ((JSONObject[]) ((JSONArray) rankedKeyword.get("rankedKeyword")).get(0)); //0: 인기 검색어, 1: 급상승 검색어
-		    		System.out.println(data);
+		    		JSONArray rankedKeyword = (JSONArray) ((JSONObject) rankedList.get(0)).get("rankedKeyword"); //0: 인기 검색어, 1: 급상승 검색어
+		    		System.out.println(rankedKeyword);
 		    		
 		    		// 선택된 값을 사용하여 작업 수행
-		    		for (int i=0; i<data.length; i++) {
-		    			String query = (String) data[i].get("query");
+		    		for (int i=0; i<rankedKeyword.size(); i++) {
+		    			String query = (String) ((JSONObject) rankedKeyword.get(i)).get("query");
 		    			vo.setQuery(query);
-		    			long value = (long) data[i].get("value");
+		    			long value = (long) ((JSONObject) rankedKeyword.get(i)).get("value");
 		    			vo.setValue(value);
+		    			System.out.println(query+" / "+value);
 		    		}
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 				
 	            // 리소스 정리
-	            reader.close();
-        	}
+	            //reader.close();
+
+				//["포켓몬", "메이플", "토드", "추옵", "90", "100", "110", "120", "130", "140", "150"] 을 포함하지 않는 키워드를 db에 저장
+				KeywordTrendService service = new KeywordTrendService();
+				
+
+				//return boolean
+//        	}
             
         } catch (IOException e) {
             e.printStackTrace();
