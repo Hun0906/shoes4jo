@@ -31,6 +31,11 @@ function setSearch(obj) {
     obj.style.color = "yellow";
 }
 
+function saveKeywordTrend() {
+	showLoading();
+	location.href="<%=context%>/save/keyword_trend";
+}
+
 </script>
 
 <style>
@@ -69,6 +74,8 @@ content:" /";
 				오류 코드</a>
 			</div>
 		</div>
+		
+		<hr>
 		
 		<div>
 		<h2>랭킹 등록</h2>
@@ -145,14 +152,17 @@ content:" /";
 		<button class="btn-basic btn-color2" onclick="location.href='<%=context%>/save/all_ranking'">Save</button>
 		</div>
 		</div>
-
-		</div>
+		
+		<hr>
 		
 		<div>
 		<h2>인기검색어 크롤링</h2>
-		<button class="btn-basic btn-color2" onclick="location.href='<%=context%>/save/crawling'">Save</button>
+		<div class="form-wrapper">
+			<button class="btn-basic btn-color2" onclick="saveKeywordTrend()">Save</button>
+		</div>
 		</div>
 		
+	</div>
 	</div>
 
 	<%@include file="../common/footer.jsp"%>

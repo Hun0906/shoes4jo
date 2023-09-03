@@ -9,9 +9,9 @@ function showLoading() {
     $('#mask').css({
 	    'z-index': '9999',
 	    'position': 'absolute',
-	    'height': '100vh',
+	    'height': '150%',
 	    'width': '100%',
-	    'background': 'rgba(0, 0, 0, 0.15)',
+	    'backdrop-filter': 'brightness(0.85) blur(2px)',
 	    'top': '0',
 	    'display': 'flex',
 	    'justify-content': 'center',
@@ -21,7 +21,7 @@ function showLoading() {
     
     $('#mask-img').css({
     	'width': '8rem',
-    	'margin-bottom': '4rem'
+    	'margin-bottom': '50vh'
     });
   
     //마스크 표시

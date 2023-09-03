@@ -36,7 +36,7 @@ public interface KeywordTrendMapper {
 
     
     //update
-    @Update("UPDATE `4jo_keyword_trend` SET query_value = #{query_value} WHERE keyword = #{keyword} and query = #{query}")
+    @Update("UPDATE `4jo_keyword_trend` SET query_value = #{query_value} WHERE keyword = #{keyword} AND query = #{query}")
     void update(KeywordTrendVO vo);
 
 }

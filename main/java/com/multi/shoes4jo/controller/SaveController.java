@@ -30,6 +30,9 @@ public class SaveController {
 
 	@Autowired
 	RankingService rankingService;
+	
+	@Autowired
+	KeywordTrendCrawling keywordTrendCrawling;
 
 	@Autowired
 	GoodsClickAPI goodsClick;
@@ -40,6 +43,7 @@ public class SaveController {
 	@Autowired
 	HttpServletRequest request;
 
+	
 	@RequestMapping(value = "/goods_trend")
 	public String goods_trend(GoodsTrendVO vo) throws Exception {
 		String title = request.getParameter("keyword");
@@ -359,11 +363,12 @@ public class SaveController {
 	    }
 	}
 	
-	@RequestMapping(value = "/crawling")
-	public String Crawling() throws Exception {
-		KeywordTrendCrawling model = new KeywordTrendCrawling();
-		model.ReadJson();
-		return "trend_save";
+	
+	@RequestMapping(value = "/keyword_trend")
+	public String saveKeywordTrend() throws InterruptedException {
+		keywordTrendCrawling.saveKeywordTrend();
+		
+		return "redirect:/trend_save";
 	}
-
+	
 }
