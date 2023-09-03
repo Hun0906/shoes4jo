@@ -59,7 +59,7 @@ h2 {
 					<h2 class="select-shoes">운동화</h2>
 					<span>인기 키워드</span>
 				</div>
-				<div class="list" id="group">
+				<div class="list" id="kind">
 
 				</div>
 			</div>

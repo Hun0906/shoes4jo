@@ -4,20 +4,21 @@ import org.springframework.stereotype.Component;
 
 @Component("KeywordTrendVO")
 public class KeywordTrendVO {
-	private String group;
+	private String keyword_group;
 	private String keyword;
 	private String query;
-	private long value;
+	private long query_value;
 	
 	public KeywordTrendVO() {
 	}
 
-	public String getGroup() {
-		return group;
+
+	public String getKeyword_group() {
+		return keyword_group;
 	}
 
-	public void setGroup(String group) {
-		this.group = group;
+	public void setKeyword_group(String keyword_group) {
+		this.keyword_group = keyword_group;
 	}
 
 	public String getKeyword() {
@@ -36,12 +37,16 @@ public class KeywordTrendVO {
 		this.query = query;
 	}
 
-	public long getValue() {
-		return value;
+
+	public long getQuery_value() {
+		return query_value;
 	}
 
-	public void setValue(long value) {
-		this.value = value;
+
+	public void setQuery_value(long query_value) {
+		this.query_value = query_value;
 	}
+
+
 	
 }

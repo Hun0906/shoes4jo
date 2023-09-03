@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,16 +16,22 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.multi.shoes4jo.service.trend.KeywordTrendService;
 import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Controller
 @RestController
 public class KeywordTrendCrawling {
 
+	@Autowired
+	KeywordTrendService service;
+	
+	
 	@GetMapping("/jsoup")
 	public void jsoup() {
 		String targetUrl = "https://trends.google.com/trends/embed/explore/RELATED_QUERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%EC%8A%A4%EC%BC%80%EC%B3%90%EC%8A%A4%22%2C%22geo%22%3A%22KR%22%2C%22time%22%3A%22today%203-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-540&eq=date%3Dtoday%25203-m%26geo%3DKR%26q%3D%25EB%2589%25B4%25EB%25B0%259C%25EB%259E%2580%25EC%258A%25A4";
@@ -55,7 +60,7 @@ public class KeywordTrendCrawling {
 	}
 	
 	@GetMapping("/readjson")
-    public void ReadJson() {
+    public void ReadJson() throws InterruptedException {
 		KeywordTrendVO vo = new KeywordTrendVO();
 		
         try {
@@ -106,39 +111,52 @@ public class KeywordTrendCrawling {
 			urlMap.put("url_vans",         url_vans);
 			urlMap.put("url_sketchers",    url_sketchers);
 			
-			String[] urlKeyArray = {"url_shoes",       
-					"url_runningshoes",
-					"url_slipper",     
-					"url_sneakers",    
-					"url_slipon",      
-					"url_trakingshoes",
-					"url_sandal",      
-					"url_boots",       
-					"url_nike",        
-					"url_adidas",      
-					"url_newbalance",  
-					"url_drmartin",    
-					"url_asics",       
-					"url_leebok",      
-					"url_crocs",       
-					"url_canvas",      
-					"url_vans",        
-					"url_sketchers"   };
+			String[] urlKeyArray = {"url_shoes", "url_runningshoes", "url_slipper",     
+					"url_sneakers",  "url_slipon",   "url_trakingshoes",
+					"url_sandal",  "url_boots",     "url_nike",        
+					"url_adidas", "url_newbalance", "url_drmartin",    
+					"url_asics", "url_leebok", "url_crocs",       
+					"url_canvas", "url_vans", "url_sketchers"   };
 			  
         	// URL 연결 및 데이터 읽기
     		JSONParser parser = new JSONParser();
-//        	for (String urlKey: urlKeyArray) {
-//        		switch (urlKey) {
-//        		case "url_shoes":
-//        			vo.setGroup("general");
-//        			vo.setKeyword("shoes");
-//        			break;
-//        		}
+        	for (String urlKey: urlKeyArray) {
+        		Thread.sleep(500);
         		
-        		String url = "C:/Users/User/Desktop/temporary/json.txt";
+        		switch (urlKey) {
+        		case "url_shoes":
+        			vo.setKeyword_group("shoes");
+        			vo.setKeyword(urlKey.substring(4));
+        			break;
+        		case "url_runningshoes"	:
+				case "url_slipper"		:
+				case "url_sneakers"		:
+				case "url_slipon"		:
+				case "url_trakingshoes"	:
+				case "url_sandal"		:
+				case "url_boots"		:
+        			vo.setKeyword_group("kind");
+        			vo.setKeyword(urlKey.substring(4));
+        			break;
+				case "url_nike"			:
+				case "url_adidas"		:
+				case "url_newbalance"	:
+				case "url_drmartin"		:
+				case "url_asics"		:
+				case "url_leebok"       :
+				case "url_crocs"		:
+				case "url_canvas"		:
+				case "url_vans"			:
+				case "url_sketchers"	:
+					vo.setKeyword_group("brand");
+					vo.setKeyword(urlKey.substring(4));
+					break;
+        		}
         		
-//        		BufferedReader reader = new BufferedReader(new InputStreamReader(urlMap.get(urlKey).openStream()));
-        		BufferedReader reader = new BufferedReader(new FileReader(url));
+        		BufferedReader reader = new BufferedReader(new InputStreamReader(urlMap.get(urlKey).openStream()));
+//        		String url = "C:/Users/User/Desktop/temporary/json.txt";
+//        		BufferedReader reader = new BufferedReader(new FileReader(url));
+        		
 	            reader.readLine(); //첫 번째 줄 버림
 	            String line = reader.readLine();
 	            
@@ -153,27 +171,51 @@ public class KeywordTrendCrawling {
 		    		// 선택된 값을 사용하여 작업 수행
 		    		for (int i=0; i<rankedKeyword.size(); i++) {
 		    			String query = (String) ((JSONObject) rankedKeyword.get(i)).get("query");
-		    			vo.setQuery(query);
-		    			long value = (long) ((JSONObject) rankedKeyword.get(i)).get("value");
-		    			vo.setValue(value);
-		    			System.out.println(query+" / "+value);
+		    			query = cleanUpQuery(query, "슬리퍼");
+		    			if (!containsWrongWord(query)) {
+		    				vo.setQuery(query);
+		    				long value = (long) ((JSONObject) rankedKeyword.get(i)).get("value");
+		    				vo.setQuery_value(value);
+		    				System.out.println(query+" / "+value);
+		    				
+		    				if (service.isExists("shoes", query)) {
+		    					service.update(vo);
+		    					System.out.println("urlKey.split('_')[1]"+"의 "+query+" 업데이트됨");
+		    				} else {
+		    					service.insert(vo);
+		    					System.out.println("urlKey.split('_')[1]"+"의 "+query+" 추가됨");
+		    				}
+		    			}
 		    		}
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 				
 	            // 리소스 정리
-	            //reader.close();
-
-				//["포켓몬", "메이플", "토드", "추옵", "90", "100", "110", "120", "130", "140", "150"] 을 포함하지 않는 키워드를 db에 저장
-				KeywordTrendService service = new KeywordTrendService();
-				
+	            reader.close();
 
 				//return boolean
-//        	}
+        	}
             
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+	
+	public boolean containsWrongWord(String input) {
+	    String[] wrongWords = {"포켓몬", "메이플", "토드", "추옵", "90", "100", "110", "120", "130", "140", "150"};
+	    
+	    for (String word : wrongWords) {
+	        if (input.contains(word)) {
+	            return true;
+	        }
+	    }
+	    
+	    return false;
+	}
+	
+	public String cleanUpQuery(String query, String keyword) {
+		query = query.replace(" ","").replace(keyword, " "+keyword+" ").trim();
+		return query;
+	}
 }
