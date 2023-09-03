@@ -13,11 +13,11 @@ import com.multi.shoes4jo.vo.KeywordTrendVO;
 @Mapper
 public interface KeywordTrendMapper {
 	//list
-    @Select("SELECT * FROM `4jo_keyword_trend` WHERE keyword = #{keyword} ORDER BY query_value DESC")
+    @Select("SELECT * FROM `4jo_keyword_trend` WHERE keyword = #{keyword} ORDER BY query_value DESC limit 10")
     List<KeywordTrendVO> selectKeyword(@Param("keyword") String keyword);
     
     @Select("SELECT `keyword` FROM `4jo_keyword_trend` WHERE keyword_group = #{keyword_group}")
-    List<KeywordTrendVO> selectGroup(@Param("keyword_group") String keyword_group);
+    List<String> selectGroup(@Param("keyword_group") String keyword_group);
     
     
     //isExists

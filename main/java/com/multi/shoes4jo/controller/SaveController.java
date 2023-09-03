@@ -274,7 +274,7 @@ public class SaveController {
 	}
 
 	@RequestMapping(value = "/all_ranking")
-	public void allRanking() throws Exception {
+	public String allRanking() throws Exception {
 	    String[] goodsList = {
 	    		"나이키 데이브레이크", 
 				"나이키 조던1 미드", 
@@ -361,10 +361,11 @@ public class SaveController {
 	        }
 	        /* 랭킹 테이블에 값 추가 */
 	    }
+	    return "redirect:/trend_save";
 	}
 	
 	
-	@RequestMapping(value = "/keyword_trend")
+	@RequestMapping(value = "/keyword_crawling")
 	public String saveKeywordTrend() throws InterruptedException {
 		keywordTrendCrawling.saveKeywordTrend();
 		

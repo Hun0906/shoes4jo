@@ -5,7 +5,7 @@ import java.util.List;
 import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 public interface KeywordTrendService {
-	public List<KeywordTrendVO> selectGroup(String group);
+	public List<String> selectGroup(String group);
 	public List<KeywordTrendVO> selectKeyword(String keyword);
 
 	public void insert(KeywordTrendVO vo);

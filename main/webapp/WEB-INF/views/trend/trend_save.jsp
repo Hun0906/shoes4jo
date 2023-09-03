@@ -33,7 +33,7 @@ function setSearch(obj) {
 
 function saveKeywordTrend() {
 	showLoading();
-	location.href="<%=context%>/save/keyword_trend";
+	location.href="<%=context%>/save/keyword_crawling";
 }
 
 </script>

@@ -251,7 +251,9 @@ public class KeywordTrendCrawling {
 	}
 	
 	public boolean containsWrongWord(String input) {
-	    String[] wrongWords = {"포켓몬", "메이플", "토드", "추옵", "90", "100", "110", "120", "130", "140", "150"};
+	    String[] wrongWords = {"포켓몬", "메이플", "토드", "추옵", 
+	    		"90", "100", "110", "120", "130", "140", "150", 
+	    		"하비 반스", "존 반스 모먼트", "끈", "공식", "미국"};
 	    
 	    for (String word : wrongWords) {
 	        if (input.contains(word)) {
