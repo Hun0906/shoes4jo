@@ -46,12 +46,6 @@ public class MainController {
 		logger.info("ranking() called");
 		return "trend/ranking";
 	}
-	
-	@RequestMapping(value = "/trend_save", method = { RequestMethod.GET, RequestMethod.POST })
-	public String trend_save() {
-		logger.info("trend_save() called");
-		return "trend/trend_save";
-	}
 
 	@RequestMapping(value = "/signup", method = { RequestMethod.GET, RequestMethod.POST })
 	public String signup() {

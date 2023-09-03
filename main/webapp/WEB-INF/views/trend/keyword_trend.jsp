@@ -1,9 +1,5 @@
-<%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	isELIgnored = "false" %>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,21 +25,6 @@ h2 {
 }
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-	getCode();
-});
-
-function getCode() {
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	const code = urlParams.get('q');
-
-	if (code === "get") {
-	    location.href="get_model";
-    }
-}
-</script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -60,7 +41,7 @@ function getCode() {
 				<div class="list" id="shoes4jo">
 				<ul>
 					<c:forEach var="keywords" items="${shoes4jo}">
-					<li>${keywords.query}</li>
+					<li>${keywords}</li>
 					</c:forEach>
 				</ul>
 				</div>
@@ -91,7 +72,7 @@ function getCode() {
 				</div>
 				<div class="list" id="kind">
 				<ul class="kind-ul" id="">
-					<c:forEach var="keywords" items="${runnigshoes}">
+					<c:forEach var="keywords" items="${runningshoes}">
 					<li>${keywords.query}</li>
 					</c:forEach>
 				</ul>
@@ -100,7 +81,11 @@ function getCode() {
 
 			<div class="subject">
 				<div class="header">
-					<h2 class="brand-selector">나이키</h2>
+					<h2 class="brand-selector">
+						<select>
+							<option value="nike">나이키</option>
+						</select>
+					</h2>
 					<span>인기 키워드</span>
 				</div>
 				<div class="list" id="brand">

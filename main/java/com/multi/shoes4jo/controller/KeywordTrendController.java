@@ -1,5 +1,7 @@
 package com.multi.shoes4jo.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.multi.shoes4jo.service.trend.KeywordTrendService;
+import com.multi.shoes4jo.util.GoodsList;
 import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Controller
@@ -23,9 +26,19 @@ public class KeywordTrendController {
 	@Autowired
 	HttpServletRequest request;
 	
-	@RequestMapping(value = "/get_model", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/model", method = { RequestMethod.GET, RequestMethod.POST })
 	public String keyword_trend(Model model) {
 		System.out.println("keyword_trend() called");
+		
+		List<String> arrayList = new ArrayList<>();
+		String[] list = GoodsList.list();
+		for (String goods: list) {
+			arrayList.add(goods);
+		}
+		Collections.shuffle(arrayList);
+		List<String> shoes4jo = arrayList.subList(0, 10);
+		
+		model.addAttribute("shoes4jo", shoes4jo);
 		
 		List<KeywordTrendVO> shoes = service.selectKeyword("shoes");
 		

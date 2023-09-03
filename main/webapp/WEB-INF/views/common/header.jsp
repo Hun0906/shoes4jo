@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header>
 <!-- 반응형 메뉴 버튼 -->
@@ -15,7 +14,7 @@
 <div class="menu_container">
 <a href="<%=context %>/main">상품별 트렌드</a>
 <a href="<%=context %>/">분류별 트렌드</a>
-<a href="<%=context %>/keyword_trend?q=get">키워드 트렌드</a>
+<a href="<%=context %>/keyword_trend/model">키워드 트렌드</a>
 <a href="<%=context %>/ranking">랭킹</a>
 <a href="<%=context %>/word_cloud">연관 주제</a>
 <a href="<%=context %>/">시장 규모</a>
@@ -42,7 +41,7 @@
 <div class="responsive-menu-wrapper">
 <div><a href="<%=context %>/main">상품별 트렌드</a></div>
 <div><a href="<%=context %>/">분류별 트렌드</a></div>
-<div><a href="<%=context %>/keyword_trend?q=get">키워드 트렌드</a></div>
+<div><a href="<%=context %>/keyword_trend/model">키워드 트렌드</a></div>
 <div><a href="<%=context %>/ranking">랭킹</a></div>
 <div><a href="<%=context %>/word_cloud">연관 주제</a></div>
 <div><a href="<%=context %>/">시장 규모</a></div>

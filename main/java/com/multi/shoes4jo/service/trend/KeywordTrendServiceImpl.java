@@ -14,8 +14,8 @@ public class KeywordTrendServiceImpl implements KeywordTrendService {
     private KeywordTrendMapper mapper;
     
 	@Override
-	public List<KeywordTrendVO> selectGroup(String group) {
-		List<KeywordTrendVO> resultList = mapper.selectGroup(group);
+	public List<String> selectGroup(String group) {
+		List<String> resultList = mapper.selectGroup(group);
 		return resultList;
 	}
 
