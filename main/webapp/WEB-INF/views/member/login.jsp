@@ -9,11 +9,6 @@
 <title>LOGIN | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
 
-<%@ page import="java.net.URLEncoder"%>
-<%@ page import="java.security.SecureRandom"%>
-<%@ page import="java.math.BigInteger"%>
-
-
 <style>
 .simpleLogin {
 	border: 1px solid #ccc;
@@ -116,17 +111,6 @@ function login() {
 				<br>
 				<hr>
 				<br>
-				<h4>간편 로그인</h4>
-				<div class="simpleLogin-wrapper">
-					<a href="https://kauth.kakao.com/oauth/authorize?client_id=cff88eebed1871d04bd76c76c9ca3c23&redirect_uri=http://localhost:8084/kakao_callback&response_type=code">
-					<span class="simpleLogin" style="background-image: url(<%=context%>/assets/img/logo_kakao.svg);"></span>
-					</a>
-
-					<a href="<%=context%>/naver_login">
-					<span class="simpleLogin" style="background-image: url(<%=context%>/assets/img/logo_naver.png);"></span>
-					</a>
-
-				</div>
 			</div>
 		</div>
 	</div>

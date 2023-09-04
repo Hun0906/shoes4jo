@@ -26,7 +26,7 @@ public class RankingController {
 
 		model.addAttribute("list", list);
 
-		return "ranking/ranking_list";
+		return "trend/ranking";
 	}
 
 }
