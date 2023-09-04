@@ -2,7 +2,7 @@ package com.multi.shoes4jo.vo;
 
 import org.springframework.stereotype.Component;
 
-@Component("KeywordTrendVO")
+@Component("GoodsTrendVO")
 public class GoodsTrendVO {
 	private String period_sdata;
 	private String keyword;
