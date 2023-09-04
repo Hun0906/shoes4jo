@@ -37,7 +37,7 @@ public class BookmarkController {
 		List<BookmarkVO> bookmark_list = service.BookmarkList(member_id);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("bookmark/bookmark_list");
+		mav.setViewName("member/my_bookmark_list");
 		mav.addObject("bookmark_list", bookmark_list);
 
 		return mav;
