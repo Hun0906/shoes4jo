@@ -18,7 +18,7 @@ public interface MemberController {
 
     public ModelAndView updateMember(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-    public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception;
+    public String deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
     public ResponseEntity<?> duplicationId(HttpServletRequest request, HttpServletResponse response) throws Exception;
     

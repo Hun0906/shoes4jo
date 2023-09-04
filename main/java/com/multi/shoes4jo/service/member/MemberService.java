@@ -6,17 +6,17 @@ import com.multi.shoes4jo.vo.MemberVO;
 
 public interface MemberService {
 
-	public int insertMember(MemberVO memberVO) throws Exception;
+	public int insertMember(MemberVO vo) throws Exception;
 	
-	public int loginMember(MemberVO memberVO) throws Exception;
+	public int loginMember(MemberVO vo) throws Exception;
 
-	public void updateMember(MemberVO memberVO) throws Exception;
+	public void updateMember(MemberVO vo) throws Exception;
 	
-	public MemberVO memberInfo(String memberId) throws Exception;
+	public MemberVO memberInfo(String member_id) throws Exception;
 
-	public int deleteMember(String memberVO) throws Exception;
+	public int deleteMember(String member_id) throws Exception;
 
-	public int duplicationId(String id) throws Exception;
+	public int duplicationId(String member_id) throws Exception;
 	
 	public List<MemberVO> memberIdSearch(MemberVO searchVO);
 	

@@ -1,5 +1,7 @@
 package com.multi.shoes4jo.service.bookmark;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +17,35 @@ public class BookmarkServiceImpl implements BookmarkService {
 	private BookmarkMapper bookmarkMapper;
 
 	@Override
-	public List<BookmarkVO> getselectAll() {
-		return bookmarkMapper.selectAll();
+	public BookmarkVO check(String member_id, int gno) {
+		return bookmarkMapper.check(member_id, gno);
 	}
 
 	@Override
-	public BookmarkVO getselectOne(int bookmark_no) {
-		return bookmarkMapper.selectOne(bookmark_no);
+	public List<BookmarkVO> BookmarkList(String member_id) {
+		return bookmarkMapper.BookmarkList(member_id);
 	}
 
 	@Override
-	public void insert(BookmarkVO vo) {
+	public int insert(BookmarkVO vo) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String dateString = formatter.format(new Date());
+
+		vo.setAdd_date(dateString);
+
+		if (this.check(vo.getMember_id(), vo.getGno()) != null) {
+			this.delete(vo.getGno(), vo.getMember_id());
+			return -1;
+		}
+
 		this.bookmarkMapper.insert(vo);
+
+		return 1;
 	}
 
-
 	@Override
-	public void delete(int bookmark_no) {
-		this.bookmarkMapper.delete(bookmark_no);
+	public int delete(int gno, String member_id) {
+		return this.bookmarkMapper.delete(gno, member_id);
 	}
 }

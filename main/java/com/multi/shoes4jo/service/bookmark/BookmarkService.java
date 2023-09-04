@@ -6,11 +6,12 @@ import com.multi.shoes4jo.vo.BookmarkVO;
 
 public interface BookmarkService {
 
-	List<BookmarkVO> getselectAll();
+    public BookmarkVO check(String member_id, int gno);
 
-	BookmarkVO getselectOne(int bookmark_no);
+    public List<BookmarkVO> BookmarkList(String member_id);
 
-	void insert(BookmarkVO vo);
+    public int insert(BookmarkVO vo);
 
-	void delete(int bookmark_no);
+    public int delete(int gno, String member_id);
 }
+

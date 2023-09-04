@@ -18,6 +18,25 @@ public class GoodsDetailVO {
 
 	public GoodsDetailVO() {
 	}
+	
+	
+
+	public GoodsDetailVO(int gno, String keyword, String category, String goods_name, String goods_img,
+			String seller_name, String seller_url, int goods_price, int delivery_fee, String date) {
+
+		this.gno = gno;
+		this.keyword = keyword;
+		this.category = category;
+		this.goods_name = goods_name;
+		this.goods_img = goods_img;
+		this.seller_name = seller_name;
+		this.seller_url = seller_url;
+		this.goods_price = goods_price;
+		this.delivery_fee = delivery_fee;
+		this.date = date;
+	}
+
+
 
 	public int getGno() {
 		return gno;

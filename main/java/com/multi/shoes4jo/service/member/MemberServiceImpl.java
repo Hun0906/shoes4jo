@@ -13,12 +13,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private MemberServiceImpl memberMapper;
 
 	@Override
-	public int insertMember(MemberVO member) throws Exception {
+	public int insertMember(MemberVO vo) throws Exception {
 		try {
-			return sqlSession.insert("memberMapper.insertMember", member);
+			return sqlSession.insert("memberMapper.insertMember", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -26,41 +25,42 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int loginMember(MemberVO member) throws Exception {
+	public int loginMember(MemberVO vo) throws Exception {
 		try {
-			return sqlSession.selectOne("memberMapper.loginMember", member);
+			return sqlSession.selectOne("memberMapper.loginMember", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
 
-	public MemberVO memberInfo(String memberId) throws Exception {
-		return sqlSession.selectOne("memberMapper.memberInfo", memberId);
+	public MemberVO memberInfo(String member_id) throws Exception {
+		return sqlSession.selectOne("memberMapper.memberInfo", member_id);
 	}
 
 	@Override
-	public void updateMember(MemberVO member) throws Exception {
+	public void updateMember(MemberVO vo) throws Exception {
 		try {
-			sqlSession.update("memberMapper.updateMember", member);
+			sqlSession.update("memberMapper.updateMember", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public int deleteMember(String id) throws Exception {
+	public int deleteMember(String member_id) throws Exception {
 		try {
-			return sqlSession.delete("memberMapper.deleteMember", id);
+			return sqlSession.delete("memberMapper.deleteMember",member_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
+	
 
 	@Override
-	public int duplicationId(String id) throws Exception {
-		return sqlSession.selectOne("memberMapper.duplicationId", id);
+	public int duplicationId(String member_id) throws Exception {
+		return sqlSession.selectOne("memberMapper.duplicationId", member_id);
 	}
 
 	

@@ -2,9 +2,6 @@ package com.multi.shoes4jo.vo;
 
 import org.springframework.stereotype.Component;
 
-//DTO,VO는 각 계층(Layer)간 데이터 교환을 위한 객체(Java Beans)
-//로직이 없는 순수한 데이터 객체이며, getter/setter 메소드만을 갖는다.
-//@Component("MemberVO")으로 빈 생성함
 
 @Component("MemberVO")
 public class MemberVO {
@@ -29,52 +26,53 @@ public class MemberVO {
 		this.member_phone = member_phone;
 	}
 
-	public String getmember_id() {
+	public String getMember_id() {
 		return member_id;
 	}
 
-	public void setmember_id(String member_id) {
+	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
 
-	public String getmember_name() {
+	public String getMember_name() {
 		return member_name;
 	}
 
-	public void setmember_name(String member_name) {
+	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
 
-	public String getmember_pw() {
+	public String getMember_pw() {
 		return member_pw;
 	}
 
-	public void setmember_pw(String member_pw) {
+	public void setMember_pw(String member_pw) {
 		this.member_pw = member_pw;
 	}
 
-	public String getsignup_date() {
+	public String getSignup_date() {
 		return signup_date;
 	}
 
-	public void setsignup_date(String signup_date) {
+	public void setSignup_date(String signup_date) {
 		this.signup_date = signup_date;
 	}
 
-	public String getmember_email() {
+	public String getMember_email() {
 		return member_email;
 	}
 
-	public void setmember_email(String member_email) {
+	public void setMember_email(String member_email) {
 		this.member_email = member_email;
 	}
-	
-	public String getmember_phone() {
+
+	public String getMember_phone() {
 		return member_phone;
 	}
 
-	public void setmember_phone(String member_phone) {
+	public void setMember_phone(String member_phone) {
 		this.member_phone = member_phone;
 	}
+
 	
 } 

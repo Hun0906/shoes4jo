@@ -3,45 +3,53 @@ package com.multi.shoes4jo.vo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-@Component("BoardVO")
-public class BoardVO {
+@Component("FreeBoardVO")
+public class FreeBoardVO {
 
-	private int bno;
+	private int fno;
+	private String member_id;
 	private String category;
 	private String title;
 	private String content;
-	private String writer;
 	private int viewcnt;
-	private String regdate;
+	private String date;
 	private String file_name;
 	private String file_path;
-	private String link;
+	private String comment;
 	private MultipartFile file;
-	
-	public BoardVO() {
+
+	public FreeBoardVO() {
 	}
 
-	public BoardVO(int bno, String category, String title, String content, String writer, int viewcnt, String regdate,
-			String file_name, String file_path, String link, MultipartFile file) {
-		this.bno = bno;
+	public FreeBoardVO(int fno, String member_id, String category, String title, String content, int viewcnt, String date,
+			String file_name, String file_path, String comment, MultipartFile file) {
+		this.fno = fno;
+		this.member_id = member_id;
 		this.category = category;
 		this.title = title;
 		this.content = content;
-		this.writer = writer;
 		this.viewcnt = viewcnt;
-		this.regdate = regdate;
+		this.date = date;
 		this.file_name = file_name;
 		this.file_path = file_path;
-		this.link = link;
+		this.comment = comment;
 		this.file = file;
 	}
 
-	public int getBno() {
-		return bno;
+	public int getFno() {
+		return fno;
 	}
 
-	public void setBno(int bno) {
-		this.bno = bno;
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+	
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
 	public String getCategory() {
@@ -68,14 +76,6 @@ public class BoardVO {
 		this.content = content;
 	}
 
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
 	public int getViewcnt() {
 		return viewcnt;
 	}
@@ -84,12 +84,12 @@ public class BoardVO {
 		this.viewcnt = viewcnt;
 	}
 
-	public String getRegdate() {
-		return regdate;
+	public String getDate() {
+		return date;
 	}
 
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public String getFile_name() {
@@ -108,12 +108,12 @@ public class BoardVO {
 		this.file_path = file_path;
 	}
 
-	public String getLink() {
-		return link;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public MultipartFile getFile() {
