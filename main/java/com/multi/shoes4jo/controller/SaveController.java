@@ -305,7 +305,7 @@ public class SaveController {
 	        }
 	        /* 랭킹 테이블에 값 추가 */
 	    }
-	    return "redirect:/trend_save";
+	    return "redirect:/save/trend_save";
 	}
 	
 	
@@ -313,7 +313,7 @@ public class SaveController {
 	public String saveKeywordTrend() throws InterruptedException {
 		keywordTrendCrawling.saveKeywordTrend();
 		
-		return "redirect:/trend_save";
+		return "redirect:/save/trend_save";
 	}
 	
 }

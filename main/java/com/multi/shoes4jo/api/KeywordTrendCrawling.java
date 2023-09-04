@@ -161,7 +161,7 @@ public class KeywordTrendCrawling {
 //		    		System.out.println(jsonObj);
 		    		JSONArray rankedList = (JSONArray) ((JSONObject) jsonObj.get("default")).get("rankedList");
 		    		JSONArray rankedKeyword = (JSONArray) ((JSONObject) rankedList.get(0)).get("rankedKeyword"); //0: 인기 검색어, 1: 급상승 검색어
-//		    		System.out.println(rankedKeyword);
+		    		System.out.println(rankedKeyword);
 		    		
 		    		// 선택된 값을 사용하여 작업 수행
 		    		for (int i=0; i<rankedKeyword.size(); i++) {
@@ -176,6 +176,8 @@ public class KeywordTrendCrawling {
 		    					if (service.oldValue(urlKey.substring(4), query) != value) {
 			    					service.update(vo);
 			    					System.out.println(urlKey.substring(4)+"의 "+query+" / "+value+" 업데이트됨");
+		    					} else {
+		    						System.out.println(urlKey.substring(4)+"의 "+query+" / "+value+" 변동 없음");
 		    					}
 		    				} else {
 		    					service.insert(vo);
@@ -313,7 +315,7 @@ public class KeywordTrendCrawling {
 				keyword = "크록스";
 				break;
 			case "url_canvas"		:
-				keyword = "캔버스";
+				keyword = "컨버스";
 				break;
 			case "url_vans"			:
 				keyword = "반스";
