@@ -42,11 +42,11 @@
 <div class="responsive-menu-wrapper">
 <div><a href="<%=context %>/main">상품별 트렌드</a></div>
 <div><a href="<%=context %>/">분류별 트렌드</a></div>
-<div><a href="<%=context %>/">검색어 트렌드</a></div>
-<div><a href="<%=context %>/ranking">랭킹</a></div>
+<div><a href="<%=context %>/keyword_trend">키워드 트렌드</a></div>
+<div><a href="<%=context %>/ranking.do">랭킹</a></div>
 <div><a href="<%=context %>/word_cloud">연관 주제</a></div>
 <div><a href="<%=context %>/freeboard/list.do">자유게시판</a></div>
-<div><a href="<%=context %>/magazine">매거진</a></div>
+<div><a href="<%=context %>/board/magazine">매거진</a></div>
 </div>
 
 <script>
