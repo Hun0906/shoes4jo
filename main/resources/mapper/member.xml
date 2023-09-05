@@ -16,7 +16,7 @@
 	</resultMap>
 
 	<select id="showMember" resultMap="memResult">
-		SELECT * FROM shoes_4jo.4jo_member
+		SELECT * FROM `member`
 	</select>
 
 
@@ -24,7 +24,7 @@
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
 
 <![CDATA[
-        insert into shoes_4jo.4jo_member(member_id, member_name, member_pw, signup_date,member_email, member_phone)
+        insert into `member`(member_id, member_name, member_pw, signup_date,member_email, member_phone)
         values(#{member_id}, #{member_name}, #{member_pw}, NOW(), #{member_email}, #{member_phone})
     ]]>
 	</insert>
@@ -32,13 +32,13 @@
 
 	<select id="loginMember"
 		parameterType="com.multi.shoes4jo.vo.MemberVO" resultType="int">SELECT
-		count(*) FROM shoes_4jo.4jo_member WHERE member_id =#{member_id} AND
+		count(*) FROM `member` WHERE member_id =#{member_id} AND
 		member_pw = #{member_pw}
 	</select>
 
 	<select id="memberInfo"
 		parameterType="com.multi.shoes4jo.vo.MemberVO" resultMap="memResult">SELECT * FROM
-		shoes_4jo.4jo_member WHERE member_id =#{member_id}
+		`member` WHERE member_id =#{member_id}
 	</select>
 
 
@@ -46,7 +46,7 @@
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
 
 <![CDATA[
-	     update shoes_4jo.4jo_member
+	     update `member`
 	     set member_name=#{member_name}, member_pw=#{member_pw}
 	     , member_email=#{member_email},member_phone=#{member_phone}
 	     where
@@ -57,7 +57,7 @@
 	<delete id="deleteMember"
 		parameterType="java.lang.String">
 <![CDATA[
-   delete from shoes_4jo.4jo_member
+   delete from `member`
    where
    member_id=#{member_id}
 ]]>
@@ -68,7 +68,7 @@
 		parameterType="com.multi.shoes4jo.vo.MemberVO" resultType="int">
 
 <![CDATA[
-		SELECT count(*) cnt FROM shoes_4jo.4jo_member
+		SELECT count(*) cnt FROM `member`
 		WHERE member_id = #{member_id} 
       ]]>
 	</select>
@@ -77,7 +77,7 @@
 	<select id="memberIdSearch"
 		parameterType="com.multi.shoes4jo.vo.MemberVO" resultMap="memResult">
 <![CDATA[
-    select * from shoes_4jo.4jo_member where member_name = #{member_name} and member_phone = #{member_phone} ]]>
+    select * from `member` where member_name = #{member_name} and member_phone = #{member_phone} ]]>
 	</select>
 
 
@@ -89,7 +89,7 @@
     select
         count(*)
     from
-        shoes_4jo.4jo_member
+        `member`
     where
         member_name = #{member_name}
     and
@@ -102,7 +102,7 @@
 	<update id="pwUpdate"
 		parameterType="com.multi.shoes4jo.vo.MemberVO">
 		UPDATE
-		shoes_4jo.4jo_member
+		`member`
 		SET
 		member_pw = #{member_pw}
 		where

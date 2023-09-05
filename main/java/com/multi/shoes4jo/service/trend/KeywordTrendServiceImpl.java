@@ -24,6 +24,12 @@ public class KeywordTrendServiceImpl implements KeywordTrendService {
 		List<KeywordTrendVO> resultList = mapper.selectKeyword(keyword);
 		return resultList;
 	}
+	
+	@Override
+	public List<KeywordTrendVO> selectAll() {
+		List<KeywordTrendVO> resultList = mapper.selectAll();
+		return resultList;
+	}
 
 	@Override
 	public void insert(KeywordTrendVO vo) {
