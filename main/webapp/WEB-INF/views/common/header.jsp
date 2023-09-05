@@ -16,8 +16,8 @@
 <a href="<%=context %>/">분류별 트렌드</a>
 <a href="<%=context %>/keyword_trend/model">키워드 트렌드</a>
 <a href="<%=context %>/ranking.do">랭킹</a>
-<a href="<%=context %>/word_cloud">연관 주제</a>
 <a href="<%=context %>/freeboard/list.do">자유게시판</a>
+<a href="<%=context %>/word_cloud/model">연관 주제</a>
 <a href="<%=context %>/board/magazine">매거진</a>
 </div>
 

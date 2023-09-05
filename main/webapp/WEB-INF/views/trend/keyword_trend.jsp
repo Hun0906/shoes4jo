@@ -78,6 +78,14 @@ h2 {
     color: white;
     font-weight: 500;
     cursor: default;
+    transform: scale(1.03);
+    drop-shadow: 0 0 #ccc;
+    box-shadow: 0 0 8px #00000020;
+    font-size: 1.5rem;
+}
+
+.list-wrapper li:hover > b{
+    font-size: 1.5rem;
 }
 
 @keyframes fadeIn {
@@ -98,6 +106,26 @@ display: none;
 .kind-ul{
 display: none;
 }
+
+.contents{
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-gap: 5rem;
+max-width: 1024px;
+margin: auto;
+}
+
+@media (max-width: 1024px){
+.contents{
+grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 600px){
+.contents{
+padding: 0 2rem;
+}
+}
 </style>
 
 </head>
@@ -106,12 +134,7 @@ display: none;
 
 	<div class="container">
 		<h1>키워드 트렌드</h1>
-		<div style="
-				display: grid;
-			    grid-template-columns: repeat(2, 1fr);
-			    grid-gap: 5rem;
-			    max-width: 1024px;
-			    margin: auto;">
+		<div class="contents">
 
 			<div class="subject">
 				<div class="header">

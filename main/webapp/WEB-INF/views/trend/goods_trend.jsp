@@ -140,7 +140,7 @@ margin: 2.25rem 0;
 				<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button>
 			</form>
 			<div class="goods_trend_header">
-			<a href="">⭐즐겨찾기 등록</a><a href="">🔎상품 상세페이지</a>
+			<c:if><a href="">🔎상품 상세페이지</a></c:if>
 			<hr>
 			<h2><%=(keyword == null) ? "" : keyword%></h2><span class="normal">에 대한 사람들의 관심도는?</span>
 			</div>

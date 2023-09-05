@@ -97,6 +97,7 @@ margin: 0.5rem;
 				<p>Bootstrap</p>
 				<p>commons DBCP</p>
 				<p>Chart.js</p>
+				<p>D3.js</p>
 				<p>jQCloud</p>
 				</div>
 			</div>

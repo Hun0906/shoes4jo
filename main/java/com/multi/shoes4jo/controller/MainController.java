@@ -34,13 +34,7 @@ public class MainController {
 		logger.info("goods_trend() called");
 		return "trend/goods_trend";
 	}
-	
-	@RequestMapping(value = "/word_cloud", method = { RequestMethod.GET, RequestMethod.POST })
-	public String word_cloud() {
-		logger.info("word_cloud() called");
-		return "trend/word_cloud";
-	}
-	
+
 	@RequestMapping(value = "/ranking", method = { RequestMethod.GET, RequestMethod.POST })
 	public String ranking() {
 		logger.info("ranking() called");
