@@ -21,7 +21,7 @@
 			<thead>
 				<tr>
 					<th class="text-center">상품 번호</th>
-					<th class="text-center">키워드</th>
+					<th class="text-center">상품 키워드</th>
 					<th class="text-center">북마크 등록일</th>
 					<th class="text-center">바로가기</th>
 				</tr>

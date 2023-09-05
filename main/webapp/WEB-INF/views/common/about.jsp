@@ -68,27 +68,50 @@
 								src="https://avatars.githubusercontent.com/u/130541650?s=100&v=4"
 								onclick="window.open('https://github.com/0123aqq')">
 							<h3>하세라</h3>
-							<span>아이디, 비밀번호 찾기</span> <span>마이바티스 세팅</span>
+							<br>
+							<span>프로젝트 환경 설정</span> 
+							<span>관리자 게시판, 자유게시판</span>
+							<span>댓글 기능</span>
+							<span>계정 찾기</span>
+							<span>상품 관리 기능</span>
+							<span>즐겨찾기</span>
 						</div>
 						<div class="team-card">
 							<img
 								src="https://avatars.githubusercontent.com/u/134472331?s=100&v=4"
 								onclick="window.open('https://github.com/heebanggg')">
 							<h3>박희범</h3>
-							<span>회원가입</span> <span>2차 DB 설계</span>
+							<br>
+							<span>회원가입</span> 
+							<span>2차 DB 설계</span>
+							<span>상품 데이터 수집</span>
+							<span>랭킹 페이지</span>
 						</div>
 						<div class="team-card">
 							<img src="https://avatars.githubusercontent.com/u/134472216?v=4"
 								onclick="window.open('https://github.com/yumalg12')">
 							<h3>유맑음</h3>
-							<span>메인</span> <span>로그인</span> <span>상품별 트렌드</span> <span>검색량
-								트렌드</span>
+							<br>
+							<span>프로젝트 전체 UI</span> 
+							<span>메인</span> 
+							<span>헤더,푸터</span> 
+							<span>로그인</span>
+							<span>상품별 트렌드</span>
+							<span>키워드 트렌드</span>
+							<span>연관 주제 페이지</span>
+							<span>매거진 페이지</span>
+							<span>API,크롤링 데이터 수집</span>
 						</div>
 						<div class="team-card">
 							<img src="https://avatars.githubusercontent.com/u/134472292?v=4"
 								onclick="window.open('https://github.com/Hun0906')">
 							<h3>이동훈</h3>
-							<span>마이페이지</span> <span>카테고리별 트렌드</span>
+							<br>
+							<span>마이페이지</span> 
+							<span>카테고리별 트렌드</span>
+							<span>시장 규모</span>
+							<span>API 데이터 수집 </span>
+							<span>크롤링 데이터 수집</span>
 						</div>
 					</div>
 
