@@ -26,6 +26,24 @@ function getTrendWidget(keyword){
 				"guestPath" : "https://trends.google.com:443/trends/embed/"
 			});
 }
+
+function getSubjectWidget(keyword){
+	trends.embed.renderExploreWidget(
+			"RELATED_TOPICS",
+			{
+				"comparisonItem" : [ {
+					"keyword" : keyword,
+					"geo" : "KR",
+					"time" : "today 3-m"
+				} ],
+				"category" : 0,
+				"property" : ""
+			},
+			{
+				"exploreQuery" : "date=today%203-m&geo=KR&q=%EC%8A%88%EC%A6%88&hl=ko",
+				"guestPath" : "https://trends.google.com:443/trends/embed/"
+			});
+}
 </script>
 
 </head>
@@ -45,6 +63,16 @@ function getTrendWidget(keyword){
 					getTrendWidget("신발");
 				</script>
 			 -->
+			</div>
+		</div>
+
+		<div class="subject">
+			<div class="header">
+				<h2>슈즈</h2>
+				<a target="_blank" href="https://trends.google.com/trends/embed/explore/RELATED_QUERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%EC%8A%88%EC%A6%88%22%2C%22geo%22%3A%22KR%22%2C%22time%22%3A%22today%203-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-540&eq=date%3Dtoday%25203-m%26geo%3DKR%26q%3D%25EB%2589%25B4%25EB%25B0%259C%25EB%259E%2580%25EC%258A%25A4">크롤링 페이지 바로가기</a>
+			</div>
+			<div class="list">
+
 			</div>
 		</div>
 		
@@ -226,7 +254,47 @@ function getTrendWidget(keyword){
 			</div>
 		</div>
 
+		<div class="subject">
+			<div class="header">
+				<h2>스케쳐스</h2>
+				<a target="_blank" href="https://trends.google.com/trends/embed/explore/RELATED_QUERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%EC%8A%A4%EC%BC%80%EC%B3%90%EC%8A%A4%22%2C%22geo%22%3A%22KR%22%2C%22time%22%3A%22today%203-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-540&eq=date%3Dtoday%25203-m%26geo%3DKR%26q%3D%25EB%2589%25B4%25EB%25B0%259C%25EB%259E%2580%25EC%258A%25A4">크롤링 페이지 바로가기</a>
+			</div>
+			<div class="list">
+			
+			</div>
+		</div>
+
 	</div>
+
+<hr>
+<h1>연관 주제</h1>
+		<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 3rem;">
+		
+		<div class="subject">
+			<div class="header">
+				<h2>슈즈</h2>
+				<a target="_blank" href="https://trends.google.com:443/trends/embed/explore/RELATED_TOPICS?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%EC%8A%88%EC%A6%88%22%2C%22geo%22%3A%22KR%22%2C%22time%22%3A%22today%203-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-540&eq=date%3Dtoday%25203-m%26geo%3DKR%26q%3D%25EC%258A%2588%25EC%25A6%2588%26hl%3Dko">크롤링 페이지 바로가기</a>
+			</div>
+			<div class="list">
+				<script type="text/javascript">
+					getSubjectWidget("슈즈");
+				</script>
+			</div>
+		</div>
+		
+		<div class="subject">
+			<div class="header">
+				<h2>신발</h2>
+				<a target="_blank" href="https://trends.google.com:443/trends/embed/explore/RELATED_TOPICS?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%EC%8B%A0%EB%B0%9C%22%2C%22geo%22%3A%22KR%22%2C%22time%22%3A%22today%203-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-540&eq=date%3Dtoday%25203-m%26geo%3DKR%26q%3D%25EC%258A%2588%25EC%25A6%2588%26hl%3Dko">크롤링 페이지 바로가기</a>
+			</div>
+			<div class="list">
+				<script type="text/javascript">
+					getSubjectWidget("신발");
+				</script>
+			</div>
+		</div>
+
+</div>
 </div>
 
 </body>

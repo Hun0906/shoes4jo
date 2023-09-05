@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
- 
+
 import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Mapper
@@ -18,6 +18,9 @@ public interface KeywordTrendMapper {
     
     @Select("SELECT `keyword` FROM `keyword_trend` WHERE keyword_group = #{keyword_group}")
     List<String> selectGroup(@Param("keyword_group") String keyword_group);
+    
+    @Select("SELECT * FROM `keyword_trend` ORDER BY query_value DESC")
+    List<KeywordTrendVO> selectAll();
     
     
     //isExists
