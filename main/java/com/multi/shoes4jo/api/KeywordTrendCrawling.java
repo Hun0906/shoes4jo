@@ -64,6 +64,7 @@ public class KeywordTrendCrawling {
 		
         try {
             // JSON 파일 경로
+        	String url_sinbal		=	"C:/Shoes4Jo/json/1_shoes_sinbal.txt";
         	String url_shoes		=	"C:/Shoes4Jo/json/1_shoes_shoes.txt";
 
         	String url_runningshoes	=	"C:/Shoes4Jo/json/2_kind_runningshoes.txt";
@@ -87,6 +88,7 @@ public class KeywordTrendCrawling {
 
 			Map<String, String> urlMap = new HashMap<>();
 			
+			urlMap.put("url_sinbal",       url_sinbal);
 			urlMap.put("url_shoes",        url_shoes);
 
 			urlMap.put("url_runningshoes", url_runningshoes);
@@ -108,8 +110,8 @@ public class KeywordTrendCrawling {
 			urlMap.put("url_vans",         url_vans);
 			urlMap.put("url_sketchers",    url_sketchers);
 			
-			String[] urlKeyArray = {"url_shoes"
-					, "url_runningshoes", "url_slipper",     
+			String[] urlKeyArray = {"url_sinbal", "url_shoes",
+					"url_runningshoes", "url_slipper",     
 					"url_sneakers",  "url_slipon",   "url_trakingshoes",
 					"url_sandal",  "url_boots",     "url_nike",        
 					"url_adidas", "url_newbalance", "url_drmartin",    
@@ -121,6 +123,7 @@ public class KeywordTrendCrawling {
     		JSONParser parser = new JSONParser();
         	for (String urlKey: urlKeyArray) {
         		switch (urlKey) {
+	        		case "url_sinbal":
 	        		case "url_shoes":
 	        			vo.setKeyword_group("shoes");
 	        			vo.setKeyword(urlKey.substring(4));
@@ -255,7 +258,8 @@ public class KeywordTrendCrawling {
 	public boolean containsWrongWord(String input) {
 	    String[] wrongWords = {"포켓몬", "메이플", "토드", "추옵", 
 	    		"90", "100", "110", "120", "130", "140", "150", 
-	    		"하비 반스", "존 반스 모먼트", "끈", "공식", "미국"};
+	    		"하비 반스", "존 반스 모먼트", "끈", "공식", "미국",
+	    		"테라리아"};
 	    
 	    for (String word : wrongWords) {
 	        if (input.contains(word)) {
@@ -269,8 +273,11 @@ public class KeywordTrendCrawling {
 	public String cleanUpQuery(String query, String urlKey) {
 		String keyword = "";
 		switch (urlKey) {
-			case "url_shoes":
+			case "url_sinbal":
 				keyword = "신발";
+				break;
+			case "url_shoes":
+				keyword = "슈즈";
 				break;
 			case "url_runningshoes"	:
 				keyword = "운동화";

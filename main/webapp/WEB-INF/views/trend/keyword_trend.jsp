@@ -78,6 +78,14 @@ h2 {
     color: white;
     font-weight: 500;
     cursor: default;
+    transform: scale(1.03);
+    drop-shadow: 0 0 #ccc;
+    box-shadow: 0 0 8px #00000020;
+    font-size: 1.5rem;
+}
+
+.list-wrapper li:hover > b{
+    font-size: 1.5rem;
 }
 
 @keyframes fadeIn {
