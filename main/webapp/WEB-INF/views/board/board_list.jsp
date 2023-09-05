@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>게시판 | SHOES4JO</title>
+    <title> 관리자 게시판 | SHOES4JO</title>
 
     <%@include file="../common/header-head.jsp"%>
 
@@ -33,7 +33,7 @@
 <%@include file="../common/header.jsp"%>
 
 <div class="container">
-    <h2 class="text-center"><a href="${context}/board/list.do" style="text-decoration: none; color: inherit;">게시판</a></h2>
+    <h2 class="text-center"><a href="${context}/board/list.do" style="text-decoration: none; color: inherit;">관리자 게시판</a></h2>
 
     <div style="display: flex; justify-content: space-between; margin: 1rem 0;">
         
