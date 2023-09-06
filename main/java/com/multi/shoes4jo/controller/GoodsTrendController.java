@@ -53,7 +53,7 @@ public class GoodsTrendController {
 		}
 		/* 랭킹 테이블에 값 추가 */
 
-		if (goodsTrendService.isExists("2023-07-01", clean_keyword)) {
+		if (goodsTrendService.isExists("2023-09-03", clean_keyword)) {
 			List<GoodsTrendVO> selectAll = goodsTrendService.selectAll(clean_keyword);
 			model.addAttribute("selectAll", selectAll);
 			

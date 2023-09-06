@@ -10,14 +10,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-.container {
-    text-align: center;
-}
-
-.header {
-    text-align: center;
-}
-
 h2 {
     margin: 0 auto;
 }

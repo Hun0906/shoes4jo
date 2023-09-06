@@ -46,6 +46,7 @@ grid-template-columns: repeat(12,1fr);
 gap: 10px;
 word-break: keep-all;
 }
+
 #ranking_list span{
 font-size: 8pt;
 }
@@ -55,7 +56,7 @@ font-size: 8pt;
 <body>
 	<%@include file="../common/header.jsp"%>
 	<div class="contents">
-		<div class="container" id="container" style="text-align: center;">
+		<div class="container" id="container">
 		<h1>트렌드 데이터 추출</h1>
 		<div>
 		<h2>상품별 트렌드</h2>
