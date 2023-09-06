@@ -69,7 +69,8 @@
 								onclick="window.open('https://github.com/0123aqq')">
 							<h3>하세라</h3>
 							<br>
-							<span>프로젝트 환경 설정</span> 
+							<span>기획,초기 산출물 작성</span>
+							<span>프로젝트 환경 설정</span>
 							<span>관리자 게시판, 자유게시판</span>
 							<span>댓글 기능</span>
 							<span>계정 찾기</span>
@@ -83,6 +84,7 @@
 								onclick="window.open('https://github.com/heebanggg')">
 							<h3>박희범</h3>
 							<br>
+							<span>기획,초기 산출물 작성</span>
 							<span>회원가입</span> 
 							<span>2차 DB 설계</span>
 							<span>상품 데이터 수집</span>
@@ -93,6 +95,8 @@
 								onclick="window.open('https://github.com/yumalg12')">
 							<h3>유맑음</h3>
 							<br>
+							<span>주제&팀명 선정</span> 
+							<span>기획,초기 산출물 작성</span>
 							<span>프로젝트 전체 UI</span> 
 							<span>메인</span> 
 							<span>헤더,푸터</span> 
@@ -108,6 +112,7 @@
 								onclick="window.open('https://github.com/Hun0906')">
 							<h3>이동훈</h3>
 							<br>
+							<span>기획,초기 산출물 작성</span>
 							<span>마이페이지</span> 
 							<span>카테고리별 트렌드</span>
 							<span>시장 규모 조사</span>
