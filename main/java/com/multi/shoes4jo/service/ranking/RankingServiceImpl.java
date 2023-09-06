@@ -39,5 +39,10 @@ public class RankingServiceImpl implements RankingService {
 	public List<RankingVO> searchRanking() {
 		return mapper.searchRanking();
 	}
+	
+	@Override
+	public List<RankingVO> selectTopTen(String date, int limit) {
+		return mapper.selectTopTen(date, limit);
+	}
 
 }

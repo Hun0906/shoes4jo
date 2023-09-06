@@ -16,4 +16,6 @@ public interface RankingService {
 	
 	public List<RankingVO> searchRanking();
 
+	public List<RankingVO> selectTopTen(String date, int limit);
+
 }
