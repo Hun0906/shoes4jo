@@ -4,56 +4,140 @@
 <!DOCTYPE html>
 <html lang="utf-8">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+	$(document)
+			.ready(
+					function() {
+						var gno = "${goods_list[0].gno}";
+						var keyword = "${goods_list[0].keyword}";
 
-$(document).ready(function(){
-    var gno = "${goods_list[0].gno}";
-    var keyword = "${goods_list[0].keyword}"; 
+						if (!gno) {
+							alert("상품 상세 정보가 없습니다.");
+							history.back();
+						}
 
-    $("#bookmark").click(function(){
-        $.ajax({
-            url: "/bookmarkcon/insert.do",
-            type: "POST",
-            data: JSON.stringify({gno: gno, keyword: keyword}), 
-            contentType: "application/json; charset=UTF-8",
-            dataType: "json", 
-            success: function(data) {
-                console.log('Response data:', data);
-                if(data.result == 1) {  
-                    alert("북마크에 추가되었습니다.");
-                    $("#bookmark img").attr("src", "/assets/icon/heart_icon.svg");
-                } else if (data.result == -1) {   
-                    alert("북마크에서 제거되었습니다.");
-                    $("#bookmark img").attr("src", "/assets/icon/emptyheart_icon.svg");
-                }
-            },
-	    error : function(xhr, status, error) {
-		console.error('Error', status, error.toString());
-	    }
-        });
-    });
-});
-
-
-</script> 
+						$("#bookmark")
+								.click(
+										function() {
+											$
+													.ajax({
+														url : "/bookmarkcon/insert.do",
+														type : "POST",
+														data : JSON.stringify({
+															gno : gno,
+															keyword : keyword
+														}),
+														contentType : "application/json; charset=UTF-8",
+														dataType : "json",
+														success : function(data) {
+															console
+																	.log(
+																			'Response data:',
+																			data);
+															if (data.result == 1) {
+																alert("북마크에 추가되었습니다.");
+																$(
+																		"#bookmark img")
+																		.attr(
+																				"src",
+																				"/assets/icon/heart_icon.svg");
+															} else if (data.result == -1) {
+																alert("북마크에서 제거되었습니다.");
+																$(
+																		"#bookmark img")
+																		.attr(
+																				"src",
+																				"/assets/icon/emptyheart_icon.svg");
+															}
+														},
+														error : function(xhr,
+																status, error) {
+															console
+																	.error(
+																			'Error',
+																			status,
+																			error
+																					.toString());
+														}
+													});
+										});
+					});
+</script>
 
 
 <head>
 <meta charset="UTF-8" />
 <title>상품 상세 페이지 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
+
 <style>
-.scroll-table {
-	display: block;
-	width: 100%;
-	overflow-x: auto; /* 스크롤 */
+.grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
 }
 
-.scroll-table table {
+.grid img{
+aspect-ratio: 1/1;
+width: 100%;
+}
+
+.grid p {
+	text-align: left;
+	font-size: 1.1em;
+	background: white;
+	width: fit-content;
+	padding: 0 0.65rem;
+	border-radius: 8px;
+	border: 2px solid #6ECCAF;
+	color: #6ECCAF;
+	cursor: default;
+	margin: 0;
+}
+
+.bookmark {
+	display: flex;
+	margin: 1rem 0;
+}
+
+.bookmark img {
+	width: 2.5rem;
+	cursor: pointer;
+	margin-top: 0.3rem;
+}
+
+.bookmark h2 {
+	margin: 0.8rem;
+	word-break: keep-all;
+}
+
+table {
 	width: 100%;
-	table-layout: fixed;
+	overflow-x: scroll;
+}
+
+td {
+	padding: 10px !important;
+	border-width: 1px;
+	border-color: black;
+}
+
+th {
+	background: black;
+	padding: 10px !important;
+	color: white;
+	border-width: 1px;
+	border-color: white;
+}
+
+@media ( max-width :1024px) {
+	.grid {
+		grid-template-columns: repeat(1, 1fr);
+		padding: 0 2rem;
+	}
 }
 </style>
 
@@ -61,67 +145,45 @@ $(document).ready(function(){
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-
-		<section class="view" style="padding-left: 100px;">
-			<nav>
-				<h1>상품 상세정보</h1>
-				<p>
-					<span>${goods_list[0].category}</span>
-				</p>
-			</nav>
-			<article class="info">
-				<div class="image">
-					<img src="${goods_list[0].goods_img}" alt="상품이미지" width="600"
-						height="600" />
+	<div class="container">
+		<h1>상품 상세정보</h1>
+		<div class="grid">
+			<img src="${goods_list[0].goods_img}" alt="상품이미지" width="100%" />
+			<div>
+				<p>${goods_list[0].category}</p>
+				<div class='bookmark'>
+					<img src='<%=context%>/assets/icon/emptyheart_icon.svg' alt='Bookmark' />
+					<h2>${goods_list[0].goods_name}</h2>
 				</div>
-				
-				
-                <div class='bookmark'>
-                    <button id='bookmark' style='background:none;border:none;'>
-                        <img src='/assets/icon/emptyheart_icon.svg' alt='Bookmark' style='width:70px;height:70px;cursor:pointer;'/>
-                    </button>    
-                </div>	
-			</article>
-		</section>
-		
-		
-		<div style="padding-top: 50px; padding-left: 150px;">
-			<table style="border: 2px solid; width: 85%;">
-				<colgroup>
-					<col style="width: 25%;" />
-					<col style="width: 25%;" />
-					<col style="width: 25%;" />
-					<col style="width: 25%;" />
-				</colgroup>
+				<hr>
+				<div>
+					<table class="table-hover">
+						<thead>
+							<tr>
+								<th>판매처</th>
+								<th>가격</th>
+								<th>배송비</th>
+								<th style="width: 8rem;">쇼핑몰</th>
+							</tr>
+						</thead>
 
-				<thead>
-					<tr>
-
-						<th style="text-align: center;">판매처</th>
-						<th style="text-align: center;">가격</th>
-						<th style="text-align: center;">배송비</th>
-						<th style="text-align: center;">바로가기</th>
-					</tr>
-				</thead>
-
-
-				<c:forEach var='goods' items='${goods_list}'>
-					<tbody>
-						<tr>
-
-							<td style="text-align: center;">${goods.seller_name}</td>
-							<td style="text-align: center;">${goods.goods_price}</td>
-							<td style="text-align: center;">${goods.delivery_fee}</td>
-							<td style="text-align: center;"><a
-								href="${goods.seller_url}">바로가기</a></td>
-						</tr>
-					</tbody>
-				</c:forEach>
-			</table>
+						<c:forEach var='goods' items='${goods_list}'>
+							<tbody>
+								<tr>
+									<td>${goods.seller_name}</td>
+									<td><fmt:formatNumber value="${goods.goods_price}" pattern="#,###" />원</td>
+									<td><fmt:formatNumber value="${goods.delivery_fee}" pattern="#,###" />원</td>
+									<td><a href="${goods.seller_url}">🛒바로가기</a></td>
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
 		</div>
+	</div>
 
-		<%@include file="../common/footer.jsp"%>
-		
+	<%@include file="../common/footer.jsp"%>
 
 </body>
 </html>

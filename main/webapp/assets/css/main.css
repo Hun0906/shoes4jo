@@ -53,13 +53,21 @@ header>a:hover{
 	color: black;	
 }
 
+.container{
+	text-align:center;
+}
+
+.header {
+    text-align: center;
+}
+
 .main_search{
-border: none;
-border-bottom: 1px solid black;
-width: 30%;
-font-size: 1.5rem;
-background-color: transparent;
-outline: none;
+	border: none;
+	border-bottom: 1px solid black;
+	width: 30%;
+	font-size: 1.5rem;
+	background-color: transparent;
+	outline: none;
 }
 
 .menu_container {
@@ -101,6 +109,10 @@ footer a{
 
 footer a {
 	line-height: 3.5;
+}
+
+table{
+   word-break: keep-all;
 }
 
 .btn-basic{

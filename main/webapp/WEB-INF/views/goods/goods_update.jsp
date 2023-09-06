@@ -7,7 +7,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>글 수정 | SHOES4JO</title>
+<title>상품 수정 | SHOES4JO</title>
 <%@ include file="../common/header-head.jsp"%>
 
 <style>
