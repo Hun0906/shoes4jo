@@ -36,7 +36,7 @@ table td:nth-child(1) {
 			<form name="freeboardUpdate" method="post" enctype="multipart/form-data"
 				action="<%=context%>/freeboard/updateOk.do">
                 <input type='hidden' name='fno' value='${freeboard.fno}'/>
-<!-- 글 번호 실제 데이터 전송!!!!이거때문에 수정 안되던거였음 -->
+
 				<table class="table table-freeboard table-hover">
 					<tr>
 						<td>글 번호</td>
