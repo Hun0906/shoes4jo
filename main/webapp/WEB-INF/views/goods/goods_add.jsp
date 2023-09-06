@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>새 글 작성 | SHOES4JO</title>
+<title>새 상품 등록 | SHOES4JO</title>
 <%@ include file="../common/header-head.jsp"%>
 
 <style>

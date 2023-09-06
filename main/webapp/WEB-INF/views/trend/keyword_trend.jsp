@@ -8,12 +8,7 @@
 <%@include file="../common/header-head.jsp"%>
 
 <style>
-.container {
-	text-align: center;
-}
-
 .header {
-	text-align: center;
     margin-bottom: 1rem;
 }
 
@@ -144,7 +139,7 @@ padding: 0 2rem;
 				<div class="list-wrapper" id="shoes4jo">
 				<ul>
 					<c:forEach var="keywords" items="${shoes4jo}">
-					<li>${keywords}</li>
+					<li style="cursor: pointer;" onclick="location.href='<%=context%>/goodscon/view.do?keyword=${keywords.replaceAll(' ','')}'">${keywords}</li>
 					</c:forEach>
 				</ul>
 				</div>

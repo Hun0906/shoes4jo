@@ -129,7 +129,7 @@ margin: 2.25rem 0;
 <body>
 	<%@include file="../common/header.jsp"%>
 	<div class="contents">
-		<div class="container" id="container" style="text-align: center;">
+		<div class="container" id="container">
 		<h1>상품별 트렌드</h1>
 			<form name="keywordTrendForm" action="javascript:getDBdata();">
 				<%
@@ -140,7 +140,7 @@ margin: 2.25rem 0;
 				<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button>
 			</form>
 			<div class="goods_trend_header">
-			<c:if><a href="">🔎상품 상세페이지</a></c:if>
+			<a href="<%=context%>/goodscon/view.do?keyword=<%=keyword.replaceAll(" ","")%>">🔎상품 상세페이지</a>
 			<hr>
 			<h2><%=(keyword == null) ? "" : keyword%></h2><span class="normal">에 대한 사람들의 관심도는?</span>
 			</div>
