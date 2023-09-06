@@ -15,9 +15,9 @@
 <a href="<%=context %>/main">상품별 트렌드</a>
 <a href="<%=context %>/">분류별 트렌드</a>
 <a href="<%=context %>/keyword_trend/model">키워드 트렌드</a>
-<a href="<%=context %>/freeboard/list.do">자유게시판</a>
 <a href="<%=context %>/word_cloud/model">연관 주제</a>
 <a href="<%=context %>/ranking.do">SHOES4JO 랭킹</a>
+<a href="<%=context %>/freeboard/list.do">커뮤니티</a>
 <a href="<%=context %>/board/magazine">매거진</a>
 </div>
 
@@ -42,9 +42,9 @@
 <div><a href="<%=context %>/main">상품별 트렌드</a></div>
 <div><a href="<%=context %>/">분류별 트렌드</a></div>
 <div><a href="<%=context %>/keyword_trend/model">키워드 트렌드</a></div>
-<div><a href="<%=context %>/freeboard/list.do">자유게시판</a></div>
 <div><a href="<%=context %>/word_cloud/model">연관 주제</a></div>
 <div><a href="<%=context %>/ranking.do">SHOES4JO 랭킹</a></div>
+<div><a href="<%=context %>/freeboard/list.do">커뮤니티</a></div>
 <div><a href="<%=context %>/board/magazine">매거진</a></div>
 </div>
 

@@ -9,6 +9,10 @@
 <title>${freeboard.title.length() > 10 ? freeboard.title.substring(0, 10).concat("...") : freeboard.title} | SHOES4JO</title>
 <%@ include file="../common/header-head.jsp"%>
 <style>
+.container {
+    text-align: center;
+}
+
 .form-wrapper {
 	max-width: 768px;
 }
@@ -93,8 +97,7 @@ table td:nth-child(2) {
 		</div>
 		<div class="form-button-wrapper">
 			<button class="btn-basic btn-line-basic"
-				onclick="location.href='<%=context%>/freeboard/list.do'">글 목록
-				보기</button>
+				onclick="location.href='<%=context%>/freeboard/list.do'">글 목록 보기</button>
 		</div>
 		</div>
 	</div>

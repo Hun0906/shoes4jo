@@ -16,7 +16,8 @@
 <body>
 	<%@include file="../common/header.jsp"%>
 	<div class="container">
-		<h2 class="text-center">북마크 목록</h2>
+	<h1>나의 북마크 목록</h1>
+		<h2 class="text-center">상품 상세페이지</h2>
 		<table class="table table-board table-hover">
 			<thead>
 				<tr>
