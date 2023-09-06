@@ -3,75 +3,49 @@
 
 <!DOCTYPE html>
 <html lang="utf-8">
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-	$(document)
-			.ready(
-					function() {
-						var gno = "${goods_list[0].gno}";
-						var keyword = "${goods_list[0].keyword}";
-
-						if (!gno) {
-							alert("상품 상세 정보가 없습니다.");
-							history.back();
-						}
-
-						$("#bookmark")
-								.click(
-										function() {
-											$
-													.ajax({
-														url : "/bookmarkcon/insert.do",
-														type : "POST",
-														data : JSON.stringify({
-															gno : gno,
-															keyword : keyword
-														}),
-														contentType : "application/json; charset=UTF-8",
-														dataType : "json",
-														success : function(data) {
-															console
-																	.log(
-																			'Response data:',
-																			data);
-															if (data.result == 1) {
-																alert("북마크에 추가되었습니다.");
-																$(
-																		"#bookmark img")
-																		.attr(
-																				"src",
-																				"/assets/icon/heart_icon.svg");
-															} else if (data.result == -1) {
-																alert("북마크에서 제거되었습니다.");
-																$(
-																		"#bookmark img")
-																		.attr(
-																				"src",
-																				"/assets/icon/emptyheart_icon.svg");
-															}
-														},
-														error : function(xhr,
-																status, error) {
-															console
-																	.error(
-																			'Error',
-																			status,
-																			error
-																					.toString());
-														}
-													});
-										});
-					});
-</script>
-
-
 <head>
 <meta charset="UTF-8" />
 <title>상품 상세 페이지 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
+
+<script>
+$(document).ready(
+	function() {
+		var gno = "${goods_list[0].gno}";
+		var keyword = "${goods_list[0].keyword}";
+
+		if (!gno) {
+			alert("상품 상세 정보가 없습니다.");
+			history.back();
+		}
+
+		$("#bookmark").click(function() {
+			$.ajax({
+				url : "<%=context%>/bookmarkcon/insert.do",
+				type : "POST",
+				data : JSON.stringify({
+					gno : gno,
+					keyword : keyword
+				}),
+				contentType : "application/json; charset=UTF-8",
+				dataType : "json",
+				success : function(data) {
+					console.log('Response data:', data);
+					if (data.result == 1) {
+						alert("북마크에 추가되었습니다.");
+						$("#bookmark").attr("src", "<%=context%>/assets/icon/heart_icon.svg");
+					} else if (data.result == -1) {
+						alert("북마크에서 제거되었습니다.");
+						$("#bookmark").attr("src", "<%=context%>/assets/icon/emptyheart_icon.svg");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.error('Error', status, error.toString());
+				}
+			});
+		});
+	});
+</script>
 
 <style>
 .grid {
@@ -80,9 +54,9 @@
 	gap: 2rem;
 }
 
-.grid img{
-aspect-ratio: 1/1;
-width: 100%;
+.grid img {
+	aspect-ratio: 1/1;
+	width: 100%;
 }
 
 .grid p {
@@ -152,7 +126,8 @@ th {
 			<div>
 				<p>${goods_list[0].category}</p>
 				<div class='bookmark'>
-					<img src='<%=context%>/assets/icon/emptyheart_icon.svg' alt='Bookmark' />
+					<img src='<%=context%>/assets/icon/${img}_icon.svg'
+						id="bookmark" alt='Bookmark' title="즐겨찾기"/>
 					<h2>${goods_list[0].goods_name}</h2>
 				</div>
 				<hr>
@@ -171,8 +146,10 @@ th {
 							<tbody>
 								<tr>
 									<td>${goods.seller_name}</td>
-									<td><fmt:formatNumber value="${goods.goods_price}" pattern="#,###" />원</td>
-									<td><fmt:formatNumber value="${goods.delivery_fee}" pattern="#,###" />원</td>
+									<td><fmt:formatNumber value="${goods.goods_price}"
+											pattern="#,###" />원</td>
+									<td><fmt:formatNumber value="${goods.delivery_fee}"
+											pattern="#,###" />원</td>
 									<td><a href="${goods.seller_url}">🛒바로가기</a></td>
 								</tr>
 							</tbody>
