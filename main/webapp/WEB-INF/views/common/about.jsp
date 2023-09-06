@@ -76,7 +76,7 @@
 							<span>계정 찾기</span>
 							<span>상품 상세 페이지</span>
 							<span>북마크(즐겨찾기)</span>
-							<span>최종 산출물 작성</span>
+							<span>기존->최종 산출물 작성</span>
 						</div>
 						<div class="team-card">
 							<img
