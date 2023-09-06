@@ -75,6 +75,7 @@
 							<span>계정 찾기</span>
 							<span>상품 관리 기능</span>
 							<span>즐겨찾기</span>
+							<span>최종 산출물 작성</span>
 						</div>
 						<div class="team-card">
 							<img
@@ -109,7 +110,7 @@
 							<br>
 							<span>마이페이지</span> 
 							<span>카테고리별 트렌드</span>
-							<span>시장 규모</span>
+							<span>시장 규모 조사</span>
 							<span>API 데이터 수집 </span>
 							<span>크롤링 데이터 수집</span>
 						</div>
