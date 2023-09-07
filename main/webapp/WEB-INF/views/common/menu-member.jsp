@@ -5,6 +5,6 @@
 <hr style="margin: 0.6rem 0;">
 <li><a class="dropdown-item" onclick="location.href='<%=context%>/controller/memberInfo'">👤마이페이지</a></li>
 <li><a class="dropdown-item" onclick="location.href='<%=context%>/bookmarkcon/list.do'">❤️북마크</a></li>
-<li><a class="dropdown-item" onclick="location.href='<%=context%>/freeboard/list.do'">✏️내 게시글</a></li>
-<li><a class="dropdown-item" onclick="location.href='<%=context%>/freeboard/list.do'">💬내 댓글</a></li>
+<li><a class="dropdown-item" onclick="location.href='<%=context%>/freeboard/MyBoardView.do'">✏️내 게시글</a></li>
+<li><a class="dropdown-item" onclick="location.href='<%=context%>/freeboard/MyCommentView.do'">💬내 댓글</a></li>
 <li><a class="dropdown-item" onclick="location.href='<%=context%>/controller/logout'">🔑로그아웃</a></li>

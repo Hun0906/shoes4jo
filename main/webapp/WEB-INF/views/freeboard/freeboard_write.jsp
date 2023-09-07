@@ -43,7 +43,7 @@
                     <td>
                         <select class="form-select" name="category">
                             <option value="정보">정보</option>
-                            <option value="구입 후기">구입 후기</option>
+                            <option value="구매 후기">구매 후기</option>
                             <option value="중고 거래">중고 거래</option>
                         </select>
                     </td>
