@@ -18,31 +18,37 @@ $(document).ready(
 			alert("상품 상세 정보가 없습니다.");
 			history.back();
 		}
-
+	  		
 		$("#bookmark").click(function() {
-			$.ajax({
-				url : "<%=context%>/bookmarkcon/insert.do",
-				type : "POST",
-				data : JSON.stringify({
-					gno : gno,
-					keyword : keyword
-				}),
-				contentType : "application/json; charset=UTF-8",
-				dataType : "json",
-				success : function(data) {
-					console.log('Response data:', data);
-					if (data.result == 1) {
-						alert("북마크에 추가되었습니다.");
-						$("#bookmark").attr("src", "<%=context%>/assets/icon/heart_icon.svg");
-					} else if (data.result == -1) {
-						alert("북마크에서 제거되었습니다.");
-						$("#bookmark").attr("src", "<%=context%>/assets/icon/emptyheart_icon.svg");
+		  	if ("<%=sessionID%>" != null && "<%=sessionID%>" != "null") {
+				$.ajax({
+					url : "<%=context%>/bookmarkcon/insert.do",
+					type : "POST",
+					data : JSON.stringify({
+						gno : gno,
+						keyword : keyword
+					}),
+					contentType : "application/json; charset=UTF-8",
+					dataType : "json",
+					success : function(data) {
+						console.log('Response data:', data);
+						if (data.result == 1) {
+							alert("북마크에 추가되었습니다.");
+							$("#bookmark").attr("src", "<%=context%>/assets/icon/heart_icon.svg");
+						} else if (data.result == -1) {
+							alert("북마크에서 제거되었습니다.");
+							$("#bookmark").attr("src", "<%=context%>/assets/icon/emptyheart_icon.svg");
+						}
+					},
+					error : function(xhr, status, error) {
+						console.error('Error', status, error.toString());
 					}
-				},
-				error : function(xhr, status, error) {
-					console.error('Error', status, error.toString());
-				}
-			});
+				});
+		  	} else {
+		  		if (confirm("로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?")){
+		  			location.href="<%=context%>/login"
+		  		}
+		  	}
 		});
 	});
 </script>
