@@ -21,6 +21,7 @@
 .team-card {
 	padding: 0.5rem;
 	margin: 1rem;
+	word-break: keep-all;
 }
 
 .team-card img {
