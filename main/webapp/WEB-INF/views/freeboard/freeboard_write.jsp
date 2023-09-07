@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td>작성자</td>
-                    <td><input class="form-control" type="text" name="member_id" maxlength="10"></td>
+                    <td><input class="form-control" type="text" name="member_id" value="<%=session.getAttribute("memberInfo")%>" maxlength="10" readonly></td>
                 </tr>
                 <tr>
                     <td>카테고리</td>
