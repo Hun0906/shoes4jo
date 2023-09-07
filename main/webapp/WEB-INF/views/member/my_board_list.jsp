@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 내 게시글 목록 | SHOES4JO</title>
+<title>내 게시글 목록 | SHOES4JO</title>
 
 
 
@@ -29,20 +29,16 @@
 			</thead>
 
 			<tbody>
-				<c:forEach var="freeboard" items="${freeboard_list}">
+				<c:forEach var="freeboard" items="${freeboardList}">
 					<tr>
 						<td class="text-center">${freeboard.fno}</td>
 						<td class="text-center">${freeboard.title}</td>
 						<td class="text-center">${freeboard.viewcnt}</td>
 						<td class="text-center">${freeboard.date.substring(0,11)}</td>
 						<td class="text-center"><a
-							href="${pageContext.request.contextPath}/freeboard/MyBoardView.do?fno=${freeboard.fno}">
-								바로가기 </a></td>
-
+							href="${pageContext.request.contextPath}/freeboard/view.do?fno=${freeboard.fno}">바로가기</a></td>
 					</tr>
 				</c:forEach>
-
-
 			</tbody>
 		</table>
 
