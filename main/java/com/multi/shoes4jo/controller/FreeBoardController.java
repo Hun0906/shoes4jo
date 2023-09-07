@@ -58,7 +58,11 @@ public class FreeBoardController {
 	public ModelAndView view(@RequestParam int fno) {
 		service.updateviewcnt(fno);
 		FreeBoardVO vo = service.select(fno);
-		return new ModelAndView("freeboard/freeboard_view", "vo", vo);
+		List<CommentVO> commentList = service.selectComment(fno); // 댓글 목록 가져오기
+		ModelAndView mav = new ModelAndView("freeboard/freeboard_view");
+		mav.addObject("freeboard", vo);
+		mav.addObject("commentList", commentList); // 모델에 댓글 목록 추가
+		return mav;
 	}
 
 	@RequestMapping(value = "/CommentView.do")
@@ -69,15 +73,14 @@ public class FreeBoardController {
 		mav.addObject("commentCount", commentCount);
 		return mav;
 	}
-	// 글에 달린 댓글 수
 
 	@RequestMapping(value = "/MyCommentView.do")
 	public String myComment(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
 
-		List<CommentVO> comments = service.selectByIdComment(member_id);
-		model.addAttribute("comments", comments);
+		List<CommentVO> commentList = service.selectByIdComment(member_id);
+		model.addAttribute("commentList", commentList);
 		return "member/my_comment_list";
 	}
 
@@ -87,37 +90,30 @@ public class FreeBoardController {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
 
-		List<FreeBoardVO> boards = service.FreeListById(member_id);
-		model.addAttribute("boards", boards);
+		List<FreeBoardVO> freeboardList = service.FreeListById(member_id);
+		model.addAttribute("freeboardList", freeboardList);
 
 		return "member/my_board_list";
 	}
 
 	@RequestMapping(value = "/write.do")
-	public String write() {
+	public String write(HttpSession session) {
+		String member_id = (String) session.getAttribute("memberInfo");
+		if (member_id == null) {
+			return "redirect:/login"; // 로그인 안하면 글 못쓰게 하기
+		}
 		return "freeboard/freeboard_write";
 	}
 
 	@RequestMapping("/writeOk.do")
 	public String writeOk(@ModelAttribute FreeBoardVO vo,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
-
-		if (file != null && !file.isEmpty()) {
-			String originalFilename = file.getOriginalFilename();
-			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
-
-			vo.setFile_name(originalFilename);
-			vo.setFile_path(newFileName);
-
-			String realPath = session.getServletContext().getRealPath("assets/img/");
-			System.out.println("파일 저장 성공: " + realPath);
-
-			File newFile = new File(realPath, newFileName);
-
-			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
+		String member_id = (String) session.getAttribute("memberInfo");
+		if (member_id == null || !member_id.equals(vo.getMember_id())) {
+			return "redirect:/freeborad/list.do";
 		}
 
+		handleFile(vo, file, session);
 		service.insert(vo);
 
 		return "redirect:/freeboard/list.do";
@@ -132,7 +128,21 @@ public class FreeBoardController {
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute FreeBoardVO vo,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
+		String member_id = (String) session.getAttribute("memberInfo");
 
+		FreeBoardVO originalPost = service.select(vo.getFno());
+		if (!originalPost.getMember_id().equals(member_id)) {
+			return "redirect:/freeborad/list.do";
+		}
+
+		handleFile(vo, file, session);
+
+		service.update(vo);
+
+		return "redirect:/freeboard/list.do";
+	}
+
+	private void handleFile(FreeBoardVO vo, MultipartFile file, HttpSession session) throws IOException {
 		if (file != null && !file.isEmpty()) {
 			String originalFilename = file.getOriginalFilename();
 			String extension = FilenameUtils.getExtension(originalFilename);
@@ -141,51 +151,43 @@ public class FreeBoardController {
 			vo.setFile_name(originalFilename);
 			vo.setFile_path(newFileName);
 
-			FreeBoardVO oldBoardData = service.select(vo.getFno());
+			File newFile = new File(session.getServletContext().getRealPath("assets/img/"), newFileName);
 
-			if (oldBoardData != null && oldBoardData.getFile_path() != null) {
-				File oldFile = new File(session.getServletContext().getRealPath("assets/img/"),
-						oldBoardData.getFile_path());
-				if (oldFile.exists()) {
-					oldFile.delete();
-				}
-			}
-
-			String realPath = session.getServletContext().getRealPath("assets/img/");
-			System.out.println("파일 저장 성공: " + realPath);
-
-			File newFile = new File(realPath, newFileName);
-
-			try {
-				FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-
-			FreeBoardVO oldBoardData = service.select(vo.getFno());
-
-			if (oldBoardData != null) {
-
-				vo.setFile_name(oldBoardData.getFile_name());
-				vo.setFile_path(oldBoardData.getFile_path());
-			}
+			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
 		}
-
-		service.update(vo);
-
-		return "redirect:/freeboard/list.do";
 	}
 
 	@RequestMapping("/delete.do")
-	public String deleteOk(@RequestParam int fno) {
+	public String deleteOk(@RequestParam int fno, HttpSession session) {
+
+		String member_id = (String) session.getAttribute("memberInfo");
+
+		FreeBoardVO vo = service.select(fno);
+
+		if (!vo.getMember_id().equals(member_id)) {
+
+			return "redirect:/freeboard/list.do";
+
+		}
+
 		service.delete(fno);
+
 		return "redirect:/freeboard/list.do";
+
 	}
 
 	@RequestMapping("/writeComment.do")
-	public String writeComment(CommentVO comment) {
+	public String writeComment(CommentVO comment, HttpSession session) {
+
+		String member_id = (String) session.getAttribute("memberInfo");
+		if (member_id == null || !member_id.equals(comment.getMember_id())) {
+			return "redirect:/freeboard/list.do";
+		}
+
+		System.out.println(comment);
 		int result = service.insertComment(comment);
+
+		System.out.println("insertComment result: " + result);
 
 		if (result > 0) {
 			return "redirect:/freeboard/view.do?fno=" + comment.getFno();
@@ -195,13 +197,21 @@ public class FreeBoardController {
 	}
 
 	@RequestMapping("/deleteComment.do")
-	public String deleteReply(@RequestParam int cno, @RequestParam int fno) {
+	public String deleteReply(@RequestParam int cno, @RequestParam int fno, HttpSession session) {
+
+		CommentVO originalComment = (CommentVO) service.selectComment(cno);
+		String member_id = (String) session.getAttribute("memberInfo");
+
+		if (!originalComment.getMember_id().equals(member_id)) {
+			return "redirect:/freeboard/list.do";
+		}
+
 		int result = service.deleteComment(cno);
 
 		if (result > 0) {
 			return "redirect:/freeboard/view.do?fno=" + fno;
 		} else {
-			return "freeboard/freeboard_list";
+			return "redirect:/freeboard/list.do";
 		}
 	}
 }
