@@ -21,29 +21,26 @@
 			<thead>
 				<tr>
 					<th class="text-center">글 번호</th>
-					<th class="text-center">작성자</th>
 					<th class="text-center">댓글 내용</th>
 					<th class="text-center">댓글 작성일</th>
 					<th class="text-center">바로가기</th>
 				</tr>
 			</thead>
 
-			<tbody>
-				<c:forEach var="bookmark" items="${comment_list}">
+						<tbody>
+				<c:forEach var="freeboard" items="${commentList}">
 					<tr>
 						<td class="text-center">${comment.fno}</td>
-						<td class="text-center">${comment.member_id}</td>
 						<td class="text-center">${comment.content}</td>
 						<td class="text-center">${comment.date.substring(0,11)}</td>
 						<td class="text-center"><a
-							href="${pageContext.request.contextPath}/freeboard/MyCommentView.do?fno=${freeboard.fno}">
-								바로가기 </a></td>
-
+							href="${pageContext.request.contextPath}/freeboard/view.do?fno=${freeboard.fno}">바로가기</a></td>
 					</tr>
 				</c:forEach>
-
-
 			</tbody>
+			
+			
+			
 		</table>
 
 	</div>

@@ -100,7 +100,7 @@ public class FreeBoardController {
 	public String write(HttpSession session) {
 		String member_id = (String) session.getAttribute("memberInfo");
 		if (member_id == null) {
-			return "redirect:/login"; // 로그인 안하면 글 못쓰게 하기
+			return "redirect:/login"; // 로그인 안하면 글 못쓰게 하고 로그인 페이지로 보내기
 		}
 		return "freeboard/freeboard_write";
 	}
@@ -199,10 +199,10 @@ public class FreeBoardController {
 	@RequestMapping("/deleteComment.do")
 	public String deleteReply(@RequestParam int cno, @RequestParam int fno, HttpSession session) {
 
-		CommentVO originalComment = (CommentVO) service.selectComment(cno);
+		CommentVO vo = (CommentVO) service.selectComment(cno);
 		String member_id = (String) session.getAttribute("memberInfo");
 
-		if (!originalComment.getMember_id().equals(member_id)) {
+		if (!vo.getMember_id().equals(member_id)) {
 			return "redirect:/freeboard/list.do";
 		}
 
