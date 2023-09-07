@@ -62,8 +62,8 @@ table td:nth-child(1) {
 						<td><select class="form-select" name="category">
 								<option value="정보"
 									${freeboard.category == '정보' ? 'selected' : ''}>정보</option>
-								<option value="구입 후기"
-									${freeboard.category == '구입 후기' ? 'selected' : ''}>구입 후기</option>
+								<option value="구매 후기"
+									${freeboard.category == '구매 후기' ? 'selected' : ''}>구매 후기</option>
 								<option value="중고 거래"
 									${freeboard.category == '중고 거래' ? 'selected' : ''}>중고 거래</option>
 						</select></td>
