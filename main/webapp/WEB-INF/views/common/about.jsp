@@ -21,6 +21,7 @@
 .team-card {
 	padding: 0.5rem;
 	margin: 1rem;
+	word-break: keep-all;
 }
 
 .team-card img {
@@ -69,14 +70,14 @@
 								onclick="window.open('https://github.com/0123aqq')">
 							<h3>하세라</h3>
 							<br>
-							<span>스프링,마이바티스 환경 설정</span>
-							<span>관리자 게시판, 커뮤니티</span>
-							<span>관리자 메뉴-조회,관리 기능</span>
-							<span>커뮤니티 댓글</span>
-							<span>계정 찾기</span>
-							<span>상품 상세 페이지</span>
-							<span>북마크(즐겨찾기)</span>
-							<span>기존->최종 산출물 작성</span>
+							<span>스프링 & 마이바티스 개발환경 설정</span>
+							<span>게시판 CRUD 기능 (커뮤니티, 매거진)</span>
+							<span>게시판 댓글 기능</span>
+							<span>아이디 & 비밀번호 찾기</span>
+							<span>상품 상세페이지</span>
+							<span>상품 리스트 관리 페이지</span>
+							<span>북마크 (즐겨찾기)</span>
+							<span>최종 산출물 작성</span>
 						</div>
 						<div class="team-card">
 							<img
@@ -85,9 +86,9 @@
 							<h3>박희범</h3>
 							<br>
 							<span>회원가입</span> 
-							<span>2차 DB 설계</span>
-							<span>SNS 유행 신발 탐색</span>
+							<span>DB 설계</span>
 							<span>랭킹 페이지</span>
+							<span>SNS 유행 신발 탐색</span>
 						</div>
 						<div class="team-card">
 							<img src="https://avatars.githubusercontent.com/u/134472216?v=4"
@@ -95,15 +96,16 @@
 							<h3>유맑음</h3>
 							<br>
 							<span>프로젝트 기획</span>
-							<span>프로젝트 전체 UI,디자인 총괄</span> 
+							<span>프로젝트 UI,디자인 총괄</span> 
 							<span>메인 페이지</span> 
-							<span>헤더,푸터</span> 
+							<span>헤더 & 푸터</span> 
 							<span>로그인</span>
 							<span>상품별 트렌드</span>
 							<span>키워드 트렌드</span>
 							<span>연관 주제(워드 클라우드)</span>
+							<span>API & 크롤링 데이터 추출</span>
 							<span>매거진</span>
-							<span>트렌드 데이터 추출</span>
+							<span>코드 리팩토링</span>
 						</div>
 						<div class="team-card">
 							<img src="https://avatars.githubusercontent.com/u/134472292?v=4"
@@ -111,11 +113,9 @@
 							<h3>이동훈</h3>
 							<br>
 							<span>마이페이지</span> 
-							<span>카테고리별 트렌드</span>
 							<span>분류별 트렌드</span>
-							<span>시장 규모 조사</span>
-							<span>API 데이터 수집 </span>
-							<span>크롤링 데이터 수집</span>
+							<span>API 자료조사 </span>
+							<span>API & 크롤링 데이터 추출</span>
 						</div>
 					</div>
 
