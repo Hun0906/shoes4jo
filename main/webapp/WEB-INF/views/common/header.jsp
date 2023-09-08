@@ -13,7 +13,7 @@
 <img src="<%=context %>/assets/img/logo01.svg" onclick="location.href='<%=context %>/'">
 <div class="menu_container">
 <a href="<%=context %>/main">상품별 트렌드</a>
-<a href="<%=context %>/">분류별 트렌드</a>
+<a href="<%=context %>/category_trend/model">분류별 트렌드</a>
 <a href="<%=context %>/keyword_trend/model">키워드 트렌드</a>
 <a href="<%=context %>/word_cloud/model">연관 주제</a>
 <a href="<%=context %>/ranking.do">SHOES4JO 랭킹</a>
@@ -40,7 +40,7 @@
 
 <div class="responsive-menu-wrapper">
 <div><a href="<%=context %>/main">상품별 트렌드</a></div>
-<div><a href="<%=context %>/">분류별 트렌드</a></div>
+<div><a href="<%=context %>/category_trend/model">분류별 트렌드</a></div>
 <div><a href="<%=context %>/keyword_trend/model">키워드 트렌드</a></div>
 <div><a href="<%=context %>/word_cloud/model">연관 주제</a></div>
 <div><a href="<%=context %>/ranking.do">SHOES4JO 랭킹</a></div>
