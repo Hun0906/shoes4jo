@@ -24,6 +24,7 @@
 	background-repeat: no-repeat;
 	background-position: left -5px bottom 0px;
 	background-size: 100% 30%;
+	/*cursor: pointer;*/
 }
 
 .main_span {
@@ -59,9 +60,25 @@
 	height: 100vh;
 	}
 }
+
 </style>
 
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var elements = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].oninvalid = function(e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                e.target.setCustomValidity("SHOES4JO가 제안하는 인기 상품을 클릭해 보세요!");
+            }
+        };
+        elements[i].oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    };
+});
+
 window.onload = function() {
 	getCode();
 }
@@ -78,14 +95,14 @@ function getCode() {
 }
 
 function getAPIResult() {
-	showLoading();
-
-	let keyword = document.getElementById("keyword").value;
+	let keyword = document.getElementById("keyword").value.trim();
 
 	if (!keyword || keyword === "" || keyword === "null" || keyword === null) {
 		alert("검색어를 입력하세요.");
+		return false;
 	}
 	
+	showLoading();
 	console.log("keyword: "+keyword);
 	document.keywordTrendForm.action = "<%=context%>/goods_trend?msg=get&keyword="+keyword;
 	document.keywordTrendForm.submit();
@@ -106,7 +123,7 @@ function getAPIResult() {
 			</div>
 			<form action="javascript:getAPIResult()"
 				method="post" name="keywordTrendForm">
-				<input type="text" class="main_search" name="keyword" id="keyword">
+				<input type="text" class="main_search" name="keyword" id="keyword" required>
 				<button class="btn-basic btn-color2" style="font-size: 1.5rem;">Search👀</button>
 			</form>
 
