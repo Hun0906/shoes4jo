@@ -46,8 +46,7 @@ const random_items = [
 "케즈 블루 클라우드", 
 "크록스 클래식 클로그", 
 "푸마 스웨이드 클래식", 
-"휠라 디스럽터2"
-	];
+"휠라 디스럽터2"];
 	
 const random_item_span = document.getElementById('random_item');
 let currentItemIndex = 0;
@@ -66,7 +65,7 @@ function typeWriterEffect(idx, characterIdx) {
 
 function changeRandomItem() {
     random_item_span.innerHTML = "";
-	const nextIndex = Math.round(Math.random() * random_items.length);
+	const nextIndex = Math.round(Math.random() * (random_items.length - 1));
     currentItemIndex = nextIndex;
     typeWriterEffect(nextIndex, 0);
 }
