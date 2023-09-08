@@ -11,7 +11,6 @@
 <style>
 .search-wrapper b{
 	font-size: 2.5rem;
-	word-break: keep-all;
 }
 </style>
 </head>
