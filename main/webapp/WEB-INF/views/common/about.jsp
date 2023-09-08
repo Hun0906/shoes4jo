@@ -88,6 +88,7 @@
 							<span>DB 설계</span>
 							<span>랭킹 페이지</span>
 							<span>SNS 유행 신발 탐색</span>
+							<span>샘플 데이터 수집</span>
 						</div>
 						<div class="team-card">
 							<img src="https://avatars.githubusercontent.com/u/134472216?v=4"
@@ -114,7 +115,8 @@
 							<span>마이페이지</span> 
 							<span>분류별 트렌드</span>
 							<span>API 자료조사 </span>
-							<span>API & 크롤링 데이터 추출</span>
+							<span>내 게시물 보기</span>
+							<span>내 댓글 보기</span>
 						</div>
 					</div>
 
