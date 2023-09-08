@@ -175,8 +175,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		<h1>회원가입</h1>
 		<form name="signupForm" onsubmit="event.preventDefault(); signup();">
 		<div class="input-wrapper">
-		<label>아이디</label><div class="input-with-button"><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control" pattern="[a-zA-Z]" maxlength=20 required>
-		<span class="button-with-input" id="idre" name="idre" onclick="duplacationId()">중복 확인</span></div>
+		<label>아이디</label><div class="input-with-button"><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control" pattern="[a-z0-9]{1}[a-z0-9.\-_]*" maxlength=20 required>
+		<span class="button-with-input" id="idre" onclick="duplacationId()">중복 확인</span></div>
 		</div>
 		<div class="input-wrapper">
 		<label>이름</label><input type="text" id="name" name="MEMBER_NAME" placeholder="이름" class="form-control" pattern="[a-zA-Z가-힣]" maxlength=20 required>
