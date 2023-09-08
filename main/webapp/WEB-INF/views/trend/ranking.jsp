@@ -148,7 +148,7 @@ grid-template-columns: 1fr;
 				</div>
 				<div class="list-wrapper" id="week-rank">
 					<div class="date"><marquee scrollamount="10" direction="right">${dateMap['week']} ~ ${dateMap['today']}</marquee></div>
-					<c:if test="${empty dayRank}"><div id="nodata"><p>표시할 랭킹 데이터가 없습니다.</p><button class="btn-basic btn-color2" onclick="location.href='<%=context%>/'">🥾트렌드 검색하기</button></div></c:if>
+					<c:if test="${empty weekRank}"><div id="nodata"><p>표시할 랭킹 데이터가 없습니다.</p><button class="btn-basic btn-color2" onclick="location.href='<%=context%>/'">🥾트렌드 검색하기</button></div></c:if>
 				<ul>
 					<c:forEach var="ranking" items="${weekRank}" varStatus="status">
 					<li onclick="location.href='${pageContext.request.contextPath}/goodscon/view.do?keyword=${ranking.keyword}'">
@@ -164,7 +164,7 @@ grid-template-columns: 1fr;
 				</div>
 				<div class="list-wrapper" id="month-rank">
 					<div class="date"><marquee scrollamount="10" direction="right">${dateMap['month']} ~ ${dateMap['today']}</marquee></div>
-					<c:if test="${empty dayRank}"><div id="nodata"><p>표시할 랭킹 데이터가 없습니다.</p><button class="btn-basic btn-color2" onclick="location.href='<%=context%>/'">🥾트렌드 검색하기</button></div></c:if>
+					<c:if test="${empty monthRank}"><div id="nodata"><p>표시할 랭킹 데이터가 없습니다.</p><button class="btn-basic btn-color2" onclick="location.href='<%=context%>/'">🥾트렌드 검색하기</button></div></c:if>
 				<ul>
 					<c:forEach var="ranking" items="${monthRank}" varStatus="status">
 					<li onclick="location.href='${pageContext.request.contextPath}/goodscon/view.do?keyword=${ranking.keyword}'">

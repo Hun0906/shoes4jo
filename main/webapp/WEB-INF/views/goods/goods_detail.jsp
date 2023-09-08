@@ -91,7 +91,6 @@ $(document).ready(
 
 .bookmark h2 {
 	margin: 0.8rem;
-	word-break: keep-all;
 }
 
 table {

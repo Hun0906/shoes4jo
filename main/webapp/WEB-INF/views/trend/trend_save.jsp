@@ -44,7 +44,6 @@ line-height: 1.0;
 display: grid;
 grid-template-columns: repeat(12,1fr);
 gap: 10px;
-word-break: keep-all;
 }
 
 #ranking_list span{
