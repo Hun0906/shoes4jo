@@ -3,7 +3,6 @@ package com.multi.shoes4jo.service.freeboard;
 import java.util.List;
 
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.vo.CommentVO;
 import com.multi.shoes4jo.vo.FreeBoardVO;
 
 public interface FreeBoardService {
@@ -26,13 +25,4 @@ public interface FreeBoardService {
 
 	public void delete(int fno);
 
-	public int insertComment(CommentVO vo);
-
-	public int deleteComment(int cno);
-
-	public List<CommentVO> selectComment(int fno);
-	// 게시물 번호에 해당하는 모든 댓글 조회
-
-	public List<CommentVO> selectByIdComment(String member_id);
-	// 본인 아이디로 쓴 댓글 리스트 조회
 }

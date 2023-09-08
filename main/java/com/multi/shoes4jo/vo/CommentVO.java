@@ -10,17 +10,19 @@ public class CommentVO {
 	private int fno;
 	private String content;
 	private String date;
+	private String update_date;
 
 	public CommentVO() {
 	}
 
-	public CommentVO(int cno, String member_id, int fno, String content, String date) {
+	public CommentVO(int cno, String member_id, int fno, String content, String date, String update_date) {
 		super();
 		this.cno = cno;
 		this.member_id = member_id;
 		this.fno = fno;
 		this.content = content;
 		this.date = date;
+		this.update_date = update_date;
 	}
 
 	public int getCno() {
@@ -63,4 +65,11 @@ public class CommentVO {
 		this.date = date;
 	}
 
+	public String getUpdate_date() {
+		return update_date;
+	}
+
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
+	}
 }
