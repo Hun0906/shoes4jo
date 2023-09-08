@@ -34,7 +34,7 @@
 						<td class="text-center">${comment.content}</td>
 						<td class="text-center">${comment.date.substring(0,11)}</td>
 						<td class="text-center"><a
-							href="${pageContext.request.contextPath}/freeboard/view.do?fno=${freeboard.fno}">바로가기</a></td>
+							href="${pageContext.request.contextPath}/CoCon/MyCommentView.do?fno=${freeboard.fno}">바로가기</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
