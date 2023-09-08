@@ -5,6 +5,7 @@ body {
 	font-family: 'Noto Sans KR', sans-serif !important;
 	font-family: 'Noto Sans', sans-serif;
 	font-size: 1.05rem;
+	word-break: keep-all;
 }
 
 header{
@@ -109,10 +110,6 @@ footer a{
 
 footer a {
 	line-height: 3.5;
-}
-
-table{
-   word-break: keep-all;
 }
 
 .btn-basic{
