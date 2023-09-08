@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.vo.CommentVO;
 import com.multi.shoes4jo.vo.FreeBoardVO;
 
 @Mapper
@@ -54,21 +53,5 @@ public interface FreeBoardMapper {
 	@Select("SELECT MAX(fno) FROM freeboard")
 	Integer maxfno();
 	// 최대 게시물 번호 조회
-
-	@Select("SELECT * FROM comment WHERE fno = #{fno}")
-	List<CommentVO> selectComment(@Param("fno") int fno);
-	// 게시물 번호에 해당하는 모든 댓글 조회
-
-	@Select("SELECT * FROM comment WHERE member_id = #{member_id}")
-	List<CommentVO> selectByIdComment(@Param("member_id") String member_id);
-	// 본인 아이디 댓글들 조회
-
-	@Insert("INSERT INTO comment (cno, member_id, fno, content) VALUES (#{cno}, #{member_id}, #{fno}, #{content})")
-	int insertComment(CommentVO comment);
-	// 새 댓글 추가
-
-	@Delete("DELETE FROM comment WHERE cno = #{cno}")
-	int deleteComment(@Param("cno") int cno);
-	// 번호에 해당하는 댓글 삭제
 
 }
