@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -25,6 +26,11 @@
 	background: white;
 	filter: brightness(95%);
 }
+
+.pagination .active .page-link {
+	background-color: #CCFFCC;
+	color: #777777;
+}
 </style>
 </head>
 
@@ -35,18 +41,20 @@
 	<div class="container">
 		<div class="form_wrapper">
 			<h1 onclick="location.href='<%=context%>/freeboard/list.do'">커뮤니티</h1>
-<h2>자유게시판</h2>
-			<div style="display: flex; justify-content: space-between; margin: 1rem 0;">
+			<h2>자유게시판</h2>
+			<div
+				style="display: flex; justify-content: space-between; margin: 1rem 0;">
 
 				<select class="form-select" style="width: fit-content"
-					onchange="window.location.href='<%=context %>/freeboard/category.do?category=' + this.value">
+					onchange="window.location.href='<%=context%>/freeboard/category.do?category=' + this.value">
 					<option value="">카테고리 선택</option>
 					<option value="정보">정보</option>
 					<option value="구매 후기">구매 후기</option>
 					<option value="중고 거래">중고 거래</option>
 				</select>
 
-				<button onclick="location.href='<%=context %>/freeboard/write.do'" class="btn-basic">글쓰기</button>
+				<button onclick="location.href='<%=context%>/freeboard/write.do'"
+					class="btn-basic">글쓰기</button>
 
 			</div>
 
@@ -67,7 +75,9 @@
 						<tr>
 							<td class="text-center">${freeboard.fno }</td>
 							<td class="text-center">${freeboard.category}</td>
-						<td class="text-center"><a href="<%=context %>/freeboard/view.do?fno=${freeboard.fno}">${freeboard.title} </a></td>
+							<td class="text-center"><a
+								href="<%=context %>/freeboard/view.do?fno=${freeboard.fno}">${freeboard.title}
+							</a></td>
 							<td class="text-center">${freeboard.member_id}</td>
 							<td class="text-center">${freeboard.viewcnt}</td>
 							<td class="text-center">${freeboard.date.substring(0,16)}</td>
@@ -86,11 +96,21 @@
 						href="<%=context %>/freeboard/list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 				</c:if>
 
+
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
 					var="idx">
-					<li><a class="page-link"
-						href="<%=context %>/freeboard/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+					<c:choose>
+						<c:when test="${idx eq pageMaker.cri.page}">
+							<li class="active"><a class="page-link"
+								href="<%=context %>/board/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a class="page-link"
+								href="<%=context %>/board/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
+
 
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 					<li><a class="page-link"
