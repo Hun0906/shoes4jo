@@ -102,11 +102,11 @@
 					<c:choose>
 						<c:when test="${idx eq pageMaker.cri.page}">
 							<li class="active"><a class="page-link"
-								href="<%=context %>/board/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+								href="<%=context %>/freeboard/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a class="page-link"
-								href="<%=context %>/board/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+								href="<%=context %>/freeboard/list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
