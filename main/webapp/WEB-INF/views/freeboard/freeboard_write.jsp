@@ -25,6 +25,7 @@
 <body>
 <%@ include file="../common/header.jsp" %>
 
+
 <div class="container">
     <h2>글 작성하기</h2>
     <div class="form-wrapper">
@@ -36,7 +37,7 @@
                 </tr>
                 <tr>
                     <td>작성자</td>
-                    <td><input class="form-control" type="text" name="member_id" value="<%=session.getAttribute("memberInfo")%>" maxlength="10" readonly></td>
+                    <td><input class="form-control" type="text" name="member_id" value="<%=session.getAttribute("memberInfo")%>" readonly></td>
                 </tr>
                 <tr>
                     <td>카테고리</td>
