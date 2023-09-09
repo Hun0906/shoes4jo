@@ -84,26 +84,35 @@ public class FreeBoardController {
 	}
 
 	@RequestMapping(value = "/write.do")
-	public String write(HttpSession session) {
+	public String write(HttpSession session, HttpServletRequest request) {
 		String member_id = (String) session.getAttribute("memberInfo");
 		if (member_id == null) {
-			return "redirect:/login"; // 로그인 안하면 글 못쓰게 하고 로그인 페이지로 보내기
+			request.setAttribute("msg", "로그인이 필요한 기능입니다.");
+			request.setAttribute("url", "/login");
+			return "msg";
 		}
 		return "freeboard/freeboard_write";
 	}
 
 	@RequestMapping("/writeOk.do")
 	public String writeOk(@ModelAttribute FreeBoardVO vo,
-			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
+			HttpServletRequest request) throws Exception {
+
 		String member_id = (String) session.getAttribute("memberInfo");
 		if (member_id == null || !member_id.equals(vo.getMember_id())) {
-			return "redirect:/freeborad/list.do";
+			request.setAttribute("msg", "로그인이 필요한 기능입니다.");
+			request.setAttribute("url", "/freeboard/list.do");
+			return "msg";
 		}
 
 		handleFile(vo, file, session);
 		service.insert(vo);
 
-		return "redirect:/freeboard/list.do";
+		request.setAttribute("msg", "새 글 등록에 성공하였습니다.");
+		request.setAttribute("url", "/freeboard/list.do");
+
+		return "msg";
 	}
 
 	@RequestMapping(value = "/view.do")
@@ -116,41 +125,68 @@ public class FreeBoardController {
 	}
 
 	@RequestMapping("/update.do")
-	public ModelAndView update(@RequestParam int fno) {
+	public String update(@RequestParam int fno, HttpSession session, HttpServletRequest request) {
+		String member_id = (String) session.getAttribute("memberInfo");
+		if (member_id == null) {
+			request.setAttribute("msg", "로그인이 필요한 기능입니다.");
+			request.setAttribute("url", "/login");
+			return "msg";
+		}
+
 		FreeBoardVO vo = service.select(fno);
-		return new ModelAndView("freeboard/freeboard_update", "vo", vo);
+
+		if (!vo.getMember_id().equals(member_id)) {
+			request.setAttribute("msg", "작성자만 글 수정이 가능합니다.");
+			request.setAttribute("url", "/freeboard/list.do");
+			return "msg";
+		}
+
+		request.setAttribute("freeboard", vo);
+
+		return "freeboard/freeboard_update";
 	}
 
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute FreeBoardVO vo,
-			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
+			HttpServletRequest request) throws Exception {
+
 		String member_id = (String) session.getAttribute("memberInfo");
 
 		FreeBoardVO originalPost = service.select(vo.getFno());
 		if (!originalPost.getMember_id().equals(member_id)) {
-			return "redirect:/freeborad/list.do";
+			request.setAttribute("msg", "작성자만 글 수정이 가능합니다.");
+			request.setAttribute("url", "/freeboard/list.do");
+			return "msg";
 		}
 
 		handleFile(vo, file, session);
 
 		service.update(vo);
 
-		return "redirect:/freeboard/list.do";
+		request.setAttribute("msg", "글 수정에 성공하였습니다.");
+		request.setAttribute("url", "/freeboard/list.do");
+
+		return "msg";
 	}
 
 	@RequestMapping("/delete.do")
-	public String deleteOk(@RequestParam int fno, HttpSession session) {
-
+	public String deleteOk(@RequestParam int fno, HttpSession session, HttpServletRequest request) {
 		String member_id = (String) session.getAttribute("memberInfo");
-
 		FreeBoardVO vo = service.select(fno);
 
 		if (!vo.getMember_id().equals(member_id)) {
-
-			return "redirect:/freeboard/list.do";
+			request.setAttribute("msg", "글 작성자만 삭제가 가능합니다.");
+			request.setAttribute("url", "/freeboard/list.do");
+			return "msg";
 		}
+
 		service.delete(fno);
+
+		request.setAttribute("msg", "글 삭제에 성공하였습니다.");
+		request.setAttribute("url", "/freeboard/list.do");
 
 		return "redirect:/freeboard/list.do";
 	}
+
 }

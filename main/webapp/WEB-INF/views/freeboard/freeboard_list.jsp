@@ -29,7 +29,7 @@
 
 .pagination .active .page-link {
 	background-color: #CCFFCC;
-	color: #777777;
+	color: #000000;
 }
 </style>
 </head>

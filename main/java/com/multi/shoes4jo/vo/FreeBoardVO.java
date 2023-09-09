@@ -15,14 +15,14 @@ public class FreeBoardVO {
 	private String date;
 	private String file_name;
 	private String file_path;
-	private String comment;
+	private String update_date;
 	private MultipartFile file;
 
 	public FreeBoardVO() {
 	}
 
-	public FreeBoardVO(int fno, String member_id, String category, String title, String content, int viewcnt, String date,
-			String file_name, String file_path, String comment, MultipartFile file) {
+	public FreeBoardVO(int fno, String member_id, String category, String title, String content, int viewcnt,
+			String date, String file_name, String file_path, String update_date, MultipartFile file) {
 		this.fno = fno;
 		this.member_id = member_id;
 		this.category = category;
@@ -32,7 +32,7 @@ public class FreeBoardVO {
 		this.date = date;
 		this.file_name = file_name;
 		this.file_path = file_path;
-		this.comment = comment;
+		this.update_date = update_date;
 		this.file = file;
 	}
 
@@ -43,7 +43,7 @@ public class FreeBoardVO {
 	public void setFno(int fno) {
 		this.fno = fno;
 	}
-	
+
 	public String getMember_id() {
 		return member_id;
 	}
@@ -108,12 +108,12 @@ public class FreeBoardVO {
 		this.file_path = file_path;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getUpdate_date() {
+		return update_date;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
 	}
 
 	public MultipartFile getFile() {

@@ -15,7 +15,7 @@ import com.multi.shoes4jo.vo.FreeBoardVO;
 @Mapper
 public interface FreeBoardMapper {
 
-	@Select("SELECT fno, member_id, category, title, content, viewcnt, date FROM freeboard ORDER BY fno DESC LIMIT #{perPageNum} OFFSET #{pageStart}")
+	@Select("SELECT fno, member_id, category, title, content, viewcnt, date, update_date FROM freeboard ORDER BY fno DESC LIMIT #{perPageNum} OFFSET #{pageStart}")
 	public List<FreeBoardVO> listPage(Criteria cri);
 	// 페이징 목록조회
 
@@ -34,11 +34,11 @@ public interface FreeBoardMapper {
 	List<FreeBoardVO> FreeListById(String member_id);
 	// 본인 아이디의 게시글 전체 조회
 
-	@Insert("INSERT INTO freeboard (fno, member_id, category, title, content, file_name, file_path, comment) VALUES (#{fno}, #{member_id}, #{category}, #{title}, #{content}, #{file_name}, #{file_path}, #{comment})")
+	@Insert("INSERT INTO freeboard (fno, member_id, category, title, content, file_name, file_path) VALUES (#{fno}, #{member_id}, #{category}, #{title}, #{content}, #{file_name}, #{file_path})")
 	int insert(FreeBoardVO vo);
 	// 새 게시물 추가
 
-	@Update("UPDATE freeboard SET category = #{category}, title = #{title}, content = #{content}, file_name = #{file_name}, file_path = #{file_path}, comment = #{comment} WHERE fno = #{fno}")
+	@Update("UPDATE freeboard SET category = #{category}, title = #{title}, content = #{content}, file_name = #{file_name}, file_path = #{file_path} WHERE fno = #{fno}")
 	int update(FreeBoardVO vo);
 	// 기존 게시물 업데이트
 
