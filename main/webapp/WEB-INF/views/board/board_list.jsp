@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> 관리자 게시판 | SHOES4JO</title>
+    <title> 매거진 관리 | SHOES4JO</title>
 
     <%@include file="../common/header-head.jsp"%>
 

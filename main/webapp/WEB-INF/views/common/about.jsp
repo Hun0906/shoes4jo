@@ -70,11 +70,11 @@
 							<h3>하세라</h3>
 							<br>
 							<span>스프링 & 마이바티스 개발환경 설정</span>
-							<span>게시판 CRUD 기능 (커뮤니티, 매거진)</span>
-							<span>게시판 댓글 기능</span>
+							<span>게시판 CRUD, 파일 업로드(커뮤니티, 매거진 관리)</span>
+							<span>커뮤니티 댓글 기능</span>
 							<span>아이디 & 비밀번호 찾기</span>
 							<span>상품 상세페이지</span>
-							<span>상품 리스트 관리 페이지</span>
+							<span>상품 리스트 관리</span>
 							<span>북마크 (즐겨찾기)</span>
 							<span>최종 산출물 작성</span>
 						</div>
@@ -87,7 +87,7 @@
 							<span>회원가입</span> 
 							<span>DB 설계</span>
 							<span>랭킹 페이지</span>
-							<span>SNS 유행 신발 탐색</span>
+							<span>회원 목록 조회</span>
 							<span>샘플 데이터 수집</span>
 						</div>
 						<div class="team-card">
@@ -104,6 +104,7 @@
 							<span>키워드 트렌드</span>
 							<span>연관 주제(워드 클라우드)</span>
 							<span>API & 크롤링 데이터 추출</span>
+							<span>SNS 유행 신발 조사</span>
 							<span>매거진</span>
 							<span>코드 리팩토링</span>
 						</div>
