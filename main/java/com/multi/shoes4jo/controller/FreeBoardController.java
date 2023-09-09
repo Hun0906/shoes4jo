@@ -99,13 +99,6 @@ public class FreeBoardController {
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
 			HttpServletRequest request) throws Exception {
 
-		String member_id = (String) session.getAttribute("memberInfo");
-		if (member_id == null || !member_id.equals(vo.getMember_id())) {
-			request.setAttribute("msg", "로그인이 필요한 기능입니다.");
-			request.setAttribute("url", "/freeboard/list.do");
-			return "msg";
-		}
-
 		handleFile(vo, file, session);
 		service.insert(vo);
 
@@ -150,15 +143,6 @@ public class FreeBoardController {
 	public String updateOk(@ModelAttribute FreeBoardVO vo,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
 			HttpServletRequest request) throws Exception {
-
-		String member_id = (String) session.getAttribute("memberInfo");
-
-		FreeBoardVO originalPost = service.select(vo.getFno());
-		if (!originalPost.getMember_id().equals(member_id)) {
-			request.setAttribute("msg", "작성자만 글 수정이 가능합니다.");
-			request.setAttribute("url", "/freeboard/list.do");
-			return "msg";
-		}
 
 		handleFile(vo, file, session);
 
