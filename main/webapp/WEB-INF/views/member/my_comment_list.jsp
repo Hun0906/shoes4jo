@@ -23,21 +23,23 @@
 					<th class="text-center">글 번호</th>
 					<th class="text-center">댓글 내용</th>
 					<th class="text-center">댓글 작성일</th>
+					<th class="text-center">댓글 수정일</th>
 					<th class="text-center">바로가기</th>
 				</tr>
 			</thead>
 
-						<tbody>
-				<c:forEach var="freeboard" items="${commentList}">
-					<tr>
-						<td class="text-center">${comment.fno}</td>
-						<td class="text-center">${comment.content}</td>
-						<td class="text-center">${comment.date.substring(0,11)}</td>
-						<td class="text-center"><a
-							href="${pageContext.request.contextPath}/CoCon/MyCommentView.do?fno=${freeboard.fno}">바로가기</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
+<tbody>
+<c:forEach var="comment" items="${list}">
+	<tr>
+		<td class="text-center">${comment.cno}</td>
+		<td class="text-center">${comment.content}</td>
+		<td class="text-center">${comment.date.substring(0,11)}</td>
+		<td class="text-center">${comment.update_date.substring(0,11)}</td>
+        <td class="text-center"><a href="${pageContext.request.contextPath}/freeboard/view.do?fno=${comment.fno}">바로가기</a></td>
+   </tr>
+</c:forEach>
+</tbody>
+
 			
 			
 			
