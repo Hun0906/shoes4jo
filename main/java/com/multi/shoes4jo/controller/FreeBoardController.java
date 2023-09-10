@@ -50,13 +50,13 @@ public class FreeBoardController {
 		return "freeboard/freeboard_list";
 	}
 
-	@RequestMapping(value = "/MyBoardView.do")
+	@RequestMapping(value = "/myBoardList.do")
 	public String myBoard(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
 
-		List<FreeBoardVO> freeboardList = service.FreeListById(member_id);
+		List<FreeBoardVO> freeboardList = service.myBoardList(member_id);
 		model.addAttribute("freeboardList", freeboardList);
 
 		return "member/my_board_list";
@@ -98,23 +98,8 @@ public class FreeBoardController {
 
 	@RequestMapping("/update.do")
 	public String update(@RequestParam int fno, HttpSession session, HttpServletRequest request) {
-		String member_id = (String) session.getAttribute("memberInfo");
-		if (member_id == null) {
-			request.setAttribute("msg", "로그인이 필요한 기능입니다.");
-			request.setAttribute("url", "/login");
-			return "msg";
-		}
-
 		FreeBoardVO vo = service.select(fno);
-
-		if (!vo.getMember_id().equals(member_id)) {
-			request.setAttribute("msg", "작성자만 글 수정이 가능합니다.");
-			request.setAttribute("url", "/freeboard/list.do");
-			return "msg";
-		}
-
 		request.setAttribute("freeboard", vo);
-
 		return "freeboard/freeboard_update";
 	}
 
@@ -124,7 +109,6 @@ public class FreeBoardController {
 			HttpServletRequest request) throws Exception {
 
 		FileUtil.FileUpload(vo, file, session);
-
 		service.update(vo);
 
 		request.setAttribute("msg", "글 수정에 성공하였습니다.");
@@ -134,21 +118,8 @@ public class FreeBoardController {
 	}
 
 	@RequestMapping("/delete.do")
-	public String deleteOk(@RequestParam int fno, HttpSession session, HttpServletRequest request) {
-		String member_id = (String) session.getAttribute("memberInfo");
-		FreeBoardVO vo = service.select(fno);
-
-		if (!vo.getMember_id().equals(member_id)) {
-			request.setAttribute("msg", "글 작성자만 삭제가 가능합니다.");
-			request.setAttribute("url", "/freeboard/list.do");
-			return "msg";
-		}
-
+	public String deleteOk(@RequestParam int fno) {
 		service.delete(fno);
-
-		request.setAttribute("msg", "글 삭제에 성공하였습니다.");
-		request.setAttribute("url", "/freeboard/list.do");
-
 		return "redirect:/freeboard/list.do";
 	}
 

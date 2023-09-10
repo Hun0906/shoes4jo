@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.mapper.FreeBoardMapper;
+import com.multi.shoes4jo.service.comment.CommentService;
 import com.multi.shoes4jo.util.Criteria;
 import com.multi.shoes4jo.vo.FreeBoardVO;
 
@@ -15,9 +16,19 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Autowired
 	private FreeBoardMapper mapper;
 
+	@Autowired
+	private CommentService comm_service;
+
 	@Override
 	public List<FreeBoardVO> listPage(Criteria cri) {
-		return mapper.listPage(cri);
+		List<FreeBoardVO> list = mapper.listPage(cri);
+
+		for (FreeBoardVO vo : list) {
+			int comment_cnt = comm_service.getTotal(vo.getFno()); // 각 게시글의 댓글 수도 조회
+			vo.setComment_cnt(comment_cnt); // 조회한 댓글 수를 VO에 설정
+		}
+
+		return list;
 	}
 
 	@Override
@@ -58,7 +69,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}
 
 	@Override
-	public List<FreeBoardVO> FreeListById(String member_id) {
-		return mapper.FreeListById(member_id);
+	public List<FreeBoardVO> myBoardList(String member_id) {
+		return mapper.myBoardList(member_id);
 	}
 }

@@ -14,19 +14,27 @@ public class CommentService {
 	@Autowired
 	private CommentMapper mapper;
 
-	public List<CommentVO> selectCo(int fno) {
-		return mapper.selectCo(fno);
+	public void insert(CommentVO vo) {
+		mapper.insert(vo);
 	}
 
-	public List<CommentVO> selectByIdCo(String member_id) {
-		return mapper.selectByIdCo(member_id);
+	public List<CommentVO> commentList(int fno) {
+		return mapper.commentList(fno);
 	}
 
-	public int insertCo(CommentVO vo) {
-		return mapper.insertCo(vo);
+	public int getTotal(int fno) {
+		return mapper.getTotal(fno);
 	}
 
-	public int deleteCo(int cno) {
-		return mapper.deleteCo(cno);
+	public List<CommentVO> myComment(String member_id) {
+		return mapper.myComment(member_id);
+	}
+
+	public void update(CommentVO vo) {
+		mapper.update(vo);
+	}
+
+	public void delete(int cno) {
+		mapper.delete(cno);
 	}
 }

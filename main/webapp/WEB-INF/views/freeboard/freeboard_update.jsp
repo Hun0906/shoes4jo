@@ -47,7 +47,7 @@ table td:nth-child(1) {
 						<td style="text-align: left;">${freeboard.date}</td>
 					</tr>
 					<tr>
-						<td style="width: 20%; min-width: 140px;">썸네일</td>
+						<td style="width: 20%; min-width: 140px;">이미지</td>
 						<td style="text-align: left;"><input class="form-control"
 							type="file" name="file" maxlength="260"></td>
 					</tr>
