@@ -1,15 +1,11 @@
 package com.multi.shoes4jo.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.shoes4jo.service.freeboard.FreeBoardService;
 import com.multi.shoes4jo.util.Criteria;
+import com.multi.shoes4jo.util.FileUtil;
 import com.multi.shoes4jo.util.PageMaker;
 import com.multi.shoes4jo.vo.FreeBoardVO;
 
@@ -53,24 +50,6 @@ public class FreeBoardController {
 		return "freeboard/freeboard_list";
 	}
 
-	private void handleFile(FreeBoardVO vo, MultipartFile file, HttpSession session) throws IOException {
-		if (file != null && !file.isEmpty()) {
-			String originalFilename = file.getOriginalFilename();
-			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
-
-			vo.setFile_name(originalFilename);
-			vo.setFile_path(newFileName);
-
-			File newFile = new File(session.getServletContext().getRealPath("assets/img/"), newFileName);
-
-			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
-
-			System.out.println("파일 저장 성공: " + newFile.getAbsolutePath());
-
-		}
-	}
-
 	@RequestMapping(value = "/MyBoardView.do")
 	public String myBoard(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
@@ -99,7 +78,7 @@ public class FreeBoardController {
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
 			HttpServletRequest request) throws Exception {
 
-		handleFile(vo, file, session);
+		FileUtil.FileUpload(vo, file, session);
 		service.insert(vo);
 
 		request.setAttribute("msg", "새 글 등록에 성공하였습니다.");
@@ -144,7 +123,7 @@ public class FreeBoardController {
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
 			HttpServletRequest request) throws Exception {
 
-		handleFile(vo, file, session);
+		FileUtil.FileUpload(vo, file, session);
 
 		service.update(vo);
 
