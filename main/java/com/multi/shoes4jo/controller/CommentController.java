@@ -1,79 +1,105 @@
 package com.multi.shoes4jo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.shoes4jo.service.comment.CommentService;
 import com.multi.shoes4jo.vo.CommentVO;
 
 @Controller
-@RequestMapping("/CoCon")
+@RequestMapping("/comment")
 public class CommentController {
 
 	@Autowired
 	CommentService service;
 
-	@RequestMapping(value = "/viewCo.do")
-	public ModelAndView viewCo(@RequestParam int fno) {
-		List<CommentVO> commentList = service.selectCo(fno);
-		int commentCount = commentList.size();
-		ModelAndView mav = new ModelAndView("freeboard/freeboard_view");
-		mav.addObject("commentCount", commentCount);
-		return mav;
-	}
-
-	@RequestMapping(value = "/MyCommentView.do")
-	public String MyCommentView(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws Exception {
-		HttpSession session = request.getSession();
-		String member_id = (String) session.getAttribute("memberInfo");
-
-		List<CommentVO> vo = service.selectByIdCo(member_id);
-		model.addAttribute("commentList", vo);
-		return "member/my_comment_list";
-	}
-
-	@RequestMapping("/insertCo.do")
-	public String insertCo(CommentVO vo, HttpSession session) {
+	@ResponseBody
+	@RequestMapping("/insert.do")
+	public String insert(@RequestBody CommentVO vo, HttpServletRequest request, HttpSession session) {
+		System.out.println("댓글 등록 요청 / 댓글 내용: " + vo.toString());
 
 		String member_id = (String) session.getAttribute("memberInfo");
-		if (member_id == null || !member_id.equals(vo.getMember_id())) {
-			return "redirect:/freeboard/list.do";
+
+		System.out.println("아이디 : " + member_id);
+
+		if (member_id == null) {
+			System.out.println("로그인이 필요한 기능입니다.");
+			request.setAttribute("msg", "로그인이 필요한 기능입니다.");
+			request.setAttribute("url", "/login");
+			return "redirect:/login";
 		}
 
-		System.out.println(vo);
-		int result = service.insertCo(vo);
+		service.insert(vo);
 
-		System.out.println("insertComment result: " + result);
-		return member_id;
+		System.out.println("아이디: " + vo.getMember_id() + ", 댓글 내용: " + vo.getContent());
+		System.out.println("댓글 등록 성공");
+
+		return "insertOk";
 	}
 
-	@RequestMapping("/deleteCo.do")
-	public String deleteCo(@RequestParam int cno, @RequestParam int fno, HttpSession session) {
+	@ResponseBody
+	@RequestMapping("/CommentList/{fno}")
+	public Map<String, Object> getList(@PathVariable int fno, Model model) {
+		System.out.println("댓글 목록 컨트롤러 동작");
+		System.out.println("글 번호: " + fno);
 
-		CommentVO vo = (CommentVO) service.selectCo(cno);
-		String member_id = (String) session.getAttribute("memberInfo");
+		List<CommentVO> list = service.commentList(fno);
+		int total = service.getTotal(fno);
 
-		if (!vo.getMember_id().equals(member_id)) {
-			return "redirect:/freeboard/list.do";
-		}
+		System.out.println("댓글 갯수: " + list.size());
 
-		int result = service.deleteCo(cno);
+		ModelAndView view = new ModelAndView();
 
-		if (result > 0) {
-			return "redirect:/freeboard/view.do?fno=" + fno;
-		} else {
-			return "redirect:/freeboard/list.do";
-		}
+		view.setViewName("/freeboard/freeboard_view");
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("total", total);
+
+		return map;
+	}
+
+	@RequestMapping("/myCommentList.do")
+	public ModelAndView myRecord(HttpSession session) {
+	    String member_id = (String) session.getAttribute("memberInfo");
+	    List<CommentVO> list = service.myComment(member_id);
+
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("list", list);
+	    map.put("total", list.size());
+
+	    return new ModelAndView("/member/my_comment_list", map);
+	}
+
+
+	@ResponseBody
+	@RequestMapping("/update.do/{cno}")
+	public String update(@PathVariable int cno, @RequestBody CommentVO vo) {
+		service.update(vo);
+
+		System.out.println("댓글 번호: " + vo.getCno() + ", 수정 내용: " + vo.getContent());
+		System.out.println("댓글 수정 성공");
+
+		return "updateOk";
+	}
+
+	@ResponseBody
+	@RequestMapping("/delete.do/{cno}")
+	public String delete(@PathVariable int cno) {
+		service.delete(cno);
+
+		return "deleteOk";
 	}
 }

@@ -5,28 +5,30 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.multi.shoes4jo.vo.CommentVO;
 
 @Mapper
 public interface CommentMapper {
 
+	@Insert("insert into comment (cno, fno, content, member_id, date) values (#{cno}, #{fno}, #{content}, #{member_id}, NOW())")
+	public int insert(CommentVO vo);
 
-	@Select("SELECT * FROM comment WHERE fno = #{fno}")
-	List<CommentVO> selectCo(@Param("fno") int fno);
-	// 게시물 번호에 해당하는 댓글 조회
+    @Select("select count(*) from comment where fno=#{fno}")
+    public int getTotal(int fno);
 
-	@Select("SELECT * FROM comment WHERE member_id = #{member_id}")
-	List<CommentVO> selectByIdCo(@Param("member_id") String member_id);
-	// 본인 아이디 댓글들 조회
+    @Select("SELECT * FROM comment where fno = #{fno}")
+    public List<CommentVO> commentList(int fno);
 
-	@Insert("INSERT INTO comment (cno, member_id, fno, content) VALUES (#{cno}, #{member_id}, #{fno}, #{content})")
-	int insertCo(CommentVO vo);
-	// 새 댓글 추가
+    @Select("SELECT * FROM comment WHERE member_id=#{member_id}")
+    public List<CommentVO> myComment(String member_id);
 
-	@Delete("DELETE FROM comment WHERE cno = #{cno}")
-	int deleteCo(@Param("cno") int cno);
-	// 번호에 해당하는 댓글 삭제
+    @Update("UPDATE comment SET content=#{content}, update_date=NOW() WHERE cno=#{cno}")
+    public int update(CommentVO vo);
+
+	@Delete("DELETE FROM comment where cno=#{cno}")
+	public int delete(int cno);
+
 }
