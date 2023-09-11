@@ -88,7 +88,7 @@ public class FreeBoardController {
 		String member_id = (String) session.getAttribute("memberInfo");
 		if (member_id == null) {
 			request.setAttribute("msg", "로그인이 필요한 기능입니다.");
-			request.setAttribute("url", "/login");
+			request.setAttribute("url", "../login");
 			return "msg";
 		}
 		return "freeboard/freeboard_write";
@@ -103,7 +103,7 @@ public class FreeBoardController {
 		service.insert(vo);
 
 		request.setAttribute("msg", "새 글 등록에 성공하였습니다.");
-		request.setAttribute("url", "/freeboard/list.do");
+		request.setAttribute("url", "./freeboard/list.do");
 
 		return "msg";
 	}
@@ -122,7 +122,7 @@ public class FreeBoardController {
 		String member_id = (String) session.getAttribute("memberInfo");
 		if (member_id == null) {
 			request.setAttribute("msg", "로그인이 필요한 기능입니다.");
-			request.setAttribute("url", "/login");
+			request.setAttribute("url", "../login");
 			return "msg";
 		}
 
@@ -130,7 +130,7 @@ public class FreeBoardController {
 
 		if (!vo.getMember_id().equals(member_id)) {
 			request.setAttribute("msg", "작성자만 글 수정이 가능합니다.");
-			request.setAttribute("url", "/freeboard/list.do");
+			request.setAttribute("url", "./freeboard/list.do");
 			return "msg";
 		}
 

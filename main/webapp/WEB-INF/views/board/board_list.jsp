@@ -28,8 +28,8 @@
 }
 
 .pagination .active .page-link {
-	background-color: #CCFFCC;
-	color: #000000;
+	background-color: #6ECCAF;
+    border-color: #6ECCAF;
 }
 </style>
 </head>
