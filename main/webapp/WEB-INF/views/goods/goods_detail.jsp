@@ -22,7 +22,7 @@ $(document).ready(
 		$("#bookmark").click(function() {
 		  	if ("<%=sessionID%>" != null && "<%=sessionID%>" != "null") {
 				$.ajax({
-					url : "<%=context%>/bookmarkcon/insert.do",
+					url : "<%=context%>/bookmark/insert.do",
 					type : "POST",
 					data : JSON.stringify({
 						gno : gno,

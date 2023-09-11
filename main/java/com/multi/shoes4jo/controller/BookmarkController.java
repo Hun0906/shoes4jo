@@ -23,7 +23,7 @@ import com.multi.shoes4jo.service.bookmark.BookmarkService;
 import com.multi.shoes4jo.vo.BookmarkVO;
 
 @Controller
-@RequestMapping("/bookmarkcon")
+@RequestMapping("/bookmark")
 public class BookmarkController {
 
 	@Autowired
