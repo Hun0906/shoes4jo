@@ -34,12 +34,12 @@ table td:nth-child(2) {
 
 
 .badge {
-	box-shadow: inset 0px 1px 0px 0px #ffffff;
-	background: linear-gradient(to bottom, #ededed5 %, #dfdfdf100 %);
-	background-color: #ededed;
-	border-radius: 6x border:1x solid #dcdcdc;
-	cursor: pointer;
-	color: #777777;
+    background-color: #ededed;
+    color: gray;
+    outline: none;
+    border: none;
+    margin: 0 5px;
+    font-weight: 400;
 }
 
 .comment-wrapper{
@@ -67,7 +67,7 @@ table td:nth-child(2) {
 	padding: 0.75rem 1.5rem;
     text-align: left;
     display: grid;
-    grid-template-columns: 150px 1fr 150px;
+    grid-template-columns: 135px 1fr 135px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -77,3 +77,4 @@ table td:nth-child(2) {
 	background: white;
     padding: 0.3rem 0 0.3rem 0.6rem;
 }
+

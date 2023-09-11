@@ -50,7 +50,7 @@ function checkDelete(fno) {
 				<div>
 					<b>작성자</b> ${freeboard.member_id}
 				</div>
-				<div>${freeboard.viewcnt}Views| ${freeboard.date.substring(0, 10)}</div>
+				<div>${freeboard.viewcnt} Views | ${freeboard.date.substring(0, 10)}</div>
 			</div>
 
 			<div class="line"></div>
@@ -91,8 +91,10 @@ function checkDelete(fno) {
 								value="${comment.update_date}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
 						<!-- 날짜 출력 안되는 문제 알아보기 -->
 						<c:if test="${sessionScope.memberInfo == comment.member_id}">
+						<div>
 							<button onClick="edit(${comment.cno})" class="badge">수정</button>
 							<button onClick="delete(${comment.cno})" class="badge">삭제</button>
+						</div>
 						</c:if>
 					</c:forEach>
 				</div>
@@ -200,8 +202,8 @@ $('#Comment_regist').click(function() {
 	                comment_html += "<span>" + content + "</span>";
 	                 
 	                if(loginCheck === list[i].member_id){
-	                    comment_html += "<span class='edit badge' data-id =" + list[i].cno+">수정</span>";
-	                    comment_html += "<span class='delete badge' data-id =" + list[i].cno+">삭제</span></div>";
+	                    comment_html += "<div style='text-align: right;'><button class='edit badge' data-id =" + list[i].cno+">수정</button>";
+	                    comment_html += "<button class='delete badge' data-id =" + list[i].cno+">삭제</button></div></div>";
 	                } else{
 	                    comment_html += "</div>";
 	                }
@@ -210,7 +212,7 @@ $('#Comment_regist').click(function() {
 	            $(".comment-box").html(comment_html);
 
 	        } else{
-	              var comment_html="<div>등록된 댓글이 없습니다.</div>";
+	              var comment_html="<div class='comment-line' style='text-align: center; margin-top: 1rem;'><span></span>등록된 댓글이 없습니다.</div>";
 	              $(".comment-box").html(comment_html);
 	        }
 	    });
