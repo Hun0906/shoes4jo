@@ -157,8 +157,6 @@ display: inline;
 				<canvas id="lineChart"></canvas>
 			</div>
 			
-			<h2></h2>
-
 		</div>
 	</div>
 

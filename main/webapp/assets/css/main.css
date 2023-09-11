@@ -221,6 +221,31 @@ footer a {
     box-shadow: 0 0 0 0.25rem #ADE79250 !important;
 }
 
+
+.pagination {
+	justify-content: center;
+}
+
+.page-link {
+	color: #bbb;
+	border: none;
+}
+
+.page-link:hover {
+	background: white;
+	filter: brightness(95%);
+	color:#6ECCAF;
+}
+
+.pagination .active .page-link {
+	background-color: #6ECCAF;
+    font-weight: bold;
+}
+
+.pagination .active .page-link:hover{
+	color: white;
+}
+
 .responsive-menu-wrapper{
     position: absolute;
     display: none;

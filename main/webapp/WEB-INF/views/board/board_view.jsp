@@ -8,36 +8,8 @@
 <meta charset="UTF-8">
 <title>${board.title.length() > 10 ? board.title.substring(0, 10).concat("...") : board.title} | SHOES4JO</title>
 <%@ include file="../common/header-head.jsp"%>
-<style>
-.form-wrapper {
-	max-width: 768px;
-}
+<link rel="stylesheet" type="text/css" href="<%=context%>/assets/css/board_view.css">
 
-.table {
-	vertical-align: middle;
-}
-
-.thumb img {
-	width: 100%;
-	max-width: 500px;
-	margin: 2rem 0;
-}
-
-table td:nth-child(1) {
-	width: 20%;
-	font-weight: bold;
-}
-
-table td:nth-child(2) {
-	text-align: left;
-}
-
-.line {
-	background: linear-gradient(60deg, #6ECCAF 0%, #ADE792 30%, #ADE792 50%, #E9FFC2 90%, #FDFFAE 100%);
-	height: 3px;
-	margin: 1rem 0;
-}
-</style>
 <script>
         function checkDelete(bno) {
             var remove = confirm("글을 삭제하시겠습니까?");
