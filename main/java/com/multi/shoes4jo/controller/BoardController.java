@@ -24,17 +24,17 @@ import com.multi.shoes4jo.vo.BoardVO;
 public class BoardController {
 
 	@Autowired
-	BoardService boardService;
+	BoardService service;
 
 	@RequestMapping(value = "/list.do")
 	public String list(Model model, Criteria cri) throws Exception {
-		List<BoardVO> list = boardService.listPage(cri);
+		List<BoardVO> list = service.listPage(cri);
 		model.addAttribute("list", list);
 		// 페이지 정보와 게시글 목록을 가져옴
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.listCount());
+		pageMaker.setTotalCount(service.listCount());
 		// 총 게시글 개수를 가져와 페이지 메이커에 설정
 
 		model.addAttribute("pageMaker", pageMaker);
@@ -45,7 +45,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/category.do")
 	public String category(@RequestParam("category") String category, Model model) {
-		List<BoardVO> list = boardService.selectOneCat(category);
+		List<BoardVO> list = service.selectOneCat(category);
 		model.addAttribute("list", list);
 		model.addAttribute("selectedCategory", category);
 		return "board/board_list";
@@ -53,9 +53,9 @@ public class BoardController {
 
 	@RequestMapping(value = "/magazine")
 	public String magazine(Model model) {
-		List<BoardVO> newslist = boardService.selectForMagazine("news");
-		List<BoardVO> eventslist = boardService.selectForMagazine("events");
-		List<BoardVO> columnslist = boardService.selectForMagazine("columns");
+		List<BoardVO> newslist = service.selectForMagazine("news");
+		List<BoardVO> eventslist = service.selectForMagazine("events");
+		List<BoardVO> columnslist = service.selectForMagazine("columns");
 		model.addAttribute("newslist", newslist);
 		model.addAttribute("eventslist", eventslist);
 		model.addAttribute("columnslist", columnslist);
@@ -64,8 +64,8 @@ public class BoardController {
 
 	@RequestMapping(value = "/view.do")
 	public ModelAndView view(@RequestParam String bno) {
-		boardService.updateviewcnt(bno);
-		BoardVO board = boardService.selectOne(bno);
+		service.updateviewcnt(bno);
+		BoardVO board = service.selectOne(bno);
 		return new ModelAndView("board/board_view", "board", board);
 	}
 
@@ -79,14 +79,14 @@ public class BoardController {
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
 		FileUtil.FileUpload(board, file, session);
-		boardService.insertOne(board);
+		service.insertOne(board);
 
 		return "redirect:/board/list.do";
 	}
 
 	@RequestMapping("/update.do")
 	public ModelAndView update(@RequestParam String bno) {
-		BoardVO board = boardService.selectOne(bno);
+		BoardVO board = service.selectOne(bno);
 		return new ModelAndView("board/board_update", "board", board);
 	}
 
@@ -95,14 +95,14 @@ public class BoardController {
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
 		FileUtil.FileUpload(board, file, session);
-		boardService.updateOne(board);
+		service.updateOne(board);
 
 		return "redirect:/board/list.do";
 	}
 
 	@RequestMapping("/delete.do")
 	public String deleteOk(@RequestParam String bno) {
-		boardService.deleteOne(bno);
+		service.deleteOne(bno);
 		return "redirect:/board/list.do";
 	}
 }

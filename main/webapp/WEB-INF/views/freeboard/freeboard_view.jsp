@@ -214,7 +214,7 @@ $('#Comment_regist').click(function() {
 	} // getList() 종료
 
 	
-	
+	//댓글 수정
 	function editComment(cno, newContent) {
 	    $.ajax({
 	        type: 'post',
@@ -233,10 +233,10 @@ $('#Comment_regist').click(function() {
 	             alert('통신 실패');
 	         }
 	    });
-	}
+	}//댓글 수정 끝
 
 
-	
+	//댓글 삭제
 	function deleteComment(cno) {
 	    const confirmDelete = confirm('댓글을 삭제하시겠습니까?');
 	    if (!confirmDelete) return;
@@ -257,9 +257,9 @@ $('#Comment_regist').click(function() {
 	        }
 	    });
 	}
+	//댓글 삭제 끝
 	
-	
-	
+	//댓글 수정,삭제 이벤트
 	$(document).on("click", ".edit", function(){
 	    const cno = $(this).data("id");
 	    const contentElement = $(this).siblings("#com-content");
@@ -280,6 +280,7 @@ $('#Comment_regist').click(function() {
 	   const cno = $(this).data("id");
 	   deleteComment(cno);
 	});
+	//댓글 수정,삭제 이벤트 끝
 </script>
 
 </html>

@@ -29,7 +29,7 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping("/insert.do")
 	public String insert(@RequestBody CommentVO vo, HttpServletRequest request, HttpSession session) {
-		System.out.println("댓글 등록 요청 / 댓글 내용: " + vo.toString());
+		System.out.println("댓글 등록 요청" + vo.toString());
 
 		String member_id = (String) session.getAttribute("memberInfo");
 
@@ -59,7 +59,7 @@ public class CommentController {
 		List<CommentVO> list = service.commentList(fno);
 		int total = service.getTotal(fno);
 
-		System.out.println("댓글 갯수: " + list.size());
+		System.out.println("댓글 수: " + list.size());
 
 		ModelAndView view = new ModelAndView();
 
