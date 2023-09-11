@@ -13,24 +13,6 @@
 .form-wrapper {
 	max-width: 100%;
 }
-
-.pagination {
-	justify-content: center;
-}
-
-.page-link {
-	color: #6ECCAF;
-}
-
-.page-link:hover {
-	background: white;
-	filter: brightness(95%);
-}
-
-.pagination .active .page-link {
-	background-color: #6ECCAF;
-    border-color: #6ECCAF;
-}
 </style>
 </head>
 

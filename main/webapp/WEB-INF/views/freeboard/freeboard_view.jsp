@@ -15,9 +15,8 @@ request.setAttribute("lineSeparator", System.getProperty("line.separator"));
 <%@ include file="../common/header-head.jsp"%>
 
 <link rel="stylesheet" type="text/css"
-	href="<%=context%>/assets/css/freeboard_view.css">
+	href="<%=context%>/assets/css/board_view.css">
 <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script>
 
@@ -32,6 +31,7 @@ function checkDelete(fno) {
 }
 
 </script>
+
 </head>
 
 <body>
@@ -40,7 +40,8 @@ function checkDelete(fno) {
 	<div class="container">
 		<div class="form-wrapper">
 			<div style="display: flex; justify-content: space-evenly;">
-				<a href="<%=context%>/freeboard/list.do?category=${freeboard.category}"
+				<a
+					href="<%=context%>/freeboard/list.do?category=${freeboard.category}"
 					style="font-size: 1.2rem;"><b>${freeboard.category}</b></a>
 			</div>
 			<p style="font-size: 2.2rem; margin-top: 1.5rem; font-weight: 500;">${freeboard.title}</p>
@@ -49,7 +50,7 @@ function checkDelete(fno) {
 				<div>
 					<b>작성자</b> ${freeboard.member_id}
 				</div>
-				<div>${freeboard.viewcnt} Views | ${freeboard.date.substring(0, 10)}</div>
+				<div>${freeboard.viewcnt}Views| ${freeboard.date.substring(0, 10)}</div>
 			</div>
 
 			<div class="line"></div>
@@ -58,47 +59,50 @@ function checkDelete(fno) {
 				<div class="thumb">
 					<c:if
 						test="${freeboard.file_path != null && not empty freeboard.file_path}">
-						<img src="<%=context%>/assets/img/${freeboard.file_path}">
+						<img src="<%=context%>/assets/img/${freeboard.file_path}"
+							onerror="this.src='<%=context%>/assets/img/default.jpg'">
 					</c:if>
 				</div>
 			</div>
-			<p> <c:out
+			<p>
+				<c:out
 					value="${fn:replace(freeboard.content, requestScope.lineSeparator, '<br/>')}"
-					escapeXml="false" /></p>
-
+					escapeXml="false" />
+			</p>
 
 
 			<!-- 댓글창 시작 -->
-			<div class="comment-box">
 
-				<div class="comment-count">
-					😀 댓글 수 😀 <span id="count">0 </span> 개
+			<div style="background: #ccc;height: 1px;margin-top: 5rem;margin-bottom:1rem;"></div>
+
+			<div class="comment-wrapper">
+
+				<div class="comment-header">
+					<b>댓글</b> (총 <b id="count" style="color:#6ECCAF">0 </b> 건)
 				</div>
-				<div class="comment-sbox">
-					<textarea class="comment-input" id="content" cols="80" rows="2"
-						name="content"></textarea>
+
+				<div class="comment-box">
+					<!-- 댓글이 들어갈 박스 -->
+					<c:forEach var="comment" items="${comments}">
+						<p>${comment.content}</p>
+
+						<span class="date">등록일: <fmt:formatDate value="${comment.date}"
+								pattern="yyyy-MM-dd HH:mm:ss" /> | 수정일: <fmt:formatDate
+								value="${comment.update_date}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
+						<!-- 날짜 출력 안되는 문제 알아보기 -->
+						<c:if test="${sessionScope.memberInfo == comment.member_id}">
+							<button onClick="edit(${comment.cno})" class="badge">수정</button>
+							<button onClick="delete(${comment.cno})" class="badge">삭제</button>
+						</c:if>
+					</c:forEach>
 				</div>
-				<div class="regBtn">
-					<button id="Comment_regist" class="btn-basic">댓글 등록</button>
+
+				<div class="comment-write">
+					<label>${freeboard.member_id}</label>
+					<textarea class="form-control" id="content" cols="80"
+						rows="2" name="content" style="max-height: 10rem;"></textarea>
+					<button id="Comment_regist" class="btn-comment">등록✏️</button>
 				</div>
-			</div>
-
-
-
-			<div class="comment_Box" style="border: 3px solid gray;">
-				<!-- 댓글이 들어갈 박스 -->
-				<c:forEach var="comment" items="${comments}">
-					<p style="text-indent: 0;">${comment.content}</p>
-
-					<small>등록일: <fmt:formatDate value="${comment.date}"
-							pattern="yyyy-MM-dd HH:mm:ss" /> | 수정일: <fmt:formatDate
-							value="${comment.update_date}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-					<!-- 날짜 출력 안되는 문제 알아보기 -->
-					<c:if test="${sessionScope.memberInfo == comment.member_id}">
-						<button onClick="edit(${comment.cno})" class="badge">수정</button>
-						<button onClick="delete(${comment.cno})" class="badge">삭제</button>
-					</c:if>
-				</c:forEach>
 			</div>
 			<!-- 댓글창 끝 -->
 
@@ -117,8 +121,7 @@ function checkDelete(fno) {
 			<!-- 본인 아이디 확인 후 글 수정,삭제창 끝-->
 			<div class="form-button-wrapper">
 				<button class="btn-basic btn-line-basic"
-					onclick="location.href='<%=context%>/freeboard/list.do'">글
-					목록 보기</button>
+					onclick="location.href='<%=context%>/freeboard/list.do'">글 목록 보기</button>
 			</div>
 		</div>
 	</div>
@@ -134,7 +137,7 @@ var loginCheck = '${sessionScope.memberInfo}';
 
 $('#Comment_regist').click(function() {
     if (fno === 'undefined' || fno === '') {
-        console.error('게시물 번호 못찾음');
+        console.error('잘못된 접근입니다.');
         return;
     }
 
@@ -187,28 +190,28 @@ $('#Comment_regist').click(function() {
 	    $.getJSON("<%=request.getContextPath()%>/comment/CommentList/"+fno, function(data) {
 	        if(data.total > 0){
 	            var list = data.list;
-	            var comment_html = "<div>";
+	            var comment_html = "<div style='margin: 1rem 0;'>";
 	            $('#count').html(data.total);
 	            for(i = 0;i < list.length;i++){
 	                var content=list[i].content;
 	                var member_id=list[i].member_id;
 
-	                comment_html += "<div><span id='member_id'><strong>" + member_id + "</strong></span><br/>";
-	                comment_html += "<span id='com-content'>" + content + "</span><br>";
+	                comment_html += "<div class='comment-line'><strong id='member_id'>" + member_id + "</strong>";
+	                comment_html += "<span>" + content + "</span>";
 	                 
 	                if(loginCheck === list[i].member_id){
-	                    comment_html += "<span class='edit' style='cursor:pointer;' data-id =" + list[i].cno+">[수정]</span>";
-	                    comment_html += "<span class='delete' style='cursor:pointer;' data-id =" + list[i].cno+">[삭제]</span><br></div><hr>";
+	                    comment_html += "<span class='edit badge' data-id =" + list[i].cno+">수정</span>";
+	                    comment_html += "<span class='delete badge' data-id =" + list[i].cno+">삭제</span></div>";
 	                } else{
-	                    comment_html += "</div><hr>";
+	                    comment_html += "</div>";
 	                }
 	            }
 
-	            $(".comment_Box").html(comment_html);
+	            $(".comment-box").html(comment_html);
 
 	        } else{
 	              var comment_html="<div>등록된 댓글이 없습니다.</div>";
-	              $(".comment_Box").html(comment_html);
+	              $(".comment-box").html(comment_html);
 	        }
 	    });
 	} // getList() 종료
