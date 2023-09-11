@@ -16,7 +16,6 @@ public class CommentVO {
 	}
 
 	public CommentVO(int cno, String member_id, int fno, String content, String date, String update_date) {
-		super();
 		this.cno = cno;
 		this.member_id = member_id;
 		this.fno = fno;
@@ -72,4 +71,5 @@ public class CommentVO {
 	public void setUpdate_date(String update_date) {
 		this.update_date = update_date;
 	}
+
 }

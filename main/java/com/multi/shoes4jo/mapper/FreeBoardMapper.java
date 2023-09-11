@@ -31,7 +31,7 @@ public interface FreeBoardMapper {
 	// 카테고리에 해당하는 게시물 전부 내림차순 정렬해서 조회
 
 	@Select("SELECT * FROM freeboard WHERE member_id = #{member_id}")
-	List<FreeBoardVO> FreeListById(String member_id);
+	List<FreeBoardVO> myBoardList(String member_id);
 	// 본인 아이디의 게시글 전체 조회
 
 	@Insert("INSERT INTO freeboard (fno, member_id, category, title, content, file_name, file_path) VALUES (#{fno}, #{member_id}, #{category}, #{title}, #{content}, #{file_name}, #{file_path})")

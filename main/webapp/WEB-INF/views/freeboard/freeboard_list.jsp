@@ -67,6 +67,7 @@
 						<th class="text-center">작성자</th>
 						<th class="text-center">조회수</th>
 						<th class="text-center">등록일</th>
+						<th class="text-center">수정일</th>
 					</tr>
 				</thead>
 
@@ -76,11 +77,15 @@
 							<td class="text-center">${freeboard.fno }</td>
 							<td class="text-center">${freeboard.category}</td>
 							<td class="text-center"><a
-								href="<%=context %>/freeboard/view.do?fno=${freeboard.fno}">${freeboard.title}
-							</a></td>
+								href="<%=context %>/freeboard/view.do?fno=${freeboard.fno}">${freeboard.title}<c:if
+										test="${freeboard.comment_cnt ne 0 }">
+										<span style="color: red;">[${freeboard.comment_cnt}]</span>
+									</c:if></a></td>
+
 							<td class="text-center">${freeboard.member_id}</td>
 							<td class="text-center">${freeboard.viewcnt}</td>
 							<td class="text-center">${freeboard.date.substring(0,16)}</td>
+							<td class="text-center">${freeboard.update_date.substring(0,16)}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
