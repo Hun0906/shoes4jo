@@ -23,7 +23,7 @@
 	<div class="container">
 		<h2 class="text-center">
 			<a href="${context}/board/list.do"
-				style="text-decoration: none; color: inherit;">관리자 게시판</a>
+				style="text-decoration: none; color: inherit;">매거진 관리</a>
 		</h2>
 
 		<div

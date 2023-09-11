@@ -36,7 +36,7 @@ table td:nth-child(1) {
 			<form name="boardUpdate" method="post" enctype="multipart/form-data"
 				action="<%=context%>/board/updateOk.do">
                 <input type='hidden' name='bno' value='${board.bno}'/>
-<!-- 글 번호 실제 데이터 전송!!!!이거때문에 수정 안되던거였음 -->
+
 				<table class="table table-board table-hover">
 					<tr>
 						<td>글 번호</td>

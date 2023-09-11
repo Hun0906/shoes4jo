@@ -5,7 +5,6 @@
 
 <mapper namespace="memberMapper">
 
-	<!-- MemberVO로 조회 결과 저장할 resultMap 정의 -->
 	<resultMap id="memResult" type="MemberVO">
 		<result column="member_id" property="member_id" />
 		<result column="member_name" property="member_name" />

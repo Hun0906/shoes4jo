@@ -177,7 +177,7 @@ $('#Comment_regist').click(function() {
             }
          },
          error:function(){
-             alert('통신 실패');
+             alert('연결 실패');
          }
      });
  });
@@ -235,7 +235,7 @@ $('#Comment_regist').click(function() {
 	            } 
 	         },
 	         error:function(){
-	             alert('통신 실패');
+	             alert('연결 실패');
 	         }
 	    });
 	}//댓글 수정 끝
@@ -258,7 +258,7 @@ $('#Comment_regist').click(function() {
 	            }
 	        },
 	        error:function(){
-	            alert('통신 실패');
+	            alert('연결 실패');
 	        }
 	    });
 	}
