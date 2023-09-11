@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.keywordtrend;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,9 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.multi.shoes4jo.service.trend.KeywordTrendService;
 import com.multi.shoes4jo.util.GoodsList;
-import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Controller
 @RequestMapping(value = "/keyword_trend", method = { RequestMethod.GET, RequestMethod.POST })

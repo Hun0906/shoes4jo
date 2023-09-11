@@ -1,8 +1,6 @@
-package com.multi.shoes4jo.service.ranking;
+package com.multi.shoes4jo.ranking;
 
 import java.util.List;
-
-import com.multi.shoes4jo.vo.RankingVO;
 
 public interface RankingService {
 	

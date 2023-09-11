@@ -1,7 +1,6 @@
-package com.multi.shoes4jo.service.trend;
+package com.multi.shoes4jo.goodstrend;
 
 import java.util.List;
-import com.multi.shoes4jo.vo.GoodsTrendVO;
 
 public interface GoodsTrendService {
 

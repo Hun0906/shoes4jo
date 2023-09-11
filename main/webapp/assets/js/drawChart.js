@@ -1,12 +1,8 @@
+let datasets_label = document.getElementById("keyword").value;
+
 function drawLineChart(line_y_arr1, line_y_arr2, line_x_arr) {
   const ctx = document.getElementById('lineChart');
   let lineChart;
-
-  if (lineChart) {
-    lineChart.destroy();
-  }
-
-  let datasets_label = document.getElementById("keyword").value;
 
   lineChart = new Chart(ctx, {
     type: 'line',
@@ -20,56 +16,48 @@ function drawLineChart(line_y_arr1, line_y_arr2, line_x_arr) {
         pointRadius: 3
       },
 	  {
-		label : "검색량",
-		data : line_y_arr2,
-		borderColor : "#ADE792",
-		borderWidth : 1,
-		pointRadius :3
+		label: "검색량",
+		data: line_y_arr2,
+		borderColor: "#ADE792",
+		borderWidth: 1,
+		pointRadius : 3
 	  }]
     },
-    options:{
-      responsive:true ,
-	  title:{
-	    display:true ,
-	    text:"Keyword Trend"
+    options: {
+      responsive: true ,
+      plugins: {
+	    title: {
+	      display: false ,
+	    },
+	    legend: {
+	      display: true
+	    },
 	  },
-      plugins:{
-	    legend:{
-	      display:true
-	    }
-	  },
-      scales:{
-        x:{
-          display:true ,
-          title:{
-            display:true ,
-            text:"날짜"
+      scales: {
+        x: {
+          display: true ,
+          title: {
+            display: true ,
+            text: "날짜",
           }
-        },
-       y:{ 
-         beginAtZero:true,
-		 title:{ 
-		   display:true ,
-		   text:"상대 비율 (arb. units)"
-		 }
-       }
+         },
+         y: { 
+           beginAtZero: true,
+		   title: { 
+		     display: true ,
+		     text: "상대 비율 (arb. units)",
+		   }
+         }
+       }  
      }  
-   }  
- });
+   });
 }
-
 
 
 function drawPieChart(pie_w_data, pie_m_data) {
   const ctx = document.getElementById('pieChart');
   let pieChart;
 
-  if (pieChart) {
-    pieChart.destroy();
-  }
-
-  let datasets_label = document.getElementById("keyword").value;
-  
   pieChart = new Chart(ctx, {
     type: 'pie',
     data: {
@@ -89,22 +77,22 @@ function drawPieChart(pie_w_data, pie_m_data) {
         title: {
           display: true,
           text: "성별 별 "+ datasets_label + " 관심도",
-        }
+        },
+      	tooltip: {
+	      callbacks: {
+	        label: (context) => context.raw + '%'
+	      },
+	    }
       }
     }
   });
 }
 
+
 function drawDoughnutChart(dn_w_data, dn_m_data) {
   const ctx = document.getElementById('doughnutChart');
   let doughnutChart;
 
-  if (doughnutChart) {
-    doughnutChart.destroy();
-  }
-
-  let datasets_label = document.getElementById("keyword").value;
-  
   doughnutChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -125,69 +113,70 @@ function drawDoughnutChart(dn_w_data, dn_m_data) {
         title: {
           display: true,
           text: "기기 별 "+ datasets_label + " 관심도",
-        }
+        },
+      	tooltip: {
+	      callbacks: {
+	        label: (context) => context.raw + '%'
+	      },
+	    }
       }
     }
   });
 }
+
+
 
 function drawBarChart(bar_data) {
-  const ctx = document.getElementById('barChart');
-  let barChart;
-
-  if (barChart) {
-    barChart.destroy();
-  }
-
-  let datasets_label = document.getElementById("keyword").value;
-  
-  barChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['10대','20대','30대','40대','50대','60대 이상'],
-      datasets: [{
-        label: "Trend",
-        data: bar_data,
-        borderColor: "#6ECCAF",
-        borderWidth: 1,
-        pointRadius: 3,
-        fill: "#6ECCAFaa",
-        backgroundColor: "#6ECCAFaa",
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-		legend: {
-        position: 'top',
+    const ctx = document.getElementById('barChart');
+    let barChart;
+    
+    barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['10대','20대','30대','40대','50대','60대 이상'],
+            datasets: [{
+                label: "Trend",
+                data: bar_data,
+                borderColor: "#6ECCAF",
+                borderWidth: 1,
+                pointRadius: 3,
+                fill: "#6ECCAFaa",
+                backgroundColor: "#6ECCAFaa",
+            }]
         },
-        title: {
-          display: true,
-          text: "세대 별 "+ datasets_label + " 관심도",
-        },
-      scales: {
-        x: {
-          display: true,
-          title: {
-            display: true,
-            text: "세대"
-          },
-          grid: {
-            display: true
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: "상대 비율 (arb. unit)"
-          },
-          grid: {
-            display: true
-          },
-          beginAtZero: true
-        }
-      }
-      }
-    }
-  });
+        options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                 position: 'top',
+              },
+              title: {
+                 display: true,
+                 text: "세대 별 "+ datasets_label + " 관심도",
+              },
+              tooltip: {
+                 callbacks: {
+                   label: (context) => context.parsed.y + '%'
+                 },
+              },
+           },
+           scales: {
+             x: {
+               display: true,
+               title: {
+                  display: true,
+                  text: "세대"
+               }
+             },
+             y: {  
+               beginAtZero: true,  
+               title: { 
+                  display: true, 
+                  text: "상대 비율 (%)" 
+               }   
+             }   
+           }
+         }   
+     });
 }
+

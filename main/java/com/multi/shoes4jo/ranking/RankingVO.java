@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.vo;
+package com.multi.shoes4jo.ranking;
 
 import org.springframework.stereotype.Component;
 

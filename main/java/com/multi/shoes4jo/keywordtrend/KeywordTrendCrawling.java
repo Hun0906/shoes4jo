@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.api;
+package com.multi.shoes4jo.keywordtrend;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,9 +22,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import com.multi.shoes4jo.service.trend.KeywordTrendService;
-import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Controller
 public class KeywordTrendCrawling {

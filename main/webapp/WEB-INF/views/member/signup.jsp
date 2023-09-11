@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	function duplacationId() {
 		let id = document.signupForm.id.value;
-		let idRegex = /[a-zA-Z]/;
+		let idRegex = new RegExp(document.signupForm.id.pattern);
 
 		if (!id) {
 			alert("아이디를 입력하세요.");
@@ -175,11 +175,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		<h1>회원가입</h1>
 		<form name="signupForm" onsubmit="event.preventDefault(); signup();">
 		<div class="input-wrapper">
-		<label>아이디</label><div class="input-with-button"><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control" pattern="[a-zA-Z]" maxlength=20 required>
+		<label>아이디</label><div class="input-with-button"><input type="text" id="id" name="MEMBER_ID" placeholder="아이디" class="form-control" pattern="^[A-Za-z0-9][A-Za-z0-9.-_]+" maxlength=20 required>
 		<span class="button-with-input" id="idre" name="idre" onclick="duplacationId()">중복 확인</span></div>
 		</div>
 		<div class="input-wrapper">
-		<label>이름</label><input type="text" id="name" name="MEMBER_NAME" placeholder="이름" class="form-control" pattern="[a-zA-Z가-힣]" maxlength=20 required>
+		<label>이름</label><input type="text" id="name" name="MEMBER_NAME" placeholder="이름" class="form-control" pattern="[a-zA-Z가-힣]{2,}" maxlength=20 required>
 		</div>
 		<div class="input-wrapper">
 		<label>이메일</label><input type="email" id="email" name="MEMBER_EMAIL" placeholder="이메일" class="form-control" pattern="^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required>

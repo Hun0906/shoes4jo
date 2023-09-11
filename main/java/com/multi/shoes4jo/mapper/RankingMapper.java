@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.multi.shoes4jo.vo.RankingVO;
+import com.multi.shoes4jo.ranking.RankingVO;
 
 @Mapper
 public interface RankingMapper {

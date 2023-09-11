@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.api;
+package com.multi.shoes4jo.categorytrend;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -16,13 +16,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class GoodsSearchAPI {
-	private static final Logger logger = LoggerFactory.getLogger(GoodsSearchAPI.class);
+public class CategoryClickAPI {
+	private static final Logger logger = LoggerFactory.getLogger(CategoryClickAPI.class);
 	
 	// getTrend 공통변수 선언
 	String clientId = "JzcrBZHimsCICRuNqbzk"; // 애플리케이션의 Client ID
@@ -32,23 +31,23 @@ public class GoodsSearchAPI {
 	String twoWeeksBefore = LocalDate.now().minusWeeks(2).toString();
 	String oneMonthBefore = LocalDate.now().minusMonths(1).toString();
 	
-	String apiUrl = "https://openapi.naver.com/v1/datalab/search";
+	String apiUrl = "https://openapi.naver.com/v1/datalab/shopping/categories";
 	
 	Map<String, String> requestHeaders = new HashMap<>();
 
 	
 	@ResponseBody
-    public String getTrendData(@RequestParam String keyword) throws Exception {
-		logger.info("getTrendData() of GoodsSearch called");
-        System.out.println("검색어 (=title): " + keyword);
+    public String getTrendData(@RequestParam String catId) throws Exception {
+		logger.info("getTrendData() called");
+        System.out.println("카테고리 ID: " + catId);
 
         String requestBody = "{"
-        	    + "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-01-01
-        	    + "   \"endDate\": \"" + today + "\","
-        	    + "   \"timeUnit\": \"date\","
-        	    + "   \"keywordGroups\":[{\"groupName\":\"" + keyword + "\"," + "\"keywords\":[\"" + keyword + "\"]}]"
-        	    + "}";
-        
+                + "   \"startDate\": \"" + "2023-07-01" + "\"," //가장 빠른 날: 2017-08-01
+                + "   \"endDate\": \"" + today + "\","
+                + "   \"timeUnit\": \"date\","
+                + "   \"category\": [{\"name\":\"" + catId + "\", \"param\": [\"" + catId + "\"] }]"
+                + "}";
+
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         requestHeaders.put("Content-Type", "application/json");
@@ -58,7 +57,7 @@ public class GoodsSearchAPI {
 		return responseBody;
 	}
 	
-	
+
     private static String post(String apiUrl, Map<String, String> requestHeaders, String requestBody) {
         HttpURLConnection con = connect(apiUrl);
 
@@ -114,6 +113,5 @@ public class GoodsSearchAPI {
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }
     }
-	
 
 }

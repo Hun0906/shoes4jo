@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.api;
+package com.multi.shoes4jo.goodstrend;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
