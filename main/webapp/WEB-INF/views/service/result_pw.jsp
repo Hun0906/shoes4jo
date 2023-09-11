@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE html>
+
+<head>
+<title>비밀번호 찾기 | SHOES4JO</title>
+<%@include file="../common/header-head.jsp"%>
+
+<style>
+.search-wrapper b{
+	font-size: 2.5rem;
+}
+</style>
+</head>
+
+<body>
+	<%@include file="../common/header.jsp"%>
+
+	<div class="form-wrapper">
+		<h1>계정 찾기</h1>
+
+		<h2>임시 비밀번호 발급</h2>
+		<div class="search-wrapper">
+
+			<b>${newPw}</b>
+
+		</div>
+	<div class="form-button-wrapper">
+		<button class="btn-basic" onclick="location.href='login'">로그인</button>
+		<span class="btn-basic btn-line-basic" onclick="location.href='signup'">가입하기</span>
+	</div>
+	</div>
+
+	<%@include file="../common/footer.jsp"%>
+</body>
+</html>
