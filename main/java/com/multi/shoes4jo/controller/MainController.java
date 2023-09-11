@@ -34,6 +34,12 @@ public class MainController {
 		logger.info("goods_trend() called");
 		return "trend/goods_trend";
 	}
+	
+	@RequestMapping(value = "/category_trend", method = { RequestMethod.GET, RequestMethod.POST })
+	public String category_trend() {
+		logger.info("category_trend() called");
+		return "trend/category_trend";
+	}
 
 	@RequestMapping(value = "/ranking", method = { RequestMethod.GET, RequestMethod.POST })
 	public String ranking() {

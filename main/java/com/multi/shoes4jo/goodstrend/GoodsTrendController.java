@@ -1,8 +1,9 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.goodstrend;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.multi.shoes4jo.service.ranking.RankingService;
-import com.multi.shoes4jo.service.trend.GoodsTrendService;
-import com.multi.shoes4jo.vo.GoodsTrendVO;
+import com.multi.shoes4jo.ranking.RankingService;
 
 @Controller
 @RequestMapping("/goods_trend")
@@ -42,18 +41,23 @@ public class GoodsTrendController {
 		/* 랭킹 테이블에 값 추가 */
 		Date dateObj = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String date = simpleDateFormat.format(dateObj);
+		String today = simpleDateFormat.format(dateObj);
 
-		if (rankingService.isExists(clean_keyword, date)) {
-			System.out.println(date + " / " + clean_keyword + " count on Ranking updated");
-			rankingService.update(clean_keyword, date);
+		if (rankingService.isExists(clean_keyword, today)) {
+			System.out.println(today + " / " + clean_keyword + " count on Ranking updated");
+			rankingService.update(clean_keyword, today);
 		} else {
-			System.out.println(date + " / " + clean_keyword + " added to Ranking");
+			System.out.println(today + " / " + clean_keyword + " added to Ranking");
 			rankingService.insert(clean_keyword, keyword);
 		}
 		/* 랭킹 테이블에 값 추가 */
 
-		if (goodsTrendService.isExists("2023-09-03", clean_keyword)) {
+		// 이틀 전 날짜 계산
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -2);
+		String bfyesterday = simpleDateFormat.format(calendar.getTime());
+
+		if (goodsTrendService.isExists(bfyesterday, clean_keyword)) {
 			List<GoodsTrendVO> selectAll = goodsTrendService.selectAll(clean_keyword);
 			model.addAttribute("selectAll", selectAll);
 			

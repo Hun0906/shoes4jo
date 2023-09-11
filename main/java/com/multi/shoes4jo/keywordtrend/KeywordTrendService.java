@@ -1,8 +1,6 @@
-package com.multi.shoes4jo.service.trend;
+package com.multi.shoes4jo.keywordtrend;
 
 import java.util.List;
-
-import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 public interface KeywordTrendService {
 	public List<String> selectGroup(String group);

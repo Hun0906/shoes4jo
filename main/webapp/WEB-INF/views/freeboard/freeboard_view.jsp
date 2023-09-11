@@ -49,7 +49,7 @@ function checkDelete(fno) {
 				<div>
 					<b>작성자</b> ${freeboard.member_id}
 				</div>
-				<div>${freeboard.viewcnt}Views|${freeboard.date.substring(0, 10)}</div>
+				<div>${freeboard.viewcnt} Views | ${freeboard.date.substring(0, 10)}</div>
 			</div>
 
 			<div class="line"></div>
