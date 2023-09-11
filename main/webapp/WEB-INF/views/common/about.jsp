@@ -86,27 +86,24 @@
 							<h3>박희범</h3>
 							<br>
 							<span>회원가입</span> 
-							<span>DB 설계</span>
-							<span>랭킹 페이지</span>
 							<span>회원 목록 조회</span>
-							<span>샘플 데이터 수집</span>
+							<span>DB 설계</span>
+							<span>상품 상세 데이터 수집</span>
+							<span>랭킹 페이지</span>
+							<span>SNS 유행 신발 조사</span>
 						</div>
 						<div class="team-card">
 							<img src="https://avatars.githubusercontent.com/u/134472216?v=4"
 								onclick="window.open('https://github.com/yumalg12')">
 							<h3>유맑음</h3>
 							<br>
-							<span>프로젝트 기획</span>
-							<span>프로젝트 UI,디자인 총괄</span> 
-							<span>메인 페이지</span> 
+							<span>프로젝트 기획 & UI 설계 & 디자인 총괄</span>
+							<span>메인 페이지 & 로그인</span> 
 							<span>헤더 & 푸터</span>
-							<span>로그인</span>
 							<span>매거진</span> 
 							<span>상품별 트렌드</span>
 							<span>키워드 트렌드</span>
 							<span>연관 주제(워드 클라우드)</span>
-							<span>API & 크롤링 데이터 추출</span>
-							<span>SNS 유행 신발 조사</span>
 							<span>깃허브 협업 주도</span>
 							<span>코드 리팩토링</span>
 						</div>
@@ -117,7 +114,7 @@
 							<br>
 							<span>마이페이지</span> 
 							<span>분류별 트렌드</span>
-							<span>API 자료조사 </span>
+							<span>API 자료조사 & 계정 생성</span>
 							<span>API & 크롤링 데이터 추출</span>
 							<span>내 게시물 보기</span>
 							<span>내 댓글 보기</span>

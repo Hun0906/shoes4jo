@@ -78,6 +78,6 @@ public class BookmarkController {
 		String member_id = (String) session.getAttribute("memberInfo");
 		service.delete(bookmark_no, member_id);
 
-		return "redirect:/bookmarkcon/list.do";
+		return "redirect:/bookmark/list.do";
 	}
 }
