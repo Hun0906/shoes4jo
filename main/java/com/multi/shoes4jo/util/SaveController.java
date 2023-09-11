@@ -1,10 +1,11 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.util;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,13 +18,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.multi.shoes4jo.api.GoodsClickAPI;
-import com.multi.shoes4jo.api.GoodsSearchAPI;
-import com.multi.shoes4jo.api.KeywordTrendCrawling;
-import com.multi.shoes4jo.service.ranking.RankingService;
-import com.multi.shoes4jo.service.trend.GoodsTrendService;
-import com.multi.shoes4jo.util.GoodsList;
-import com.multi.shoes4jo.vo.GoodsTrendVO;
+import com.multi.shoes4jo.categorytrend.CategoryClickAPI;
+import com.multi.shoes4jo.categorytrend.CategoryTrendService;
+import com.multi.shoes4jo.categorytrend.CategoryTrendVO;
+import com.multi.shoes4jo.goodstrend.GoodsClickAPI;
+import com.multi.shoes4jo.goodstrend.GoodsSearchAPI;
+import com.multi.shoes4jo.goodstrend.GoodsTrendService;
+import com.multi.shoes4jo.goodstrend.GoodsTrendVO;
+import com.multi.shoes4jo.keywordtrend.KeywordTrendCrawling;
+import com.multi.shoes4jo.ranking.RankingService;
 
 @Controller
 @RequestMapping("/save")
@@ -43,6 +46,12 @@ public class SaveController {
 	
 	@Autowired
 	GoodsSearchAPI goodsSearch;
+	
+	@Autowired
+	CategoryClickAPI categoryClick;
+
+	@Autowired
+	CategoryTrendService categoryTrendService;
 
 	@Autowired
 	HttpServletRequest request;
@@ -102,14 +111,19 @@ public class SaveController {
 			}
 			
 			//api 결과에 없는 날짜에 대해 0값 추가
-			String[] periodArr = {"2023-07-01","2023-07-02","2023-07-03","2023-07-04","2023-07-05","2023-07-06","2023-07-07","2023-07-08","2023-07-09","2023-07-10","2023-07-11","2023-07-12","2023-07-13","2023-07-14","2023-07-15","2023-07-16","2023-07-17","2023-07-18","2023-07-19","2023-07-20","2023-07-21","2023-07-22","2023-07-23","2023-07-24","2023-07-25","2023-07-26","2023-07-27","2023-07-28","2023-07-29","2023-07-30","2023-07-31","2023-08-01","2023-08-02","2023-08-03","2023-08-04","2023-08-05","2023-08-06","2023-08-07","2023-08-08","2023-08-09","2023-08-10","2023-08-11","2023-08-12","2023-08-13","2023-08-14","2023-08-15","2023-08-16","2023-08-17","2023-08-18","2023-08-19","2023-08-20","2023-08-21","2023-08-22","2023-08-23","2023-08-24","2023-08-25","2023-08-26","2023-08-27","2023-08-28","2023-08-29","2023-08-30","2023-08-31"};
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+			LocalDate startDate = LocalDate.parse("2023-07-01", formatter);
+			LocalDate endDate = LocalDate.now().minusDays(2); // 오늘 날짜에서 2일 전
+
 			vo.setRatio_cnt(0);
-			for (String period: periodArr) {
-				if (!goodsTrendService.isExists(period, keyword)) { //사용한 검색어가 해당 날짜에 값이 없으면
-					vo.setPeriod_sdata(period);
-					goodsTrendService.insert(vo); //추가
-					System.out.println(period+" 데이터 0 추가됨");
-				}
+			for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+			    String period = date.format(formatter);
+			    if (!goodsTrendService.isExists(period, keyword)) { //사용한 검색어가 해당 날짜에 값이 없으면
+			        vo.setPeriod_sdata(period);
+			        goodsTrendService.insert(vo); // 0 추가
+			        System.out.println(period + " 데이터 0 추가됨");
+			    }
 			}
 			/* api_click_all에 데이터 추가 */
 			
@@ -268,12 +282,13 @@ public class SaveController {
 			
 			//api 결과에 없는 날짜에 대해 0값 추가
 			vo.setRatio_cnt(0);
-			for (String period: periodArr) {
-				if (!goodsTrendService.isExistsSearch(period, keyword)) { //사용한 검색어가 해당 날짜에 값이 없으면
-					vo.setPeriod_sdata(period);
-					goodsTrendService.insertSearch(vo); //추가
-					System.out.println(period+" 데이터 0 추가됨");
-				}
+			for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+			    String period = date.format(formatter);
+			    if (!goodsTrendService.isExistsSearch(period, keyword)) { //사용한 검색어가 해당 날짜에 값이 없으면
+			        vo.setPeriod_sdata(period);
+			        goodsTrendService.insertSearch(vo); // 0 추가
+			        System.out.println(period + " 데이터 0 추가됨");
+			    }
 			}
 			/* api_search에 데이터 추가 */
 			
@@ -316,4 +331,73 @@ public class SaveController {
 		return "redirect:/save/trend_save";
 	}
 	
+	@RequestMapping(value = "/category_trend")
+	public String category_trend(CategoryTrendVO vo) throws Exception {
+		String catId = request.getParameter("catId");
+		String APIdata = categoryClick.getTrendData(catId);
+
+		// json parsing
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj = (JSONObject) parser.parse(APIdata);
+
+		JSONObject results = (JSONObject) ((JSONArray) jsonObj.get("results")).get(0);
+		System.out.println(results.get("data"));
+		JSONArray data = (JSONArray) results.get("data");
+		
+
+		if (data.size() != 0) {
+			//api_search DB들에 저장하기 위한 공통 선언부
+			String period_sdata;
+			vo.setCatId(catId);
+			int ratio_cnt;
+
+			/* category_click_all에 데이터 추가 */
+			// 첫날 값에 대해 정규화하여 저장 (api가 주어진 기간 내 최댓값을 100으로 하여 데이터를 제공하기 때문)
+			Number first_ratio_num = (Number)((JSONObject)data.get(0)).get("ratio");
+			double first_ratio = first_ratio_num.doubleValue();
+			for (int i = 0; i < data.size(); i++) {
+				period_sdata = (String) ((JSONObject) data.get(i)).get("period");
+				vo.setPeriod_sdata(period_sdata);
+				
+				// double 변환해 계산 후 int 변경 시 값이 100일 때 오류가 나기 때문에 단계적으로 변환
+				Number ratioNumber = (Number)((JSONObject)data.get(i)).get("ratio");
+				double ratioDouble = ratioNumber.doubleValue();
+				ratio_cnt = (int)((ratioDouble / first_ratio)*100);
+				vo.setRatio_cnt(ratio_cnt);
+				
+				if (categoryTrendService.isExists(period_sdata, catId)) { //사용한 검색어가 해당 날짜에 값이 있고
+					if (ratio_cnt != categoryTrendService.oldRatio(period_sdata, catId)) { //ratio 값이 다르다면
+						categoryTrendService.update(vo); //업데이트
+						System.out.println(period_sdata+" 데이터 업데이트됨");
+					}
+				} else { //사용한 검색어가 해당 날짜에 값이 없다면
+					categoryTrendService.insert(vo); //추가
+					System.out.println(period_sdata+" 데이터 추가됨");
+				}
+			}
+			
+			//api 결과에 없는 날짜에 대해 0값 추가
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+			LocalDate startDate = LocalDate.parse("2023-07-01", formatter);
+			LocalDate endDate = LocalDate.now().minusDays(2); // 오늘 날짜에서 2일 전
+
+			vo.setRatio_cnt(0);
+			for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+			    String period = date.format(formatter);
+			    if (!categoryTrendService.isExists(period, catId)) { //사용한 검색어가 해당 날짜에 값이 없으면
+			        vo.setPeriod_sdata(period);
+			        categoryTrendService.insert(vo); // 0 추가
+			        System.out.println(period + " 데이터 0 추가됨");
+			    }
+			}
+			/* category_click_all에 데이터 추가 */
+			
+			
+		} else {
+			return "redirect:/main?err=nodata";
+		}
+
+		return "redirect:/save/trend_save";
+	}
 }

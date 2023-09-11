@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.ranking;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -10,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.multi.shoes4jo.service.ranking.RankingService;
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.vo.RankingVO;
 
 @Controller
 @RequestMapping

@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service.trend;
+package com.multi.shoes4jo.keywordtrend;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.mapper.KeywordTrendMapper;
-import com.multi.shoes4jo.vo.KeywordTrendVO;
 
 @Service("keywordTrendService")
 public class KeywordTrendServiceImpl implements KeywordTrendService {
