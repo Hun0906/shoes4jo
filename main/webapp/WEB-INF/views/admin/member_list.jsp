@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>member_list | SHOES4JO</title>
+<title>회원 목록 | SHOES4JO</title>
 <%@include file="../common/header-head.jsp"%>
    
 </head>
