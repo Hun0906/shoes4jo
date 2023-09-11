@@ -17,7 +17,8 @@ function getAPIResult() {
 
 	if (!keyword || keyword === "" || keyword === "null" || keyword === null) {
 		alert("검색어를 입력하세요.");
-		location.href="main";
+		closeLoading();
+		return false;
 	}
 	
 	console.log("keyword: "+keyword);
@@ -36,17 +37,38 @@ function saveKeywordTrend() {
 	location.href="<%=context%>/save/keyword_crawling";
 }
 
+function saveCategoryTrend() {
+	showLoading();
+	let catId = document.getElementById("catId").value;
+
+	if (!catId || catId === "" || catId === "null" || catId === null) {
+		alert("검색어를 입력하세요.");
+		closeLoading();
+		return false;
+	}
+	
+	console.log("catId: "+catId);
+	document.categoryTrendForm.action = "<%=context%>/save/category_trend";
+	document.categoryTrendForm.submit();
+}
+
+function setCatSearch(obj) {
+    document.getElementById("catId").value = obj.getAttribute('value');
+    console.log(obj.getAttribute('value'));
+    obj.style.color = "#ADE792";
+}
+
 </script>
 
 <style>
-#ranking_list{
+.span_list{
 line-height: 1.0;
 display: grid;
 grid-template-columns: repeat(12,1fr);
 gap: 10px;
 }
 
-#ranking_list span{
+.span_list span{
 font-size: 8pt;
 }
 
@@ -81,7 +103,7 @@ font-size: 8pt;
 		<div>
 		<h2>랭킹 등록</h2>
 		<div style="display: flex;" >
-		<div id="ranking_list">
+		<div class="span_list" id="ranking_list">
 		<c:forEach var="list" items="${goodsList}">
 			<span>${list }</span>
 		</c:forEach>
@@ -99,6 +121,28 @@ font-size: 8pt;
 		</div>
 		</div>
 		
+		<hr>
+		
+		<div>
+		<h2>분류별 트렌드</h2>
+			<form name="categoryTrendForm" action="javascript:saveCategoryTrend();">
+				<input type="text" class="main_search" id="catId" name="catId" value="">
+				<button class="btn-basic btn-color2">Save</button>
+			</form>
+			
+			<div>
+				<a target="_blank" href="https://developers.naver.com/docs/serviceapi/datalab/shopping/shopping.md#%EC%87%BC%ED%95%91%EC%9D%B8%EC%82%AC%EC%9D%B4%ED%8A%B8-%EB%B6%84%EC%95%BC%EB%B3%84-%ED%8A%B8%EB%A0%8C%EB%93%9C-%EC%A1%B0%ED%9A%8C">
+					API Docs</a>
+				<a target="_blank" href="https://datalab.naver.com/shoppingInsight/sCategory.naver">데이터랩</a>
+				<a target="_blank" href="https://developers.naver.com/docs/common/openapiguide/errorcode.md#%EC%A3%BC%EC%9A%94-%EC%98%A4%EB%A5%98-%EC%BD%94%EB%93%9C">
+				오류 코드</a>
+			</div>
+			
+		<div class="span_list" id="category_list">
+		<span value="50000000">패션잡화</span>
+		</div>
+		</div>
+		
 	</div>
 	</div>
 
@@ -109,6 +153,11 @@ font-size: 8pt;
 	    Array.from(document.getElementById("ranking_list").children).forEach(e => {
 	        e.onclick = function() {
 	            setSearch(this);
+	        };
+	    });
+	    Array.from(document.getElementById("category_list").children).forEach(e => {
+	        e.onclick = function() {
+	            setCatSearch(this);
 	        };
 	    });
 	});

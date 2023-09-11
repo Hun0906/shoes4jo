@@ -67,31 +67,68 @@ function getDBdata() {
 }
 
 function drawChart() {
-	let xArr = document.getElementById("selectAll_x").innerHTML.trim().split(" ").reverse(); //내림차순 정렬이기 때문에 reverse
-	let yArr1 = document.getElementById("selectAll_y").innerHTML.trim().split(" ").reverse();
-	let yArr2 = document.getElementById("search_y").innerHTML.trim().split(" ").reverse();
+	let xArr = [];
+	<c:forEach var="selectAll" items="${selectAll}">xArr.push("${selectAll.period_sdata}");</c:forEach>
+	xArr = xArr.reverse(); //내림차순 정렬이기 때문에 reverse
+	
+	let yArr1 = [];
+	<c:forEach var="selectAll" items="${selectAll}">yArr1.push("${selectAll.ratio_cnt}");</c:forEach>
+	yArr1 = yArr1.map(Number).reverse();
+
+	let yArr2 = [];
+	<c:forEach var="search" items="${search}">yArr2.push("${search.ratio_cnt}");</c:forEach>
+	yArr2 = yArr2.map(Number).reverse();
+	
 	drawLineChart(yArr1.map(e=>e/Math.max(...yArr1)), yArr2.map(e=>e/Math.max(...yArr2)), xArr.map(e=>e.slice(5,7)+"/"+e.slice(8))); //최대값으로 정규화
 	
-	let fArr = document.getElementById("selectGen_f").innerHTML.trim().split(" ");
-	let mArr = document.getElementById("selectGen_m").innerHTML.trim().split(" ");
-	let fVal = fArr.reduce((acc,e)=>e,0); //기간 내 데이터 합산
-	let mVal = mArr.reduce((acc,e)=>e,0);
-	drawPieChart((fVal*100)/(fVal+mVal),(mVal*100)/(fVal+mVal)); //퍼센티지화
 	
-	let pcArr = document.getElementById("selectDev_pc").innerHTML.trim().split(" ");
-	let moArr = document.getElementById("selectDev_mo").innerHTML.trim().split(" ");
-	let pcVal = pcArr.reduce((acc,e)=>e,0); //기간 내 데이터 합산
-	let moVal = moArr.reduce((acc,e)=>e,0);
-	drawDoughnutChart((pcVal*100)/(pcVal+moVal),(moVal*100)/(pcVal+moVal)); //퍼센티지화
+	let fArr = [];
+	<c:forEach var="selectFemale" items="${selectFemale}">fArr.push("${selectFemale.ratio_cnt}");</c:forEach>
+	let fVal = fArr.map(Number).reduce((acc,e)=>acc+e,0); //기간 내 데이터 합산
+
+	let mArr = [];
+	<c:forEach var="selectMale" items="${selectMale}">mArr.push("${selectMale.ratio_cnt}");</c:forEach>
+	let mVal = mArr.map(Number).reduce((acc,e)=>acc+e,0); //기간 내 데이터 합산
+
+	drawPieChart(Math.round((fVal*100)/(fVal+mVal)),Math.round((mVal*100)/(fVal+mVal))); //퍼센티지화
 	
-	let selectAge_10 = document.getElementById("selectAge_10").innerHTML.trim().split(" ").reduce((acc,e)=>e);
-	let selectAge_20 = document.getElementById("selectAge_20").innerHTML.trim().split(" ").reduce((acc,e)=>e);
-	let selectAge_30 = document.getElementById("selectAge_30").innerHTML.trim().split(" ").reduce((acc,e)=>e);
-	let selectAge_40 = document.getElementById("selectAge_40").innerHTML.trim().split(" ").reduce((acc,e)=>e);
-	let selectAge_50 = document.getElementById("selectAge_50").innerHTML.trim().split(" ").reduce((acc,e)=>e);
-	let selectAge_60 = document.getElementById("selectAge_60").innerHTML.trim().split(" ").reduce((acc,e)=>e);
-	let barArr = [selectAge_10,selectAge_20,selectAge_30,selectAge_40,selectAge_50,selectAge_60];
-	drawBarChart(barArr.map(e=>e/Math.max(...barArr)));
+	
+	let pcArr = [];
+	<c:forEach var="selectPC" items="${selectPC}">pcArr.push("${selectPC.ratio_cnt}");</c:forEach>
+	let pcVal = pcArr.map(Number).reduce((acc,e)=>acc+e,0); //기간 내 데이터 합산
+
+	let moArr = [];
+	<c:forEach var="selectMobile" items="${selectMobile}">moArr.push("${selectMobile.ratio_cnt}");</c:forEach>
+	let moVal = moArr.map(Number).reduce((acc,e)=>acc+e,0); //기간 내 데이터 합산
+
+	drawDoughnutChart(Math.round((pcVal*100)/(pcVal+moVal)),Math.round((moVal*100)/(pcVal+moVal))); //퍼센티지화
+	
+	
+	let age10Arr = [];
+	<c:forEach var="age" items="${selectAge10}">age10Arr.push("${age.ratio_cnt}");</c:forEach>
+	let age20Arr = [];
+	<c:forEach var="age" items="${selectAge20}">age20Arr.push("${age.ratio_cnt}");</c:forEach>
+	let age30Arr = [];
+	<c:forEach var="age" items="${selectAge30}">age30Arr.push("${age.ratio_cnt}");</c:forEach>
+	let age40Arr = [];
+	<c:forEach var="age" items="${selectAge40}">age40Arr.push("${age.ratio_cnt}");</c:forEach>
+	let age50Arr = [];
+	<c:forEach var="age" items="${selectAge50}">age50Arr.push("${age.ratio_cnt}");</c:forEach>
+	let age60Arr = [];
+	<c:forEach var="age" items="${selectAge60}">age60Arr.push("${age.ratio_cnt}");</c:forEach>
+
+	let ageValues = [
+	    age10Arr.map(Number).reduce((acc,e)=>acc+e,0),
+	    age20Arr.map(Number).reduce((acc,e)=>acc+e,0),
+	    age30Arr.map(Number).reduce((acc,e)=>acc+e,0),
+	    age40Arr.map(Number).reduce((acc,e)=>acc+e,0),
+	    age50Arr.map(Number).reduce((acc,e)=>acc+e,0),
+	    age60Arr.map(Number).reduce((acc,e)=>acc+e,0)
+	];
+	
+	let ageSum = ageValues.reduce((acc,e)=>acc+e);
+	
+	drawBarChart(ageValues.map(e=>Math.round((e/ageSum)*100)));
 }
 </script>
 
@@ -144,30 +181,7 @@ margin: 2.25rem 0;
 			<hr>
 			<h2><%=(keyword == null) ? "" : keyword%></h2><span class="normal">에 대한 사람들의 관심도는?</span>
 			</div>
-			<div style="display: none;">
-				<a target="_blank" href="https://developers.naver.com/docs/serviceapi/datalab/shopping/shopping.md#%EC%87%BC%ED%95%91%EC%9D%B8%EC%82%AC%EC%9D%B4%ED%8A%B8-%ED%82%A4%EC%9B%8C%EB%93%9C%EB%B3%84-%ED%8A%B8%EB%A0%8C%EB%93%9C-%EC%A1%B0%ED%9A%8C">
-					API Docs</a>
-				<a target="_blank" href="https://datalab.naver.com/keyword/trendSearch.naver">데이터랩</a>
-				<a href="#" onclick="javascript:drawChart();">파싱 테스트</a>
-				<a target="_blank" href="https://developers.naver.com/docs/common/openapiguide/errorcode.md#%EC%A3%BC%EC%9A%94-%EC%98%A4%EB%A5%98-%EC%BD%94%EB%93%9C">
-				오류 코드</a>
-			</div>
-			<div style="display: none;">
-			<span id="selectAll_x"><c:forEach var="selectAll" items="${selectAll}">${selectAll.period_sdata} </c:forEach></span>
-			<span id="selectAll_y"><c:forEach var="selectAll" items="${selectAll}">${selectAll.ratio_cnt} </c:forEach></span>
-			<span id="search_y"><c:forEach var="search" items="${search}">${search.ratio_cnt} </c:forEach></span>
-			<span id="selectGen_f"><c:forEach var="selectFemale" items="${selectFemale}">${selectFemale.ratio_cnt} </c:forEach></span>
-			<span id="selectGen_m"><c:forEach var="selectMale" items="${selectMale}">${selectMale.ratio_cnt} </c:forEach></span>
-			<span id="selectDev_pc"><c:forEach var="selectPC" items="${selectPC}">${selectPC.ratio_cnt} </c:forEach></span>
-			<span id="selectDev_mo"><c:forEach var="selectMobile" items="${selectMobile}">${selectMobile.ratio_cnt} </c:forEach></span>
-			<span id="selectAge_10"><c:forEach var="selectAge10" items="${selectAge10}">${selectAge10.ratio_cnt} </c:forEach></span>
-			<span id="selectAge_20"><c:forEach var="selectAge20" items="${selectAge20}">${selectAge20.ratio_cnt} </c:forEach></span>
-			<span id="selectAge_30"><c:forEach var="selectAge30" items="${selectAge30}">${selectAge30.ratio_cnt} </c:forEach></span>
-			<span id="selectAge_40"><c:forEach var="selectAge40" items="${selectAge40}">${selectAge40.ratio_cnt} </c:forEach></span>
-			<span id="selectAge_50"><c:forEach var="selectAge50" items="${selectAge50}">${selectAge50.ratio_cnt} </c:forEach></span>
-			<span id="selectAge_60"><c:forEach var="selectAge60" items="${selectAge60}">${selectAge60.ratio_cnt} </c:forEach></span>
-			</div>
-			
+
 			<div style="display: grid; row-gap: 3rem;">
 				<canvas id="lineChart"></canvas>
 				<div style="display: grid; grid-template-columns: 1fr 1fr; justify-items: center; gap: 1rem;">
@@ -180,6 +194,8 @@ margin: 2.25rem 0;
 				</div>
 				<canvas id="barChart"></canvas>
 			</div>
+			
+			<h2></h2>
 
 		</div>
 	</div>
