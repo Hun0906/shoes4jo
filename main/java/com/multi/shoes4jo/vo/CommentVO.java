@@ -1,7 +1,6 @@
 package com.multi.shoes4jo.vo;
 
 import org.springframework.stereotype.Component;
-import java.util.Date;
 
 @Component("CommentVO")
 public class CommentVO {
@@ -10,19 +9,19 @@ public class CommentVO {
 	private String member_id;
 	private int fno;
 	private String content;
-	private Date date;
-	private Date update_date;
+	private String date;
+	private String update_date;
 
 	public CommentVO() {
 	}
 
-	public CommentVO(int cno, String member_id, int fno, String content, Date date, Date update_date) {
-	    this.cno = cno;
-	    this.member_id = member_id;
-	    this.fno = fno;
-	    this.content = content;
-	    this.date = date;
-	    this.update_date = update_date;
+	public CommentVO(int cno, String member_id, int fno, String content, String date, String update_date) {
+		this.cno = cno;
+		this.member_id = member_id;
+		this.fno = fno;
+		this.content = content;
+		this.date = date;
+		this.update_date = update_date;
 	}
 
 	public int getCno() {
@@ -57,21 +56,20 @@ public class CommentVO {
 		this.content = content;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
-	public Date getUpdate_date() {
+	public String getUpdate_date() {
 		return update_date;
 	}
 
-	public void setUpdate_date(Date update_date) {
+	public void setUpdate_date(String update_date) {
 		this.update_date = update_date;
 	}
-
 
 }
