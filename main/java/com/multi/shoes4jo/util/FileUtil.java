@@ -8,8 +8,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.multi.shoes4jo.vo.BoardVO;
-import com.multi.shoes4jo.vo.FreeBoardVO;
+import com.multi.shoes4jo.board.BoardVO;
+import com.multi.shoes4jo.freeboard.FreeBoardVO;
 
 public class FileUtil {
 	public static void FileUpload(FreeBoardVO vo, MultipartFile file, HttpSession session) throws IOException {

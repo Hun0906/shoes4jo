@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.shoes4jo.service.freeboard.FreeBoardService;
+import com.multi.shoes4jo.freeboard.FreeBoardService;
+import com.multi.shoes4jo.freeboard.FreeBoardVO;
 import com.multi.shoes4jo.util.Criteria;
 import com.multi.shoes4jo.util.FileUtil;
 import com.multi.shoes4jo.util.PageMaker;
-import com.multi.shoes4jo.vo.FreeBoardVO;
 
 @Controller
 @RequestMapping("/freeboard")

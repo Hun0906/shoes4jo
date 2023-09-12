@@ -1,8 +1,6 @@
-package com.multi.shoes4jo.service.member;
+package com.multi.shoes4jo.member;
 
 import java.util.List;
-
-import com.multi.shoes4jo.vo.MemberVO;
 
 public interface MemberService {
 

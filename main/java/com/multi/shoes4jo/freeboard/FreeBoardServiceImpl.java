@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service.freeboard;
+package com.multi.shoes4jo.freeboard;
 
 import java.util.List;
 
@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.mapper.FreeBoardMapper;
-import com.multi.shoes4jo.service.comment.CommentService;
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.vo.FreeBoardVO;
 
 @Service("freeboardService")
 public class FreeBoardServiceImpl implements FreeBoardService {

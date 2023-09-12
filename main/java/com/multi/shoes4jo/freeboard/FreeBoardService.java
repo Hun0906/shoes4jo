@@ -1,9 +1,8 @@
-package com.multi.shoes4jo.service.freeboard;
+package com.multi.shoes4jo.freeboard;
 
 import java.util.List;
 
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.vo.FreeBoardVO;
 
 public interface FreeBoardService {
 

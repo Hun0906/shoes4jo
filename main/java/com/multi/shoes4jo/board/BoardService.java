@@ -1,9 +1,8 @@
-package com.multi.shoes4jo.service.board;
+package com.multi.shoes4jo.board;
 
 import java.util.List;
 
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.vo.BoardVO;
 
 public interface BoardService {
 

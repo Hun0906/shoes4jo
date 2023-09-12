@@ -10,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.multi.shoes4jo.service.bookmark.BookmarkService;
-import com.multi.shoes4jo.service.goods.GoodsDetailService;
-import com.multi.shoes4jo.vo.BookmarkVO;
-import com.multi.shoes4jo.vo.GoodsDetailVO;
+import com.multi.shoes4jo.bookmark.BookmarkService;
+import com.multi.shoes4jo.bookmark.BookmarkVO;
+import com.multi.shoes4jo.goods.GoodsDetailService;
+import com.multi.shoes4jo.goods.GoodsDetailVO;
 
 @Controller
 @RequestMapping("/goodscon")
