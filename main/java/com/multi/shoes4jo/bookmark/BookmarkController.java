@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.multi.shoes4jo.util.Criteria;
+import com.multi.shoes4jo.util.PageMaker;
+
 @Controller
 @RequestMapping("/bookmark")
 public class BookmarkController {
@@ -27,15 +30,21 @@ public class BookmarkController {
 	private BookmarkService service;
 
 	@RequestMapping(value = "/list.do") // 본인 아이디의 북마크 전체 목록 조회
-	public ModelAndView showList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView showList(HttpServletRequest request, HttpServletResponse response, Criteria cri)
+			throws Exception {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
 
-		List<BookmarkVO> bookmark_list = service.BookmarkList(member_id);
+		List<BookmarkVO> bookmark_list = service.BookmarkList(member_id, cri);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCount());
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/my_bookmark_list");
 		mav.addObject("bookmark_list", bookmark_list);
+		mav.addObject("pageMaker", pageMaker);
 
 		return mav;
 	}
