@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.multi.shoes4jo.vo.CommentVO;
+import com.multi.shoes4jo.freeboard.CommentVO;
 
 @Mapper
 public interface CommentMapper {

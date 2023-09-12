@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.shoes4jo.service.member.MemberService;
-import com.multi.shoes4jo.vo.MemberVO;
+import com.multi.shoes4jo.member.MemberService;
+import com.multi.shoes4jo.member.MemberVO;
 
 @Controller
 @RequestMapping("/controller")

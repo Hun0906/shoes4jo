@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service.board;
+package com.multi.shoes4jo.board;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.mapper.BoardMapper;
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.vo.BoardVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
