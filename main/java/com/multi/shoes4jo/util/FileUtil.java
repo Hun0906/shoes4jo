@@ -12,11 +12,12 @@ import com.multi.shoes4jo.vo.BoardVO;
 import com.multi.shoes4jo.vo.FreeBoardVO;
 
 public class FileUtil {
-	public static void FileUpload(FreeBoardVO vo, MultipartFile file, HttpSession session) throws IOException {
+	public static String FileUpload(FreeBoardVO vo, MultipartFile file, HttpSession session) throws IOException {
+		String newFileName = null;
 		if (file != null && !file.isEmpty()) {
 			String originalFilename = file.getOriginalFilename();
 			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
+			newFileName = System.currentTimeMillis() + "." + extension;
 
 			vo.setFile_name(originalFilename);
 			vo.setFile_path(newFileName);
@@ -28,13 +29,15 @@ public class FileUtil {
 
 			System.out.println("파일 저장 성공: " + newFile.getAbsolutePath());
 		}
+		return newFileName;
 	}
 
-	public static void FileUpload(BoardVO vo, MultipartFile file, HttpSession session) throws IOException {
+	public static String FileUpload(BoardVO vo, MultipartFile file, HttpSession session) throws IOException {
+		String newFileName = null;
 		if (file != null && !file.isEmpty()) {
 			String originalFilename = file.getOriginalFilename();
 			String extension = FilenameUtils.getExtension(originalFilename);
-			String newFileName = System.currentTimeMillis() + "." + extension;
+			newFileName = System.currentTimeMillis() + "." + extension;
 
 			vo.setFile_name(originalFilename);
 			vo.setFile_path(newFileName);
@@ -42,9 +45,10 @@ public class FileUtil {
 			java.io.File newFile = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
 					newFileName);
 
-			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
+		    FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
 
-			System.out.println("파일 저장 성공: " + newFile.getAbsolutePath());
-		}
-	}
+		    System.out.println("파일 저장 성공: " + newFile.getAbsolutePath());
+	    }
+	    return newFileName;
+    }
 }

@@ -265,13 +265,13 @@ $('#Comment_regist').click(function() {
 	//댓글 삭제 끝
 	
 	//댓글 수정,삭제 이벤트
-	$(document).on("click", ".edit", function(){
-	    const cno = $(this).data("id");
-	    const contentElement = $(this).siblings("#com-content");
+$(document).on("click", ".edit", function(){
+    const cno = $(this).data("id");
+    const contentElement = $(this).parent().prev();
 
-	    const oldContent = contentElement.text();
-	    contentElement.html(`<input type="text" id="edit-field-${cno}" value="${oldContent}"> <button class="btn-basic save-edit" data-id="${cno}">저장</button>`);
-	});
+    const oldContent = contentElement.text();
+    contentElement.html(`<input type="text" id="edit-field-${cno}" value="${oldContent}"> <button class="btn-basic save-edit" data-id="${cno}">저장</button>`);
+});
 
 	$(document).on("click", ".save-edit", function(){
 	   const cno = $(this).data("id");
