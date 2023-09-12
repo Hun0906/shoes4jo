@@ -19,7 +19,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public List<FreeBoardVO> listPage(Criteria cri) {
-		List<FreeBoardVO> list = mapper.listPage(cri);
+		List<FreeBoardVO> list = mapper.listPage(cri, cri.getSearchType(), cri.getKeyword());
 
 		for (FreeBoardVO vo : list) {
 			int comment_cnt = comm_service.getTotal(vo.getFno()); // 각 게시글의 댓글 수도 조회
@@ -29,9 +29,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		return list;
 	}
 
-	@Override
-	public int listCount() {
-		return mapper.listCount();
+    @Override
+	public int listCount(String searchType, String keyword) {
+		return mapper.listCount(searchType, keyword);
 	}
 
 	@Override

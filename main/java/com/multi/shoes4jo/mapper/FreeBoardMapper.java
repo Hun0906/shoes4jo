@@ -15,12 +15,20 @@ import com.multi.shoes4jo.util.Criteria;
 @Mapper
 public interface FreeBoardMapper {
 
-	@Select("SELECT fno, member_id, category, title, content, viewcnt, date, update_date FROM freeboard ORDER BY fno DESC LIMIT #{perPageNum} OFFSET #{pageStart}")
-	public List<FreeBoardVO> listPage(Criteria cri);
-	// 페이징 목록조회
+	@Select("SELECT * FROM freeboard WHERE ${searchType} LIKE CONCAT('%', #{keyword}, '%')")
+	public List<FreeBoardVO> search(@Param("searchType") String searchType, @Param("keyword") String keyword);
 
-	@Select("SELECT COUNT(fno) FROM freeboard WHERE fno > 0")
-	public int listCount();
+	@Select("<script>" + "SELECT * FROM freeboard "
+			+ "<if test='searchType != null and keyword != null'>WHERE ${searchType} LIKE CONCAT('%', #{keyword}, '%')</if> "
+			+ "ORDER BY fno DESC LIMIT #{cri.perPageNum} OFFSET #{cri.pageStart}" + "</script>")
+	public List<FreeBoardVO> listPage(@Param("cri") Criteria cri, @Param("searchType") String searchType,
+			@Param("keyword") String keyword);
+	// 페이징 목록조회 + 검색
+
+	@Select("<script>" + "SELECT COUNT(fno) FROM freeboard "
+			+ "<if test='searchType != null and keyword != null'>WHERE ${searchType} LIKE CONCAT('%', #{keyword}, '%')</if> "
+			+ "</script>")
+	public int listCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 
 	@Select("SELECT * FROM freeboard WHERE fno = #{fno}")
 	FreeBoardVO select(@Param("fno") int fno);
@@ -34,8 +42,8 @@ public interface FreeBoardMapper {
 	List<FreeBoardVO> myBoardList(@Param("member_id") String member_id, @Param("cri") Criteria cri);
 	// 본인 아이디의 게시글 전체 조회(페이징)
 
-	@Select("SELECT COUNT(fno) FROM freeboard WHERE member_id = #{memberId}")
-	int listCountMember(@Param("memberId") String memberId);
+	@Select("SELECT COUNT(fno) FROM freeboard WHERE member_id = #{member_id}")
+	int listCountMember(@Param("member_id") String member_id);
 	// 아이디 게시글 조회 페이징
 
 	@Insert("INSERT INTO freeboard (fno, member_id, category, title, content, file_name, file_path) VALUES (#{fno}, #{member_id}, #{category}, #{title}, #{content}, #{file_name}, #{file_path})")

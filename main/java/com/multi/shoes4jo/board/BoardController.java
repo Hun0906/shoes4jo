@@ -2,6 +2,7 @@ package com.multi.shoes4jo.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -26,18 +27,29 @@ public class BoardController {
 	BoardService service;
 
 	@RequestMapping(value = "/list.do")
-	public String list(Model model, Criteria cri) throws Exception {
+	public String list(Model model, Criteria cri, HttpServletRequest request) throws Exception {
+
+		String searchType = request.getParameter("searchType");
+		String keyword = request.getParameter("keyword");
+
+		if (searchType == null || searchType.isEmpty()) {
+			cri.setSearchType("title");
+		} else {
+			cri.setSearchType(searchType);
+		}
+
+		if (keyword != null && !keyword.isEmpty()) {
+			cri.setKeyword(keyword);
+		}
+
 		List<BoardVO> list = service.listPage(cri);
 		model.addAttribute("list", list);
-		// 페이지 정보와 게시글 목록을 가져옴
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.listCount());
-		// 총 게시글 개수를 가져와 페이지 메이커에 설정
+		pageMaker.setTotalCount(service.listCount(cri.getSearchType(), cri.getKeyword()));
 
 		model.addAttribute("pageMaker", pageMaker);
-		// 페이지메이커 객체를 모델에 추가해서 뷰로 실어보내줌
 
 		return "board/board_list";
 	}
@@ -74,8 +86,8 @@ public class BoardController {
 	}
 
 	@RequestMapping("/writeOk.do")
-	public String writeOk(@ModelAttribute BoardVO vo,
-			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
+	public String writeOk(@ModelAttribute BoardVO vo, @RequestParam(name = "file", required = false) MultipartFile file,
+			HttpSession session) throws Exception {
 
 		if (file != null && !file.isEmpty()) {
 			String originalFilename = file.getOriginalFilename();

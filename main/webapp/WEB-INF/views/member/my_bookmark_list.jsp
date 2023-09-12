@@ -17,7 +17,7 @@
 	<%@include file="../common/header.jsp"%>
 	<div class="container">
 	<h1>나의 북마크 목록</h1>
-		<h2 class="text-center">상품 상세페이지</h2>
+		<h2 class="text-center">즐겨찾기</h2>
 		<table class="table table-board table-hover">
 			<thead>
 				<tr>

@@ -13,6 +13,14 @@
 .form-wrapper {
 	max-width: 100%;
 }
+.basic {
+    background-color: black;
+    color: white;
+}
+.search-container {
+  display: flex;
+  justify-content: center;
+}
 </style>
 </head>
 
@@ -36,7 +44,6 @@
 				<option value="events">이벤트</option>
 				<option value="columns">칼럼</option>
 			</select>
-
 
 			<button onclick="location.href='<%=context%>/board/write.do'"
 				class="btn-basic">글쓰기</button>
@@ -72,17 +79,35 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
 	</div>
-
 	<div>
+
+
+
+
+		<!-- 검색창 -->
+<br>
+<div class="search-container">
+	<form action="${pageContext.request.contextPath}/board/list.do" method="get">
+		<select name="searchType">
+			<option value="title">제목</option>
+			<option value="content">내용</option>
+			<option value="writer">작성자</option>
+		</select> 
+        <input type="text" name="keyword">
+        <button type="submit" class="basic">검색</button>
+    </form>
+</div>
+<br>
+		<!-- 검색창 끝, 페이징 시작 -->
+
+
 		<ul class="pagination">
 
 			<c:if test="${pageMaker.prev}">
 				<li><a class="page-link"
 					href="<%=context %>/board/list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 			</c:if>
-
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
 				var="idx">
 				<c:choose>
@@ -96,8 +121,6 @@
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-
-
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 				<li><a class="page-link"
 					href="<%=context %>/board/list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
@@ -105,7 +128,7 @@
 
 		</ul>
 	</div>
-
+	<!-- 페이징 끝 -->
 
 	<%@include file="../common/footer.jsp"%>
 </body>
