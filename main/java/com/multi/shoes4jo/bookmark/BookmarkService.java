@@ -1,8 +1,6 @@
-package com.multi.shoes4jo.service.bookmark;
+package com.multi.shoes4jo.bookmark;
 
 import java.util.List;
-
-import com.multi.shoes4jo.vo.BookmarkVO;
 
 public interface BookmarkService {
 

@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.shoes4jo.service.freeboard.FreeBoardService;
+import com.multi.shoes4jo.freeboard.FreeBoardService;
+import com.multi.shoes4jo.freeboard.FreeBoardVO;
 import com.multi.shoes4jo.util.Criteria;
 import com.multi.shoes4jo.util.FileUtil;
 import com.multi.shoes4jo.util.PageMaker;
-import com.multi.shoes4jo.vo.FreeBoardVO;
 
 @Controller
 @RequestMapping("/freeboard")
@@ -82,7 +82,7 @@ public class FreeBoardController {
 		service.insert(vo);
 
 		request.setAttribute("msg", "새 글 등록에 성공하였습니다.");
-		request.setAttribute("url", "./freeboard/list.do");
+		request.setAttribute("url", "../freeboard/list.do");
 
 		return "msg";
 	}
@@ -96,31 +96,45 @@ public class FreeBoardController {
 		return mav;
 	}
 
-   @RequestMapping("/update.do")
-   public String update(@RequestParam int fno, HttpSession session, HttpServletRequest request) {
-      FreeBoardVO vo = service.select(fno);
-      request.setAttribute("freeboard", vo);
-      return "freeboard/freeboard_update";
-   }
+	@RequestMapping("/update.do")
+	public String update(@RequestParam int fno, HttpSession session, HttpServletRequest request) {
+		FreeBoardVO vo = service.select(fno);
+		request.setAttribute("freeboard", vo);
+		return "freeboard/freeboard_update";
+	}
 
-   @RequestMapping("/updateOk.do")
-   public String updateOk(@ModelAttribute FreeBoardVO vo,
-         @RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
-         HttpServletRequest request) throws Exception {
+	@RequestMapping("/updateOk.do")
+	public String updateOk(@ModelAttribute FreeBoardVO vo,
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
+			HttpServletRequest request) throws Exception {
 
-      FileUtil.FileUpload(vo, file, session);
-      service.update(vo);
+		String uploadedImageName = FileUtil.FileUpload(vo, file, session);
+		if (uploadedImageName == null) {
+			FreeBoardVO oldBoardData = service.select(vo.getFno());
+			vo.setFile_name(oldBoardData.getFile_name());
+			vo.setFile_path(oldBoardData.getFile_path());
+		}
 
-      request.setAttribute("msg", "글 수정에 성공하였습니다.");
-      request.setAttribute("url", "/freeboard/list.do");
+		service.update(vo);
 
-      return "msg";
-   }
+		request.setAttribute("msg", "글 수정에 성공하였습니다.");
+		request.setAttribute("url", "../freeboard/list.do");
+
+		return "msg";
+	}
 
 	@RequestMapping("/delete.do")
-	public String deleteOk(@RequestParam int fno) {
+	public String deleteOk(@RequestParam int fno, HttpSession session) {
+		FreeBoardVO vo = service.select(fno);
+		if (vo.getFile_path() != null) {
+			java.io.File file = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+					vo.getFile_path());
+			if (file.exists()) {
+				file.delete();
+			}
+		}
+
 		service.delete(fno);
 		return "redirect:/freeboard/list.do";
 	}
-
 }

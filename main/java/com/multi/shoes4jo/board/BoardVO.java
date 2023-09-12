@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.vo;
+package com.multi.shoes4jo.board;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

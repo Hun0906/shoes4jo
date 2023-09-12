@@ -100,7 +100,7 @@ function checkDelete(fno) {
 				</div>
 
 				<div class="comment-write">
-					<label>${freeboard.member_id}</label>
+					<label>${empty sessionScope.memberInfo ? '비회원' : sessionScope.memberInfo}</label>
 					<textarea class="form-control" id="content" cols="80"
 						rows="2" name="content" style="max-height: 10rem;"></textarea>
 					<button id="Comment_regist" class="btn-comment">등록✏️</button>
@@ -177,7 +177,7 @@ $('#Comment_regist').click(function() {
             }
          },
          error:function(){
-             alert('통신 실패');
+             alert('연결 실패');
          }
      });
  });
@@ -235,7 +235,7 @@ $('#Comment_regist').click(function() {
 	            } 
 	         },
 	         error:function(){
-	             alert('통신 실패');
+	             alert('연결 실패');
 	         }
 	    });
 	}//댓글 수정 끝
@@ -258,20 +258,20 @@ $('#Comment_regist').click(function() {
 	            }
 	        },
 	        error:function(){
-	            alert('통신 실패');
+	            alert('연결 실패');
 	        }
 	    });
 	}
 	//댓글 삭제 끝
 	
 	//댓글 수정,삭제 이벤트
-	$(document).on("click", ".edit", function(){
-	    const cno = $(this).data("id");
-	    const contentElement = $(this).siblings("#com-content");
+$(document).on("click", ".edit", function(){
+    const cno = $(this).data("id");
+    const contentElement = $(this).parent().prev();
 
-	    const oldContent = contentElement.text();
-	    contentElement.html(`<input type="text" id="edit-field-${cno}" value="${oldContent}"> <button class="btn-basic save-edit" data-id="${cno}">저장</button>`);
-	});
+    const oldContent = contentElement.text();
+    contentElement.html(`<input type="text" id="edit-field-${cno}" value="${oldContent}"> <button class="btn-basic save-edit" data-id="${cno}">저장</button>`);
+});
 
 	$(document).on("click", ".save-edit", function(){
 	   const cno = $(this).data("id");

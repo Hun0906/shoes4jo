@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.multi.shoes4jo.vo.BookmarkVO;
+import com.multi.shoes4jo.bookmark.BookmarkVO;
 
 @Mapper
 public interface BookmarkMapper {

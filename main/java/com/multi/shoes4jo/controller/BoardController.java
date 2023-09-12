@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.shoes4jo.service.board.BoardService;
+import com.multi.shoes4jo.board.BoardService;
+import com.multi.shoes4jo.board.BoardVO;
 import com.multi.shoes4jo.util.Criteria;
 import com.multi.shoes4jo.util.FileUtil;
 import com.multi.shoes4jo.util.PageMaker;
-import com.multi.shoes4jo.vo.BoardVO;
 
 @Controller
 @RequestMapping("/board")
@@ -94,14 +94,29 @@ public class BoardController {
 	public String updateOk(@ModelAttribute BoardVO board,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
-		FileUtil.FileUpload(board, file, session);
+		String uploadedImageName = FileUtil.FileUpload(board, file, session);
+		if (uploadedImageName == null) {
+			BoardVO oldBoardData = service.selectOne(String.valueOf(board.getBno()));
+			board.setFile_name(oldBoardData.getFile_name());
+			board.setFile_path(oldBoardData.getFile_path());
+		}
+
 		service.updateOne(board);
 
 		return "redirect:/board/list.do";
 	}
 
 	@RequestMapping("/delete.do")
-	public String deleteOk(@RequestParam String bno) {
+	public String deleteOk(@RequestParam String bno, HttpSession session) {
+		BoardVO board = service.selectOne(bno);
+		if (board.getFile_path() != null) {
+			java.io.File file = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+					board.getFile_path());
+			if (file.exists()) {
+				file.delete();
+			}
+		}
+
 		service.deleteOne(bno);
 		return "redirect:/board/list.do";
 	}

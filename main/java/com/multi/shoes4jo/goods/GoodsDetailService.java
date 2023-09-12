@@ -1,8 +1,6 @@
-package com.multi.shoes4jo.service.goods;
+package com.multi.shoes4jo.goods;
 
 import java.util.List;
-
-import com.multi.shoes4jo.vo.GoodsDetailVO;
 
 public interface GoodsDetailService {
 
