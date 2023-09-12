@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.util.FileUtil;
 import com.multi.shoes4jo.util.PageMaker;
 
 @Controller
@@ -76,7 +77,21 @@ public class FreeBoardController {
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
 			HttpServletRequest request) throws Exception {
 
-		FileUtil.FileUpload(vo, file, session);
+		if (file != null && !file.isEmpty()) {
+			String originalFilename = file.getOriginalFilename();
+			String extension = FilenameUtils.getExtension(originalFilename);
+			String newFileName = System.currentTimeMillis() + "." + extension;
+
+			vo.setFile_name(originalFilename);
+			vo.setFile_path(newFileName);
+
+			java.io.File newFile = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+					newFileName);
+
+			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
+			System.out.println("파일 저장 성공: " + newFile.getAbsolutePath());
+		}
+
 		service.insert(vo);
 
 		request.setAttribute("msg", "새 글 등록에 성공하였습니다.");
@@ -106,8 +121,32 @@ public class FreeBoardController {
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
 			HttpServletRequest request) throws Exception {
 
-		String uploadedImageName = FileUtil.FileUpload(vo, file, session);
-		if (uploadedImageName == null) {
+		if (file != null && !file.isEmpty()) {
+			// 기존 파일이 있으면 삭제
+			FreeBoardVO oldBoardData = service.select(vo.getFno());
+			if (oldBoardData.getFile_path() != null) {
+				java.io.File oldFile = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+						oldBoardData.getFile_path());
+				if (oldFile.exists()) {
+					oldFile.delete();
+				}
+			}
+
+			// 새로운 파일 업로드
+			String originalFilename = file.getOriginalFilename();
+			String extension = FilenameUtils.getExtension(originalFilename);
+			String newFileName = System.currentTimeMillis() + "." + extension;
+
+			vo.setFile_name(originalFilename);
+			vo.setFile_path(newFileName);
+
+			java.io.File newFile = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+					newFileName);
+
+			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
+			System.out.println("파일 저장 성공: " + newFile.getAbsolutePath());
+
+		} else {
 			FreeBoardVO oldBoardData = service.select(vo.getFno());
 			vo.setFile_name(oldBoardData.getFile_name());
 			vo.setFile_path(oldBoardData.getFile_path());

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.multi.shoes4jo.util.Criteria;
-import com.multi.shoes4jo.util.FileUtil;
 import com.multi.shoes4jo.util.PageMaker;
 
 @Controller
@@ -61,7 +62,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/view.do")
-	public ModelAndView view(@RequestParam String bno) {
+	public ModelAndView view(@RequestParam int bno) {
 		service.updateviewcnt(bno);
 		BoardVO board = service.selectOne(bno);
 		return new ModelAndView("board/board_view", "board", board);
@@ -73,43 +74,81 @@ public class BoardController {
 	}
 
 	@RequestMapping("/writeOk.do")
-	public String writeOk(@ModelAttribute BoardVO board,
+	public String writeOk(@ModelAttribute BoardVO vo,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
-		FileUtil.FileUpload(board, file, session);
-		service.insertOne(board);
+		if (file != null && !file.isEmpty()) {
+			String originalFilename = file.getOriginalFilename();
+			String extension = FilenameUtils.getExtension(originalFilename);
+			String newFileName = System.currentTimeMillis() + "." + extension;
+
+			vo.setFile_name(originalFilename);
+			vo.setFile_path(newFileName);
+
+			java.io.File newFile = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+					newFileName);
+
+			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
+			System.out.println("파일 저장 성공: " + newFile.getAbsolutePath());
+		}
+
+		service.insertOne(vo);
 
 		return "redirect:/board/list.do";
 	}
 
 	@RequestMapping("/update.do")
-	public ModelAndView update(@RequestParam String bno) {
-		BoardVO board = service.selectOne(bno);
-		return new ModelAndView("board/board_update", "board", board);
+	public ModelAndView update(@RequestParam int bno) {
+		BoardVO vo = service.selectOne(bno);
+		return new ModelAndView("board/board_update", "board", vo);
 	}
 
 	@RequestMapping("/updateOk.do")
-	public String updateOk(@ModelAttribute BoardVO board,
+	public String updateOk(@ModelAttribute BoardVO vo,
 			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
-		String uploadedImageName = FileUtil.FileUpload(board, file, session);
-		if (uploadedImageName == null) {
-			BoardVO oldBoardData = service.selectOne(String.valueOf(board.getBno()));
-			board.setFile_name(oldBoardData.getFile_name());
-			board.setFile_path(oldBoardData.getFile_path());
+		if (file != null && !file.isEmpty()) {
+			// 기존 파일이 있으면 삭제
+			BoardVO oldBoardData = service.selectOne(vo.getBno());
+			if (oldBoardData.getFile_path() != null) {
+				java.io.File oldFile = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+						oldBoardData.getFile_path());
+				if (oldFile.exists()) {
+					oldFile.delete();
+				}
+			}
+
+			// 새로운 파일 업로드
+			String originalFilename = file.getOriginalFilename();
+			String extension = FilenameUtils.getExtension(originalFilename);
+			String newFileName = System.currentTimeMillis() + "." + extension;
+
+			vo.setFile_name(originalFilename);
+			vo.setFile_path(newFileName);
+
+			java.io.File newFile = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+					newFileName);
+
+			FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
+			System.out.println("파일 저장 성공: " + newFile.getAbsolutePath());
+
+		} else {
+			BoardVO oldBoardData = service.selectOne(vo.getBno());
+			vo.setFile_name(oldBoardData.getFile_name());
+			vo.setFile_path(oldBoardData.getFile_path());
 		}
 
-		service.updateOne(board);
+		service.updateOne(vo);
 
 		return "redirect:/board/list.do";
 	}
 
 	@RequestMapping("/delete.do")
-	public String deleteOk(@RequestParam String bno, HttpSession session) {
-		BoardVO board = service.selectOne(bno);
-		if (board.getFile_path() != null) {
+	public String deleteOk(@RequestParam int bno, HttpSession session) {
+		BoardVO vo = service.selectOne(bno);
+		if (vo.getFile_path() != null) {
 			java.io.File file = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
-					board.getFile_path());
+					vo.getFile_path());
 			if (file.exists()) {
 				file.delete();
 			}

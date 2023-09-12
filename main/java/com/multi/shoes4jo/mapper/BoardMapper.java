@@ -31,23 +31,23 @@ public interface BoardMapper {
 	// 카테고리에 해당하는 게시물 전부 내림차순 정렬해서 조회
 
 	@Select("SELECT * FROM board WHERE bno = #{bno}")
-	BoardVO select(@Param("bno") String bno);
+	BoardVO select(@Param("bno") int bno);
 	// 게시물 번호에 해당하는 게시물 조회
 
 	@Insert("INSERT INTO board (bno, category, title, content, writer, file_name, file_path, link) VALUES (#{bno}, #{category}, #{title}, #{content}, #{writer}, #{file_name}, #{file_path}, #{link})")
-	int insert(BoardVO board);
+	int insert(BoardVO vo);
 	// 새 게시물 추가
 
 	@Update("UPDATE board SET category = #{category}, title = #{title}, content = #{content}, file_name = #{file_name}, file_path = #{file_path}, link = #{link} WHERE bno = #{bno}")
-	int update(BoardVO board);
+	int update(BoardVO vo);
 	// 기존 게시물 업데이트
 
 	@Update("UPDATE board SET viewcnt = viewcnt + 1 WHERE bno = #{bno}")
-	void updateCount(@Param("bno") String bno);
+	void updateCount(@Param("bno") int bno);
 	// 게시물 번호에 해당하는 조회수 1 증가
 
 	@Delete("DELETE FROM board WHERE bno = #{bno}")
-	void delete(@Param("bno") String bno);
+	void delete(@Param("bno") int bno);
 	// 번호에 해당하는 게시물 삭제
 
 	@Select("SELECT MAX(bno) FROM board")
