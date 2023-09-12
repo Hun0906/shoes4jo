@@ -82,7 +82,7 @@ public class FreeBoardController {
 		service.insert(vo);
 
 		request.setAttribute("msg", "새 글 등록에 성공하였습니다.");
-		request.setAttribute("url", "./freeboard/list.do");
+		request.setAttribute("url", "../freeboard/list.do");
 
 		return "msg";
 	}
@@ -112,7 +112,7 @@ public class FreeBoardController {
       service.update(vo);
 
       request.setAttribute("msg", "글 수정에 성공하였습니다.");
-      request.setAttribute("url", "/freeboard/list.do");
+      request.setAttribute("url", "../freeboard/list.do");
 
       return "msg";
    }

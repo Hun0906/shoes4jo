@@ -100,7 +100,7 @@ function checkDelete(fno) {
 				</div>
 
 				<div class="comment-write">
-					<label>${freeboard.member_id}</label>
+					<label>${empty sessionScope.memberInfo ? '비회원' : sessionScope.memberInfo}</label>
 					<textarea class="form-control" id="content" cols="80"
 						rows="2" name="content" style="max-height: 10rem;"></textarea>
 					<button id="Comment_regist" class="btn-comment">등록✏️</button>
