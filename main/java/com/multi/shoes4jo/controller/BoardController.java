@@ -92,25 +92,31 @@ public class BoardController {
 
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute BoardVO board,
-	        @RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
-	    String uploadedImageName= FileUtil.FileUpload(board, file, session);
-	    if(uploadedImageName == null){
-	        BoardVO oldBoardData= service.selectOne(String.valueOf(board.getBno()));
-	        board.setFile_name(oldBoardData.getFile_name());
-	        board.setFile_path(oldBoardData.getFile_path());
-	    }
+		String uploadedImageName = FileUtil.FileUpload(board, file, session);
+		if (uploadedImageName == null) {
+			BoardVO oldBoardData = service.selectOne(String.valueOf(board.getBno()));
+			board.setFile_name(oldBoardData.getFile_name());
+			board.setFile_path(oldBoardData.getFile_path());
+		}
 
-	    service.updateOne(board);
+		service.updateOne(board);
 
-	    return "redirect:/board/list.do";
+		return "redirect:/board/list.do";
 	}
 
-
-
-	
 	@RequestMapping("/delete.do")
-	public String deleteOk(@RequestParam String bno) {
+	public String deleteOk(@RequestParam String bno, HttpSession session) {
+		BoardVO board = service.selectOne(bno);
+		if (board.getFile_path() != null) {
+			java.io.File file = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+					board.getFile_path());
+			if (file.exists()) {
+				file.delete();
+			}
+		}
+
 		service.deleteOne(bno);
 		return "redirect:/board/list.do";
 	}

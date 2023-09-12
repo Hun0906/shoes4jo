@@ -124,9 +124,17 @@ public class FreeBoardController {
 	}
 
 	@RequestMapping("/delete.do")
-	public String deleteOk(@RequestParam int fno) {
+	public String deleteOk(@RequestParam int fno, HttpSession session) {
+		FreeBoardVO vo = service.select(fno);
+		if (vo.getFile_path() != null) {
+			java.io.File file = new java.io.File(session.getServletContext().getRealPath("assets/img/"),
+					vo.getFile_path());
+			if (file.exists()) {
+				file.delete();
+			}
+		}
+
 		service.delete(fno);
 		return "redirect:/freeboard/list.do";
 	}
-
 }
