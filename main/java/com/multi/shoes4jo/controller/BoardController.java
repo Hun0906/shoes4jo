@@ -92,14 +92,23 @@ public class BoardController {
 
 	@RequestMapping("/updateOk.do")
 	public String updateOk(@ModelAttribute BoardVO board,
-			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
+	        @RequestParam(name = "file", required = false) MultipartFile file, HttpSession session) throws Exception {
 
-		FileUtil.FileUpload(board, file, session);
-		service.updateOne(board);
+	    String uploadedImageName= FileUtil.FileUpload(board, file, session);
+	    if(uploadedImageName == null){
+	        BoardVO oldBoardData= service.selectOne(String.valueOf(board.getBno()));
+	        board.setFile_name(oldBoardData.getFile_name());
+	        board.setFile_path(oldBoardData.getFile_path());
+	    }
 
-		return "redirect:/board/list.do";
+	    service.updateOne(board);
+
+	    return "redirect:/board/list.do";
 	}
 
+
+
+	
 	@RequestMapping("/delete.do")
 	public String deleteOk(@RequestParam String bno) {
 		service.deleteOne(bno);

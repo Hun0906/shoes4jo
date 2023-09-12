@@ -35,7 +35,7 @@ table td:nth-child(1) {
 		<div class="form-wrapper">
 			<form name="boardUpdate" method="post" enctype="multipart/form-data"
 				action="<%=context%>/board/updateOk.do">
-                <input type='hidden' name='bno' value='${board.bno}'/>
+				<input type='hidden' name='bno' value='${board.bno}' />
 
 				<table class="table table-board table-hover">
 					<tr>
@@ -47,10 +47,20 @@ table td:nth-child(1) {
 						<td style="text-align: left;">${board.regdate}</td>
 					</tr>
 					<tr>
-						<td style="width: 20%; min-width: 140px;">썸네일</td>
+						<td>썸네일</td>
 						<td style="text-align: left;"><input class="form-control"
 							type="file" name="file" maxlength="260"></td>
 					</tr>
+
+					<c:if test="${not empty board.file_path}">
+						<tr>
+							<td>기존 썸네일</td>
+							<td><img src="<%=context%>/assets/img/${board.file_path}"
+								alt="CurrentThumbnail"
+								style="max-width: 200px; max-height: 200px;"></td>
+						</tr>
+					</c:if>
+
 
 					<tr>
 						<td>작성자</td>

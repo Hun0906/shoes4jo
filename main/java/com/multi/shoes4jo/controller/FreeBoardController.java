@@ -96,26 +96,32 @@ public class FreeBoardController {
 		return mav;
 	}
 
-   @RequestMapping("/update.do")
-   public String update(@RequestParam int fno, HttpSession session, HttpServletRequest request) {
-      FreeBoardVO vo = service.select(fno);
-      request.setAttribute("freeboard", vo);
-      return "freeboard/freeboard_update";
-   }
+	@RequestMapping("/update.do")
+	public String update(@RequestParam int fno, HttpSession session, HttpServletRequest request) {
+		FreeBoardVO vo = service.select(fno);
+		request.setAttribute("freeboard", vo);
+		return "freeboard/freeboard_update";
+	}
 
-   @RequestMapping("/updateOk.do")
-   public String updateOk(@ModelAttribute FreeBoardVO vo,
-         @RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
-         HttpServletRequest request) throws Exception {
+	@RequestMapping("/updateOk.do")
+	public String updateOk(@ModelAttribute FreeBoardVO vo,
+			@RequestParam(name = "file", required = false) MultipartFile file, HttpSession session,
+			HttpServletRequest request) throws Exception {
 
-      FileUtil.FileUpload(vo, file, session);
-      service.update(vo);
+		String uploadedImageName = FileUtil.FileUpload(vo, file, session);
+		if (uploadedImageName == null) {
+			FreeBoardVO oldBoardData = service.select(vo.getFno());
+			vo.setFile_name(oldBoardData.getFile_name());
+			vo.setFile_path(oldBoardData.getFile_path());
+		}
 
-      request.setAttribute("msg", "글 수정에 성공하였습니다.");
-      request.setAttribute("url", "../freeboard/list.do");
+		service.update(vo);
 
-      return "msg";
-   }
+		request.setAttribute("msg", "글 수정에 성공하였습니다.");
+		request.setAttribute("url", "../freeboard/list.do");
+
+		return "msg";
+	}
 
 	@RequestMapping("/delete.do")
 	public String deleteOk(@RequestParam int fno) {
