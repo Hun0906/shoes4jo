@@ -18,6 +18,16 @@
 		SELECT * FROM `shoes_4jo`.`member`
 	</select>
 
+<select id="listMembers" resultMap="memResult">
+	SELECT * FROM `shoes_4jo`.`member`
+	ORDER BY member_id DESC LIMIT #{perPageNum} OFFSET #{pageStart}
+</select>
+
+<select id="countMembers" resultType="int">
+	SELECT COUNT(*) FROM `shoes_4jo`.`member`
+</select>
+
+
 
 	<insert id="insertMember"
 		parameterType="com.multi.shoes4jo.member.MemberVO">
