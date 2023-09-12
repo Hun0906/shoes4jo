@@ -50,13 +50,20 @@ public class FreeBoardController {
 	}
 
 	@RequestMapping(value = "/myBoardList.do")
-	public String myBoard(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String myBoard(HttpServletRequest request, HttpServletResponse response, Model model, Criteria cri)
+			throws Exception {
 
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
 
-		List<FreeBoardVO> freeboardList = service.myBoardList(member_id);
+		List<FreeBoardVO> freeboardList = service.myBoardList(member_id, cri);
 		model.addAttribute("freeboardList", freeboardList);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCountMember(member_id));
+
+		model.addAttribute("pageMaker", pageMaker);
 
 		return "member/my_board_list";
 	}

@@ -67,7 +67,13 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}
 
 	@Override
-	public List<FreeBoardVO> myBoardList(String member_id) {
-		return mapper.myBoardList(member_id);
+	public List<FreeBoardVO> myBoardList(String member_id, Criteria cri) {
+		return mapper.myBoardList(member_id, cri);
 	}
+
+	@Override
+	public int listCountMember(String member_id) {
+		return mapper.listCountMember(member_id);
+	}
+
 }

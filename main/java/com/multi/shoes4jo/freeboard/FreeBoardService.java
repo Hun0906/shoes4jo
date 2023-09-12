@@ -14,7 +14,9 @@ public interface FreeBoardService {
 
 	public List<FreeBoardVO> selectCat(String category);
 
-	public List<FreeBoardVO> myBoardList(String member_id);
+	public List<FreeBoardVO> myBoardList(String member_id,Criteria cri);
+	
+	public int listCountMember(String member_id);
 
 	public void updateviewcnt(int fno);
 
