@@ -13,5 +13,7 @@ public interface GoodsDetailService {
 	public void update(GoodsDetailVO vo);
 
     public void delete(int gno);
+    
+    public void deleteByKeyword(String keyword);
 
 }

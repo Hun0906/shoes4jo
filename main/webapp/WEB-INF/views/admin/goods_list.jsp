@@ -45,7 +45,10 @@
 						<td>${goods.date.substring(0,11)}</td>
 						<td>${goods.category}</td>
 
-<td><a href="<%=context %>/goodscon/update.do?keyword=${goods.keyword}" class="button">수정</a><br><a href="<%=context %>/goodscon/delete.do?gno=${goods.gno}" onclick='return confirm("등록한 상품을 삭제하시겠습니까?")' >삭제</a></td>
+<td><a href="<%=context %>/goodscon/update.do?keyword=${goods.keyword}" class="button">수정</a><br>
+<a href="<%=context %>/goodscon/delete.do?gno=${goods.gno}" onclick='return confirm("등록한 상품을 삭제하시겠습니까?")' >삭제</a><br>
+<a href="<%=context %>/goodscon/deleteByKeyword.do?keyword=${ goods.keyword }" onclick='return confirm("해당 키워드의 모든 상품을 삭제하시겠습니까?")'>키워드 전체 삭제</a></td>
+
 
 					</tr>
 				</c:forEach>

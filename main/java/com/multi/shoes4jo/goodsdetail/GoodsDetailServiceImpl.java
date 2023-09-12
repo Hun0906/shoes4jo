@@ -45,4 +45,9 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	public void delete(int gno) {
 		goodsMapper.delete(gno);
 	}
+
+	@Override
+	public void deleteByKeyword(String keyword) {
+		goodsMapper.deleteByKeyword(keyword);
+	}
 }

@@ -38,10 +38,8 @@ public class GoodsDetailController {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
 		List<BookmarkVO> bookmark_list = bookmarkService.BookmarkList(member_id);
-//		System.out.println("bookmark_list.size(): "+bookmark_list.size());
 		if (bookmark_list.size() != 0) {
 			for (BookmarkVO bookmark : bookmark_list) {
-//				System.out.println(bookmark);
 				if (bookmark.getGno() == goodsList.get(0).getGno()) {
 					model.addAttribute("img", "heart");
 					return "/goods/goods_detail";
@@ -82,6 +80,12 @@ public class GoodsDetailController {
 	@RequestMapping(value = "/delete.do")
 	public String delete(int gno) {
 		service.delete(gno);
+		return "redirect:/goodscon/list.do";
+	}
+
+	@RequestMapping(value = "/deleteByKeyword.do")
+	public String deleteByKeyword(String keyword) {
+		service.deleteByKeyword(keyword);
 		return "redirect:/goodscon/list.do";
 	}
 }
