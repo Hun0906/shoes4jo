@@ -8,7 +8,7 @@ public interface BoardService {
 
 	public List<BoardVO> listPage(Criteria cri);
 
-	public int listCount();
+	public int listCount(String searchType, String keyword);
 
 	public List<BoardVO> selectForMagazine(String category);
 

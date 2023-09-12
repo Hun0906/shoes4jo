@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.multi.shoes4jo.board.BoardVO;
 import com.multi.shoes4jo.util.Criteria;
 import com.multi.shoes4jo.util.PageMaker;
 
@@ -28,13 +29,27 @@ public class FreeBoardController {
 	FreeBoardService service;
 
 	@RequestMapping(value = "/list.do")
-	public String list(Model model, Criteria cri) throws Exception {
+	public String list(Model model, Criteria cri, HttpServletRequest request) throws Exception {
+
+		String searchType = request.getParameter("searchType");
+		String keyword = request.getParameter("keyword");
+
+		if (searchType == null || searchType.isEmpty()) {
+			cri.setSearchType("title");
+		} else {
+			cri.setSearchType(searchType);
+		}
+
+		if (keyword != null && !keyword.isEmpty()) {
+			cri.setKeyword(keyword);
+		}
+
 		List<FreeBoardVO> list = service.listPage(cri);
 		model.addAttribute("list", list);
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.listCount());
+		pageMaker.setTotalCount(service.listCount(cri.getSearchType(), cri.getKeyword()));
 
 		model.addAttribute("pageMaker", pageMaker);
 

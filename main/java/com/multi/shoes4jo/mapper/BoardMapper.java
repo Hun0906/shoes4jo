@@ -15,12 +15,22 @@ import com.multi.shoes4jo.util.Criteria;
 @Mapper
 public interface BoardMapper {
 
-	@Select("SELECT bno, category, title, content, writer, viewcnt, regdate FROM board ORDER BY bno DESC LIMIT #{perPageNum} OFFSET #{pageStart}")
-	public List<BoardVO> listPage(Criteria cri);
-	// 페이징 목록조회
+	@Select("SELECT * FROM board WHERE ${searchType} LIKE CONCAT('%', #{keyword}, '%')")
+	public List<BoardVO> search(@Param("searchType") String searchType, @Param("keyword") String keyword);
 
-	@Select("SELECT COUNT(bno) FROM board WHERE bno > 0")
-	public int listCount();
+	@Select("<script>" + "SELECT bno, category, title, content, writer, viewcnt, regdate " + "FROM board "
+			+ "<if test='searchType != null and keyword != null'>WHERE ${searchType} LIKE CONCAT('%', #{keyword}, '%')</if> "
+			+ "ORDER BY bno DESC LIMIT #{cri.perPageNum} OFFSET #{cri.pageStart}" + "</script>")
+	public List<BoardVO> listPage(@Param("cri") Criteria cri, @Param("searchType") String searchType,
+			@Param("keyword") String keyword);
+	// 페이징 목록조회 + 검색
+
+	@Select("<script>" 
+		    + "SELECT COUNT(bno) FROM board "
+		    + "<if test='searchType != null and keyword != null'>WHERE ${searchType} LIKE CONCAT('%', #{keyword}, '%')</if> "
+		    + "</script>")
+		public int listCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
+
 
 	@Select("SELECT * FROM board where category = #{category} ORDER BY bno DESC limit 3")
 	List<BoardVO> selectForMagazine(@Param("category") String category);

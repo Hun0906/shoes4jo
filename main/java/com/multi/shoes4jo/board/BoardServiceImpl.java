@@ -16,12 +16,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> listPage(Criteria cri) {
-		return mapper.listPage(cri);
+		return mapper.listPage(cri, cri.getSearchType(), cri.getKeyword());
 	}
 
-	@Override
-	public int listCount() {
-		return mapper.listCount();
+    @Override
+	public int listCount(String searchType, String keyword) {
+		return mapper.listCount(searchType, keyword);
 	}
 
 	@Override
