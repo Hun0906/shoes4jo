@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service.goods;
+package com.multi.shoes4jo.goods;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.mapper.GoodsDetailMapper;
-import com.multi.shoes4jo.vo.GoodsDetailVO;
 
 @Service("goodsDetailService")
 public class GoodsDetailServiceImpl implements GoodsDetailService {

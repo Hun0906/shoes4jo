@@ -20,7 +20,7 @@
 
 
 	<insert id="insertMember"
-		parameterType="com.multi.shoes4jo.vo.MemberVO">
+		parameterType="com.multi.shoes4jo.member.MemberVO">
 
 <![CDATA[
         insert into `shoes_4jo`.`member`(member_id, member_name, member_pw, signup_date,member_email, member_phone)
@@ -30,19 +30,19 @@
 
 
 	<select id="loginMember"
-		parameterType="com.multi.shoes4jo.vo.MemberVO" resultType="int">SELECT
+		parameterType="com.multi.shoes4jo.member.MemberVO" resultType="int">SELECT
 		count(*) FROM `shoes_4jo`.`member` WHERE member_id =#{member_id} AND
 		member_pw = #{member_pw}
 	</select>
 
 	<select id="memberInfo"
-		parameterType="com.multi.shoes4jo.vo.MemberVO" resultMap="memResult">SELECT * FROM
+		parameterType="com.multi.shoes4jo.member.MemberVO" resultMap="memResult">SELECT * FROM
 		`shoes_4jo`.`member` WHERE member_id =#{member_id}
 	</select>
 
 
 	<update id="updateMember"
-		parameterType="com.multi.shoes4jo.vo.MemberVO">
+		parameterType="com.multi.shoes4jo.member.MemberVO">
 
 <![CDATA[
 	     update `shoes_4jo`.`member`
@@ -64,7 +64,7 @@
 
 	<!-- 아이디 중복 검사 -->
 	<select id="duplicationId"
-		parameterType="com.multi.shoes4jo.vo.MemberVO" resultType="int">
+		parameterType="com.multi.shoes4jo.member.MemberVO" resultType="int">
 
 <![CDATA[
 		SELECT count(*) cnt FROM `shoes_4jo`.`member`
@@ -74,7 +74,7 @@
 
 
 	<select id="memberIdSearch"
-		parameterType="com.multi.shoes4jo.vo.MemberVO" resultMap="memResult">
+		parameterType="com.multi.shoes4jo.member.MemberVO" resultMap="memResult">
 <![CDATA[
     select * from `shoes_4jo`.`member` where member_name = #{member_name} and member_phone = #{member_phone} ]]>
 	</select>
@@ -82,7 +82,7 @@
 
 
 	<select id="pwCheck"
-		parameterType="com.multi.shoes4jo.vo.MemberVO"
+		parameterType="com.multi.shoes4jo.member.MemberVO"
 		resultType="java.lang.Integer">
 <![CDATA[
     select
@@ -99,7 +99,7 @@
 	</select>
 
 	<update id="pwUpdate"
-		parameterType="com.multi.shoes4jo.vo.MemberVO">
+		parameterType="com.multi.shoes4jo.member.MemberVO">
 		UPDATE
 		`shoes_4jo`.`member`
 		SET

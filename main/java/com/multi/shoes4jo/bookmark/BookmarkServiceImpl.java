@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.service.bookmark;
+package com.multi.shoes4jo.bookmark;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.mapper.BookmarkMapper;
-import com.multi.shoes4jo.vo.BookmarkVO;
 
 @Service("bookmarkService")
 public class BookmarkServiceImpl implements BookmarkService {

@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.shoes4jo.service.bookmark.BookmarkService;
-import com.multi.shoes4jo.vo.BookmarkVO;
+import com.multi.shoes4jo.bookmark.BookmarkService;
+import com.multi.shoes4jo.bookmark.BookmarkVO;
 
 @Controller
 @RequestMapping("/bookmark")
