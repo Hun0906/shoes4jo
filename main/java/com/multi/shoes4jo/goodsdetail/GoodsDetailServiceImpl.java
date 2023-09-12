@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.goods;
+package com.multi.shoes4jo.goodsdetail;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,5 +44,10 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	@Override
 	public void delete(int gno) {
 		goodsMapper.delete(gno);
+	}
+
+	@Override
+	public void deleteByKeyword(String keyword) {
+		goodsMapper.deleteByKeyword(keyword);
 	}
 }

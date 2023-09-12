@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.member;
 
 import java.security.SecureRandom;
 import java.util.List;

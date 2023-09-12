@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.freeboard;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.multi.shoes4jo.freeboard.CommentService;
-import com.multi.shoes4jo.freeboard.CommentVO;
 
 @Controller
 @RequestMapping("/comment")
@@ -73,16 +70,15 @@ public class CommentController {
 
 	@RequestMapping("/myCommentList.do")
 	public ModelAndView myRecord(HttpSession session) {
-	    String member_id = (String) session.getAttribute("memberInfo");
-	    List<CommentVO> list = service.myComment(member_id);
+		String member_id = (String) session.getAttribute("memberInfo");
+		List<CommentVO> list = service.myComment(member_id);
 
-	    Map<String, Object> map = new HashMap<>();
-	    map.put("list", list);
-	    map.put("total", list.size());
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("total", list.size());
 
-	    return new ModelAndView("/member/my_comment_list", map);
+		return new ModelAndView("/member/my_comment_list", map);
 	}
-
 
 	@ResponseBody
 	@RequestMapping("/update.do/{cno}")

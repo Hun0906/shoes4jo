@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.multi.shoes4jo.goods.GoodsDetailVO;
+import com.multi.shoes4jo.goodsdetail.GoodsDetailVO;
 
 @Mapper
 public interface GoodsDetailMapper {
@@ -30,7 +30,12 @@ public interface GoodsDetailMapper {
 	@Update("UPDATE goods_detail SET category=#{category}, goods_name=#{goods_name} , goods_img=#{goods_img} , seller_name=#{seller_name} , seller_url=#{seller_url} , goods_price=#{goods_price} , delivery_fee=#{delivery_fee} WHERE gno =#{gno} AND keyword =#{keyword}")
 	void update(GoodsDetailVO vo);
 
-	// 등록 상품 삭제
+	// 상품 번호 기준으로 등록 상품 삭제
     @Delete("DELETE FROM goods_detail WHERE gno=#{gno}")
     void delete(@Param("gno") int gno);
+    
+    //같은 키워드에 해당하는 상품 전부 삭제
+    @Delete("DELETE FROM goods_detail WHERE keyword=#{keyword}")
+    void deleteByKeyword(@Param("keyword") String keyword);
+
 }
