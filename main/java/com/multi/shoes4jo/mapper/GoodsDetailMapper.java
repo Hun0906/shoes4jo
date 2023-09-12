@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.multi.shoes4jo.goods.GoodsDetailVO;
+import com.multi.shoes4jo.goodsdetail.GoodsDetailVO;
 
 @Mapper
 public interface GoodsDetailMapper {

@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.bookmark;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.multi.shoes4jo.bookmark.BookmarkService;
-import com.multi.shoes4jo.bookmark.BookmarkVO;
 
 @Controller
 @RequestMapping("/bookmark")
@@ -60,18 +57,17 @@ public class BookmarkController {
 	@PostMapping(value = "/insert.do")
 	@ResponseBody
 	public ResponseEntity<?> insert(@RequestBody Map<String, Object> bookmarkMap, HttpSession session) {
-	    String member_id = (String) session.getAttribute("memberInfo");
+		String member_id = (String) session.getAttribute("memberInfo");
 
-	    BookmarkVO vo = new BookmarkVO();
-	    vo.setGno(Integer.parseInt(bookmarkMap.get("gno").toString()));
-	    vo.setMember_id(member_id);
-	    vo.setKeyword((String) bookmarkMap.get("keyword"));
+		BookmarkVO vo = new BookmarkVO();
+		vo.setGno(Integer.parseInt(bookmarkMap.get("gno").toString()));
+		vo.setMember_id(member_id);
+		vo.setKeyword((String) bookmarkMap.get("keyword"));
 
-	    int result = service.insert(vo);
+		int result = service.insert(vo);
 
-	    return new ResponseEntity<>(Collections.singletonMap("result", result), HttpStatus.OK);
+		return new ResponseEntity<>(Collections.singletonMap("result", result), HttpStatus.OK);
 	}
-
 
 	@RequestMapping(value = "/delete.do")
 	public String delete(@RequestParam("bookmark_no") int bookmark_no, HttpSession session) {

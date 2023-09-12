@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.member;
  
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.goods;
+package com.multi.shoes4jo.goodsdetail;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
