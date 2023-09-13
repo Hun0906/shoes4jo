@@ -70,15 +70,16 @@ public class CommentController {
 
 	@RequestMapping("/myCommentList.do")
 	public ModelAndView myRecord(HttpSession session) {
-		String member_id = (String) session.getAttribute("memberInfo");
-		List<CommentVO> list = service.myComment(member_id);
+	    String member_id = (String) session.getAttribute("memberInfo");
+	    List<CommentVO> list = service.myComment(member_id);
 
-		Map<String, Object> map = new HashMap<>();
-		map.put("list", list);
-		map.put("total", list.size());
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("list", list);
+	    map.put("total", list.size());
 
-		return new ModelAndView("/member/my_comment_list", map);
+	    return new ModelAndView("/member/my_comment_list", map);
 	}
+
 
 	@ResponseBody
 	@RequestMapping("/update.do/{cno}")
