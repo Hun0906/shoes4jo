@@ -17,6 +17,7 @@ function showLoading() {
 	    'justify-content': 'center',
 	    'align-items': 'center',
 	    'left': '0',
+	    'overflow': 'hidden',
     }); 
     
     $('#mask-img').css({
