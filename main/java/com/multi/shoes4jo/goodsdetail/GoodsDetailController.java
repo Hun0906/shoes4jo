@@ -38,7 +38,7 @@ public class GoodsDetailController {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
 		List<BookmarkVO> bookmark_list = bookmarkService.BookmarkList(member_id);
-		if (bookmark_list.size() != 0) {
+		if (bookmark_list.size() != 0 && goodsList.size() != 0) {
 			for (BookmarkVO bookmark : bookmark_list) {
 				if (bookmark.getGno() == goodsList.get(0).getGno()) {
 					model.addAttribute("img", "heart");

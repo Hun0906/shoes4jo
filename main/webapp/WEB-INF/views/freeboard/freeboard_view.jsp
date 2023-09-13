@@ -270,7 +270,7 @@ $(document).on("click", ".edit", function(){
     const contentElement = $(this).parent().prev();
 
     const oldContent = contentElement.text();
-    contentElement.html(`<input type="text" id="edit-field-${cno}" value="${oldContent}"> <button class="btn-basic save-edit" data-id="${cno}">저장</button>`);
+    contentElement.html(`<div class="edit-field"><input type="text" class="form-control" id="edit-field-`+cno+`" value="${oldContent}"> <button class="btn-comment save-edit" data-id="`+cno+`">저장</button></div>`);
 });
 
 	$(document).on("click", ".save-edit", function(){

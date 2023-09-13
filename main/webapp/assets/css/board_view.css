@@ -78,3 +78,14 @@ table td:nth-child(2) {
     padding: 0.3rem 0 0.3rem 0.6rem;
 }
 
+.edit-field{
+	display: grid;
+    grid-template-columns: 1fr 60px;
+    gap: 5px;
+}
+
+.edit-field button{
+	padding: 0.3rem 0;
+	font-size: 0.9rem;
+}
+
