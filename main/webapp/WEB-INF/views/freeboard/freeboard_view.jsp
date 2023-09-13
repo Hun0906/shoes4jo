@@ -264,10 +264,10 @@ $('#Comment_regist').click(function() {
 $(document).on("click", ".edit", function(){
     const cno = $(this).data("id");
     const contentElement = $(this).parent().prev();
-
     const oldContent = contentElement.text();
     contentElement.html(`<div class="edit-field"><input type="text" class="form-control" id="edit-field-`+cno+`" value="${oldContent}"> <button class="btn-comment save-edit" data-id="`+cno+`">저장</button></div>`);
 });
+
 
 	$(document).on("click", ".save-edit", function(){
 	   const cno = $(this).data("id");
