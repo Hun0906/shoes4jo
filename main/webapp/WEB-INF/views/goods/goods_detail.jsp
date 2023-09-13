@@ -127,7 +127,7 @@ th {
 	<div class="container">
 		<h1>상품 상세정보</h1>
 		<div class="grid">
-			<img src="${goods_list[0].goods_img}" alt="상품이미지" width="100%" onerror="this.src='<%=context%>/assets/img/default.jpg'"/>
+			<img src="${goods_list[0].goods_img}" width="100%" onerror="this.src='<%=context%>/assets/img/default.jpg'"/>
 			<div>
 				<p>${goods_list[0].category}</p>
 				<div class='bookmark'>

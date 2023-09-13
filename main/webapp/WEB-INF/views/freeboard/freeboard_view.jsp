@@ -89,6 +89,7 @@ function checkDelete(fno) {
 
 						<c:if test="${sessionScope.memberInfo == comment.member_id}">
 							<div>
+                <!-- <button onClick="edit(${comment.cno})" class="badge">수정</button> -->
 								<button onClick="delete(${comment.cno})" class="badge">삭제</button>
 							</div>
 						</c:if>
@@ -118,8 +119,7 @@ function checkDelete(fno) {
 
 			<div class="form-button-wrapper">
 				<button class="btn-basic btn-line-basic"
-					onclick="location.href='<%=context%>/freeboard/list.do'">글
-					목록 보기</button>
+					onclick="location.href='<%=context%>/freeboard/list.do'">글 목록 보기</button>
 			</div>
 		</div>
 	</div>
@@ -238,6 +238,17 @@ $('#Comment_regist').click(function() {
 	//댓글 삭제 끝
 	
 
+//    const oldContent = contentElement.text();
+//    contentElement.html(`<div class="edit-field"><input type="text" class="form-control" id="edit-field-`+cno+`" value="${oldContent}"> <button class="btn-comment save-edit" data-id="`+cno+`">저장</button></div>`);
+});
+
+// 	$(document).on("click", ".save-edit", function(){
+// 	   const cno = $(this).data("id");
+
+// 	   const newContent = $("#edit-field-" + cno).val();
+
+// 	   editComment(cno, newContent);
+// 	});
 
 	$(document).on("click", ".delete", function(){
 	   const cno = $(this).data("id");
