@@ -221,6 +221,7 @@ $('#Comment_regist').click(function() {
 	        type: 'post',
 	        url: '<%=request.getContextPath()%>/comment/update.do/' + cno,
 	        data: JSON.stringify({
+	        	"cno": cno,
 	            "content": newContent
 	        }),
 	        contentType: 'application/json',
