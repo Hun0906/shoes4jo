@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.mapper.GoodsDetailMapper;
+import com.multi.shoes4jo.util.Criteria;
 
 @Service("goodsDetailService")
 public class GoodsDetailServiceImpl implements GoodsDetailService {
 
 	@Autowired
-	private GoodsDetailMapper goodsMapper;
+	private GoodsDetailMapper mapper;
 
 	@Override
 	public void insert(GoodsDetailVO vo) {
@@ -23,31 +24,36 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 
 		vo.setDate(dateString);
 
-		goodsMapper.insert(vo);
+		mapper.insert(vo);
 	}
 
 	@Override
-	public List<GoodsDetailVO> selectAllGoods() {
-		return goodsMapper.selectAllGoods();
+	public List<GoodsDetailVO> selectAllGoods(Criteria cri) {
+		return mapper.selectAllGoods(cri);
+	}
+
+	@Override
+	public int listCount() {
+		return mapper.listCount();
 	}
 
 	@Override
 	public List<GoodsDetailVO> selectOne(String keyword) {
-		return goodsMapper.selectOne(keyword);
+		return mapper.selectOne(keyword);
 	}
 
 	@Override
 	public void update(GoodsDetailVO vo) {
-		goodsMapper.update(vo);
+		mapper.update(vo);
 	}
 
 	@Override
 	public void delete(int gno) {
-		goodsMapper.delete(gno);
+		mapper.delete(gno);
 	}
 
 	@Override
 	public void deleteByKeyword(String keyword) {
-		goodsMapper.deleteByKeyword(keyword);
+		mapper.deleteByKeyword(keyword);
 	}
 }

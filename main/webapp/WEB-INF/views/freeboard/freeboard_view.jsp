@@ -50,7 +50,7 @@ function checkDelete(fno) {
 				<div>
 					<b>작성자</b> ${freeboard.member_id}
 				</div>
-				<div>${freeboard.viewcnt} Views | ${freeboard.date.substring(0, 10)}</div>
+				<div>${freeboard.viewcnt}Views|${freeboard.date.substring(0, 10)}</div>
 			</div>
 
 			<div class="line"></div>
@@ -73,12 +73,13 @@ function checkDelete(fno) {
 
 			<!-- 댓글창 시작 -->
 
-			<div style="background: #ccc;height: 1px;margin-top: 5rem;margin-bottom:1rem;"></div>
+			<div
+				style="background: #ccc; height: 1px; margin-top: 5rem; margin-bottom: 1rem;"></div>
 
 			<div class="comment-wrapper">
 
 				<div class="comment-header">
-					<b>댓글</b> (총 <b id="count" style="color:#6ECCAF">0 </b> 건)
+					<b>댓글</b> (총 <b id="count" style="color: #6ECCAF">0 </b> 건)
 				</div>
 
 				<div class="comment-box">
@@ -86,41 +87,36 @@ function checkDelete(fno) {
 					<c:forEach var="comment" items="${comments}">
 						<p>${comment.content}</p>
 
-						<span class="date">등록일: <fmt:formatDate value="${comment.date}"
-								pattern="yyyy-MM-dd HH:mm:ss" /> | 수정일: <fmt:formatDate
-								value="${comment.update_date}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
-						<!-- 날짜 출력 안되는 문제 알아보기 -->
 						<c:if test="${sessionScope.memberInfo == comment.member_id}">
-						<div>
-							<button onClick="edit(${comment.cno})" class="badge">수정</button>
-							<button onClick="delete(${comment.cno})" class="badge">삭제</button>
-						</div>
+							<div>
+                <!-- <button onClick="edit(${comment.cno})" class="badge">수정</button> -->
+								<button onClick="delete(${comment.cno})" class="badge">삭제</button>
+							</div>
 						</c:if>
 					</c:forEach>
 				</div>
 
 				<div class="comment-write">
 					<label>${empty sessionScope.memberInfo ? '비회원' : sessionScope.memberInfo}</label>
-					<textarea class="form-control" id="content" cols="80"
-						rows="2" name="content" style="max-height: 10rem;"></textarea>
+					<textarea class="form-control" id="content" cols="80" rows="2"
+						name="content" style="max-height: 10rem;"></textarea>
 					<button id="Comment_regist" class="btn-comment">등록✏️</button>
 				</div>
 			</div>
 			<!-- 댓글창 끝 -->
 
 
-			<!-- 본인 아이디 확인 후 글 수정,삭제창 보이게 함-->
 			<div class="line"></div>
 
 			<div class="form-button-wrapper">
 				<c:if test="${sessionScope.memberInfo == freeboard.member_id}">
 					<span class="btn-basic btn-line-red"
 						onclick="checkDelete(${freeboard.fno})">삭제하기</span>
-					<button class="btn-basic"
-						onclick="location.href='<%=context%>/freeboard/update.do?fno=${freeboard.fno}'">수정하기</button>
 				</c:if>
 			</div>
-			<!-- 본인 아이디 확인 후 글 수정,삭제창 끝-->
+
+
+
 			<div class="form-button-wrapper">
 				<button class="btn-basic btn-line-basic"
 					onclick="location.href='<%=context%>/freeboard/list.do'">글 목록 보기</button>
@@ -202,7 +198,6 @@ $('#Comment_regist').click(function() {
 	                comment_html += "<span>" + content + "</span>";
 	                 
 	                if(loginCheck === list[i].member_id){
-	                    comment_html += "<div style='text-align: right;'><button class='edit badge' data-id =" + list[i].cno+">수정</button>";
 	                    comment_html += "<button class='delete badge' data-id =" + list[i].cno+">삭제</button></div></div>";
 	                } else{
 	                    comment_html += "</div>";
@@ -217,28 +212,6 @@ $('#Comment_regist').click(function() {
 	        }
 	    });
 	} // getList() 종료
-
-	
-	//댓글 수정
-	function editComment(cno, newContent) {
-	    $.ajax({
-	        type: 'post',
-	        url: '<%=request.getContextPath()%>/comment/update.do/' + cno,
-	        data: JSON.stringify({
-	            "content": newContent
-	        }),
-	        contentType: 'application/json',
-	        success:function(data){
-	            if (data === 'updateOk') {
-	                alert('댓글이 수정되었습니다');
-	                getList();
-	            } 
-	         },
-	         error:function(){
-	             alert('연결 실패');
-	         }
-	    });
-	}//댓글 수정 끝
 
 
 	//댓글 삭제
@@ -264,22 +237,18 @@ $('#Comment_regist').click(function() {
 	}
 	//댓글 삭제 끝
 	
-	//댓글 수정,삭제 이벤트
-$(document).on("click", ".edit", function(){
-    const cno = $(this).data("id");
-    const contentElement = $(this).parent().prev();
 
-    const oldContent = contentElement.text();
-    contentElement.html(`<div class="edit-field"><input type="text" class="form-control" id="edit-field-`+cno+`" value="${oldContent}"> <button class="btn-comment save-edit" data-id="`+cno+`">저장</button></div>`);
+//    const oldContent = contentElement.text();
+//    contentElement.html(`<div class="edit-field"><input type="text" class="form-control" id="edit-field-`+cno+`" value="${oldContent}"> <button class="btn-comment save-edit" data-id="`+cno+`">저장</button></div>`);
 });
 
-	$(document).on("click", ".save-edit", function(){
-	   const cno = $(this).data("id");
+// 	$(document).on("click", ".save-edit", function(){
+// 	   const cno = $(this).data("id");
 
-	   const newContent = $("#edit-field-" + cno).val();
+// 	   const newContent = $("#edit-field-" + cno).val();
 
-	   editComment(cno, newContent);
-	});
+// 	   editComment(cno, newContent);
+// 	});
 
 	$(document).on("click", ".delete", function(){
 	   const cno = $(this).data("id");

@@ -12,53 +12,53 @@ import com.multi.shoes4jo.util.Criteria;
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	private BoardMapper boardMapper;
+	private BoardMapper mapper;
 
 	@Override
 	public List<BoardVO> listPage(Criteria cri) {
-		return boardMapper.listPage(cri);
+		return mapper.listPage(cri, cri.getSearchType(), cri.getKeyword());
 	}
 
-	@Override
-	public int listCount() {
-		return boardMapper.listCount();
+    @Override
+	public int listCount(String searchType, String keyword) {
+		return mapper.listCount(searchType, keyword);
 	}
 
 	@Override
 	public List<BoardVO> selectForMagazine(String category) {
-		return boardMapper.selectForMagazine(category);
+		return mapper.selectForMagazine(category);
 	}
 
 	@Override
 	public List<BoardVO> selectOneCat(String category) {
-		return boardMapper.selectOneCat(category);
+		return mapper.selectOneCat(category);
 	}
 
 	@Override
-	public BoardVO selectOne(String bno) {
-		return boardMapper.select(bno);
+	public BoardVO selectOne(int bno) {
+		return mapper.select(bno);
 	}
 
 	@Override
-	public void insertOne(BoardVO board) {
-		Integer maxBno = boardMapper.maxBno();
-		board.setBno((maxBno == null) ? 1 : maxBno + 1);
-		boardMapper.insert(board);
+	public void insertOne(BoardVO vo) {
+		Integer maxBno = mapper.maxBno();
+		vo.setBno((maxBno == null) ? 1 : maxBno + 1);
+		mapper.insert(vo);
 	}
 
 	@Override
-	public void updateOne(BoardVO board) {
-		boardMapper.update(board);
+	public void updateOne(BoardVO vo) {
+		mapper.update(vo);
 	}
 
 	@Override
-	public void updateviewcnt(String bno) {
-		boardMapper.updateCount(bno);
+	public void updateviewcnt(int bno) {
+		mapper.updateCount(bno);
 	}
 
 	@Override
-	public void deleteOne(String bno) {
-		boardMapper.delete(bno);
+	public void deleteOne(int bno) {
+		mapper.delete(bno);
 	}
 
 }

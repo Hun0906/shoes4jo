@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.shoes4jo.member.MemberService;
-import com.multi.shoes4jo.member.MemberVO;
+import com.multi.shoes4jo.util.Criteria;
+import com.multi.shoes4jo.util.PageMaker;
 
 @Controller
 @RequestMapping("/controller")
@@ -278,11 +278,18 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	@RequestMapping(value = "/showMember")
-	public String showMember(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String showMember(Criteria cri, HttpServletRequest request, HttpServletResponse response, Model model)
+			throws Exception {
 
-		List<MemberVO> member_list = service.listMembers();
+		List<MemberVO> member_list = service.listMembers(cri);
 		model.addAttribute("member_list", member_list);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countMembers());
+
+		model.addAttribute("pageMaker", pageMaker);
+
 		return "/admin/member_list";
 	}
-
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.shoes4jo.bookmark.BookmarkService;
 import com.multi.shoes4jo.bookmark.BookmarkVO;
+import com.multi.shoes4jo.util.Criteria;
+import com.multi.shoes4jo.util.PageMaker;
 
 @Controller
 @RequestMapping("/goodscon")
@@ -24,9 +26,17 @@ public class GoodsDetailController {
 	private BookmarkService bookmarkService;
 
 	@RequestMapping(value = "/list.do") // 상품 전체 목록 조회
-	public String showList(Model model) {
-		List<GoodsDetailVO> goods_list = service.selectAllGoods();
+	public String showList(Model model, Criteria cri) {
+		List<GoodsDetailVO> goods_list = service.selectAllGoods(cri);
 		model.addAttribute("goods_list", goods_list);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCount()); // countMembers()는 전체 게시물 수를 반환하는 메서드입니다.
+														// 이 부분은 실제 상황에 맞게 구현이 필요합니다.
+
+		model.addAttribute("pageMaker", pageMaker);
+
 		return "/admin/goods_list";
 	}
 
@@ -37,7 +47,7 @@ public class GoodsDetailController {
 
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
-		List<BookmarkVO> bookmark_list = bookmarkService.BookmarkList(member_id);
+		List<BookmarkVO> bookmark_list = bookmarkService.getAllBookmarks(member_id);
 		if (bookmark_list.size() != 0 && goodsList.size() != 0) {
 			for (BookmarkVO bookmark : bookmark_list) {
 				if (bookmark.getGno() == goodsList.get(0).getGno()) {

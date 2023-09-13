@@ -8,22 +8,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.shoes4jo.mapper.BookmarkMapper;
+import com.multi.shoes4jo.util.Criteria;
 
 @Service("bookmarkService")
 public class BookmarkServiceImpl implements BookmarkService {
 
 	@Autowired
-	private BookmarkMapper bookmarkMapper;
+	private BookmarkMapper mapper;
 
 	@Override
 	public BookmarkVO check(String member_id, int gno) {
-		return bookmarkMapper.check(member_id, gno);
+		return mapper.check(member_id, gno);
 	}
 
 	@Override
-	public List<BookmarkVO> BookmarkList(String member_id) {
-		return bookmarkMapper.BookmarkList(member_id);
+	public List<BookmarkVO> BookmarkList(String member_id, Criteria cri) {
+	    return mapper.BookmarkList(member_id, cri);
 	}
+
+	@Override
+	public int listCount() {
+		return mapper.listCount();
+	}
+	
+	@Override
+	public List<BookmarkVO> getAllBookmarks(String member_id) {
+	    return mapper.getAllBookmarks(member_id);
+	}
+	//페이징 안한 북마크 리스트
 
 	@Override
 	public int insert(BookmarkVO vo) {
@@ -38,13 +50,13 @@ public class BookmarkServiceImpl implements BookmarkService {
 			return -1;
 		}
 
-		this.bookmarkMapper.insert(vo);
+		this.mapper.insert(vo);
 
 		return 1;
 	}
 
 	@Override
 	public int delete(int gno, String member_id) {
-		return this.bookmarkMapper.delete(gno, member_id);
+		return this.mapper.delete(gno, member_id);
 	}
 }

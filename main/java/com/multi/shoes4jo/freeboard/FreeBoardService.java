@@ -8,13 +8,15 @@ public interface FreeBoardService {
 
 	public List<FreeBoardVO> listPage(Criteria cri);
 
-	public int listCount();
-
+	public int listCount(String searchType, String keyword);
+	
 	public FreeBoardVO select(int fno);
 
 	public List<FreeBoardVO> selectCat(String category);
 
-	public List<FreeBoardVO> myBoardList(String member_id);
+	public List<FreeBoardVO> myBoardList(String member_id, Criteria cri);
+
+	public int listCountMember(String member_id);
 
 	public void updateviewcnt(int fno);
 

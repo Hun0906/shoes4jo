@@ -8,20 +8,20 @@ public interface BoardService {
 
 	public List<BoardVO> listPage(Criteria cri);
 
-	public int listCount();
+	public int listCount(String searchType, String keyword);
 
 	public List<BoardVO> selectForMagazine(String category);
 
 	public List<BoardVO> selectOneCat(String category);
 
-	public BoardVO selectOne(String bno);
+	public BoardVO selectOne(int bno);
 
-	public void updateviewcnt(String bno);
+	public void updateviewcnt(int bno);
 
-	public void insertOne(BoardVO board);
+	public void insertOne(BoardVO vo);
 
-	public void updateOne(BoardVO board);
+	public void updateOne(BoardVO vo);
 
-	public void deleteOne(String bno);
+	public void deleteOne(int bno);
 
 }

@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.multi.shoes4jo.util.Criteria;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -48,39 +50,40 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int deleteMember(String member_id) throws Exception {
 		try {
-			return sqlSession.delete("memberMapper.deleteMember",member_id);
+			return sqlSession.delete("memberMapper.deleteMember", member_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
-	
 
 	@Override
 	public int duplicationId(String member_id) throws Exception {
 		return sqlSession.selectOne("memberMapper.duplicationId", member_id);
 	}
 
-	
 	@Override
 	public List<MemberVO> memberIdSearch(MemberVO searchVO) {
-	return sqlSession.selectList("memberMapper.memberIdSearch", searchVO);
+		return sqlSession.selectList("memberMapper.memberIdSearch", searchVO);
 	}
-	
-	
+
 	@Override
 	public int pwCheck(MemberVO searchVO) {
-		return sqlSession.selectOne("memberMapper.pwCheck", searchVO); 
+		return sqlSession.selectOne("memberMapper.pwCheck", searchVO);
 	}
-	 
+
 	@Override
 	public void pwUpdate(MemberVO searchVO) {
 		sqlSession.update("memberMapper.pwUpdate", searchVO);
 	}
-	
-    @Override
-    public List<MemberVO> listMembers() throws Exception {
-        return sqlSession.selectList("memberMapper.showMember");
-    }
-}  
 
+	@Override
+	public List<MemberVO> listMembers(Criteria cri) throws Exception {
+		return sqlSession.selectList("memberMapper.listMembers", cri);
+	}
+
+	@Override
+	public int countMembers() throws Exception {
+		return sqlSession.selectOne("memberMapper.countMembers");
+	}
+}
