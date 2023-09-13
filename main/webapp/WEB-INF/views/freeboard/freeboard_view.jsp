@@ -50,7 +50,7 @@ function checkDelete(fno) {
 				<div>
 					<b>작성자</b> ${freeboard.member_id}
 				</div>
-				<div>${freeboard.viewcnt}Views|${freeboard.date.substring(0, 10)}</div>
+				<div>${freeboard.viewcnt} Views | ${freeboard.date.substring(0, 10)}</div>
 			</div>
 
 			<div class="line"></div>
@@ -240,7 +240,7 @@ $('#Comment_regist').click(function() {
 
 //    const oldContent = contentElement.text();
 //    contentElement.html(`<div class="edit-field"><input type="text" class="form-control" id="edit-field-`+cno+`" value="${oldContent}"> <button class="btn-comment save-edit" data-id="`+cno+`">저장</button></div>`);
-});
+//});
 
 // 	$(document).on("click", ".save-edit", function(){
 // 	   const cno = $(this).data("id");

@@ -25,9 +25,19 @@
 .commnet-num svg {
 	margin-right: 5px;
 }
-.basic {
-    background-color: black;
-    color: white;
+.board-search-wrapper button{
+	padding: 0 1rem;
+}
+.board-search-wrapper select{
+	width: fit-content;
+}
+.board-search-wrapper input{
+	width: 16rem;
+}
+.board-search-wrapper{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
 }
 </style>
 </head>
@@ -81,8 +91,7 @@
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-chat-left"
 											viewBox="0 0 20 20">
-  <path
-												d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
 </svg>${freeboard.comment_cnt}</span>
 								</c:if></td>
 
@@ -100,17 +109,16 @@
 
 			<!-- 검색창 -->
 			<br>
-			<div>
-				<form action="${pageContext.request.contextPath}/freeboard/list.do"
-					method="get">
-					<select name="searchType">
+				<form action="${pageContext.request.contextPath}/freeboard/list.do" method="get">
+			<div class="board-search-wrapper">
+					<select name="searchType" class="form-select">
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 						<option value="member_id">작성자</option>
-					</select> <input type="text" name="keyword">
-					<button type="submit" class="basic">검색</button>
-				</form>
+					</select> <input type="text" name="keyword" class="form-control">
+					<button type="submit" class="btn-line-basic">검색</button>
 			</div>
+				</form>
 			<br>
 			<!-- 검색창 끝, 페이징 시작 -->
 
