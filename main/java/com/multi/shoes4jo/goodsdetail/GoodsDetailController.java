@@ -32,8 +32,7 @@ public class GoodsDetailController {
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.listCount()); // countMembers()는 전체 게시물 수를 반환하는 메서드입니다.
-														// 이 부분은 실제 상황에 맞게 구현이 필요합니다.
+		pageMaker.setTotalCount(service.listCount()); 
 
 		model.addAttribute("pageMaker", pageMaker);
 
