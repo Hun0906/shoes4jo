@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.freeboard;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.multi.shoes4jo.freeboard.CommentService;
-import com.multi.shoes4jo.freeboard.CommentVO;
 
 @Controller
 @RequestMapping("/comment")

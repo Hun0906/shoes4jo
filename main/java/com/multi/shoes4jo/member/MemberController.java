@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.member;
  
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.multi.shoes4jo.util.Criteria;
 
 public interface MemberController {
 
@@ -30,7 +32,6 @@ public interface MemberController {
     
     public String search_pw(HttpServletRequest request, Model model) throws Exception;
     
-    public String showMember(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception;
- 
+    public String showMember(Criteria cri, HttpServletRequest request,HttpServletResponse response,Model model) throws Exception; 
 }
 

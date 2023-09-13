@@ -86,10 +86,6 @@ function checkDelete(fno) {
 					<c:forEach var="comment" items="${comments}">
 						<p>${comment.content}</p>
 
-						<span class="date">등록일: <fmt:formatDate value="${comment.date}"
-								pattern="yyyy-MM-dd HH:mm:ss" /> | 수정일: <fmt:formatDate
-								value="${comment.update_date}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
-						<!-- 날짜 출력 안되는 문제 알아보기 -->
 						<c:if test="${sessionScope.memberInfo == comment.member_id}">
 						<div>
 							<button onClick="edit(${comment.cno})" class="badge">수정</button>
@@ -225,6 +221,7 @@ $('#Comment_regist').click(function() {
 	        type: 'post',
 	        url: '<%=request.getContextPath()%>/comment/update.do/' + cno,
 	        data: JSON.stringify({
+	        	"cno": cno,
 	            "content": newContent
 	        }),
 	        contentType: 'application/json',
@@ -268,10 +265,10 @@ $('#Comment_regist').click(function() {
 $(document).on("click", ".edit", function(){
     const cno = $(this).data("id");
     const contentElement = $(this).parent().prev();
-
     const oldContent = contentElement.text();
-    contentElement.html(`<input type="text" id="edit-field-${cno}" value="${oldContent}"> <button class="btn-basic save-edit" data-id="${cno}">저장</button>`);
+    contentElement.html(`<div class="edit-field"><input type="text" class="form-control" id="edit-field-`+cno+`" value="${oldContent}"> <button class="btn-comment save-edit" data-id="`+cno+`">저장</button></div>`);
 });
+
 
 	$(document).on("click", ".save-edit", function(){
 	   const cno = $(this).data("id");

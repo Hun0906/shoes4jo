@@ -1,4 +1,4 @@
-package com.multi.shoes4jo.controller;
+package com.multi.shoes4jo.bookmark;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.multi.shoes4jo.bookmark.BookmarkService;
-import com.multi.shoes4jo.bookmark.BookmarkVO;
+import com.multi.shoes4jo.util.Criteria;
+import com.multi.shoes4jo.util.PageMaker;
 
 @Controller
 @RequestMapping("/bookmark")
@@ -30,15 +30,21 @@ public class BookmarkController {
 	private BookmarkService service;
 
 	@RequestMapping(value = "/list.do") // 본인 아이디의 북마크 전체 목록 조회
-	public ModelAndView showList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView showList(HttpServletRequest request, HttpServletResponse response, Criteria cri)
+			throws Exception {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("memberInfo");
 
-		List<BookmarkVO> bookmark_list = service.BookmarkList(member_id);
+		List<BookmarkVO> bookmark_list = service.BookmarkList(member_id, cri);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCount());
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/my_bookmark_list");
 		mav.addObject("bookmark_list", bookmark_list);
+		mav.addObject("pageMaker", pageMaker);
 
 		return mav;
 	}
@@ -60,18 +66,17 @@ public class BookmarkController {
 	@PostMapping(value = "/insert.do")
 	@ResponseBody
 	public ResponseEntity<?> insert(@RequestBody Map<String, Object> bookmarkMap, HttpSession session) {
-	    String member_id = (String) session.getAttribute("memberInfo");
+		String member_id = (String) session.getAttribute("memberInfo");
 
-	    BookmarkVO vo = new BookmarkVO();
-	    vo.setGno(Integer.parseInt(bookmarkMap.get("gno").toString()));
-	    vo.setMember_id(member_id);
-	    vo.setKeyword((String) bookmarkMap.get("keyword"));
+		BookmarkVO vo = new BookmarkVO();
+		vo.setGno(Integer.parseInt(bookmarkMap.get("gno").toString()));
+		vo.setMember_id(member_id);
+		vo.setKeyword((String) bookmarkMap.get("keyword"));
 
-	    int result = service.insert(vo);
+		int result = service.insert(vo);
 
-	    return new ResponseEntity<>(Collections.singletonMap("result", result), HttpStatus.OK);
+		return new ResponseEntity<>(Collections.singletonMap("result", result), HttpStatus.OK);
 	}
-
 
 	@RequestMapping(value = "/delete.do")
 	public String delete(@RequestParam("bookmark_no") int bookmark_no, HttpSession session) {

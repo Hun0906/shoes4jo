@@ -28,24 +28,22 @@
 				</tr>
 			</thead>
 
-<tbody>
-<c:forEach var="comment" items="${list}">
-	<tr>
-		<td class="text-center">${comment.cno}</td>
-		<td class="text-center">${comment.content}</td>
-		<td class="text-center">${comment.date.substring(0,11)}</td>
-		<td class="text-center">${comment.update_date.substring(0,11)}</td>
-        <td class="text-center"><a href="${pageContext.request.contextPath}/freeboard/view.do?fno=${comment.fno}">바로가기</a></td>
-   </tr>
-</c:forEach>
-</tbody>
-
-			
-			
-			
+			<tbody>
+				<c:forEach var="comment" items="${list}">
+					<tr>
+						<td class="text-center">${comment.cno}</td>
+						<td class="text-center">${comment.content}</td>
+						<td class="text-center">${comment.date.substring(0,11)}</td>
+						<td class="text-center">${comment.update_date.substring(0,11)}</td>
+						<td class="text-center"><a
+							href="${pageContext.request.contextPath}/freeboard/view.do?fno=${comment.fno}">바로가기</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
-
 	</div>
+	
+	
 	<%@include file="../common/footer.jsp"%>
 </body>
 </html>
