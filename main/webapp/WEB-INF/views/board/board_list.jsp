@@ -14,8 +14,8 @@
 	max-width: 100%;
 }
 .basic {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
 }
 .search-container {
   display: flex;
