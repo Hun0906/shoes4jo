@@ -1,7 +1,7 @@
 # shoes4jo
 멀티캠퍼스 파이널 프로젝트 4조
 
-시연영상 링크🕶 https://youtu.be/9Vvx_keefgw
+시연영상 링크🕶 https://www.youtube.com/watch?v=GWw88Ux_QXc
 
 ![image](https://github.com/0123aqq/shoes4jo/assets/130541650/c9ec37a6-a3c4-4ec8-b963-462df3e61aba)
 
