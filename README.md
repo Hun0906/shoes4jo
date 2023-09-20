@@ -25,7 +25,6 @@
 
 ![image](https://github.com/0123aqq/shoes4jo/assets/130541650/103caa5c-0f49-44dc-a066-c3fa0fe8bfbd)
 
-![image](https://github.com/0123aqq/shoes4jo/assets/130541650/2994f467-8719-4e24-afa9-35053c6f2b31)
 
 
 
