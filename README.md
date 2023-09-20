@@ -11,8 +11,6 @@
 
 ![image](https://github.com/0123aqq/shoes4jo/assets/130541650/f744593d-dc8c-472b-8dda-61b6c905b2b2)
 
-![image](https://github.com/0123aqq/shoes4jo/assets/130541650/fa4ca2c2-6d8a-4c7f-8e34-3783b43810a3)
-
 ![image](https://github.com/0123aqq/shoes4jo/assets/130541650/b4b26d71-af7b-417d-baa3-567c082d5fb0)
 
 ![image](https://github.com/0123aqq/shoes4jo/assets/130541650/8844e9f5-f267-4c96-9a00-977b4e583922)
