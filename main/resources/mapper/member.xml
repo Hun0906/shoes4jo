@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="memberMapper">
+
+	<resultMap id="memResult" type="MemberVO">
+		<result column="member_id" property="member_id" />
+		<result column="member_name" property="member_name" />
+		<result column="member_pw" property="member_pw" />
+		<result column="signup_date" property="signup_date" />
+		<result column="member_email" property="member_email" />
+		<result column="member_phone" property="member_phone" />
+	</resultMap>
+
+	<select id="showMember" resultMap="memResult">
+		SELECT * FROM `shoes_4jo`.`member`
+	</select>
+
+<select id="listMembers" resultMap="memResult">
+	SELECT * FROM `shoes_4jo`.`member`
+	ORDER BY member_id DESC LIMIT #{perPageNum} OFFSET #{pageStart}
+</select>
+
+<select id="countMembers" resultType="int">
+	SELECT COUNT(*) FROM `shoes_4jo`.`member`
+</select>
+
+
+
+	<insert id="insertMember"
+		parameterType="com.multi.shoes4jo.member.MemberVO">
+
+<![CDATA[
+        insert into `shoes_4jo`.`member`(member_id, member_name, member_pw, signup_date,member_email, member_phone)
+        values(#{member_id}, #{member_name}, #{member_pw}, NOW(), #{member_email}, #{member_phone})
+    ]]>
+	</insert>
+
+
+	<select id="loginMember"
+		parameterType="com.multi.shoes4jo.member.MemberVO" resultType="int">SELECT
+		count(*) FROM `shoes_4jo`.`member` WHERE member_id =#{member_id} AND
+		member_pw = #{member_pw}
+	</select>
+
+	<select id="memberInfo"
+		parameterType="com.multi.shoes4jo.member.MemberVO" resultMap="memResult">SELECT * FROM
+		`shoes_4jo`.`member` WHERE member_id =#{member_id}
+	</select>
+
+
+	<update id="updateMember"
+		parameterType="com.multi.shoes4jo.member.MemberVO">
+
+<![CDATA[
+	     update `shoes_4jo`.`member`
+	     set member_name=#{member_name}, member_pw=#{member_pw}
+	     , member_email=#{member_email},member_phone=#{member_phone}
+	     where
+	     member_id=#{member_id}
+      ]]>
+	</update>
+
+	<delete id="deleteMember"
+		parameterType="java.lang.String">
+<![CDATA[
+   delete from `shoes_4jo`.`member`
+   where
+   member_id=#{member_id}
+]]>
+	</delete>
+
+	<!-- 아이디 중복 검사 -->
+	<select id="duplicationId"
+		parameterType="com.multi.shoes4jo.member.MemberVO" resultType="int">
+
+<![CDATA[
+		SELECT count(*) cnt FROM `shoes_4jo`.`member`
+		WHERE member_id = #{member_id} 
+      ]]>
+	</select>
+
+
+	<select id="memberIdSearch"
+		parameterType="com.multi.shoes4jo.member.MemberVO" resultMap="memResult">
+<![CDATA[
+    select * from `shoes_4jo`.`member` where member_name = #{member_name} and member_phone = #{member_phone} ]]>
+	</select>
+
+
+
+	<select id="pwCheck"
+		parameterType="com.multi.shoes4jo.member.MemberVO"
+		resultType="java.lang.Integer">
+<![CDATA[
+    select
+        count(*)
+    from
+        `shoes_4jo`.`member`
+    where
+        member_name = #{member_name}
+    and
+        member_phone = #{member_phone}
+    and
+        member_id = #{member_id}
+]]>
+	</select>
+
+	<update id="pwUpdate"
+		parameterType="com.multi.shoes4jo.member.MemberVO">
+		UPDATE
+		`shoes_4jo`.`member`
+		SET
+		member_pw = #{member_pw}
+		where
+		member_name = #{member_name}
+		and
+		member_phone = #{member_phone}
+		and
+		member_id = #{member_id}
+	</update>
+
+</mapper>
